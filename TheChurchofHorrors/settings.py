@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     
     'apps.blog',
+    'modules.userprofile',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS =(
