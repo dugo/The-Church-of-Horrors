@@ -11,8 +11,12 @@ urlpatterns = patterns('',
     # url(r'^$', 'TheChurchofHorrors.views.home', name='home'),
     # url(r'^TheChurchofHorrors/', include('TheChurchofHorrors.foo.urls')),
 
+
+
     (r'^%s/(?P<path>.*)$' % settings.MEDIA_URL[1:-1], 'django.views.static.serve', {'document_root' : settings.MEDIA_ROOT, 'show_indexes': True}),
 
+    (r'^tinymce/', include('tinymce.urls')),
+    (r'^admin/filebrowser/', include('filebrowser.urls')),
     url(r'^admin_tools/', include('admin_tools.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

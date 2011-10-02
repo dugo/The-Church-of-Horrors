@@ -3,6 +3,7 @@
 from django.db import models
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
+from tinymce import models as tinymce_models
 
 
 class Section(models.Model):
@@ -32,6 +33,8 @@ class Subsection(models.Model):
         super(type(self),self).save(*args,**kwargs)
 
 class Entry(models.Model):
+    content = tinymce_models.HTMLField(_("Contenido"),blank=False)
+    brief = models.TextField(_("Brief"),blank=False)
     author = models.ForeignKey(User,verbose_name=_(u"Autor"))
     section = models.ForeignKey(Section,verbose_name=_(u"Sección"))
     subsection = models.ForeignKey(Subsection,verbose_name=_(u"Subsección"))
@@ -39,9 +42,7 @@ class Entry(models.Model):
     modified = models.DateTimeField(_(u'Modificado'),auto_now=True)
     published = models.BooleanField(_(u'Publicado'),default=False,blank=False)
     title = models.CharField(_(u"Título"),max_length=1024,blank=False)
-    brief = models.TextField(_("Brief"),blank=False)
-    content = models.TextField(_("Contenido"),blank=False)
-    slug = models.SlugField(max_length=255,unique=True)
+    slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=u"Será generada automaticamente a partir del título")
     
     class Meta:
         verbose_name = _(u"entrada")
@@ -49,7 +50,8 @@ class Entry(models.Model):
 
 class ImageGallery(models.Model):
     entry = models.ForeignKey(Entry,verbose_name=_(u"Entrada"),related_name="images")
-    order = models.PositiveIntegerField()
+    file = models.ImageField(blank=False,upload_to='images/%Y/%m')
+    order = models.PositiveIntegerField(_(u'Orden'))
     
     class Meta:
         verbose_name = _(u"Imagen de galería")

@@ -77,6 +77,8 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     ("admin_tools", os.path.join(VIRTUALENV_ROOT,"lib","python2.6","site-packages","admin_tools","media","admin_tools")),
+    ("tiny_mce", os.path.join(VIRTUALENV_ROOT,"lib","python2.6","site-packages","tinymce","static","tiny_mce")),
+    ("filebrowser", os.path.join(VIRTUALENV_ROOT,"lib","python2.6","site-packages","django_filebrowser-3.0-py2.6.egg","filebrowser","media","filebrowser")),
 )
 
 # List of finder classes that know how to find static files in
@@ -115,6 +117,7 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'filebrowser',
     'admin_tools',
     'admin_tools.theming',
     'admin_tools.menu',
@@ -129,6 +132,7 @@ INSTALLED_APPS = (
     
     'apps.blog',
     'modules.userprofile',
+    'tinymce',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS =(
@@ -165,14 +169,33 @@ LOGGING = {
     }
 }
 
+AUTH_PROFILE_MODULE = 'userprofile.UserProfile'
+
+ADMIN_TOOLS_MENU = 'TheChurchofHorrors.site.menu.CustomMenu'
+ADMIN_TOOLS_INDEX_DASHBOARD = 'TheChurchofHorrors.site.dashboard.CustomIndexDashboard'
+
 try:
     from local_settings import *
-    
-    if DEBUG:
-        ADMIN_MEDIA_PREFIX  = '/static/admin/'
-        STATIC_URL          = '/static/'
-        MEDIA_URL           = '/media/'
-    
 except ImportError:
     pass
 
+
+if DEBUG:
+    ADMIN_MEDIA_PREFIX  = '/static/admin/'
+    STATIC_URL          = '/static/'
+    MEDIA_URL           = '/media/'
+
+FILEBROWSER_URL_FILEBROWSER_MEDIA = STATIC_URL+"filebrowser/"
+FILEBROWSER_URL_TINYMCE = STATIC_URL+'tiny_mce/'
+FILEBROWSER_EXTENSIONS = {
+    'Folder': [''],
+    'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
+}
+
+TINYMCE_JS_URL = STATIC_URL+'tiny_mce/tiny_mce_src.js'
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,spellchecker,paste,searchreplace",
+    'theme': "advanced",
+}
+TINYMCE_SPELLCHECKER = True
+TINYMCE_COMPRESSOR = False
