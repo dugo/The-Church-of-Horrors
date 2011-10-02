@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelavent variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/dugo/Escritorio/Forjas/TheChurchofHorros/thechurch-env"
+VIRTUAL_ENV="/home/dugo/Escritorio/Forjas/The-Church-of-Horrors/thechurch-env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
