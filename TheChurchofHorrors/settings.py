@@ -166,6 +166,12 @@ LOGGING = {
 
 try:
     from local_settings import *
+    
+    if DEBUG:
+        ADMIN_MEDIA_PREFIX  = '/static/admin/'
+        STATIC_URL          = '/static/'
+        MEDIA_URL           = '/media/'
+    
 except ImportError:
     pass
 
