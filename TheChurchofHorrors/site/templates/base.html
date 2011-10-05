@@ -46,19 +46,35 @@ $(document).ready(function(){
         </div>
         <div id="left">
             <hr/>
-            {% for s in sections %}
-            <div class="section">Últimos {{s}}</div>
-                {% for e in last_entries.s %}
-                    <div {% if forloop.counter|divisibleby:2 %}style="margin-right:0px;"{%endif%}>
-                        <div><img src="example/entry.png" class="adjust"/></div>
-                        <span class="title"><a href="#">{{e}}</a></span>
-                        <span class="author">{{e.author}}</span>
-                        <span class="date">{{e.date}}</span>
+            {% if entries.1 %}
+                    <div class="section">Últimas Publicaciones</div>
+                        {% for e in entries %}
+                            <div {% if forloop.counter|divisibleby:2 %}style="margin-right:0px;"{%endif%}>
+                                <div><img src="example/entry.png" class="adjust"/></div>
+                                <span class="title"><a href="#">{{e}}</a></span>
+                                <span class="author">{{e.author}}</span>
+                                <span class="date">{{e.date}}</span>
+                            </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
-            </div>
-            <hr/>
-            {%endfor%}
+                    <hr/>
+            {%else%}
+                {% for s in sections %}
+                    {% if entries.s %}
+                    <div class="section">Últimos {{s}}</div>
+                        {% for e in entries.s %}
+                            <div {% if forloop.counter|divisibleby:2 %}style="margin-right:0px;"{%endif%}>
+                                <div><img src="example/entry.png" class="adjust"/></div>
+                                <span class="title"><a href="#">{{e}}</a></span>
+                                <span class="author">{{e.author}}</span>
+                                <span class="date">{{e.date}}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <hr/>
+                    {%endif%}
+                {%endfor%}
+            {%endif%}
         </div>
         <div id="content" class="home">
         {%block content%}{%endblock%}
