@@ -1,14 +1,21 @@
 # coding=utf-8
 # Django settings for TheChurchofHorrors project.
 
-import os.path
+import os.path,site,sys
+from distutils.sysconfig import get_python_lib
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-PROJECT_ROOT    = os.path.dirname(__file__)
-VIRTUALENV_ROOT = os.path.join(PROJECT_ROOT, '..',"thechurch-env")
-SITE_ROOT       = os.path.join(PROJECT_ROOT, 'site')
+PROJECT_ROOT        = os.path.dirname(__file__)
+VIRTUALENV_ROOT     = os.path.join(PROJECT_ROOT, '..',"thechurch-env")
+SITE_ROOT           = os.path.join(PROJECT_ROOT, 'site')
+MODULES_ROOT        = os.path.join(PROJECT_ROOT, 'modules')
+APPS_ROOT        = os.path.join(PROJECT_ROOT, 'apps')
+SITEPACKAGES_ROOT   = get_python_lib()
+
+sys.path.insert(0, APPS_ROOT)
+sys.path.insert(0, MODULES_ROOT)
 
 ADMINS = (
     (u'Rubén Dugo', 'rdugomartin@gmail.com'),
@@ -76,9 +83,9 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    ("admin_tools", os.path.join(VIRTUALENV_ROOT,"lib","python2.6","site-packages","admin_tools","media","admin_tools")),
-    ("tiny_mce", os.path.join(VIRTUALENV_ROOT,"lib","python2.6","site-packages","tinymce","static","tiny_mce")),
-    ("filebrowser", os.path.join(VIRTUALENV_ROOT,"lib","python2.6","site-packages","django_filebrowser-3.0-py2.6.egg","filebrowser","media","filebrowser")),
+    ("admin_tools", os.path.join(MODULES_ROOT,"admin_tools","media","admin_tools")),
+    ("tiny_mce", os.path.join(SITEPACKAGES_ROOT,"tinymce","static","tiny_mce")),
+    ("filebrowser", os.path.join(MODULES_ROOT,"filebrowser","media","filebrowser")),
 )
 
 # List of finder classes that know how to find static files in
@@ -130,8 +137,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     
-    'apps.blog',
-    'modules.userprofile',
+    'blog',
+    'userprofile',
     'tinymce',
 )
 
