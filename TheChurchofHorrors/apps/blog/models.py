@@ -26,11 +26,7 @@ class Subsection(models.Model):
         verbose_name = _(u"subsección")
         verbose_name_plural = _(u"subsecciones")
         ordering = ('name',)
-    
-    def save(self,*args,**kwargs):
-        if self.name:
-            self.name = self.name.upper()
-        super(type(self),self).save(*args,**kwargs)
+
 
 class Entry(models.Model):
     content = tinymce_models.HTMLField(_("Contenido"),blank=False)
@@ -56,7 +52,7 @@ class ImageGallery(models.Model):
     class Meta:
         verbose_name = _(u"Imagen de galería")
         verbose_name_plural = _(u"Imagenes de galería")
-        ordering = ('-order',)
+        ordering = ('order',)
         unique_together = ('entry','order',)
     
     

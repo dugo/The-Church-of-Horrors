@@ -1,1 +1,5 @@
-# Create your views here.
+# coding=utf-8
+
+def home(request):
+    
+    

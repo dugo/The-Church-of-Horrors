@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{%block title%}{%endblock%}</title> 
+
+<link rel="stylesheet" href="{{MEDIA_URL}}css/style.css" type="text/css"/>
+{% block extra_css %}{%endblock%}
+<script type="text/javascript" src="{{MEDIA_URL}}js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}js/jquery.myimgscale-0.2.min.js"></script>
+{% block extra_js %}{%endblock%}
+
+<script type="text/javascript" >
+$(document).ready(function(){
+
+    $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
+    
+    {% block extra_js_ready %}{%endblock%}
+});
+</script>
+
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <img src="images/logo.png" alt="The Church of Horros logo"/>
+            <div id="banner"></div>
+            <div id="sections">
+                <a href='/' class="section">HOME</a>
+                {% for s in sections %}
+                <a href='{{s.get_absolute_url}}' class="section">{{s}}</a>
+                {% endfor %}
+                
+                <a href='#' id="vimeo" class="social"></a>
+                <a href='#' id="twitter" class="social"></a>
+                <a href='#' id="facebook" class="social"></a>
+                <a href='#' id="rss" class="social"></a>
+            </div>
+            <div id="subsections">
+                {% for s in subsections %}
+                <a href='{{s.get_absolute_url}}'>{{s}}</a>
+                {% endfor %}
+                <button id="search-button"></button>
+                <input type="text" id="search" placeholder="Buscar..."/>
+            </div>
+        </div>
+        <div id="left">
+            <hr/>
+            {% for s in sections %}
+            <div class="section">Últimos {{s}}</div>
+                {% for e in last_entries.s %}
+                    <div {% if forloop.counter|divisibleby:2 %}style="margin-right:0px;"{%endif%}>
+                        <div><img src="example/entry.png" class="adjust"/></div>
+                        <span class="title"><a href="#">{{e}}</a></span>
+                        <span class="author">{{e.author}}</span>
+                        <span class="date">{{e.date}}</span>
+                    </div>
+                {% endfor %}
+            </div>
+            <hr/>
+            {%endfor%}
+        </div>
+        <div id="content" class="home">
+        {%block content%}{%endblock%}
+        
+        
+        </div>
+    </div>
+    
+    <div id="footer">
+        <div id="subfooter-1">
+            <div id="subfooter-2">
+                <div class="footer-item footer-item-1">
+                    <h3><a href="#">Contacto</a></h3>
+                    <h3><a href="#">Staff</a></h3>
+                    <h3><a href="#">Información</a></h3>
+                </div>
+                <div class="footer-item">
+                    <h3>Categorías</h3>
+                    {% for s in subsections %}
+                    <a href="{{s.get_absolute_url}}">{{s}}</a>
+                    {%endfor%}
+                </div>
+                <div class="footer-item">
+                    <h3>Secciones</h3>
+                    {% for s in sections %}
+                    <a href="{{s.get_absolute_url}}">{{s}}</a>
+                    {%endfor%}
+                </div>
+                <div class="footer-item">
+                    <h3>Archivo</h3>
+                    <a href="#">Julio 2011</a>
+                    <a href="#">Junio 2011</a>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div id="copyright"><hr/>Copyright 2011 <a href="#">thechurchofhorros.com</a>. Todos los derechos reservados.</div>
+    </div>
+</body>
+</html>
