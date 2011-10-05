@@ -111,7 +111,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
+    'TheChurchofHorrors.site.middleware.CommonBlogMiddleware',
+    #'django.contrib.messages.middleware.MessageMiddleware',
 )
 
 ROOT_URLCONF = 'TheChurchofHorrors.urls'
@@ -151,6 +152,7 @@ TEMPLATE_CONTEXT_PROCESSORS =(
     "django.core.context_processors.static",
     #"django.contrib.messages.context_processors.messages",
     'django.core.context_processors.request',
+    'TheChurchofHorrors.site.context_processors.common',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -206,3 +208,5 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 TINYMCE_SPELLCHECKER = True
 TINYMCE_COMPRESSOR = False
+
+BLOG_MAX_LAST_ENTRIES = 4

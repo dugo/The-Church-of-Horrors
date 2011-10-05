@@ -10,9 +10,13 @@ from django.utils.translation import ugettext as _
 
 class Section(admin.ModelAdmin):
     model = models.Section
+    
+    readonly_fields = ('slug',)
 
 class Subsection(admin.ModelAdmin):
     model = models.Subsection
+    
+    readonly_fields = ('slug',)
 
 class ImageGallery(admin.TabularInline):
     model = models.ImageGallery
