@@ -93,7 +93,7 @@ class Entry(models.Model):
     def get_last_by_author(self,user,author,max=settings.BLOG_MAX_LAST_ENTRIES):
         
         if user.is_authenticated():
-            q = models.Q(published=True) || models.Q(author__id=user.id)
+            q = models.Q(published=True) | models.Q(author__id=user.id)
         else:
             q = models.Q(published=True)
         
@@ -105,12 +105,15 @@ class Entry(models.Model):
         entries = {}
         
         if user.is_authenticated():
-            q = models.Q(published=True) || models.Q(author__id=user.id)
+            q = models.Q(published=True) | models.Q(author__id=user.id)
         else:
             q = models.Q(published=True)
         
         for s in Section.objects.all()[:]:
-            if not section is None and s.id <> section.id:
+            if not section is None:
+                if s.id <> section.id:
+                    entries[unicode(s)] = Entry.objects.filter( q ).filter(section__id=s.id)[:max]
+            else:
                 entries[unicode(s)] = Entry.objects.filter( q ).filter(section__id=s.id)[:max]
         
         return entries

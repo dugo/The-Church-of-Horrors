@@ -6,7 +6,10 @@ def common(request):
     if request.section is None:
         subsections = Subsection.objects.all().order_by('name')[:]
     else:
-        subsections = [ s.section=unicode(request.section) for s in Subsection.objects.all().order_by('name')[:] ]
+        subsections = []
+        for s in Subsection.objects.all().order_by('name')[:]:
+            s.section=unicode(request.section)
+            subsections.append(s)
     
     if not request.entry is None:
         entries = Entry.get_last_by_author(user=request.user,author=request.entry.author)

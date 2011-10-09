@@ -1,3 +1,4 @@
+{% if not request.is_ajax %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -23,7 +24,7 @@ $(document).ready(function(){
 <body>
     <div id="container">
         <div id="header">
-            <img src="images/logo.png" alt="The Church of Horros logo"/>
+            <img src="{{MEDIA_URL}}images/logo.png" alt="The Church of Horros logo"/>
             <div id="banner"></div>
             <div id="sections">
                 <a href='/' class="section">HOME</a>
@@ -60,9 +61,10 @@ $(document).ready(function(){
                     <hr/>
             {%else%}
                 {% for s in sections %}
-                    {% if entries.s %}
+                    {% set s.__unicode__ as u %}
+                    {% if entries.u %}
                     <div class="section">Últimos {{s}}</div>
-                        {% for e in entries.s %}
+                        {% for e in entries.u %}
                             <div {% if forloop.counter|divisibleby:2 %}style="margin-right:0px;"{%endif%}>
                                 <div><img src="example/entry.png" class="adjust"/></div>
                                 <span class="title"><a href="#">{{e}}</a></span>
@@ -76,11 +78,11 @@ $(document).ready(function(){
                 {%endfor%}
             {%endif%}
         </div>
-        <div id="content" class="home">
+{%endif%}
+        
         {%block content%}{%endblock%}
-        
-        
-        </div>
+
+{% if not request.is_ajax %}
     </div>
     
     <div id="footer">
@@ -116,3 +118,4 @@ $(document).ready(function(){
     </div>
 </body>
 </html>
+{%endif%}
