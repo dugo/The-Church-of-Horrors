@@ -8,7 +8,6 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 PROJECT_ROOT        = os.path.dirname(__file__)
-VIRTUALENV_ROOT     = os.path.join(PROJECT_ROOT, '..',"thechurch-env")
 SITE_ROOT           = os.path.join(PROJECT_ROOT, 'site')
 MODULES_ROOT        = os.path.join(PROJECT_ROOT, 'modules')
 APPS_ROOT        = os.path.join(PROJECT_ROOT, 'apps')

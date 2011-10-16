@@ -72,6 +72,6 @@ class Entry(admin.ModelAdmin):
 
 
 
-admin.site.register(models.Section,Subsection)
+admin.site.register(models.Section,Section)
 admin.site.register(models.Subsection,Subsection)
 admin.site.register(models.Entry,Entry)
