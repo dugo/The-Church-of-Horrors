@@ -111,7 +111,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'TheChurchofHorrors.site.middleware.CommonBlogMiddleware',
+    #'TheChurchofHorrors.site.middleware.CommonBlogMiddleware',
     #'django.contrib.messages.middleware.MessageMiddleware',
 )
 

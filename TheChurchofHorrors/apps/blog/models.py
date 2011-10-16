@@ -25,8 +25,6 @@ class Section(models.Model):
         ordering = ('name',)
 
     def save(self,*args,**kwargs):
-        if self.name:
-            self.name = self.name.upper()
         self.slug = slugify(self.name)
         super(type(self),self).save(*args,**kwargs)
 
@@ -38,8 +36,8 @@ class Subsection(models.Model):
         return unicode(self.name)
 
     class Meta:
-        verbose_name = _(u"subsección")
-        verbose_name_plural = _(u"subsecciones")
+        verbose_name = _(u"categoría")
+        verbose_name_plural = _(u"categorías")
         ordering = ('name',)
 
     @models.permalink
@@ -64,7 +62,7 @@ class Entry(models.Model):
     brief = models.TextField(_("Brief"),blank=False)
     author = models.ForeignKey(User,verbose_name=_(u"Autor"))
     section = models.ForeignKey(Section,verbose_name=_(u"Sección"))
-    subsection = models.ForeignKey(Subsection,verbose_name=_(u"Subsección"))
+    subsection = models.ForeignKey(Subsection,verbose_name=_(u"Categoría"))
     created = models.DateTimeField(_(u'Creado'),auto_now_add=True)
     modified = models.DateTimeField(_(u'Modificado'),auto_now=True)
     published = models.BooleanField(_(u'Publicado'),default=False,blank=False)
@@ -90,14 +88,14 @@ class Entry(models.Model):
             'entry': self.slug})
     
     @classmethod
-    def get_last_by_author(self,user,author,max=settings.BLOG_MAX_LAST_ENTRIES):
+    def get_last(self):
         
-        if user.is_authenticated():
-            q = models.Q(published=True) | models.Q(author__id=user.id)
-        else:
-            q = models.Q(published=True)
+        return Entry.objects.order_by('-created')
         
-        return Entry.objects.filter( q ).filter(author__id=author.id).order_by('-created')[:max]
+    @classmethod
+    def get_last_by_author(self,author,max=settings.BLOG_MAX_LAST_ENTRIES):
+        
+        return Entry.objects.filter(published=True,author__id=author.id).order_by('-created')[:max]
     
     @classmethod    
     def get_last_by_section(self,user,section=None,max=settings.BLOG_MAX_LAST_ENTRIES):
@@ -112,9 +110,13 @@ class Entry(models.Model):
         for s in Section.objects.all()[:]:
             if not section is None:
                 if s.id <> section.id:
-                    entries[unicode(s)] = Entry.objects.filter( q ).filter(section__id=s.id)[:max]
+                    query = Entry.objects.filter( q ).filter(section__id=s.id)
+                    if query.count()>0:
+                        entries[unicode(s)] = query[:max]
             else:
-                entries[unicode(s)] = Entry.objects.filter( q ).filter(section__id=s.id)[:max]
+                query = Entry.objects.filter( q ).filter(section__id=s.id)
+                if query.count()>0:
+                    entries[unicode(s)] = query[:max]
         
         return entries
         

@@ -14,7 +14,7 @@
 <script type="text/javascript" >
 $(document).ready(function(){
 
-    $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
+    //$(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
     
     {% block extra_js_ready %}{%endblock%}
 });
@@ -29,7 +29,7 @@ $(document).ready(function(){
             <div id="sections">
                 <a href='/' class="section">HOME</a>
                 {% for s in sections %}
-                <a href='{{s.get_absolute_url}}' class="section">{{s}}</a>
+                <a href='{{s.get_absolute_url}}' class="section">{{s|upper}}</a>
                 {% endfor %}
                 
                 <a href='#' id="vimeo" class="social"></a>
@@ -47,11 +47,11 @@ $(document).ready(function(){
         </div>
         <div id="left">
             <hr/>
-            {% if entries.1 %}
+            {% if entries.0 %}
                     <div class="section">Últimas Publicaciones</div>
-                        {% for e in entries %}
+                        {% for e in right_entries %}
                             <div {% if forloop.counter|divisibleby:2 %}style="margin-right:0px;"{%endif%}>
-                                <div><img src="example/entry.png" class="adjust"/></div>
+                                <div><img src="{{MEDIA_URL}}example/entry.png" class="adjust"/></div>
                                 <span class="title"><a href="#">{{e}}</a></span>
                                 <span class="author">{{e.author}}</span>
                                 <span class="date">{{e.date}}</span>
@@ -60,13 +60,11 @@ $(document).ready(function(){
                     </div>
                     <hr/>
             {%else%}
-                {% for s in sections %}
-                    {% set s.__unicode__ as u %}
-                    {% if entries.u %}
+                {% for s,entries in right_entries.items %}
                     <div class="section">Últimos {{s}}</div>
-                        {% for e in entries.u %}
+                        {% for e in entries %}
                             <div {% if forloop.counter|divisibleby:2 %}style="margin-right:0px;"{%endif%}>
-                                <div><img src="example/entry.png" class="adjust"/></div>
+                                <div><img src="{{MEDIA_URL}}example/entry.png" class="adjust"/></div>
                                 <span class="title"><a href="#">{{e}}</a></span>
                                 <span class="author">{{e.author}}</span>
                                 <span class="date">{{e.date}}</span>
@@ -74,7 +72,6 @@ $(document).ready(function(){
                         {% endfor %}
                     </div>
                     <hr/>
-                    {%endif%}
                 {%endfor%}
             {%endif%}
         </div>
