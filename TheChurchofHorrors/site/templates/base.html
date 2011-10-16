@@ -51,8 +51,8 @@ $(document).ready(function(){
                     <div class="section">Últimas Publicaciones</div>
                         {% for e in right_entries %}
                             <div {% if forloop.counter|divisibleby:2 %}style="margin-right:0px;"{%endif%}>
-                                <div><img src="{{MEDIA_URL}}example/entry.png" class="adjust"/></div>
-                                <span class="title"><a href="#">{{e}}</a></span>
+                                <div><img src="{{e.get_main_image}}" class="adjust"/></div>
+                                <span class="title"><a href="{{e.get_absolute_url}}">{{e}}</a></span>
                                 <span class="author">{{e.author}}</span>
                                 <span class="date">{{e.date}}</span>
                             </div>
@@ -64,8 +64,8 @@ $(document).ready(function(){
                     <div class="section">Últimos {{s|upper}}</div>
                         {% for e in entries %}
                             <div {% if forloop.counter|divisibleby:2 %}style="margin-right:0px;"{%endif%}>
-                                <div><img src="{{MEDIA_URL}}example/entry.png" class="adjust"/></div>
-                                <span class="title"><a href="#">{{e}}</a></span>
+                                <div><img src="{{e.get_main_image}}" class="adjust"/></div>
+                                <span class="title"><a href="{{e.get_absolute_url}}">{{e}}</a></span>
                                 <span class="author">{{e.author}}</span>
                                 <span class="date">{{e.date}}</span>
                             </div>

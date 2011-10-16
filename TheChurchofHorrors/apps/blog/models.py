@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from tinymce import models as tinymce_models
 from django.template.defaultfilters import slugify
 from django.conf import settings
+from filebrowser.fields import FileBrowseField
 
 class Section(models.Model):
     name = models.CharField(_(u"Nombre"),max_length=255,unique=True,db_index=True,blank=False)
@@ -58,15 +59,15 @@ class Subsection(models.Model):
 
 
 class Entry(models.Model):
+    title = models.CharField(_(u"Título"),max_length=1024,blank=False)
     content = tinymce_models.HTMLField(_("Contenido"),blank=False)
-    brief = models.TextField(_("Brief"),blank=False)
+    #brief = models.TextField(_("Brief"),blank=False)
     author = models.ForeignKey(User,verbose_name=_(u"Autor"))
     section = models.ForeignKey(Section,verbose_name=_(u"Sección"))
     subsection = models.ForeignKey(Subsection,verbose_name=_(u"Categoría"))
     created = models.DateTimeField(_(u'Creado'),auto_now_add=True)
     modified = models.DateTimeField(_(u'Modificado'),auto_now=True)
     published = models.BooleanField(_(u'Publicado'),default=False,blank=False)
-    title = models.CharField(_(u"Título"),max_length=1024,blank=False)
     slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=u"Será generada automaticamente a partir del título")
     
     def __unicode__(self):
@@ -120,11 +121,19 @@ class Entry(models.Model):
         
         return entries
         
+    def get_main_image(self):
+        print self.images.count()
+        return unicode(self.images.get(main=True))
+        
 
 class ImageGallery(models.Model):
     entry = models.ForeignKey(Entry,verbose_name=_(u"Entrada"),related_name="images")
-    file = models.ImageField(blank=False,upload_to='images/%Y/%m')
+    file = FileBrowseField(blank=False,directory='images/%Y/%m',extensions=[".jpg",".png",".jpeg",".gif"])
     order = models.PositiveIntegerField(_(u'Orden'))
+    main = models.BooleanField(_(u'Principal'))
+    
+    def __unicode__(self):
+		return unicode(self.file)
     
     class Meta:
         verbose_name = _(u"Imagen de galería")

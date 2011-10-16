@@ -85,7 +85,13 @@ hr {
     color:#5889b6;
     font-weight:normal;
     display:block;
+    
 }
+/*#left div .title a {
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow:clip;
+}*/
 #left div .author {
     font-family:verdana,sans-serif;
     font-size:10px;
