@@ -14,7 +14,7 @@
 <script type="text/javascript" >
 $(document).ready(function(){
 
-    //$(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
+    $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
     
     {% block extra_js_ready %}{%endblock%}
 });
@@ -61,7 +61,7 @@ $(document).ready(function(){
                     <hr/>
             {%else%}
                 {% for s,entries in right_entries.items %}
-                    <div class="section">Últimos {{s}}</div>
+                    <div class="section">Últimos {{s|upper}}</div>
                         {% for e in entries %}
                             <div {% if forloop.counter|divisibleby:2 %}style="margin-right:0px;"{%endif%}>
                                 <div><img src="{{MEDIA_URL}}example/entry.png" class="adjust"/></div>
