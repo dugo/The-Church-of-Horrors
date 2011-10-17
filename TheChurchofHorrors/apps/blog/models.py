@@ -69,6 +69,7 @@ class Entry(models.Model):
     modified = models.DateTimeField(_(u'Modificado'),auto_now=True)
     published = models.BooleanField(_(u'Publicado'),default=False,blank=False)
     slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=u"Será generada automaticamente a partir del título")
+    gallery = models.BooleanField(_(u'Mostrar en galería de HOME'),default=False)
     
     def __unicode__(self):
         return unicode(self.title)
@@ -98,6 +99,11 @@ class Entry(models.Model):
         
         return Entry.objects.filter(published=True,author__id=author.id).order_by('-created')[:max]
     
+    @classmethod
+    def get_home_gallery(self):
+        
+        return Entry.objects.filter(gallery=True).order_by('-created')
+    
     @classmethod    
     def get_last_by_section(self,user,section=None,max=settings.BLOG_MAX_LAST_ENTRIES):
         
@@ -122,8 +128,25 @@ class Entry(models.Model):
         return entries
         
     def get_main_image(self):
-        print self.images.count()
         return unicode(self.images.get(main=True))
+    
+    def get_brief(self):
+        import re
+        
+        content = re.sub(r'<[^>]+>','',self.content)
+        
+        if len(content) < 300:
+            return content
+        
+        idx = 0
+        for i in range(300,450):
+            if content[i] == ".":
+                idx = i
+                break
+        else:
+            return self.content[:450]
+        
+        return content[:idx+1]
         
 
 class ImageGallery(models.Model):

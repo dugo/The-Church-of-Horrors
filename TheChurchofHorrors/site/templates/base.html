@@ -45,29 +45,34 @@ $(document).ready(function(){
                 <input type="text" id="search" placeholder="Buscar..."/>
             </div>
         </div>
+{% endif %}
+
+{%block content%}{%endblock%}
+
+{% if not request.is_ajax %}    
         <div id="left">
             <hr/>
-            {% if entries.0 %}
+            {% if right_entries.0 %}
                     <div class="section">Últimas Publicaciones</div>
                         {% for e in right_entries %}
                             <div {% if forloop.counter|divisibleby:2 %}style="margin-right:0px;"{%endif%}>
                                 <div><img src="{{e.get_main_image}}" class="adjust"/></div>
                                 <span class="title"><a href="{{e.get_absolute_url}}">{{e}}</a></span>
                                 <span class="author">{{e.author}}</span>
-                                <span class="date">{{e.date}}</span>
+                                <span class="date">{{e.created|date}}</span>
                             </div>
                         {% endfor %}
                     </div>
                     <hr/>
             {%else%}
-                {% for s,entries in right_entries.items %}
+                {% for s,items in right_entries.items %}
                     <div class="section">Últimos {{s|upper}}</div>
-                        {% for e in entries %}
+                        {% for e in items %}
                             <div {% if forloop.counter|divisibleby:2 %}style="margin-right:0px;"{%endif%}>
                                 <div><img src="{{e.get_main_image}}" class="adjust"/></div>
                                 <span class="title"><a href="{{e.get_absolute_url}}">{{e}}</a></span>
                                 <span class="author">{{e.author}}</span>
-                                <span class="date">{{e.date}}</span>
+                                <span class="date">{{e.created|date}}</span>
                             </div>
                         {% endfor %}
                     </div>
@@ -75,13 +80,8 @@ $(document).ready(function(){
                 {%endfor%}
             {%endif%}
         </div>
-{%endif%}
-        
-        {%block content%}{%endblock%}
-
-{% if not request.is_ajax %}
     </div>
-    
+
     <div id="footer">
         <div id="subfooter-1">
             <div id="subfooter-2">

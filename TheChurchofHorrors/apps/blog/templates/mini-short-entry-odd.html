@@ -1,0 +1,12 @@
+<div class="short-entry odd">
+    <div class="img"><img src="{{e.get_main_image}}" class="adjust"/></div>
+    <div class="desc">
+    <span class="title"><a href="#">{{e.title}}</a></span>
+    <span class="info">Por <a href="{{e.author.get_absolute_url}}">{{e.author.get_full_name}}</a>, <em>{{e.created|date}}</em>, en <a href="{{e.subsection.get_absolute_url}}">{{e.subsection}}.</a></span>
+    <p>{{e.get_brief}}</p>
+    
+    <a href="{{e.get_absolute_url}}" class="read">Leer</a>
+    {#<a href="#" class="comments">5 Comentarios</a>#}
+    </div>
+    <hr/>
+</div>

@@ -1,68 +1,24 @@
-{% extends "base.html %}
 
-{% block content %}
-        <hr/>
-        <div class="long-entry">
-            <div class="img"><img src="example/home-long-entry.png" class="adjust"/></div>
-            <div class="desc">
-            <span class="title"><a href="#">Balablab</a></span>
-            <span class="info">Por <a href="#">Miguel A. Vazquez</a>, <em>8 Junio 2011</em>, en <a href="#">Arte.</a></span>
-            <p>Lorem ipsum dolor sit amet, vel purus mauris est, penatibus maecenas ac nec, quisque vehicula, at in suspendisse in non gravida eget. Tortor neque et quis, amet integer. Magna tincidunt dolor, pede bibendum orci natus molestie, fusce in arcu. Eget egestas ultrices. Sodales orci tortor integer quis eros vel, lobortis dui ante vitae etiam elit, eget amet montes in tristique, id eleifend, qui aliquam nullam hendrerit.</p>
+        {% for e in entries %}
             
-            <a href="#" class="read">Leer</a>
-            <a href="#" class="comments">5 Comentarios</a>
-            </div>
-        </div>
-        <hr/>
-        <div class="long-entry">
-            <div class="img"><img src="example/home-long-entry.png" class="adjust"/></div>
-            <div class="desc">
-            <span class="title"><a href="#">Balablab</a></span>
-            <span class="info">Por <a href="#">Miguel A. Vazquez</a>, <em>8 Junio 2011</em>, en <a href="#">Arte.</a></span>
-            <p>Lorem ipsum dolor sit amet, vel purus mauris est, penatibus maecenas ac nec, quisque vehicula, at in suspendisse in non gravida eget. Tortor neque et quis, amet integer. Magna tincidunt dolor, pede bibendum orci natus molestie, fusce in arcu. Eget egestas ultrices. Sodales orci tortor integer quis eros vel, lobortis dui ante vitae etiam elit, eget amet montes in tristique, id eleifend, qui aliquam nullam hendrerit.</p>
+            {% if forloop.counter0 < 2 %}
+                {% include "mini-long-entry.html" %}
+            {%else%}
             
-            <a href="#" class="read">Leer</a>
-            <a href="#" class="comments">5 Comentarios</a>
-            </div>
-        </div>
-        
-        <hr/>
-        <div class="short-entries">
-            <div class="short-entry odd">
-                <div class="img"><img src="example/home-long-entry.png" class="adjust"/></div>
-                <div class="desc">
-                <span class="title"><a href="#">Balablab</a></span>
-                <span class="info">Por <a href="#">Miguel A. Vazquez</a>, <em>8 Junio 2011</em>, en <a href="#">Arte.</a></span>
-                <p>Lorem ipsum dolor sit amet, vel purus mauris est, penatibus maecenas ac nec, quisque vehicula, at in suspendisse in non gravida eget. Tortor neque et quis, amet integer. Magna tincidunt dolor, pede bibendum orci natus molestie, fusce in arcu. Eget egestas ultrices. Sodales orci tortor integer quis eros vel, lobortis dui ante vitae etiam elit, eget amet montes in tristique, id eleifend, qui aliquam nullam hendrerit.</p>
-                
-                <a href="#" class="read">Leer</a>
-                <a href="#" class="comments">5 Comentarios</a>
-                </div>
+                {% if forloop.counter0 == 2 %}
                 <hr/>
-            </div>
-            <div class="short-entry">
-                <div class="img"><img src="example/home-long-entry.png" class="adjust"/></div>
-                <div class="desc">
-                <span class="title"><a href="#">Balablab</a></span>
-                <span class="info">Por <a href="#">Miguel A. Vazquez</a>, <em>8 Junio 2011</em>, en <a href="#">Arte.</a></span>
-                <p>Lorem ipsum dolor sit amet, vel purus mauris est, penatibus maecenas ac nec, quisque vehicula, at in suspendisse in non gravida eget. Tortor neque et quis, amet integer. Magna tincidunt dolor, pede bibendum orci natus molestie, fusce in arcu. Eget egestas ultrices. Sodales orci tortor integer quis eros vel, lobortis dui ante vitae etiam elit, eget amet montes in tristique, id eleifend, qui aliquam nullam hendrerit.</p>
+                <div class="short-entries">
+                {% endif %}
+            
+                {% if forloop.counter|divisibleby:2 %}
+                    {% include "mini-short-entry.html" %}
+                {%else%}
+                    {% include "mini-short-entry-odd.html" %}
+                {%endif%}
                 
-                <a href="#" class="read">Leer</a>
-                <a href="#" class="comments">5 Comentarios</a>
+                {% if forloop.last %}
                 </div>
-                <hr/>
-            </div>
-            <div class="short-entry odd">
-                <div class="img"><img src="example/home-long-entry.png" class="adjust"/></div>
-                <div class="desc">
-                <span class="title"><a href="#">Balablab</a></span>
-                <span class="info">Por <a href="#">Miguel A. Vazquez</a>, <em>8 Junio 2011</em>, en <a href="#">Arte.</a></span>
-                <p>Lorem ipsum dolor sit amet, vel purus mauris est, penatibus maecenas ac nec, quisque vehicula, at in suspendisse in non gravida eget. Tortor neque et quis, amet integer. Magna tincidunt dolor, pede bibendum orci natus molestie, fusce in arcu. Eget egestas ultrices. Sodales orci tortor integer quis eros vel, lobortis dui ante vitae etiam elit, eget amet montes in tristique, id eleifend, qui aliquam nullam hendrerit.</p>
+                {% endif %}
                 
-                <a href="#" class="read">Leer</a>
-                <a href="#" class="comments">5 Comentarios</a>
-                </div>
-                <hr/>
-            </div>
-        </div>
-{%endblock%}
+            {%endif%}
+        {%endfor%}

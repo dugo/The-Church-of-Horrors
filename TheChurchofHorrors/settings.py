@@ -209,3 +209,9 @@ TINYMCE_SPELLCHECKER = True
 TINYMCE_COMPRESSOR = False
 
 BLOG_MAX_LAST_ENTRIES = 4
+
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: "/author/%s/" % u.username,
+}
+
+DATETIME_FORMAT = DATE_FORMAT = "d b Y"
