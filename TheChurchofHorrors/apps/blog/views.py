@@ -11,11 +11,14 @@ def home(request):
     random.seed(time.time())
     
     right_entries = Entry.get_last_by_section(request.user)
-    content_entries = list(Entry.get_last()[:6])
-    content_entries = random.shuffle(content_entries)
+    gallery_entries = Entry.get_home_gallery()
+    entries = Entry.get_last()[:6]
+    
+    random.shuffle(entries)
+    random.shuffle(gallery_entries)
 
     return render_to_response("home.html", 
-        dict(right_entries=right_entries, content_entries=content_entries), 
+        dict(right_entries=right_entries, entries=entries), 
         context_instance=RequestContext(request))
     
 def contact(request):
@@ -35,5 +38,8 @@ def entry(request,section,subsubsection,entry):
     
 def archive(request,year,month):
     return HttpResponse()
+    
+def author(request,user):
+    return HttpResponse(user)
     
     

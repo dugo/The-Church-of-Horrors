@@ -55,6 +55,8 @@ class Entry(admin.ModelAdmin):
     
     inlines = (ImageGallery,)
     
+    list_display = ('__unicode__','gallery',)
+    
     readonly_fields = ('slug',)
     
     def get_form(self, request, obj=None, **kwargs):
