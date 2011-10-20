@@ -132,41 +132,42 @@ $(document).ready(function(){
                 <button id="search-button"></button>
                 <input type="text" id="search" placeholder="Buscar..."/>
             </div>
-        </div>
+        </div><!-- #header -->
 {% endif %}
 
 <div id='ajax-wrapper'>
-    <div id="content" class="{%block content_class%}{%endblock%}">
 
-    {%block home_gallery%}{%endblock%}
-    <hr/>
-    {%block breadcrumb%}{%endblock%}
-    {%block content%}{%endblock%}
-    </div>
+    <div id="content" class="{%block content_class%}{%endblock%}">
+        {%block home_gallery%}{%endblock%}
+        <hr/>
+        {%block breadcrumb%}{%endblock%}
+        {%block content%}{%endblock%}
+    </div> <!-- #content -->
 
     <div id="left">
-            {%block author%}<hr/>{%endblock%}
-        
-            {% if right_entries.0 %}
-                    <div class="section">Últimas Publicaciones</div>
-                        {% for e in right_entries %}
-                            {% preview_entry e forloop.counter%}
-                        {% endfor %}
-                    <hr/>
-            {%else%}
-                {% for s,items in right_entries.items %}
-                    <div class="section">Últim{{s|sexualize}}s {{s|upper}}</div>
-                        {% for e in items %}
-                            {% preview_entry e forloop.counter%}
-                        {% endfor %}
-                    <hr/>
-                {%endfor%}
+        {%block author%}<hr/>{%endblock%}
+
+        {% if right_entries.0 %}
+                <div class="section">Últimas Publicaciones</div>
+                    {% for e in right_entries %}
+                        {% preview_entry e forloop.counter%}
+                    {% endfor %}
+                <hr/>
+        {%else%}
+            {% for s,items in right_entries.items %}
+                <div class="section">Últim{{s|sexualize}}s {{s|upper}}</div>
+                    {% for e in items %}
+                        {% preview_entry e forloop.counter%}
+                    {% endfor %}
+                <hr/>
+            {%endfor%}
         {%endif%}
-        </div>
-    </div>
-</div>
+    </div> <!-- #left -->
+    
+</div> <!-- #ajax-wrapper -->
 
 {% if not request.is_ajax %}
+    </div> <!-- #container -->
     <div id="footer">
         <div id="subfooter-1">
             <div id="subfooter-2">
@@ -201,5 +202,6 @@ $(document).ready(function(){
         <div id="copyright"><hr/>Copyright 2011 <a href="/">thechurchofhorrors.com</a>. Todos los derechos reservados.</div>
     </div>
 </body>
+
 </html>
 {%endif%}
