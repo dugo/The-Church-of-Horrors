@@ -32,7 +32,7 @@ class ImageGalleryFormset(BaseInlineFormSet):
                 # an AttributeError for cleaned_data
                 pass
         if count <> 1:
-            raise forms.ValidationError(_("Debes subir al menos una imagen y sólo debe haber una principal"))
+            raise forms.ValidationError(_(u"Debes subir al menos una imagen y sólo debe haber una principal"))
 
 class ImageGallery(admin.TabularInline):
     model = models.ImageGallery

@@ -11,8 +11,8 @@ def home(request):
     random.seed(time.time())
     
     right_entries = Entry.get_last_by_section(request.user)
-    gallery_entries = Entry.get_home_gallery()
-    entries = Entry.get_last()[:6]
+    gallery_entries = list(Entry.get_home_gallery())
+    entries = list(Entry.get_last()[:6])
     
     random.shuffle(entries)
     random.shuffle(gallery_entries)

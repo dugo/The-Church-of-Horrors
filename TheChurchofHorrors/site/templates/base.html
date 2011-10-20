@@ -59,12 +59,11 @@ $(document).ready(function(){
                         {% for e in right_entries %}
                             <div {% if forloop.counter|divisibleby:2 %}style="margin-right:0px;"{%endif%}>
                                 <div><img src="{{e.get_main_image}}" class="adjust"/></div>
-                                <span class="title"><a href="{{e.get_absolute_url}}">{{e}}</a></span>
-                                <span class="author">{{e.author}}</span>
+                                <div class="title"><a href="{{e.get_absolute_url}}">{{e}}</a></div>
+                                <span class="author">{{e.author.get_full_name}}</span>
                                 <span class="date">{{e.created|date}}</span>
                             </div>
                         {% endfor %}
-                    </div>
                     <hr/>
             {%else%}
                 {% for s,items in right_entries.items %}
@@ -72,15 +71,15 @@ $(document).ready(function(){
                         {% for e in items %}
                             <div {% if forloop.counter|divisibleby:2 %}style="margin-right:0px;"{%endif%}>
                                 <div><img src="{{e.get_main_image}}" class="adjust"/></div>
-                                <span class="title"><a href="{{e.get_absolute_url}}">{{e}}</a></span>
-                                <span class="author">{{e.author}}</span>
+                                <div class="title"><a href="{{e.get_absolute_url}}">{{e}}</a></div>
+                                <span class="author">{{e.author.get_full_name}}</span>
                                 <span class="date">{{e.created|date}}</span>
                             </div>
                         {% endfor %}
-                    </div>
                     <hr/>
                 {%endfor%}
             {%endif%}
+            </div>
         </div>
     </div>
 
@@ -104,11 +103,13 @@ $(document).ready(function(){
                     <a href="{{s.get_absolute_url}}">{{s}}</a>
                     {%endfor%}
                 </div>
+                <!--
                 <div class="footer-item">
                     <h3>Archivo</h3>
                     <a href="#">Julio 2011</a>
                     <a href="#">Junio 2011</a>
                 </div>
+                -->
             </div>
             
         </div>

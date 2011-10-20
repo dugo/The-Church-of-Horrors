@@ -84,8 +84,11 @@ hr {
     font-size:12px;
     color:#5889b6;
     font-weight:normal;
-    display:block;
-    
+    margin:0 !important;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;        
+    height: auto !important;
 }
 /*#left div .title a {
     overflow: hidden;
