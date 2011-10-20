@@ -64,7 +64,7 @@ class Entry(admin.ModelAdmin):
     
     inlines = (ImageGallery,)
     
-    list_display = ('__unicode__','author','published','gallery',)
+    list_display = ('__unicode__','author','published','gallery','view',)
     
     readonly_fields = ('slug',)
     
@@ -91,6 +91,11 @@ class Entry(admin.ModelAdmin):
             obj.author = request.user
                    
         obj.save()
+    
+    def view(self,o):
+        return "<a href='%s' onclick='window.open(this.href);return false;'>%s</a>" % (o.get_absolute_url(),_(u'Ver'))
+    view.allow_tags = True
+    view.short_description = _(u'Ver')
     
     def queryset(self, request):
         qs = super(Entry, self).queryset(request)

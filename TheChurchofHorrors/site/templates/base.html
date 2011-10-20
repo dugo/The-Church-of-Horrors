@@ -58,27 +58,28 @@ $(document).ready(function(){
         ajax_ready();
     }
     
-    $('a[href^="/"]:not(a[href^="/admin"])').click(function(e){ 
-        
-        var url = this.href;
-        
-        e.preventDefault(); 
-        $.ajax({
-            url: url,
-            type:"get",
-            context: $(this),
-            success: function (data) {
-                
-                    $('#ajax-wrapper').html(data);
-                
-                    ajax_ready();        
-                    window.history.pushState(data, $('#ajax-wrapper title').text(), url);
-                },
-            error: function() { window.location = this.href; }
+    if (typeof window.history.pushState != "undefined") {
+        $('a[href^="/"]:not(a[href^="/admin"])').click(function(e){ 
+            
+            var url = this.href;
+            
+            e.preventDefault(); 
+            $.ajax({
+                url: url,
+                type:"get",
+                context: $(this),
+                success: function (data) {
+                    
+                        $('#ajax-wrapper').html(data);
+                    
+                        ajax_ready();        
+                        window.history.pushState(data, $('#ajax-wrapper title').text(), url);
+                    },
+                error: function() { window.location = this.href; }
+                });
+            
             });
-        
-        });
-    
+     }
     
     {% block extra_js_ready %}{%endblock%}
 });

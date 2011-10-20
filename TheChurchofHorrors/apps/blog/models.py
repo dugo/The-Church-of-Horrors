@@ -112,9 +112,14 @@ class Entry(models.Model):
             return Entry.objects.order_by('-created').filter(published=True)
         
     @classmethod
-    def get_last_by_author(self,author,max=settings.BLOG_MAX_LAST_ENTRIES):
+    def get_last_by_author(self,author,entry=None,max=settings.BLOG_MAX_LAST_ENTRIES):
 
-        return Entry.objects.filter(published=True,author__id=author.id).order_by('-created')[:max]
+        entries = Entry.objects.filter(published=True,author__id=author.id).order_by('-created')
+        
+        if entry:
+            return entries.exclude(id=entry.id)
+        
+        return entries[:max]
     
     @classmethod    
     def get_last_by_section(self,user,section=None,max=settings.BLOG_MAX_LAST_ENTRIES):
