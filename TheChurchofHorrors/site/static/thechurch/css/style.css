@@ -20,7 +20,7 @@ hr {
 @font-face{font-family:DINWeb-Black;src:url("fonts/DINWeb-Black.woff") format("woff");}
 
 
-#container { width:980px; margin: 0 auto; }
+#container { width:980px; margin: 0 auto; height:auto;display:block;}
 #header { width: 100%; margin: 16px auto 0 auto; display:block;}
 #header > img { float:left; display:block;margin-top:9px;cursor:pointer;}
 #header #banner { margin-left:20px;height:70px;width:720px;/*background-color:#d10018;*/float:left;display:block;}
