@@ -17,7 +17,7 @@
 {%block content%}
     {%if entry.author.id == request.user.id%}<a href="{% url admin:blog_entry_change entry.id %}" onclick="window.open(this.href);return false;" class="edit">Editar</a>{%endif%}
     <br/>
-    <h1>{{entry.title}}</h1>
+    <a href="{{e.get_absolute_url}}"><h1>{{entry.title}}</h1></a>
     <span class="date">{{entry.created|date}}</span>
     {% if entry.show_gallery%}{%entry_gallery entry%}{%endif%}
     <div class="content-entry">{{entry.content|safe}}</div>
