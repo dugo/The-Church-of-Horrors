@@ -30,9 +30,7 @@
 </script>
 {%endif%}
 
-{% if request.is_ajax %}
 <title>{%block title%}{%endblock%}</title> 
-{%endif%}
 
 {% if not request.is_ajax %}
 <link rel="shortcut icon" href="{{STATIC_URL}}favicon.ico" />
