@@ -2,8 +2,12 @@
 # coding: utf-8
 
 # generate a random password
-from random import choice
+from random import choice,seed
+import time
 import string
+import sys,os
+
+seed(time.time())
 
 def GenPasswd():
     chars = string.letters + string.digits
@@ -11,8 +15,6 @@ def GenPasswd():
     for i in range(8):
         newpasswd = newpasswd + choice(chars)
     return newpasswd
-
-import sys,os
 
 activate = "/var/virtualenvs/thechurch/bin/activate_this.py"
 execfile(activate, dict(__file__=activate))
@@ -29,6 +31,8 @@ setup_environ(settings)
 from django.conf import settings
 from django.template.loader import render_to_string
 from modules.userprofile.models import UserProfile
+from django.contrib.auth.models import User,Group
+from django.core.mail import send_mail
 
 emails = []
 nombres = []
@@ -45,15 +49,13 @@ for l in open(sys.argv[1]).readlines():
     
     i+=1
 
-from django.contrib.auth.models import User,Group
-
-group = Groups.objects.get(name="Redactor")
+group = Group.objects.get(name="Redactor")
 
 for i in range(len(emails)):
     
     passwd = GenPasswd()
     
-    u = User(email=emails[i+1],username=emails[i+1].split('@')[0],first_name=nombres[i].title())
+    u = User(email=emails[i],username=emails[i].split('@')[0],first_name=nombres[i].title())
     u.set_password(passwd)
     u.is_staff=True
     u.is_superuser = False
@@ -62,8 +64,9 @@ for i in range(len(emails)):
     u.save()
     
     # render template
-    email = render_to_string('email/first_email.html', { 'user': u , 'passwd':passwd})
+    email = render_to_string('emails/first_email.html', { 'user': u , 'passwd':passwd})
     
     # send email
-    print email
+    send_mail('Bienvenido a TheChurchofHorrors', email, u'Rubén Dugo <rdugo@thechurchofhorrors.com>', [emails[i]], fail_silently=False)
+    time.sleep(5)
 
