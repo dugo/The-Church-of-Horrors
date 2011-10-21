@@ -16,7 +16,7 @@ def home(request):
     right_entries = Entry.get_last_by_section(request.user)
     entries = list(Entry.get_last()[:settings.BLOG_MAX_LAST_ENTRIES])
     
-    random.shuffle(entries)
+    #random.shuffle(entries)
 
     return render_to_response("home.html", 
         dict(right_entries=right_entries, entries=entries,section=None,subsection=None), 
@@ -65,7 +65,7 @@ def section_subsection(request,section,subsection):
     
     right_entries = Entry.get_last_by_section(request.user)
 
-    random.shuffle(entries)
+    #random.shuffle(entries)
 
     return render_to_response("home.html", 
         dict(right_entries=right_entries, entries=entries,section=section,subsection=subsection), 
@@ -88,8 +88,8 @@ def author(request,user):
     #right_entries = Entry.get_last_by_section(request.user)
     entries = list(Entry.get_last_by_author(author))
 
-    random.seed(time.time())
-    random.shuffle(entries)
+    #random.seed(time.time())
+    #random.shuffle(entries)
 
     return render_to_response("author.html", 
         dict(right_entries=[], entries=entries, author=author,section=None,subsection=None), 
@@ -113,7 +113,7 @@ def view_for_subsection(request,subsection):
     entries = list(Entry.get_last(subsection__id=subsection.id)[:settings.BLOG_MAX_LAST_ENTRIES])
     right_entries = Entry.get_last_by_section(request.user)
 
-    random.shuffle(entries)
+    #random.shuffle(entries)
 
     return render_to_response("home-short.html", 
         dict(right_entries=right_entries, entries=entries,subsection=subsection,section=None), 
@@ -124,7 +124,7 @@ def view_for_section(request,section):
     entries = list(Entry.get_last(section__id=section.id)[:settings.BLOG_MAX_LAST_ENTRIES])
     right_entries = Entry.get_last_by_section(request.user,section=section)
 
-    random.shuffle(entries)
+    #random.shuffle(entries)
 
     return render_to_response("home-short.html", 
         dict(right_entries=right_entries, entries=entries, section = section,subsection=None), 
