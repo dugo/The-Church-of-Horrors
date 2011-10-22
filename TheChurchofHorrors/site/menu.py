@@ -23,11 +23,11 @@ class CustomMenu(Menu):
             items.Bookmarks(),
             items.AppList(
                 _('Blogging'),
-                exclude=('django.contrib.*',)
+                exclude=('django.contrib.*','django_evolution.*',)
             ),
             items.AppList(
                 _('Administration'),
-                models=('django.contrib.*',)
+                models=('django.contrib.*','django_evolution.*',)
             )
         ]
 

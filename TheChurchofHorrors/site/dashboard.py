@@ -43,13 +43,13 @@ class CustomIndexDashboard(Dashboard):
         # append an app list module for "Applications"
         self.children.append(modules.AppList(
             _('Blogging'),
-            exclude=('django.contrib.*',),
+            exclude=('django.contrib.*','django_evolution.*'),
         ))
 
         # append an app list module for "Administration"
         self.children.append(modules.AppList(
             _('Administration'),
-            models=('django.contrib.*',),
+            models=('django.contrib.*','django_evolution.*',),
         ))
 
         # append a recent actions module

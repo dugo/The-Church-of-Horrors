@@ -1,9 +1,9 @@
 # coding=utf-8
 
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseNotFound
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from apps.blog.models import Entry
+from apps.blog.models import Entry,Section,Subsection
 import time,random
 
 def home(request):
@@ -28,7 +28,23 @@ def staff(request):
     return HttpResponse()
     
 def common(request,slug):
-    return HttpResponse()
+    
+    try:
+        return view_for_entry( request, Entry.objects.get(slug=slug) )
+    except Entry.DoesNotExist:
+        pass
+
+    try:
+        subsection = Subsection.objects.get(slug=slug)
+    except Subsection.DoesNotExist:
+        pass
+
+    try:
+        section = Section.objects.get(slug=slug)
+    except Section.DoesNotExist:
+        return HttpResponseNotFound()
+
+    return HttpResponseNotFound()
     
 def section_subsection(request,section,subsubsection):
     return HttpResponse()
@@ -41,5 +57,16 @@ def archive(request,year,month):
     
 def author(request,user):
     return HttpResponse(user)
+
+
+def view_for_entry(request,entry):
+    
+    right_entries = Entry.get_last_by_author(entry.author)
+    
+
+    return render_to_response("entry.html", 
+        dict(right_entries=right_entries, entry=entry), 
+        context_instance=RequestContext(request))
+    
     
     

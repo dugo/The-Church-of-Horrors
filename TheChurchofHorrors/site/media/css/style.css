@@ -2,13 +2,14 @@
 body { background-color: #f2f3f5; }
 a {text-decoration:none; color:#5889b6;}
 hr {
-    color: #f0bec1;
-    background-color: #f0bec1;
-    height: 1px;
-    border: 0;
-    width: 100%;
-    display:block;
-    clear:both;
+    color: #f0bec1 !important;
+    background-color: #f0bec1 !important;
+    height: 1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    display:block !important;
+    clear:both !important;
 }
 
 @font-face{font-family:DINWeb-Light;src:url("fonts/DINWeb-Light.eot");}
@@ -289,4 +290,117 @@ hr {
     bottom:0px;
     text-align:center;
     padding-bottom:10px;
+}
+
+#left div.author {
+    margin-top:6px;
+    height:auto;
+    width:100%;
+}
+
+#left div.author span {
+    display:block;
+    background:transparent url('../images/bullet.png') no-repeat left 6px;
+    font-family:"DINWeb-Medium",Arial;
+    font-size:14px;
+    padding-left: 10px;
+    margin-top:6px;
+    height:auto;
+    width:100%;
+    margin-bottom:10px;
+}
+
+#left div.author .name {
+    display:block;
+    color: #808183;
+    font-family:"DINWeb-Medium",Arial;
+    font-size:14px;
+    height:auto;
+    width:auto;
+    margin-bottom:10px;
+}
+#left div.author .desc {
+    display:inline;
+    font-family:verdana;
+    font-size:10px;
+    height:auto;
+    width:auto;
+    margin:0;
+    color:black;
+}
+
+#left div.author .links {
+    height:auto;
+    width:100%;
+    font-family:verdana;
+    font-size:10px;
+}
+
+#left div.author img {
+    display:block;
+    width:104px;
+    height:auto;
+    margin-left: -10px;
+    float:left;
+    margin-right:20px;
+    margin-bottom:10px;
+}
+
+.entry h1 {
+    font-family:verdana;
+    font-size:18px;
+    color:#5889b6;
+    font-weight:normal;
+}
+
+.entry {
+    text-align:justify;
+}
+
+.entry .date {
+    font-family:verdana;
+    font-size:10px;
+    color: #808183;
+}
+
+.entry blockquote {
+    font-family:verdana;
+    font-size:14px;
+    color: #808183;
+    margin:10px 0;
+}
+
+.entry .content-entry {
+    font-family:verdana !important;
+    font-size:10px !important;
+    color: black !important;
+    margin-top:16px;
+}
+
+
+.entry .column *{ padding: 5px; }
+
+.entry p strong {
+    font-weight:bold;
+}
+
+.entry .edit {
+    font-size:10px;
+    float:right;
+    font-family:verdana;
+}
+
+.entry hr {
+    margin:15px auto;
+}
+
+.entry table {
+    width:100%;
+    vertical-align: text-top !important; 
+}
+.entry td {
+    vertical-align: text-top !important; 
+    padding:0;
+    padding-right:30px;
+
 }

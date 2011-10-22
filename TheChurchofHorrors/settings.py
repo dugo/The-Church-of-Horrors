@@ -83,7 +83,7 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     ("admin_tools", os.path.join(MODULES_ROOT,"admin_tools","media","admin_tools")),
-    ("tiny_mce", os.path.join(SITEPACKAGES_ROOT,"tinymce","static","tiny_mce")),
+    ("tiny_mce", os.path.join(MODULES_ROOT,"tinymce","static","tiny_mce")),
     ("filebrowser", os.path.join(MODULES_ROOT,"filebrowser","media","filebrowser")),
 )
 
@@ -140,6 +140,7 @@ INSTALLED_APPS = (
     'blog',
     'userprofile',
     'tinymce',
+    'django_evolution',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS =(
@@ -202,8 +203,15 @@ FILEBROWSER_EXTENSIONS = {
 
 TINYMCE_JS_URL = STATIC_URL+'tiny_mce/tiny_mce_src.js'
 TINYMCE_DEFAULT_CONFIG = {
-    'plugins': "table,spellchecker,paste,searchreplace",
+    'plugins': "preview,table,spellchecker,paste,searchreplace,media,embed",
     'theme': "advanced",
+    "theme_advanced_buttons3_add_before" : "tablecontrols,separator",
+    "theme_advanced_buttons3_add" : "separator,preview,emotions,embed",
+    "plugin_preview_width" : "500",
+    "plugin_preview_height" : "600",
+    "extended_valid_elements" : "iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder]",
+    "embed_iframe_innerhtml_fallback" : 'This will be placed between the iframe tags'
+
 }
 TINYMCE_SPELLCHECKER = True
 TINYMCE_COMPRESSOR = False

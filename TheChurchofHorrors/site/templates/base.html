@@ -1,3 +1,5 @@
+{% load blog %}
+
 {% if not request.is_ajax %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -51,30 +53,22 @@ $(document).ready(function(){
 
 {%block content%}{%endblock%}
 
-{% if not request.is_ajax %}    
+{% if not request.is_ajax %}
         <div id="left">
-            <hr/>
+        
+            {%block author%}<hr/>{%endblock%}
+        
             {% if right_entries.0 %}
                     <div class="section">Últimas Publicaciones</div>
                         {% for e in right_entries %}
-                            <div {% if forloop.counter|divisibleby:2 %}style="margin-right:0px;"{%endif%}>
-                                <div><img src="{{e.get_main_image}}" class="adjust"/></div>
-                                <div class="title"><a href="{{e.get_absolute_url}}">{{e}}</a></div>
-                                <span class="author">{{e.author.get_full_name}}</span>
-                                <span class="date">{{e.created|date}}</span>
-                            </div>
+                            {% preview_entry e forloop.counter%}
                         {% endfor %}
                     <hr/>
             {%else%}
                 {% for s,items in right_entries.items %}
                     <div class="section">Últimos {{s|upper}}</div>
                         {% for e in items %}
-                            <div {% if forloop.counter|divisibleby:2 %}style="margin-right:0px;"{%endif%}>
-                                <div><img src="{{e.get_main_image}}" class="adjust"/></div>
-                                <div class="title"><a href="{{e.get_absolute_url}}">{{e}}</a></div>
-                                <span class="author">{{e.author.get_full_name}}</span>
-                                <span class="date">{{e.created|date}}</span>
-                            </div>
+                            {% preview_entry e forloop.counter%}
                         {% endfor %}
                     <hr/>
                 {%endfor%}

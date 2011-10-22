@@ -8,6 +8,7 @@ from django.forms.models import BaseInlineFormSet
 from tinymce.widgets import TinyMCE
 from django import forms
 from django.utils.translation import ugettext as _
+from django.conf import settings
 
 class Section(admin.ModelAdmin):
     model = models.Section
@@ -32,7 +33,10 @@ class ImageGalleryFormset(BaseInlineFormSet):
                 # an AttributeError for cleaned_data
                 pass
         if count <> 1:
-            raise forms.ValidationError(_(u"Debes subir al menos una imagen y sólo debe haber una principal"))
+            raise forms.ValidationError(_(u"Debes subir al menos una imagen y sólo debe haber una marcada como principal"))
+        
+        if len(self.forms) <= 1:
+            raise forms.ValidationError(_(u"Para que aparezca la galería debes de subir una imagen o más"))
 
 class ImageGallery(admin.TabularInline):
     model = models.ImageGallery
@@ -44,7 +48,7 @@ class ImageGallery(admin.TabularInline):
 
 class EntryForm(ModelForm):
     
-    content = forms.CharField(label=_(u"Contenido"),widget=TinyMCE(attrs={'cols': 120, 'rows': 40}))
+    content = forms.CharField(label=_(u"Contenido"),widget=TinyMCE(attrs={'cols': 120, 'rows': 40},  mce_attrs = { "style_formats" : [ {"title" : _('Cita'), "block" : 'blockquote'} ], "content_css": "%scss/editor.css" % settings.MEDIA_URL }))
     
     class Meta:
         model = models.Entry

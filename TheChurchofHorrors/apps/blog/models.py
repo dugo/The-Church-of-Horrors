@@ -60,7 +60,7 @@ class Subsection(models.Model):
 
 class Entry(models.Model):
     title = models.CharField(_(u"Título"),max_length=1024,blank=False)
-    content = tinymce_models.HTMLField(_("Contenido"),blank=False)
+    content = tinymce_models.HTMLField(_("Contenido"),blank=False,)
     #brief = models.TextField(_("Brief"),blank=False)
     author = models.ForeignKey(User,verbose_name=_(u"Autor"))
     section = models.ForeignKey(Section,verbose_name=_(u"Sección"))
@@ -68,8 +68,9 @@ class Entry(models.Model):
     created = models.DateTimeField(_(u'Creado'),auto_now_add=True)
     modified = models.DateTimeField(_(u'Modificado'),auto_now=True)
     published = models.BooleanField(_(u'Publicado'),default=False,blank=False)
-    slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=u"Será generada automaticamente a partir del título")
-    gallery = models.BooleanField(_(u'Mostrar en galería de HOME'),default=False)
+    slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=_(u"Será generada automaticamente a partir del título"))
+    gallery = models.BooleanField(_(u'Mostrar en galería de HOME'),help_text=_(u'Se mostrará sólo la imagen marcada cómo principal'),default=False)
+    show_gallery = models.BooleanField(_(u'Mostrar galería en entrada'),help_text=_(u'Se mostrará en la propia entrada una galería con las imágenes en el orden establecido'),default=False)
     
     def __unicode__(self):
         return unicode(self.title)
@@ -82,12 +83,17 @@ class Entry(models.Model):
         verbose_name = _(u"entrada")
         ordering = ('-created',)
 
-    @models.permalink
+    """@models.permalink
     def get_absolute_url(self):
         return ('entry', (), {
             'section': self.section.slug,
             'subsection': self.subsection.slug,
-            'entry': self.slug})
+            'entry': self.slug})"""
+    
+    @models.permalink
+    def get_absolute_url(self):
+        return ('common', (), {
+            'slug': self.slug})
     
     @classmethod
     def get_last(self):
@@ -152,8 +158,9 @@ class Entry(models.Model):
 class ImageGallery(models.Model):
     entry = models.ForeignKey(Entry,verbose_name=_(u"Entrada"),related_name="images")
     file = FileBrowseField(blank=False,directory='images/%Y/%m',extensions=[".jpg",".png",".jpeg",".gif"])
-    order = models.PositiveIntegerField(_(u'Orden'))
-    main = models.BooleanField(_(u'Principal'))
+    #file = models.ImageField(blank=False,upload_to='images/%Y/%m')
+    order = models.PositiveIntegerField(_(u'Orden en la galería'),default=1)
+    main = models.BooleanField(_(u'Usar como principal'))
     
     def __unicode__(self):
 		return unicode(self.file)

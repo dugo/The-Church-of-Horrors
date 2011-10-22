@@ -12,7 +12,14 @@ class UserProfileItem(admin.TabularInline):
 class UserProfile(admin.ModelAdmin):
     model = models.UserProfile
     
+    list_display = ('user','get_avatar',)
+    
     inlines = (UserProfileItem,)
+    
+    def get_avatar(self,obj):
+        return "<img src='%s' height=50 width=auto/>" % unicode(obj.avatar)
+    get_avatar.allow_tags = True
+    get_avatar.short_description = "Avatar"
 
 
 
