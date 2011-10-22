@@ -4,7 +4,7 @@
 import os.path,site,sys
 from distutils.sysconfig import get_python_lib
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 PROJECT_ROOT        = os.path.dirname(__file__)
@@ -188,22 +188,6 @@ try:
 except ImportError:
     pass
 
-
-if DEBUG:
-    ADMIN_MEDIA_PREFIX  = '/static/admin/'
-    STATIC_URL          = '/static/'
-    MEDIA_URL           = '/media/'
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-            'NAME': 'thechurchofhorrors',                      # Or path to database file if using sqlite3.
-            'USER': 'root',                      # Not used with sqlite3.
-            'PASSWORD': 'root',                  # Not used with sqlite3.
-            'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-        }
-    }
-
 FILEBROWSER_URL_FILEBROWSER_MEDIA = STATIC_URL+"filebrowser/"
 FILEBROWSER_URL_TINYMCE = STATIC_URL+'tiny_mce/'
 FILEBROWSER_EXTENSIONS = {
@@ -233,3 +217,14 @@ ABSOLUTE_URL_OVERRIDES = {
 }
 
 DATETIME_FORMAT = DATE_FORMAT = "d b Y"
+
+try:
+    from local_settings import *
+except:
+    pass
+
+if DEBUG:
+    TEMPLATE_DEBUG = True
+    ADMIN_MEDIA_PREFIX  = '/static/admin/'
+    STATIC_URL          = '/static/'
+    MEDIA_URL           = '/media/'
