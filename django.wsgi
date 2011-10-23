@@ -16,7 +16,7 @@ path = '/var/virtualenvs/thechurch/lib/python2.6/site-packages'
 if path not in sys.path:
     sys.path.insert(0,path)
     
-activate = "/var/virtualenvs/thechurch/bin/activate"
+activate = "/var/virtualenvs/thechurch/bin/activate_this.py"
 execfile(activate, dict(__file__=activate))
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'TheChurchofHorrors.settings'
