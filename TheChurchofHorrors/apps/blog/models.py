@@ -61,7 +61,7 @@ class Subsection(models.Model):
 
 
 class Entry(models.Model):
-    title = models.CharField(_(u"Título"),max_length=1024,blank=False,unique=True)
+    title = models.CharField(_(u"Título"),max_length=255,blank=False,unique=True)
     content = tinymce_models.HTMLField(_("Contenido"),blank=False,)
     #brief = models.TextField(_("Brief"),blank=False)
     author = models.ForeignKey(User,verbose_name=_(u"Autor"))

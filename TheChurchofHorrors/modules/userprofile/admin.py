@@ -36,6 +36,17 @@ class UserProfile(admin.ModelAdmin):
         
         obj.save()
 
+    def get_form(self, request, obj=None, **kwargs):
+        
+        form = super(UserProfile, self).get_form(request, obj=None, **kwargs)
+        
+        if not request.user.is_superuser:
+            form.base_fields['user'].queryset = form.base_fields['user'].queryset.filter(id=request.user.id)
+        
+        form.base_fields['user'].initial = request.user
+        
+        return form
+
 
 
 admin.site.register(models.UserProfile,UserProfile)

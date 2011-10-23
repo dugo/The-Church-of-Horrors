@@ -67,11 +67,11 @@ class Entry(admin.ModelAdmin):
         
         form = super(Entry, self).get_form(request, obj=None, **kwargs)
         
+        form.base_fields['author'].initial = request.user
+        
         if request.user.is_superuser:
             self.readonly_fields = ('slug',)
-        else:
-            from django.contrib.auth.models import User
-            
+        else:            
             self.readonly_fields = ('slug',) 
             form.base_fields['author'].queryset = form.base_fields['author'].queryset.filter(id=request.user.id)
             
