@@ -10,7 +10,7 @@ urlpatterns = patterns('',
     
     (r'^%s/(?P<path>.*)$' % settings.MEDIA_URL[1:-1], 'django.views.static.serve', {'document_root' : settings.MEDIA_ROOT, 'show_indexes': True}),
     (r'favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '%sfavicon.ico' % settings.STATIC_URL}),
-    (r'crossdomain\.xml$', 'django.views.generic.simple.redirect_to', {'url': '%crossdomain.xml' % settings.STATIC_URL}),
+    (r'crossdomain\.xml$', 'django.views.generic.simple.redirect_to', {'url': '%scrossdomain.xml' % settings.STATIC_URL}),
 
     (r'^tinymce/', include('tinymce.urls')),
     (r'^admin/filebrowser/', include('filebrowser.urls')),
