@@ -21,6 +21,21 @@ class UserProfile(admin.ModelAdmin):
     get_avatar.allow_tags = True
     get_avatar.short_description = "Avatar"
 
+    def queryset(self, request):
+        qs = super(UserProfile, self).queryset(request)
+
+        if not request.user.is_superuser:
+            return qs.filter(user__id=request.user.id)
+        
+        return qs
+    
+    def save_model(self, request, obj, form, change):
+        
+        if not request.user.is_superuser and request.user.id <> obj.user.id:
+            return
+        
+        obj.save()
+
 
 
 admin.site.register(models.UserProfile,UserProfile)

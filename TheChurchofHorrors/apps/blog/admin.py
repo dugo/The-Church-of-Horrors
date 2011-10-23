@@ -90,7 +90,7 @@ class Entry(admin.ModelAdmin):
     def queryset(self, request):
         qs = super(Entry, self).queryset(request)
 
-        if not request.is_superuser:
+        if not request.user.is_superuser:
             return qs.filter(author__id=request.user.id)
         
         return qs
