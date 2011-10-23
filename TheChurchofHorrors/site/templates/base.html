@@ -2,7 +2,7 @@
 {% load url from future %}
 
 
-{% if not request.is_ajax %}
+{#{% if not request.is_ajax %}#}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -42,10 +42,10 @@ $(document).ready(function(){
                 <a href='{{s.get_absolute_url}}' class="section">{{s|upper}}</a>
                 {% endfor %}
                 
-                <a href='#' id="vimeo" class="social"></a>
-                <a href='#' id="twitter" class="social"></a>
-                <a href='#' id="facebook" class="social"></a>
-                <a href='{%url 'feed'%}' id="rss" class="social"></a>
+                <a href='http://vimeo.com/thechurchofhorrors' id="vimeo" class="social" target="_blank"></a>
+                <a href='#' id="twitter" class="social" target="_blank"></a>
+                <a href='http://www.facebook.com/TheChurchofHorrors' id="facebook" class="social" target="_blank"></a>
+                <a href='{%url 'feed' %}' id="rss" class="social" target="_blank"></a>
             </div>
             <div id="subsections">
                 {% if section %}
@@ -61,7 +61,7 @@ $(document).ready(function(){
                 <input type="text" id="search" placeholder="Buscar..."/>
             </div>
         </div>
-{% endif %}
+{#{% endif %}#}
 
 <div id="content" class="{%block content_class%}{%endblock%}">
 <hr/>
@@ -69,7 +69,7 @@ $(document).ready(function(){
 {%block content%}{%endblock%}
 </div>
 
-{% if not request.is_ajax %}
+{#{% if not request.is_ajax %}#}
         <div id="left">
         
             {%block author%}<hr/>{%endblock%}
@@ -124,8 +124,8 @@ $(document).ready(function(){
             
         </div>
         
-        <div id="copyright"><hr/>Copyright 2011 <a href="/">thechurchofhorros.com</a>. Todos los derechos reservados.</div>
+        <div id="copyright"><hr/>Copyright 2011 <a href="/">thechurchofhorrors.com</a>. Todos los derechos reservados.</div>
     </div>
 </body>
 </html>
-{%endif%}
+{#{%endif%}#}
