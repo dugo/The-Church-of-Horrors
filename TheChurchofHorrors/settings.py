@@ -201,8 +201,11 @@ try:
 except ImportError:
     pass
 
+FILEBROWSER_DEBUG = True
 FILEBROWSER_URL_FILEBROWSER_MEDIA = STATIC_URL+"filebrowser/"
 FILEBROWSER_URL_TINYMCE = STATIC_URL+'tiny_mce/'
+FILEBROWSER_PATH_MEDIA = os.path.join(STATIC_ROOT, "filebrowser")
+FILEBROWSER_PATH_MEDIA = os.path.join(STATIC_ROOT, "tiny_mce")
 FILEBROWSER_EXTENSIONS = {
     'Folder': [''],
     'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
