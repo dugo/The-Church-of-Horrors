@@ -73,7 +73,7 @@ class Entry(admin.ModelAdmin):
             from django.contrib.auth.models import User
             
             self.readonly_fields = ('slug','author',) 
-            form.base_fields['author'].queryset = User.objects.filter(id=request.user.id)
+            form.fields['author'].queryset = User.objects.filter(id=request.user.id)
             
         return form
     
