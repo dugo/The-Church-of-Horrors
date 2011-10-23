@@ -223,7 +223,8 @@ TINYMCE_DEFAULT_CONFIG = {
     "plugin_preview_width" : "500",
     "plugin_preview_height" : "600",
     "extended_valid_elements" : "iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder]",
-    "embed_iframe_innerhtml_fallback" : 'This will be placed between the iframe tags'
+    "embed_iframe_innerhtml_fallback" : 'This will be placed between the iframe tags',
+    "theme_advanced_blockformats":"p"
 
 }
 TINYMCE_SPELLCHECKER = True
