@@ -64,17 +64,37 @@ class Entry(admin.ModelAdmin):
     readonly_fields = ('slug',)
     
     def get_form(self, request, obj=None, **kwargs):
+        
+        form = super(Entry, self).get_form(request, obj=None, **kwargs)
+        
         if request.user.is_superuser:
             self.readonly_fields = ('slug',)
         else:
             self.readonly_fields = ('slug','author',) 
-        return super(Entry, self).get_form(request, obj=None, **kwargs)
+            
+            form.base_fields['author'].queryset = User.objects.filter(id=request.user.id)
+            
+        return form
     
     
     def save_model(self, request, obj, form, change):
-		if not hasattr(obj,'author'):
+        
+        if hasattr(obj,'author') and not request.user.is_superuser and request.user.id <> obj.author.id:
+            return
+        
+		if not hasattr(obj,'author') or not request.user.is_superuser:
 			obj.author = request.user
+                   
 		obj.save()
+    
+    def queryset(self, request):
+        qs = super(Entry, self).queryset(request)
+
+        if not request.is_superuser:
+            return qs.filter(author__id=request.user.id)
+        
+        return qs
+
 
 
 
