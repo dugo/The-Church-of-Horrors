@@ -85,6 +85,7 @@ STATICFILES_DIRS = (
     ("admin_tools", os.path.join(MODULES_ROOT,"admin_tools","media","admin_tools")),
     ("tiny_mce", os.path.join(MODULES_ROOT,"tinymce","static","tiny_mce")),
     ("filebrowser", os.path.join(MODULES_ROOT,"filebrowser","media","filebrowser")),
+    ("thechurch", os.path.join(STATIC_ROOT,"thechurch",)),
 )
 
 # List of finder classes that know how to find static files in
