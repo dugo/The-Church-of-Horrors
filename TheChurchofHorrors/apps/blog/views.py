@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from apps.blog.models import Entry,Section,Subsection
 import time,random
+from django.conf import settings
 
 def home(request):
     
@@ -12,13 +13,13 @@ def home(request):
     
     right_entries = Entry.get_last_by_section(request.user)
     gallery_entries = list(Entry.get_home_gallery())
-    entries = list(Entry.get_last()[:6])
+    entries = list(Entry.get_last()[:settings.BLOG_MAX_LAST_ENTRIES])
     
     random.shuffle(entries)
     random.shuffle(gallery_entries)
 
     return render_to_response("home.html", 
-        dict(right_entries=right_entries, entries=entries), 
+        dict(right_entries=right_entries, entries=entries,show_long=True), 
         context_instance=RequestContext(request))
     
 def contact(request):
@@ -35,12 +36,12 @@ def common(request,slug):
         pass
 
     try:
-        subsection = Subsection.objects.get(slug=slug)
+        return view_for_subsection( request, subsection = Subsection.objects.get(slug=slug) )
     except Subsection.DoesNotExist:
         pass
 
     try:
-        section = Section.objects.get(slug=slug)
+        return view_for_section( request, section = Section.objects.get(slug=slug) )
     except Section.DoesNotExist:
         return HttpResponseNotFound()
 
@@ -66,6 +67,28 @@ def view_for_entry(request,entry):
 
     return render_to_response("entry.html", 
         dict(right_entries=right_entries, entry=entry), 
+        context_instance=RequestContext(request))
+        
+def view_for_subsection(request,subsection):
+    
+    entries = list(Entry.get_last(subsection__id=subsection.id)[:settings.BLOG_MAX_LAST_ENTRIES])
+    right_entries = Entry.get_last_by_section(request.user)
+
+    random.shuffle(entries)
+
+    return render_to_response("home.html", 
+        dict(right_entries=right_entries, entries=entries, show_long=False), 
+        context_instance=RequestContext(request))
+
+def view_for_section(request,section):
+    
+    entries = list(Entry.get_last(section__id=section.id)[:settings.BLOG_MAX_LAST_ENTRIES])
+    right_entries = Entry.get_last_by_section(request.user,section=section)
+
+    random.shuffle(entries)
+
+    return render_to_response("home.html", 
+        dict(right_entries=right_entries, entries=entries, show_long=False), 
         context_instance=RequestContext(request))
     
     

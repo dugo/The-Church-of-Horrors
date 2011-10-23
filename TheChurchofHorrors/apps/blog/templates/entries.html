@@ -1,4 +1,6 @@
 
+    {% if show_long %}
+
         {% for e in entries %}
             
             {% if forloop.counter0 < 2 %}
@@ -22,3 +24,22 @@
                 
             {%endif%}
         {%endfor%}
+    
+    {%else%}
+            <hr/>
+            <div class="short-entries">
+    
+            {% for e in entries %}
+            
+                {% if forloop.counter|divisibleby:2 %}
+                    {% include "mini-short-entry.html" %}
+                {%else%}
+                    {% include "mini-short-entry-odd.html" %}
+                {%endif%}
+            
+            {%endfor%}
+            
+            </div>
+            
+    
+    {%endif%}

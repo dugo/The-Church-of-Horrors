@@ -96,9 +96,12 @@ class Entry(models.Model):
             'slug': self.slug})
     
     @classmethod
-    def get_last(self):
+    def get_last(self,**kwargs):
         
-        return Entry.objects.order_by('-created')
+        if kwargs:
+            return Entry.objects.order_by('-created').filter(**kwargs)
+        else:
+            return Entry.objects.order_by('-created')
         
     @classmethod
     def get_last_by_author(self,author,max=settings.BLOG_MAX_LAST_ENTRIES):
