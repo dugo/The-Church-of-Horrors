@@ -70,9 +70,10 @@ class Entry(admin.ModelAdmin):
         if request.user.is_superuser:
             self.readonly_fields = ('slug',)
         else:
-            self.readonly_fields = ('slug','author',) 
+            #from django.contrib.auth.models import User
             
-            form.base_fields['author'].queryset = User.objects.filter(id=request.user.id)
+            self.readonly_fields = ('slug','author',) 
+            form.base_fields['author'].queryset = form.base_fields['author'].queryset.filter(id=request.user.id)
             
         return form
     
