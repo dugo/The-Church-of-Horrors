@@ -82,10 +82,10 @@ class Entry(admin.ModelAdmin):
         if hasattr(obj,'author') and not request.user.is_superuser and request.user.id <> obj.author.id:
             return
         
-		if not hasattr(obj,'author') or not request.user.is_superuser:
-			obj.author = request.user
+        if not hasattr(obj,'author') or not request.user.is_superuser:
+            obj.author = request.user
                    
-		obj.save()
+        obj.save()
     
     def queryset(self, request):
         qs = super(Entry, self).queryset(request)
