@@ -22,7 +22,7 @@ hr {
 
 #container { width:980px; margin: 0 auto; }
 #header { width: 100%; margin: 16px auto 0 auto; display:block;}
-#header > img { float:left; display:block;margin-top:9px;}
+#header > img { float:left; display:block;margin-top:9px;cursor:pointer;}
 #header #banner { margin-left:20px;height:70px;width:720px;/*background-color:#d10018;*/float:left;display:block;}
 #header #sections { display:block;margin-top:16px;float:left;width:100%;}
 #header #sections .section { display:block; background-color:black; color:white; float:left; padding:8px 16px;margin-right:8px;text-decoration:none; font-family:helvetica,sans-serif;font-weight:normal;font-family:"DINWeb-Medium",Arial;}
@@ -390,7 +390,7 @@ hr {
     font-family:verdana;
 }
 
-.entry hr {
+.entry .content-entry hr {
     margin:15px auto;
 }
 
@@ -403,4 +403,26 @@ hr {
     padding:0;
     padding-right:30px;
 
+}
+
+#breadcrumb {
+    font-family:verdana,sans-serif;
+    font-size:10px;
+    color:#808184;
+    font-weight:normal;
+    display:block;
+    margin-top:5px;
+}
+
+#topbanner {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:30px;
+    background:#d10018 url('../images/under-construction.png') no-repeat center top;
+    /*display:none;*/
+    filter:alpha(opacity=75);
+	opacity:.75;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)"; /*--IE 8 Transparency--*/
 }

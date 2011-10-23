@@ -20,15 +20,18 @@ $(document).ready(function(){
 
     $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
     
+    
+    
     {% block extra_js_ready %}{%endblock%}
 });
 </script>
 
 </head>
 <body>
+    <div id="topbanner"></div>
     <div id="container">
         <div id="header">
-            <img src="{{MEDIA_URL}}images/logo.png" alt="The Church of Horros logo"/>
+            <img src="{{MEDIA_URL}}images/logo.png" alt="The Church of Horros logo" onclick="window.location='/';"/>
             <div id="banner"></div>
             <div id="sections">
                 <a href='/' class="section">HOME</a>
@@ -42,16 +45,26 @@ $(document).ready(function(){
                 <a href='#' id="rss" class="social"></a>
             </div>
             <div id="subsections">
-                {% for s in subsections %}
-                <a href='{{s.get_absolute_url}}'>{{s}}</a>
-                {% endfor %}
+                {% if section %}
+                    {% for s in subsections %}
+                    <a href='{% url section_subsection section=section subsection=s %}'>{{s}}</a>
+                    {% endfor %}
+                {%else%}
+                    {% for s in subsections %}
+                    <a href='{{s.get_absolute_url}}'>{{s}}</a>
+                    {% endfor %}
+                {%endif%}
                 <button id="search-button"></button>
                 <input type="text" id="search" placeholder="Buscar..."/>
             </div>
         </div>
 {% endif %}
 
+<div id="content" class="{%block content_class%}{%endblock%}">
+<hr/>
+{%block breadcrumb%}{%endblock%}
 {%block content%}{%endblock%}
+</div>
 
 {% if not request.is_ajax %}
         <div id="left">

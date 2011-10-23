@@ -7,6 +7,8 @@ from tinymce import models as tinymce_models
 from django.template.defaultfilters import slugify
 from django.conf import settings
 from filebrowser.fields import FileBrowseField
+from taggit.managers import TaggableManager
+
 
 class Section(models.Model):
     name = models.CharField(_(u"Nombre"),max_length=255,unique=True,db_index=True,blank=False)
@@ -71,6 +73,7 @@ class Entry(models.Model):
     slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=_(u"Será generada automaticamente a partir del título"))
     gallery = models.BooleanField(_(u'Mostrar en galería de HOME'),help_text=_(u'Se mostrará sólo la imagen marcada cómo principal'),default=False)
     show_gallery = models.BooleanField(_(u'Mostrar galería en entrada'),help_text=_(u'Se mostrará en la propia entrada una galería con las imágenes en el orden establecido'),default=False)
+    tags = TaggableManager()
     
     def __unicode__(self):
         return unicode(self.title)

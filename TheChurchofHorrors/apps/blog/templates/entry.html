@@ -5,12 +5,15 @@
 
 {% block author %}{% mini_author entry.author %}{% endblock %}
 
+{%block breadcrumb%}{% breadcrumb request.get_full_path entry.section entry.subsection %}{%endblock%}
+
+{%block content_class%}entry{%endblock%}
+
 {%block content%}
-<div id="content" class="entry">
     {%if entry.author.id == request.user.id%}<a href="{% url admin:blog_entry_change entry.id %}" onclick="window.open(this.href);return false;" class="edit">Editar</a>{%endif%}
+    <br/>
     <h1>{{entry.title}}</h1>
     <span class="date">{{entry.created|date}}</span>
     <div class="content-entry">{{entry.content|safe}}</div>
-    <hr/>
-</div>
+    <!--<hr/>-->
 {%endblock%}

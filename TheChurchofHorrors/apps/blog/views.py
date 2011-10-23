@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from apps.blog.models import Entry,Section,Subsection
 import time,random
+from django.shortcuts import get_object_or_404
 from django.conf import settings
 
 def home(request):
@@ -19,7 +20,7 @@ def home(request):
     random.shuffle(gallery_entries)
 
     return render_to_response("home.html", 
-        dict(right_entries=right_entries, entries=entries,show_long=True), 
+        dict(right_entries=right_entries, entries=entries,show_long=True,section=None,subsection=None), 
         context_instance=RequestContext(request))
     
 def contact(request):
@@ -47,8 +48,20 @@ def common(request,slug):
 
     return HttpResponseNotFound()
     
-def section_subsection(request,section,subsubsection):
-    return HttpResponse()
+def section_subsection(request,section,subsection):
+    
+    section = get_object_or_404(Section,slug=section)
+    subsection = get_object_or_404(Subsection,slug=subsection)
+    
+    entries = list(Entry.get_last(subsection__id=subsection.id,section__id=section.id)[:settings.BLOG_MAX_LAST_ENTRIES])
+    
+    right_entries = Entry.get_last_by_section(request.user)
+
+    random.shuffle(entries)
+
+    return render_to_response("home.html", 
+        dict(right_entries=right_entries, entries=entries, show_long=False,section=section,subsection=subsection), 
+        context_instance=RequestContext(request))
     
 def entry(request,section,subsubsection,entry):
     return HttpResponse()
@@ -77,7 +90,7 @@ def view_for_subsection(request,subsection):
     random.shuffle(entries)
 
     return render_to_response("home.html", 
-        dict(right_entries=right_entries, entries=entries, show_long=False), 
+        dict(right_entries=right_entries, entries=entries, show_long=False,subsection=subsection,section=None), 
         context_instance=RequestContext(request))
 
 def view_for_section(request,section):
@@ -88,7 +101,7 @@ def view_for_section(request,section):
     random.shuffle(entries)
 
     return render_to_response("home.html", 
-        dict(right_entries=right_entries, entries=entries, show_long=False), 
+        dict(right_entries=right_entries, entries=entries, show_long=False, section = section,subsection=None), 
         context_instance=RequestContext(request))
     
     

@@ -123,6 +123,17 @@ TEMPLATE_DIRS = (
     os.path.join(SITE_ROOT, 'templates'),
 )
 
+try:
+    from local_settings import *
+except:
+    pass
+
+if DEBUG:
+    TEMPLATE_DEBUG = True
+    ADMIN_MEDIA_PREFIX  = '/static/admin/'
+    STATIC_URL          = '/static/'
+    MEDIA_URL           = '/media/'
+
 INSTALLED_APPS = (
     'filebrowser',
     'admin_tools',
@@ -141,6 +152,7 @@ INSTALLED_APPS = (
     'userprofile',
     'tinymce',
     'django_evolution',
+    'taggit',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS =(
@@ -211,6 +223,11 @@ TINYMCE_SPELLCHECKER = True
 TINYMCE_COMPRESSOR = False
 
 BLOG_MAX_LAST_ENTRIES = 4
+BLOG_BREADCRUMB_URL_MAPPING = {
+    'contact':"Contacto",
+    'staff':"Staff",
+    'author':"Autor",
+    }
 
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: "/author/%s/" % u.username,
@@ -218,13 +235,3 @@ ABSOLUTE_URL_OVERRIDES = {
 
 DATETIME_FORMAT = DATE_FORMAT = "d b Y"
 
-try:
-    from local_settings import *
-except:
-    pass
-
-if DEBUG:
-    TEMPLATE_DEBUG = True
-    ADMIN_MEDIA_PREFIX  = '/static/admin/'
-    STATIC_URL          = '/static/'
-    MEDIA_URL           = '/media/'
