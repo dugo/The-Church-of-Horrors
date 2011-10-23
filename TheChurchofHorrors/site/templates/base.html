@@ -45,7 +45,7 @@ $(document).ready(function(){
                 <a href='#' id="vimeo" class="social"></a>
                 <a href='#' id="twitter" class="social"></a>
                 <a href='#' id="facebook" class="social"></a>
-                <a href='#' id="rss" class="social"></a>
+                <a href='{%url 'feed'%}' id="rss" class="social"></a>
             </div>
             <div id="subsections">
                 {% if section %}
@@ -124,7 +124,7 @@ $(document).ready(function(){
             
         </div>
         
-        <div id="copyright"><hr/>Copyright 2011 <a href="#">thechurchofhorros.com</a>. Todos los derechos reservados.</div>
+        <div id="copyright"><hr/>Copyright 2011 <a href="/">thechurchofhorros.com</a>. Todos los derechos reservados.</div>
     </div>
 </body>
 </html>
