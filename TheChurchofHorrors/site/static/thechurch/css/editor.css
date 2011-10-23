@@ -1,0 +1,45 @@
+blockquote {
+    font-family:verdana;
+    font-size:14px;
+    color: #808183;
+    margin:10px 0;
+    text-align:justify;
+}
+
+p {
+    font-family:verdana;
+    font-size:10px;
+    color: black;
+    text-align:justify;
+}
+
+p strong {
+    font-weight:bold;
+    text-align:justify;
+}
+
+h1 {
+    font-family:verdana;
+    font-size:18px;
+    color:#5889b6;
+    font-weight:normal;
+}
+
+hr {
+    color: #f0bec1 !important;
+    background-color: #f0bec1 !important;
+    height: 1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    display:block !important;
+    clear:both !important;
+    margin:15px auto !important;
+}
+
+td {
+    vertical-align: text-top !important; 
+    padding:0;
+    padding-right:30px;
+
+}
