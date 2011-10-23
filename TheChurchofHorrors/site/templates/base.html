@@ -1,4 +1,6 @@
 {% load blog %}
+{% load url from future %}
+
 
 {% if not request.is_ajax %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -47,7 +49,7 @@ $(document).ready(function(){
             <div id="subsections">
                 {% if section %}
                     {% for s in subsections %}
-                    <a href='{% url section_subsection section=section subsection=s %}'>{{s}}</a>
+                    <a href='{% url 'section_subsection' section=section subsection=s %}'>{{s}}</a>
                     {% endfor %}
                 {%else%}
                     {% for s in subsections %}
@@ -94,9 +96,9 @@ $(document).ready(function(){
         <div id="subfooter-1">
             <div id="subfooter-2">
                 <div class="footer-item footer-item-1">
-                    <h3><a href="#">Contacto</a></h3>
-                    <h3><a href="#">Staff</a></h3>
-                    <h3><a href="#">Información</a></h3>
+                    <h3><a href="{% url 'contact' %}">Contacto</a></h3>
+                    <h3><a href="{% url 'staff' %}">Staff</a></h3>
+                    <!--<h3><a href="#">Información</a></h3>-->
                 </div>
                 <div class="footer-item">
                     <h3>Categorías</h3>

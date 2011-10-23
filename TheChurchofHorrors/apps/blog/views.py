@@ -24,10 +24,19 @@ def home(request):
         context_instance=RequestContext(request))
     
 def contact(request):
-    return HttpResponse()
+    
+    right_entries = Entry.get_last_by_section(request.user)
+
+    return render_to_response("contact.html", 
+        dict(right_entries=right_entries, section=None,subsection=None), 
+        context_instance=RequestContext(request))
     
 def staff(request):
-    return HttpResponse()
+    right_entries = Entry.get_last_by_section(request.user)
+
+    return render_to_response("staff.html", 
+        dict(right_entries=right_entries, section=None,subsection=None), 
+        context_instance=RequestContext(request))
     
 def common(request,slug):
     
@@ -67,10 +76,18 @@ def entry(request,section,subsubsection,entry):
     return HttpResponse()
     
 def archive(request,year,month):
-    return HttpResponse()
+    right_entries = Entry.get_last_by_section(request.user)
+
+    return render_to_response("archive.html", 
+        dict(right_entries=right_entries, section=None,subsection=None), 
+        context_instance=RequestContext(request))
     
 def author(request,user):
-    return HttpResponse(user)
+    right_entries = Entry.get_last_by_section(request.user)
+
+    return render_to_response("author.html", 
+        dict(right_entries=right_entries, section=None,subsection=None), 
+        context_instance=RequestContext(request))
 
 
 def view_for_entry(request,entry):
