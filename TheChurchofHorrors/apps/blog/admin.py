@@ -48,7 +48,7 @@ class ImageGallery(admin.TabularInline):
 
 class EntryForm(ModelForm):
     
-    content = forms.CharField(label=_(u"Contenido"),widget=TinyMCE(attrs={'cols': 120, 'rows': 40},  mce_attrs = { "style_formats" : [ {"title" : _('Cita'), "block" : 'blockquote'} ], "content_css": "%scss/editor.css" % settings.MEDIA_URL }))
+    content = forms.CharField(label=_(u"Contenido"),widget=TinyMCE(attrs={'cols': 120, 'rows': 40},  mce_attrs = { "style_formats" : [ {"title" : _('Cita'), "block" : 'blockquote'} ], "content_css": "%sthechurch/css/editor.css" % settings.STATIC_URL }))
     
     class Meta:
         model = models.Entry
