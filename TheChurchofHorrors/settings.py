@@ -137,6 +137,36 @@ if DEBUG:
     STATIC_URL          = '/static/'
     MEDIA_URL           = '/media/'
 
+
+FILEBROWSER_DEBUG = False
+FILEBROWSER_DIRECTORY = ''
+FILEBROWSER_URL_FILEBROWSER_MEDIA = "/static/filebrowser/"
+FILEBROWSER_URL_TINYMCE = '/static/tiny_mce/'
+FILEBROWSER_PATH_MEDIA = os.path.join(STATIC_ROOT, "filebrowser")
+FILEBROWSER_PATH_TINYMCE = os.path.join(STATIC_ROOT, "tiny_mce")
+FILEBROWSER_EXTENSIONS = {
+    'Folder': [''],
+    'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
+}
+
+TINYMCE_COMPRESSOR = True
+TINYMCE_JS_URL = '/static/tiny_mce/tiny_mce_src.js'
+TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "tiny_mce")
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "preview,table,spellchecker,paste,searchreplace,media,embed",
+    'theme': "advanced",
+    "theme_advanced_buttons3_add_before" : "tablecontrols,separator",
+    "theme_advanced_buttons3_add" : "separator,preview,emotions,embed",
+    "plugin_preview_width" : "500",
+    "plugin_preview_height" : "600",
+    "extended_valid_elements" : "iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder]",
+    "embed_iframe_innerhtml_fallback" : 'This will be placed between the iframe tags',
+    "theme_advanced_blockformats":"p"
+
+}
+TINYMCE_SPELLCHECKER = True
+TINYMCE_COMPRESSOR = False
+
 INSTALLED_APPS = (
     'filebrowser',
     'admin_tools',
@@ -202,35 +232,6 @@ try:
     from local_settings import *
 except ImportError:
     pass
-
-FILEBROWSER_DEBUG = False
-FILEBROWSER_DIRECTORY = ''
-FILEBROWSER_URL_FILEBROWSER_MEDIA = "/static/filebrowser/"
-FILEBROWSER_URL_TINYMCE = '/static/tiny_mce/'
-FILEBROWSER_PATH_MEDIA = os.path.join(STATIC_ROOT, "filebrowser")
-FILEBROWSER_PATH_TINYMCE = os.path.join(STATIC_ROOT, "tiny_mce")
-FILEBROWSER_EXTENSIONS = {
-    'Folder': [''],
-    'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
-}
-
-TINYMCE_COMPRESSOR = True
-TINYMCE_JS_URL = 'http://thechurchofhorrors.com/static/tiny_mce/tiny_mce_src.js'
-TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "tiny_mce")
-TINYMCE_DEFAULT_CONFIG = {
-    'plugins': "preview,table,spellchecker,paste,searchreplace,media,embed",
-    'theme': "advanced",
-    "theme_advanced_buttons3_add_before" : "tablecontrols,separator",
-    "theme_advanced_buttons3_add" : "separator,preview,emotions,embed",
-    "plugin_preview_width" : "500",
-    "plugin_preview_height" : "600",
-    "extended_valid_elements" : "iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder]",
-    "embed_iframe_innerhtml_fallback" : 'This will be placed between the iframe tags',
-    "theme_advanced_blockformats":"p"
-
-}
-TINYMCE_SPELLCHECKER = True
-TINYMCE_COMPRESSOR = False
 
 BLOG_MAX_LAST_ENTRIES = 4
 BLOG_BREADCRUMB_URL_MAPPING = {
