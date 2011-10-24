@@ -7,6 +7,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{%block extra_metatags%}
+<meta name="keywords" content="the church of horrors,thechurchofhorrors.com,magazine,cultural,magazine cultural,{{sections|join:','}},{{subsections|join:','}}"/>
+<meta name="description" content="The Church of Horrors intenta crear un espacio donde convivan diferentes propuestas y estilos artísticos, fomentando a su vez el conocimiento de obras y artistas; cuyo mejor medio de difusión se encuentra en la misma red." />
+{%endblock%}
+
 <title>{%block title%}{%endblock%}</title> 
 
 <link rel="shortcut icon" href="{{STATIC_URL}}favicon.ico" />

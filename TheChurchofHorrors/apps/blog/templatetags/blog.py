@@ -1,3 +1,4 @@
+from django.template.defaultfilters import stringfilter
 from django import template
 
 register = template.Library()
@@ -35,3 +36,8 @@ def breadcrumb(path,section=None,subsection=None):
 		urls.insert(0, ("/", "HOME") )
 	
 	return {'urls':urls}
+
+@register.filter
+@stringfilter
+def remove_linebreaks(value):
+    return value.replace('\n','').replace('\r','')
