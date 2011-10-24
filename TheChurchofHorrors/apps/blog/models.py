@@ -102,9 +102,9 @@ class Entry(models.Model):
     def get_last(self,**kwargs):
         
         if kwargs:
-            return Entry.objects.order_by('-created').filter(**kwargs)
+            return Entry.objects.order_by('-created').filter(**kwargs).filter(published=True)
         else:
-            return Entry.objects.order_by('-created')
+            return Entry.objects.order_by('-created').filter(published=True)
         
     @classmethod
     def get_last_by_author(self,author,max=settings.BLOG_MAX_LAST_ENTRIES):
@@ -121,7 +121,8 @@ class Entry(models.Model):
         
         entries = {}
         
-        if user.is_authenticated():
+        # removed!
+        if False and user.is_authenticated():
             q = models.Q(published=True) | models.Q(author__id=user.id)
         else:
             q = models.Q(published=True)
