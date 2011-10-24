@@ -215,7 +215,7 @@ FILEBROWSER_EXTENSIONS = {
 }
 
 TINYMCE_COMPRESSOR = True
-TINYMCE_JS_URL = '/static/tiny_mce/tiny_mce_src.js'
+TINYMCE_JS_URL = 'http://thechurchofhorrors.com/static/tiny_mce/tiny_mce_src.js'
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "tiny_mce")
 TINYMCE_DEFAULT_CONFIG = {
     'plugins': "preview,table,spellchecker,paste,searchreplace,media,embed",
