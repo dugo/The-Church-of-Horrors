@@ -214,7 +214,7 @@ FILEBROWSER_EXTENSIONS = {
     'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
 }
 
-TINYMCE_JS_URL = STATIC_URL+'tiny_mce/tiny_mce_src.js'
+TINYMCE_JS_URL = '/static/tiny_mce/tiny_mce_src.js'
 TINYMCE_DEFAULT_CONFIG = {
     'plugins': "preview,table,spellchecker,paste,searchreplace,media,embed",
     'theme': "advanced",
