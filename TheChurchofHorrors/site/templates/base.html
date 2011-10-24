@@ -50,7 +50,7 @@ $(document).ready(function(){
             <div id="subsections">
                 {% if section %}
                     {% for s in subsections %}
-                    <a href='{% url 'section_subsection' section=section subsection=s %}'>{{s}}</a>
+                    <a href='{% url 'section_subsection' section=section.slug subsection=s.slug %}'>{{s}}</a>
                     {% endfor %}
                 {%else%}
                     {% for s in subsections %}

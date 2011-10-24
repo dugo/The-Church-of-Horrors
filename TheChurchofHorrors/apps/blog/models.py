@@ -48,7 +48,7 @@ class Subsection(models.Model):
         
         if hasattr(self,"section"):
             return ('section_subsection', (), {
-                'section': self.section,
+                'section': self.section.slug,
                 'subsection': self.slug})
                 
         else:
