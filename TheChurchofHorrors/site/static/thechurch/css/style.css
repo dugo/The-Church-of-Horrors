@@ -25,7 +25,7 @@ hr {
 #header > img { float:left; display:block;margin-top:9px;cursor:pointer;}
 #header #banner { margin-left:20px;height:70px;width:720px;/*background-color:#d10018;*/float:left;display:block;}
 #header #sections { display:block;margin-top:16px;float:left;width:100%;}
-#header #sections .section { display:block; background-color:black; color:white; float:left; padding:8px 16px;margin-right:8px;text-decoration:none; font-family:helvetica,sans-serif;font-weight:normal;font-family:"DINWeb-Medium",Arial;}
+#header #sections .section { display:block; background-color:black; color:white; float:left; padding:8px 14px;margin-right:8px;text-decoration:none; font-family:helvetica,sans-serif;font-weight:normal;font-family:"DINWeb-Medium",Arial;}
 #header #sections .social {display:block;width:37px;height:37px;float:right;background-image:url('../images/social.png');background-repeat: no-repeat;margin-left:8px}
 #rss {background-position: 0px 0px !important;}
 #facebook {background-position: -45px 0px !important;}
@@ -40,7 +40,7 @@ hr {
     color:gray;
     font-family:verdana,sans-serif;
     font-size:10px;
-    width:144px;
+    width:149px;
     }
 #search-button {
     border:0;
@@ -50,7 +50,8 @@ hr {
     width:20px;
     cursor:pointer;
     }
-#header #subsections a { display:block; background-color:white; color:black; float:left; padding:6px 10px;margin-right:5px;font-family:verdana,sans-serif;font-size:10px; }
+#header #subsections a { display:block; background-color:white; color:black; float:left; padding:6px 9px;margin-right:8.5px;font-family:verdana,sans-serif;font-size:10px; }
+#header #subsections a:hover { background-color:#d10019; }
 
 #left {
     width:230px;
@@ -208,11 +209,13 @@ hr {
 }
 
 #footer {
-    position:absolute;
+    position:relative;
     margin-top:30px;
+    margin:30px auto 0 auto;
     /*bottom:0px;*/
     height:190px;
-    width:100%;
+    /*width:100%;*/
+    width:980px;
     background-color:#404042;
     text-align:center;
 }
@@ -271,12 +274,12 @@ hr {
     margin-bottom:18px;
 }
 #footer hr {
-    color: #98999b;
-    background-color: #98999b;
-    height: 2px;
-    border: 0;
-    width: 90%;
-    margin:5px auto;
+    color: #98999b !important;
+    background-color: #98999b !important;
+    height: 2px !important;
+    border: 0 !important;
+    width: 90% !important;
+    margin:5px auto !important;
 }
 #footer #copyright
 {

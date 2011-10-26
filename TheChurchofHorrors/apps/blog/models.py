@@ -34,6 +34,7 @@ class Section(models.Model):
 class Subsection(models.Model):
     name = models.CharField(_(u"Nombre"),max_length=255,unique=True,db_index=True,blank=False)
     slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=u"Será generada automaticamente a partir del nombre")
+    order = models.PositiveIntegerField(_(u"Orden en el que se mostrará en el menú"),default=0,blank=False,null=False)
     
     def __unicode__(self):
         return unicode(self.name)
