@@ -34,7 +34,7 @@ class Section(models.Model):
 class Subsection(models.Model):
     name = models.CharField(_(u"Nombre"),max_length=255,unique=True,db_index=True,blank=False)
     slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=u"Será generada automaticamente a partir del nombre")
-    sort = models.PositiveIntegerField(_(u"Orden en el que se mostrará en el menú"),default=0,blank=False,null=False)
+    sort = models.PositiveIntegerField(_(u"Orden"),default=0,blank=False,null=False,help_text=_(u"En el que se mostrará en el menú"))
     
     def __unicode__(self):
         return unicode(self.name)
@@ -42,7 +42,7 @@ class Subsection(models.Model):
     class Meta:
         verbose_name = _(u"categoría")
         verbose_name_plural = _(u"categorías")
-        ordering = ('name',)
+        ordering = ('sort',)
 
     @models.permalink
     def get_absolute_url(self):

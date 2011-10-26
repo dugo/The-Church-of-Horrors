@@ -15,6 +15,8 @@ class Section(admin.ModelAdmin):
     
     readonly_fields = ('slug',)
 
+    list_fields = ('name','sort',)
+
 class Subsection(admin.ModelAdmin):
     model = models.Subsection
     
