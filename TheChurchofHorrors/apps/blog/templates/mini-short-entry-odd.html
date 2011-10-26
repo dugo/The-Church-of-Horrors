@@ -1,7 +1,7 @@
 <div class="short-entry odd">
     <div class="img"><img src="{{e.get_main_image}}" class="adjust"/></div>
     <div class="desc">
-    <span class="title"><a href="#">{{e.title}}</a></span>
+    <span class="title"><a href="{{e.get_absolute_url}}">{{e.title}}</a></span>
     <span class="info">Por <a href="{{e.author.get_absolute_url}}">{%if e.author.get_full_name%}{{e.author.get_full_name}}{%else%}{{e.author}}{%endif%}</a>, <em>{{e.created|date}}</em>, en <a href="{{e.subsection.get_absolute_url}}">{{e.subsection}}.</a></span>
     <p>{{e.get_brief}}</p>
     
