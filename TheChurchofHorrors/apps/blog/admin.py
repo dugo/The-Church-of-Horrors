@@ -15,12 +15,11 @@ class Section(admin.ModelAdmin):
     
     readonly_fields = ('slug',)
 
-    list_display = ('name','sort',)
-
 class Subsection(admin.ModelAdmin):
     model = models.Subsection
     
     readonly_fields = ('slug',)
+    list_display = ('name','sort',)
 
 class ImageGalleryFormset(BaseInlineFormSet):
     def clean(self):
