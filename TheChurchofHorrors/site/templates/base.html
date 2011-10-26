@@ -102,7 +102,7 @@ $(document).ready(function(){
                     <hr/>
             {%else%}
                 {% for s,items in right_entries.items %}
-                    <div class="section">Últimos {{s|upper}}</div>
+                    <div class="section">Últim{{s|sexualize}}s {{s|upper}}</div>
                         {% for e in items %}
                             {% preview_entry e forloop.counter%}
                         {% endfor %}

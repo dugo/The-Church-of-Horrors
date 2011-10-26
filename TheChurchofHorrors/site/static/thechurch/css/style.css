@@ -50,7 +50,7 @@ hr {
     width:20px;
     cursor:pointer;
     }
-#header #subsections a { display:block; background-color:white; color:black; float:left; padding:6px 9px;margin-right:8.5px;font-family:verdana,sans-serif;font-size:10px; }
+#header #subsections a { display:block; background-color:white; color:black; float:left; padding:6px 12px;margin-right:3px;font-family:verdana,sans-serif;font-size:10px; }
 #header #subsections a:hover { background-color:#d10019; }
 
 #left {

@@ -41,3 +41,29 @@ def breadcrumb(path,section=None,subsection=None):
 @stringfilter
 def remove_linebreaks(value):
     return value.replace('\n','').replace('\r','')
+
+@register.filter
+@stringfilter
+def sexualize(value, arg=u'o,a'):
+    
+    FEM_VOCALS = ('a',)
+    VOCALS = ('a','e','i','o','u',)
+    
+    bits = arg.split(u',')
+    if len(bits) <> 2:
+        return u''
+    masc_suffix, fem_suffix = bits[:2]
+
+    # find the last vocal of value
+    for i in range(len(value)-1,-1,-1):
+        if value[i] in VOCALS:
+            vocal = value[i]
+            break
+    else:
+        return u''
+    
+    if vocal in FEM_VOCALS:
+        return fem_suffix
+    
+    return masc_suffix
+sexualize.is_safe = False
