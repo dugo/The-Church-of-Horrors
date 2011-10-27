@@ -52,6 +52,7 @@ hr {
     }
 #header #subsections a { display:block; background-color:white; color:black; float:left; padding:6px 12px;margin-right:3px;font-family:verdana,sans-serif;font-size:10px; }
 #header #subsections a:hover { background-color:#d10019; }
+a:hover { color:#d10019; }
 
 #left {
     width:230px;
@@ -214,8 +215,8 @@ hr {
     margin:30px auto 0 auto;
     /*bottom:0px;*/
     height:190px;
-    /*width:100%;*/
-    width:980px;
+    width:100%;
+    /*width:980px;*/
     background-color:#404042;
     text-align:center;
 }
@@ -278,7 +279,7 @@ hr {
     background-color: #98999b !important;
     height: 2px !important;
     border: 0 !important;
-    width: 90% !important;
+    width: 980px !important;
     margin:5px auto !important;
 }
 #footer #copyright
@@ -381,7 +382,7 @@ hr {
 }
 
 
-.entry .column *{ padding: 5px; }
+.entry div.column { padding-right:10px; }
 
 .entry p strong {
     font-weight:bold;

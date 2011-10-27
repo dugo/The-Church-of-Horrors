@@ -153,15 +153,17 @@ TINYMCE_COMPRESSOR = True
 TINYMCE_JS_URL = '/static/tiny_mce/tiny_mce_src.js'
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "tiny_mce")
 TINYMCE_DEFAULT_CONFIG = {
-    'plugins': "preview,table,spellchecker,paste,searchreplace,media,embed",
+    #'plugins': "preview,spellchecker,paste,searchreplace,media,embed",
+    'plugins': "preview,table,spellchecker,paste,searchreplace,media,embed,template",
     'theme': "advanced",
     "theme_advanced_buttons3_add_before" : "tablecontrols,separator",
-    "theme_advanced_buttons3_add" : "separator,preview,emotions,embed",
+    "theme_advanced_buttons3_add" : "separator,preview,emotions,embed,separator,template",
     "plugin_preview_width" : "500",
     "plugin_preview_height" : "600",
     "extended_valid_elements" : "iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder]",
     "embed_iframe_innerhtml_fallback" : 'This will be placed between the iframe tags',
-    "theme_advanced_blockformats":"p"
+    "theme_advanced_blockformats":"p",
+    "template_templates" : [ { "title" : "Dos columnas", "src" : "%sthechurch/twocolumns.html"  % STATIC_URL ,  "description" : "Dos columnas"  } ]
 
 }
 TINYMCE_SPELLCHECKER = True

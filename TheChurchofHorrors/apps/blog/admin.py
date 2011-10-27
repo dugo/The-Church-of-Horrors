@@ -60,7 +60,7 @@ class Entry(admin.ModelAdmin):
     
     inlines = (ImageGallery,)
     
-    list_display = ('__unicode__','gallery',)
+    list_display = ('__unicode__','published','gallery',)
     
     readonly_fields = ('slug',)
     
