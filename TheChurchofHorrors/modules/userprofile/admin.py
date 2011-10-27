@@ -4,6 +4,12 @@ import models
 
 from django.contrib import admin
 
+class Rol(admin.ModelAdmin):
+    model = models.UserProfile
+    
+    list_display = ('__unicode__','sort',)
+    
+
 class UserProfileItem(admin.TabularInline):
     model = models.UserProfileItem
     can_delete = True

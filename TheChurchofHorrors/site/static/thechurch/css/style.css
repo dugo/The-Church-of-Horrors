@@ -12,9 +12,9 @@ hr {
     clear:both !important;
 }
 
-@font-face{font-family:DINWeb-Light;src:url("fonts/DINWeb-Light.eot");}
-@font-face{font-family:DINWeb-Medium;src:url("fonts/DINWeb-Medium.eot");}
-@font-face{font-family:DINWeb-Black;src:url("fonts/DINWeb-Black.eot");}
+@font-face{font-family:DINWeb-Light;src:url("fonts/DINWeb-Light.eot");src:local("DINWeb-Light") url("fonts/DINWeb-Light.ttf") format("truetype");}
+@font-face{font-family:DINWeb-Medium;src:url("fonts/DINWeb-Medium.eot");src:local("DINWeb-Medium") url("fonts/DINWeb-Medium.ttf") format("truetype");}
+@font-face{font-family:DINWeb-Black;src:url("fonts/DINWeb-Black.eot");src:local("DINWeb-Black") url("fonts/DINWeb-Black.ttf") format("truetype");}
 @font-face{font-family:DINWeb-Light;src:url("fonts/DINWeb-Light.woff") format("woff");}
 @font-face{font-family:DINWeb-Medium;src:url("fonts/DINWeb-Medium.woff") format("woff");}
 @font-face{font-family:DINWeb-Black;src:url("fonts/DINWeb-Black.woff") format("woff");}

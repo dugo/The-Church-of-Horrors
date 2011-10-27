@@ -4,7 +4,8 @@ PIL==1.1.7
 #django-tinymce==1.5.1a2
 ipython==0.11
 wsgiref==0.1.2
-django-evolution==0.5
+#django-evolution==0.5
 django-taggit==0.9.3
+#South==0.7.3
 #django-admin-tools==0.4.0
 #django-filebrowser==3.0

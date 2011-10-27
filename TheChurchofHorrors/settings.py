@@ -187,7 +187,7 @@ INSTALLED_APPS = (
     'blog',
     'userprofile',
     'tinymce',
-    'django_evolution',
+    #'south',
     'taggit',
 )
 

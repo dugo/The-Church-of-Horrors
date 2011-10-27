@@ -68,15 +68,9 @@ $(document).ready(function(){
                 <a href='{%url 'feed' %}' id="rss" class="social" target="_blank"></a>
             </div>
             <div id="subsections">
-                {% if section %}
-                    {% for s in subsections %}
-                    <a href='{% url 'section_subsection' section=section.slug subsection=s.slug %}'>{{s}}</a>
-                    {% endfor %}
-                {%else%}
-                    {% for s in subsections %}
-                    <a href='{{s.get_absolute_url}}'>{{s}}</a>
-                    {% endfor %}
-                {%endif%}
+                {% for s in subsections %}
+                <a href='{{s.get_absolute_url}}'>{{s}}</a>
+                {% endfor %}
                 <button id="search-button"></button>
                 <input type="text" id="search" placeholder="Buscar..."/>
             </div>
