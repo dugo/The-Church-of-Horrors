@@ -56,3 +56,4 @@ class UserProfile(admin.ModelAdmin):
 
 
 admin.site.register(models.UserProfile,UserProfile)
+admin.site.register(models.Rol,Rol)
