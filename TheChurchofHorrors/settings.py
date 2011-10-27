@@ -163,7 +163,7 @@ TINYMCE_DEFAULT_CONFIG = {
     "extended_valid_elements" : "iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder]",
     "embed_iframe_innerhtml_fallback" : 'This will be placed between the iframe tags',
     "theme_advanced_blockformats":"p",
-    "template_templates" : [ { "title" : "Dos columnas", "src" : "%sthechurch/twocolumns.html"  % STATIC_URL ,  "description" : "Dos columnas"  } ]
+    "template_templates" : [ { "title" : "Dos columnas", "src" : "/static/thechurch/twocolumns.html" ,  "description" : "Dos columnas"  } ]
 
 }
 TINYMCE_SPELLCHECKER = True
