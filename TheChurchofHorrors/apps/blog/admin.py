@@ -25,9 +25,13 @@ class ImageGalleryFormset(BaseInlineFormSet):
     def clean(self):
         # get forms that actually have valid data
         count = 0
+        total = 0
         for form in self.forms:
             try:
-                if form.cleaned_data and form.cleaned_data['main']:
+                if form.cleaned_data and not form.cleaned_data['DELETE']:
+                    total+=1
+                
+                if form.cleaned_data and not form.cleaned_data['DELETE'] and form.cleaned_data['main']:
                     count += 1
             except AttributeError:
                 # annoyingly, if a subform is invalid Django explicity raises
@@ -36,7 +40,7 @@ class ImageGalleryFormset(BaseInlineFormSet):
         if count <> 1:
             raise forms.ValidationError(_(u"Debes subir al menos una imagen y sólo debe haber una marcada como principal"))
         
-        if form.cleaned_data.get('show_gallery',False) and len(self.forms) <= 1:
+        if form.cleaned_data.get('show_gallery',False) and total <= 1:
             raise forms.ValidationError(_(u"Para que aparezca la galería debes de subir una imagen o más"))
 
 class ImageGallery(admin.TabularInline):
@@ -60,7 +64,7 @@ class Entry(admin.ModelAdmin):
     
     inlines = (ImageGallery,)
     
-    list_display = ('__unicode__','published','gallery',)
+    list_display = ('__unicode__','author','published','gallery',)
     
     readonly_fields = ('slug',)
     
@@ -68,13 +72,12 @@ class Entry(admin.ModelAdmin):
         
         form = super(Entry, self).get_form(request, obj=None, **kwargs)
         
-        form.base_fields['author'].initial = request.user
+        if form.base_fields.has_key('author'):
+            form.base_fields['author'].initial = request.user
         
-        if request.user.is_superuser:
-            self.readonly_fields = ('slug',)
-        else:            
-            self.readonly_fields = ('slug',) 
-            form.base_fields['author'].queryset = form.base_fields['author'].queryset.filter(id=request.user.id)
+        if not request.user.is_superuser:
+            self.exclude = ('author','gallery','published',)
+            #form.base_fields['author'].queryset = form.base_fields['author'].queryset.filter(id=request.user.id)
             
         return form
     

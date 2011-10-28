@@ -21,13 +21,13 @@ def breadcrumb(path,section=None,subsection=None):
 	
 	if subsection:
 		urls.append( (subsection.get_absolute_url(),unicode(subsection),) )
-	
+
 	if not section and not subsection:
 		from django.conf import settings
-		
+
 		mapping = settings.BLOG_BREADCRUMB_URL_MAPPING
-		
-		token = path.split('/')[0]
+
+		token = path.split('/')[1]
 		
 		if mapping.get(token):
 			urls.append( (path, mapping.get(token),) )

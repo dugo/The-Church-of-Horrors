@@ -6,17 +6,6 @@
 <meta name="description" content="{{entry.get_brief|remove_linebreaks}}" />
 {%endblock%}
 
-{% block extra_js %}
-{#<script type="text/javascript" src="{{STATIC_URL}}thechurch/js/autocolumn.min.js"></script>#}
-{%endblock%}
-
-{%comment%}
-{% block extra_js_ready %}
-$('div.content-entry').columnize();
-{%endblock%}
-{%endcomment%}
-
-
 {% block title %}The Church of Horrors :: {{entry}}{%endblock%}
 
 {% block author %}{% mini_author entry.author %}{% endblock %}

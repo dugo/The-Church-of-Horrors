@@ -72,8 +72,8 @@ class Entry(models.Model):
     modified = models.DateTimeField(_(u'Modificado'),auto_now=True)
     published = models.BooleanField(_(u'Publicado'),default=False,blank=False)
     slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=_(u"Será generada automaticamente a partir del título"))
-    gallery = models.BooleanField(_(u'Mostrar en galería de HOME'),help_text=_(u'Se mostrará sólo la imagen marcada cómo principal'),default=False)
-    show_gallery = models.BooleanField(_(u'Mostrar galería en entrada'),help_text=_(u'Se mostrará en la propia entrada una galería con las imágenes en el orden establecido'),default=False)
+    gallery = models.BooleanField(_(u'Mostrar en galería de HOME'),help_text=_(u'Se mostrará sólo la imagen marcada cómo principal'),default=False,blank=True)
+    show_gallery = models.BooleanField(_(u'Mostrar galería en entrada'),help_text=_(u'Se mostrará en la propia entrada una galería con las imágenes en el orden establecido'),default=False,blank=True)
     tags = TaggableManager()
     
     def __unicode__(self):
@@ -109,7 +109,7 @@ class Entry(models.Model):
         
     @classmethod
     def get_last_by_author(self,author,max=settings.BLOG_MAX_LAST_ENTRIES):
-        
+
         return Entry.objects.filter(published=True,author__id=author.id).order_by('-created')[:max]
     
     @classmethod

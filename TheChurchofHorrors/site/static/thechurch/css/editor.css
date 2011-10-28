@@ -43,3 +43,6 @@ td {
     padding-right:30px;
 
 }
+
+a:hover { color:#d10019 !important;}
+a {text-decoration:none !important; color:#5889b6 !important;}

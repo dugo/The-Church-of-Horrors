@@ -19,9 +19,9 @@ class Rol(models.Model):
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, verbose_name=_("Usuario"), unique=True,blank=False)
-    description = models.TextField(_(u'Descripción'),max_length=160, help_text = _(u'Cómo te describes en 160 caracteres (un sms)'))
-    rol = models.ForeignKey(Rol,verbose_name=_(u'Rol'), help_text=_(u'¿Qué papel desempeñas?'))
-    avatar = FileBrowseField(blank=False,directory='avatars/',extensions=[".jpg",".png",".jpeg",".gif"], verbose_name=_(u'Tu avatar. Será redimensionado y convertido a blanco y negro'))
+    description = models.CharField(_(u'Descripción'),max_length=160, help_text = _(u'Cómo te describes en 160 caracteres (un sms)'))
+    rol = models.ForeignKey(Rol,verbose_name=_(u'Rol'), help_text=_(u'¿Qué papel desempeñas?'),blank=False,null=False)
+    avatar = FileBrowseField(blank=False,directory='avatars/',extensions=[".jpg",".png",".jpeg",".gif"], help_text=_(u'Tu avatar. Será redimensionado y convertido a blanco y negro'))
     #avatar = models.ImageField(blank=False,upload_to='avatars/')
     
     def get_items(self):

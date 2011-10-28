@@ -1,1 +1,19 @@
 {% extends "base.html" %}
+{% load blog %}
+
+{% block extra_metatags %}
+<meta name="keywords" content="{%if e.author.get_full_name%}{{e.author.get_full_name}}{%else%}{{e.author}}{%endif%},{{e.get_profile.rol}}"/>
+<meta name="description" content="{{e.get_profile.description}}" />
+{%endblock%}
+
+{% block title %}The Church of Horrors :: {%if e.author.get_full_name%}{{e.author.get_full_name}}{%else%}{{e.author}}{%endif%}{%endblock%}
+
+{% block author %}{% mini_author author %}{% endblock %}
+
+{%block breadcrumb%}{% breadcrumb request.get_full_path section subsection %}{%endblock%}
+
+{%block content_class%}home{%endblock%}
+
+{%block content%}
+    {% include "entries.html" %}
+{%endblock%}

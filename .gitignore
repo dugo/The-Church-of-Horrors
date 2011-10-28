@@ -2,4 +2,4 @@
 *~
 *.bak
 local_settings.py
-TheChurchofHorrors/site/media/uploads/*
+TheChurchofHorrors/site/media/*

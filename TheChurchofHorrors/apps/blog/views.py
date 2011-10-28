@@ -7,6 +7,7 @@ from apps.blog.models import Entry,Section,Subsection
 import time,random
 from django.shortcuts import get_object_or_404
 from django.conf import settings
+from django.contrib.auth.models import User
 
 def home(request):
     
@@ -83,10 +84,17 @@ def archive(request,year,month):
         context_instance=RequestContext(request))
     
 def author(request,user):
-    right_entries = Entry.get_last_by_section(request.user)
+    
+    author = get_object_or_404(User,username=user)
+    
+    #right_entries = Entry.get_last_by_section(request.user)
+    entries = list(Entry.get_last_by_author(author))
+
+    random.seed(time.time())
+    random.shuffle(entries)
 
     return render_to_response("author.html", 
-        dict(right_entries=right_entries, section=None,subsection=None), 
+        dict(right_entries=[], entries=entries, author=author,section=None,subsection=None), 
         context_instance=RequestContext(request))
 
 

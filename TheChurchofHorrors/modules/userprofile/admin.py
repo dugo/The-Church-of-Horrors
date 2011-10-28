@@ -3,24 +3,54 @@
 import models
 
 from django.contrib import admin
+from django import forms
+from django.conf import settings
+from django.utils.translation import ugettext as _
+
+
+class UserProfileForm( forms.ModelForm ):
+    description = forms.CharField(label=_(u'Descripción'),widget=forms.Textarea(attrs={'class':'counted','maxlength':'160'}),help_text = _(u'Cómo te describes en 160 caracteres (un sms)') )
+    class Meta:
+        model = models.UserProfile
 
 class Rol(admin.ModelAdmin):
     model = models.UserProfile
     
     list_display = ('__unicode__','sort',)
+
+class CounterAdmin(admin.ModelAdmin):
+    counted_fields = ()
     
+    #really for textareas
+    max_lengths = {'abstract': 400,'description':160}
+    
+    class Media:
+        js = ('%sthechurch/js/jquery-1.6.4.min.js' % settings.STATIC_URL,
+            '%sthechurch/js/jquery.charCount.js' % settings.STATIC_URL,)
+        
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        field = super(CounterAdmin, self).formfield_for_dbfield(db_field, **kwargs)
+        if db_field.name in self.counted_fields:
+            field.widget.attrs['maxlength'] = self.max_lengths[db_field.name]
+            field.widget.attrs['class'] = 'counted ' + field.widget.attrs.get('class','')
+        return field    
 
 class UserProfileItem(admin.TabularInline):
     model = models.UserProfileItem
     can_delete = True
     extra = 1
 
-class UserProfile(admin.ModelAdmin):
+class UserProfile(CounterAdmin):
+    
+    form = UserProfileForm
+    
     model = models.UserProfile
     
     list_display = ('user','get_avatar',)
     
     inlines = (UserProfileItem,)
+    
+    counted_fields = ('description',)
     
     def get_avatar(self,obj):
         return "<img src='%s' height=50 width=auto/>" % unicode(obj.avatar)
@@ -37,9 +67,12 @@ class UserProfile(admin.ModelAdmin):
     
     def save_model(self, request, obj, form, change):
         
-        if not request.user.is_superuser and request.user.id <> obj.user.id:
+        if hasattr(obj,'user') and not request.user.is_superuser and request.user.id <> obj.user.id:
             return
         
+        if not hasattr(obj,'user') or not request.user.is_superuser:
+            obj.user = request.user
+                   
         obj.save()
 
     def get_form(self, request, obj=None, **kwargs):
@@ -47,9 +80,12 @@ class UserProfile(admin.ModelAdmin):
         form = super(UserProfile, self).get_form(request, obj=None, **kwargs)
         
         if not request.user.is_superuser:
-            form.base_fields['user'].queryset = form.base_fields['user'].queryset.filter(id=request.user.id)
-        
-        form.base_fields['user'].initial = request.user
+            #form.base_fields['user'].queryset = form.base_fields['user'].queryset.filter(id=request.user.id)
+            self.exclude = ('user',)
+            form.base_fields['rol'].queryset = form.base_fields['rol'].queryset.filter(name="Redactor")
+            form.base_fields['rol'].initial = form.base_fields['rol'].queryset[:1].get()
+        else:
+            form.base_fields['user'].initial = request.user
         
         return form
 
