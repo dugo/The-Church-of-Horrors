@@ -9,7 +9,7 @@ from django.utils.translation import ugettext as _
 
 
 class UserProfileForm( forms.ModelForm ):
-    description = forms.CharField(label=_(u'Descripción'),widget=forms.Textarea(attrs={'class':'counted','maxlength':'160'}),help_text = _(u'Cómo te describes en 160 caracteres (un sms)') )
+    description = forms.CharField(label=_(u'Descripción'),widget=forms.Textarea(attrs={'class':'counted','maxlength':'160'}),help_text = _(u'¿Cómo te describirías en un sms (160 caracteres)?') )
     class Meta:
         model = models.UserProfile
 

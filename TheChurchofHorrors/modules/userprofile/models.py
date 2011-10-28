@@ -21,7 +21,7 @@ class UserProfile(models.Model):
     user = models.ForeignKey(User, verbose_name=_("Usuario"), unique=True,blank=False)
     description = models.CharField(_(u'Descripción'),max_length=160, help_text = _(u'Cómo te describes en 160 caracteres (un sms)'))
     rol = models.ForeignKey(Rol,verbose_name=_(u'Rol'), help_text=_(u'¿Qué papel desempeñas?'),blank=False,null=False)
-    avatar = FileBrowseField(blank=False,directory='avatars/',extensions=[".jpg",".png",".jpeg",".gif"], help_text=_(u'Tu avatar. Será redimensionado y convertido a blanco y negro'))
+    avatar = models.ImageField(blank=False,upload_to='avatars/',help_text=_(u'Tu avatar. Será redimensionado y convertido a blanco y negro'))
     #avatar = models.ImageField(blank=False,upload_to='avatars/')
     
     def get_items(self):
@@ -29,6 +29,24 @@ class UserProfile(models.Model):
     
     def __unicode__(self):
         return unicode(self.user)
+    
+    def save(self,*args,**kwargs):
+        
+            super(type(self),self).save(*args,**kwargs)
+            
+            from PIL import Image
+
+            im = Image.open(self.avatar.path)
+            
+            # resize process
+            if im.size[0] <> 104:
+                im = im.resize((104,int((float(im.size[1])/float(im.size[0]))*104.0),),Image.ANTIALIAS)
+            
+            # bw    
+            im = im.convert('L')
+                    
+            im.save( self.avatar.path, "PNG")
+            
     
     class Meta:
         verbose_name = _('perfil de usuario')

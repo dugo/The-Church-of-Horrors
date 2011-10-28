@@ -1,4 +1,5 @@
 from django.contrib.sitemaps import Sitemap
+from django.contrib.auth.models import User
 from apps.blog.models import Entry,Section,Subsection
 from datetime import date
 
@@ -21,7 +22,7 @@ class SectionSitemap(Sitemap):
 
     def lastmod(self, obj):
         try:
-            return Entry.objects.filter(section__id=obj.id).order_by("-created")[0:1].get().created
+            return Entry.objects.filter(section__id=obj.id,published=True).order_by("-created")[0:1].get().created
         except Entry.DoesNotExist:
             return date.today()
 
@@ -34,7 +35,7 @@ class SubsectionSitemap(Sitemap):
 
     def lastmod(self, obj):
         try:
-            return Entry.objects.filter(subsection__id=obj.id).order_by("-created")[0:1].get().created
+            return Entry.objects.filter(subsection__id=obj.id,published=True).order_by("-created")[0:1].get().created
         except Entry.DoesNotExist:
             return date.today()
 
@@ -52,6 +53,19 @@ class SectionSubsectionSitemap(Sitemap):
 
     def lastmod(self, obj):
         try:
-            return Entry.objects.filter(subsection__id=obj.id,section=obj.section.id).order_by("-created")[0:1].get().created
+            return Entry.objects.filter(subsection__id=obj.id,section=obj.section.id,published=True).order_by("-created")[0:1].get().created
+        except Entry.DoesNotExist:
+            return date.today()
+            
+class AuthorSitemap(Sitemap):
+    changefreq = "always"
+    priority = 0.5
+
+    def items(self):
+        return User.objects.all()
+
+    def lastmod(self, obj):
+        try:
+            return Entry.objects.filter(author__id=obj.id,published=True).order_by("-created")[0:1].get().created
         except Entry.DoesNotExist:
             return date.today()

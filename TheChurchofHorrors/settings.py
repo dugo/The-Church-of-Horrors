@@ -149,6 +149,11 @@ FILEBROWSER_EXTENSIONS = {
     'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
 }
 
+"""FILEBROWSER_VERSIONS = {
+  'admin_thumbnail': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'crop'},
+  'bw': {'verbose_name': u'Black&White', 'width': 104, 'height': '', 'opts': ''},
+}"""
+
 TINYMCE_COMPRESSOR = True
 TINYMCE_JS_URL = '/static/tiny_mce/tiny_mce_src.js'
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "tiny_mce")
@@ -244,7 +249,7 @@ BLOG_BREADCRUMB_URL_MAPPING = {
     }
 
 ABSOLUTE_URL_OVERRIDES = {
-    'auth.user': lambda u: "/author/%s/" % u.username,
+    'auth.user': lambda u: "/!/%s/" % u.username,
 }
 
 DATETIME_FORMAT = DATE_FORMAT = "d b Y"
