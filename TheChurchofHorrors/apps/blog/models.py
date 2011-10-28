@@ -161,12 +161,11 @@ class Entry(models.Model):
             return self.content[:450]
         
         return content[:idx+1]
-        
-
+    
 class ImageGallery(models.Model):
     entry = models.ForeignKey(Entry,verbose_name=_(u"Entrada"),related_name="images")
-    #file = FileBrowseField(blank=False,directory='images/%Y/%m',extensions=[".jpg",".png",".jpeg",".gif"])
-    file = models.ImageField(blank=False,upload_to='images/%Y/%m')
+    file = FileBrowseField(blank=False,directory='',format='image',extensions=[".jpg",".png",".jpeg",".gif"])
+    #file = models.ImageField(blank=False,upload_to='images/%Y/%m')
     order = models.PositiveIntegerField(_(u'Orden en la galería'),default=1)
     main = models.BooleanField(_(u'Usar como principal'))
     
@@ -178,8 +177,6 @@ class ImageGallery(models.Model):
         verbose_name_plural = _(u"Imagenes de galería")
         ordering = ('order',)
         unique_together = ('entry','order',)
-    
-    
     
     
     

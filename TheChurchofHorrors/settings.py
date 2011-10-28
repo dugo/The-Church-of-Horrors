@@ -139,7 +139,7 @@ if DEBUG:
 
 
 FILEBROWSER_DEBUG = False
-FILEBROWSER_DIRECTORY = ''
+FILEBROWSER_DIRECTORY = os.path.join(MEDIA_ROOT,'images')
 FILEBROWSER_URL_FILEBROWSER_MEDIA = "/static/filebrowser/"
 FILEBROWSER_URL_TINYMCE = '/static/tiny_mce/'
 FILEBROWSER_PATH_MEDIA = os.path.join(STATIC_ROOT, "filebrowser")
