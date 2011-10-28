@@ -164,7 +164,7 @@ class Entry(models.Model):
     
 class ImageGallery(models.Model):
     entry = models.ForeignKey(Entry,verbose_name=_(u"Entrada"),related_name="images")
-    file = FileBrowseField(blank=False,directory='',format='image',extensions=[".jpg",".png",".jpeg",".gif"])
+    file = FileBrowseField(blank=False,format='image',extensions=[".jpg",".png",".jpeg",".gif"])
     #file = models.ImageField(blank=False,upload_to='images/%Y/%m')
     order = models.PositiveIntegerField(_(u'Orden en la galería'),default=1)
     main = models.BooleanField(_(u'Usar como principal'))

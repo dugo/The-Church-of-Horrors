@@ -82,9 +82,9 @@
         <td>{{ file.datetime|date:"N j, Y" }}</td>
 
         <!-- RENAME -->
-        {#<td class="fb_icon"><a href="{% url fb_rename %}{% query_string %}&amp;filename={{ file.filename }}" class="fb_renamelink" title="{% trans 'Rename' %}"><img src="{{ settings_var.URL_FILEBROWSER_MEDIA }}img/filebrowser_icon_rename.gif" /></a></td>#}
+        {%if user.is_superuser%}<td class="fb_icon"><a href="{% url fb_rename %}{% query_string %}&amp;filename={{ file.filename }}" class="fb_renamelink" title="{% trans 'Rename' %}"><img src="{{ settings_var.URL_FILEBROWSER_MEDIA }}img/filebrowser_icon_rename.gif" /></a></td>{%endif %}
 
-        {%comment%}
+        {%if user.is_superuser%}
         <!-- DELETE -->
         {% if results_var.delete_total %}
         <td class="fb_icon">
@@ -97,7 +97,7 @@
           {% endifnotequal %}
         </td>
         {% endif %}
-        {%endcomment%}
+        {%endif %}
         
         <!-- DEBUG -->
         {% if settings_var.DEBUG %}
