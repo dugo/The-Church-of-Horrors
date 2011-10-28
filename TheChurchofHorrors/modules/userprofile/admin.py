@@ -53,7 +53,7 @@ class UserProfile(CounterAdmin):
     counted_fields = ('description',)
     
     def get_avatar(self,obj):
-        return "<img src='%s' height=50 width=auto/>" % unicode(obj.avatar)
+        return "<img src='%s' height=50 width=auto/>" % unicode(obj.avatar.url)
     get_avatar.allow_tags = True
     get_avatar.short_description = "Avatar"
 

@@ -35,6 +35,7 @@ class UserProfile(models.Model):
             super(type(self),self).save(*args,**kwargs)
             
             from PIL import Image
+            import os
 
             im = Image.open(self.avatar.path)
             
@@ -46,6 +47,16 @@ class UserProfile(models.Model):
             im = im.convert('L')
                     
             im.save( self.avatar.path, "PNG")
+            
+            newname = "%s.png" % self.user.username
+            
+            os.rename(self.avatar.path, os.path.join(os.path.dirname(self.avatar.path),newname) )
+            
+            self.avatar.name = "avatars/%s" % newname
+            
+            print self.avatar.url
+            
+            super(type(self),self).save(*args,**kwargs)
             
     
     class Meta:
