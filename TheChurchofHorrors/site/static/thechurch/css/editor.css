@@ -3,19 +3,19 @@ blockquote {
     font-size:14px;
     color: #808183;
     margin:10px 0;
-    text-align:justify;
+    /*text-align:justify;*/
 }
 
 p {
     font-family:verdana;
     font-size:10px;
     color: black;
-    text-align:justify;
+    /*text-align:justify;*/
 }
 
 p strong {
     font-weight:bold;
-    text-align:justify;
+    /*text-align:justify;*/
 }
 
 h1 {
@@ -38,7 +38,7 @@ hr {
 }
 
 td {
-    vertical-align: text-top !important; 
+    vertical-align: text-top ; 
     padding:0;
     padding-right:30px;
 

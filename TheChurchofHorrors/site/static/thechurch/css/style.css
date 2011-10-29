@@ -400,10 +400,10 @@ a:hover { color:#d10019; }
 
 .entry table {
     width:100%;
-    vertical-align: text-top !important; 
+    vertical-align: text-top ; 
 }
 .entry td {
-    vertical-align: text-top !important; 
+    vertical-align: text-top; 
     padding:0;
     padding-right:30px;
 
