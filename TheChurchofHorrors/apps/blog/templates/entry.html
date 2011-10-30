@@ -19,6 +19,7 @@
     <br/>
     <h1>{{entry.title}}</h1>
     <span class="date">{{entry.created|date}}</span>
+    {% if entry.show_gallery%}{%entry_gallery entry%}{%endif%}
     <div class="content-entry">{{entry.content|safe}}</div>
     <!--<hr/>-->
 {%endblock%}

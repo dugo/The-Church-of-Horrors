@@ -12,7 +12,7 @@ def preview_entry(entry, n=0):
 def mini_author(author):
 	return {'author':author}
     
-@register.inclusion_tag('gallery.html')
+@register.inclusion_tag('gallery-entry.html')
 def entry_gallery(entry):
     
     images = entry.images.order_by("order")[:]
