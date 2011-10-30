@@ -42,6 +42,7 @@
 $(document).ready(function(){
 
     $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
+    $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
     
     
     
@@ -78,6 +79,7 @@ $(document).ready(function(){
 {#{% endif %}#}
 
 <div id="content" class="{%block content_class%}{%endblock%}">
+{%block home_gallery%}{%endblock%}
 <hr/>
 {%block breadcrumb%}{%endblock%}
 {%block content%}{%endblock%}

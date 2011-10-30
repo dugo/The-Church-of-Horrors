@@ -431,3 +431,57 @@ a:hover { color:#d10019; }
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)"; /*--IE 8 Transparency--*/
     z-index:999;
 }
+
+#gallery-wrapper {
+    display:block;
+    width:100%;
+    /*height:400px;*/
+    height:270px;
+    background:white url('../images/gallery-background.png') repeat left top;
+    margin-bottom:17px;
+    position:relative;
+}
+
+#gallery {
+    display:block;
+    width:100000px;
+    height:270px;
+}
+
+.gallery-subwrapper {
+    display:block;
+    width:730px;
+    height:270px;
+}
+
+#gallery .image {
+    display:block;
+    position:relative;
+    width:730px;
+    height:100%;
+    float:left;
+}
+
+#gallery-wrapper #next {
+    width:23px;
+    height:23px;
+    background:url('../images/gallery-sprites.png') 0 0 no-repeat;
+    position:absolute;
+    right:14px;
+    bottom:14px;
+    cursor:pointer;
+    z-index:999;
+}
+
+#gallery-wrapper #prev {
+    width:23px;
+    height:23px;
+    background:url('../images/gallery-sprites.png') -23px 0 no-repeat;
+    position:absolute;
+    left:14px;
+    bottom:14px;
+    cursor:pointer;
+    z-index:999;
+    display:none;
+}
+

@@ -1,0 +1,51 @@
+{% if total > 0 %}
+
+<script type="text/javascript">
+function gallery_next() {
+    var margin = 730;
+    var total = parseInt($('#gallery').attr('total'));
+    var current = parseInt($('#gallery').attr('current'));
+    
+    if (current<total) {
+            $('#gallery').animate( {"margin-left":(current*margin*-1)+"px"},'slow','swing');
+            current++;
+            $('#gallery').attr('current',current);
+            
+            if (current>=total)
+                $('#next').fadeOut('slow');
+            
+            $('#prev').fadeIn('slow');
+        }
+}
+function gallery_prev() {
+    var margin = 730;
+    var total = parseInt($('#gallery').attr('total'));
+    var current = parseInt($('#gallery').attr('current'));
+    
+    if (current>1) {
+            current--;
+            $('#gallery').animate( {"margin-left":((current-1)*margin)+"px"},'slow','swing');
+            $('#gallery').attr('current',current);
+            
+            if (current<=1)
+                $('#prev').fadeOut('slow');
+            
+            $('#next').fadeIn('slow');
+        }
+}
+</script>
+
+<div id="gallery-wrapper">
+    <div id="next" onclick="gallery_next();"></div>
+    <div id="prev" onclick="gallery_prev();"></div>
+    <div id="gallery" total="{{total}}" current="1">
+        {% for e in gallery %}
+            <div class="image">
+                <img src="{{e.main_image}}" alt="{{e.title}}" class="{%if e.main_image.adjust%}adjust{%else%}adjust-nofill{%endif%}"/>
+            </div>
+        {%endfor%}
+    </div>
+    
+</div>
+
+{%endif%}

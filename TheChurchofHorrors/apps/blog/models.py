@@ -78,6 +78,16 @@ class Entry(models.Model):
     
     def __unicode__(self):
         return unicode(self.title)
+    
+    @classmethod
+    def get_home_gallery(self):
+        gallery = []
+
+        for e in Entry.objects.filter(published=True,gallery=True).order_by('-created')[:]:
+            e.main_image = e.images.get(main=True)
+            gallery.append(e)
+        
+        return gallery
 
     def save(self,*args,**kwargs):
         self.slug = slugify(self.title)
@@ -111,11 +121,6 @@ class Entry(models.Model):
     def get_last_by_author(self,author,max=settings.BLOG_MAX_LAST_ENTRIES):
 
         return Entry.objects.filter(published=True,author__id=author.id).order_by('-created')[:max]
-    
-    @classmethod
-    def get_home_gallery(self):
-        
-        return Entry.objects.filter(gallery=True).order_by('-created')
     
     @classmethod    
     def get_last_by_section(self,user,section=None,max=settings.BLOG_MAX_LAST_ENTRIES):
@@ -168,6 +173,7 @@ class ImageGallery(models.Model):
     #file = models.ImageField(blank=False,upload_to='images/%Y/%m')
     order = models.PositiveIntegerField(_(u'Orden en la galería'),default=1)
     main = models.BooleanField(_(u'Usar como principal'))
+    #adjust = models.BooleanField(_(u'Auto-ajustar'),default=False)
     
     def __unicode__(self):
 		return unicode(self.file)

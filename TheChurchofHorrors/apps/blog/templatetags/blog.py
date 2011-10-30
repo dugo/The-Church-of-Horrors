@@ -1,5 +1,6 @@
 from django.template.defaultfilters import stringfilter
 from django import template
+from apps.blog.models import Entry
 
 register = template.Library()
 
@@ -10,6 +11,21 @@ def preview_entry(entry, n=0):
 @register.inclusion_tag('mini-author.html')
 def mini_author(author):
 	return {'author':author}
+    
+@register.inclusion_tag('gallery.html')
+def entry_gallery(entry):
+    
+    images = entry.images.order_by("order")[:]
+    
+    return {'images':images}
+    
+@register.inclusion_tag('gallery.html')
+def home_gallery():
+    
+    gallery = Entry.get_home_gallery()
+    total = len(gallery)
+    
+    return {'gallery':gallery, "total":total}
 	
 @register.inclusion_tag('breadcrumb.html')
 def breadcrumb(path,section=None,subsection=None):

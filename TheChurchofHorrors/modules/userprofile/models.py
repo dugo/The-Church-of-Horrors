@@ -54,8 +54,6 @@ class UserProfile(models.Model):
             
             self.avatar.name = "avatars/%s" % newname
             
-            print self.avatar.url
-            
             super(type(self),self).save(*args,**kwargs)
             
     
