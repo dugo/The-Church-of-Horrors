@@ -462,6 +462,45 @@ a:hover { color:#d10019; }
     float:left;
 }
 
+#gallery .desc {
+    display:block;
+    position:absolute;
+    width:166px;
+    height:100%;
+    margin-left:60px;
+    z-index:10;
+    padding:14px 10px;
+    background:url('../images/background-gallery-desc.png');
+    filter:alpha(opacity=75);
+	opacity:.75;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)"; /*--IE 8 Transparency--*/
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+#gallery .desc .title {
+    width:100%;
+    height:auto;
+    color:#5889b6;
+    font-family:verdana;
+    font-size:12px;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;  
+}
+
+#gallery .desc .brief {
+    display:block;
+    width:100%;
+    height:auto;
+    color:white;
+    font-family:verdana;
+    font-size:10px;
+    overflow: hidden;
+    text-overflow:ellipsis;  
+    margin-top:10px;
+}
+
 #gallery-wrapper #next {
     width:23px;
     height:23px;
