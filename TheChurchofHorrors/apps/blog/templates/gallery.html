@@ -24,7 +24,7 @@ function gallery_prev() {
     
     if (current>1) {
             current--;
-            $('#gallery').animate( {"margin-left":((current-1)*margin)+"px"},'slow','swing');
+            $('#gallery').animate( {"margin-left":((current-1)*margin*-1)+"px"},'slow','swing');
             $('#gallery').attr('current',current);
             
             if (current<=1)
