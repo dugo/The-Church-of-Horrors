@@ -14,11 +14,9 @@ def home(request):
     random.seed(time.time())
     
     right_entries = Entry.get_last_by_section(request.user)
-    gallery_entries = list(Entry.get_home_gallery())
     entries = list(Entry.get_last()[:settings.BLOG_MAX_LAST_ENTRIES])
     
     random.shuffle(entries)
-    random.shuffle(gallery_entries)
 
     return render_to_response("home.html", 
         dict(right_entries=right_entries, entries=entries,show_long=True,section=None,subsection=None), 

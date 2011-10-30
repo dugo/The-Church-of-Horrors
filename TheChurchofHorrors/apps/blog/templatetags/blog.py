@@ -21,11 +21,14 @@ def entry_gallery(entry):
     
 @register.inclusion_tag('gallery.html')
 def home_gallery():
+    import random,time
+    random.seed(time.time())
     
-    gallery = Entry.get_home_gallery()
+    gallery = list(Entry.get_home_gallery())
+    random.shuffle(gallery)
     total = len(gallery)
     
-    return {'gallery':gallery, "total":total}
+    return {'gallery':gallery, "total":total }
 	
 @register.inclusion_tag('breadcrumb.html')
 def breadcrumb(path,section=None,subsection=None):

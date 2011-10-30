@@ -81,13 +81,7 @@ class Entry(models.Model):
     
     @classmethod
     def get_home_gallery(self):
-        gallery = []
-
-        for e in Entry.objects.filter(published=True,gallery=True).order_by('-created')[:]:
-            e.main_image = e.images.get(main=True)
-            gallery.append(e)
-        
-        return gallery
+        return Entry.objects.filter(published=True,gallery=True).order_by('-created')
 
     def save(self,*args,**kwargs):
         self.slug = slugify(self.title)
