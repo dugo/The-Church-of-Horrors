@@ -98,6 +98,9 @@ def author(request,user):
 
 def view_for_entry(request,entry):
     
+    if not request.user.is_superuser and not entry.published and (not request.user.is_authenticated() or entry.author_id <> request.user.id):
+        return HttpResponseNotFound()
+    
     right_entries = Entry.get_last_by_author(entry.author)
     
 
