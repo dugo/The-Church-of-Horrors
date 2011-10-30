@@ -173,7 +173,7 @@ class ImageGallery(models.Model):
     #file = models.ImageField(blank=False,upload_to='images/%Y/%m')
     order = models.PositiveIntegerField(_(u'Orden en la galería'),default=1)
     main = models.BooleanField(_(u'Usar como principal'))
-    #adjust = models.BooleanField(_(u'Auto-ajustar'),default=False)
+    adjust = models.BooleanField(_(u'Auto-ajustar'),default=False)
     
     def __unicode__(self):
 		return unicode(self.file)
