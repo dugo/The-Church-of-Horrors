@@ -141,7 +141,7 @@ class Entry(models.Model):
         return entries
         
     def get_main_image(self):
-        return unicode(self.images.get(main=True))
+        return self.images.get(main=True)
     
     def get_brief(self):
         import re
