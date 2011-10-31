@@ -47,8 +47,8 @@
 <script type="text/javascript" >
 $(document).ready(function(){
 
-    $("#ajax-wrapper .adjust").scaleImage({parent: "div",center: true,scale:"fill"});
-    $("#ajax-wrapper .adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
+    $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
+    $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
     
     // ajaxing!!
     window.onpopstate = function(event) {  
@@ -85,8 +85,8 @@ $(document).ready(function(){
 
 function ajax_ready() {
 $(document).ready(function(){
-    $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
-    $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
+    $("#ajax-wrapper .adjust").scaleImage({parent: "div",center: true,scale:"fill"});
+    $("#ajax-wrapper .adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
     $('#ajax-wrapper a[href^="/"]:not(a[href^="/admin"])').click(function(e){ 
         e.preventDefault(); 
         var url = this.href;
