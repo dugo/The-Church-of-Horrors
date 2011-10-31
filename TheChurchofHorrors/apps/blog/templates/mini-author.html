@@ -5,5 +5,5 @@
     <div class="desc">{{author.get_profile.description}}</div>
     <div class="links">
     {% if author.entries.all.count%}<a href="{{author.get_absolute_url}}">publicaciones</a>{%if author.get_profile.get_items%} / {%endif%}{%endif%}
-    {%for link in author.get_profile.get_items%}<a href="{{link.url}}" onclick="window.open(this.href);return false;">{{link}}</a>{% if not forloop.last %} / {%endif%}{%endfor%}</div>
+    {%for link in author.get_profile.get_items%}<a href="{{link.url}}" onclick="window.open(this.href);return false;">{{link|lower}}</a>{% if not forloop.last %} / {%endif%}{%endfor%}</div>
 </div>

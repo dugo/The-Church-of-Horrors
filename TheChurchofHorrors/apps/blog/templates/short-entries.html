@@ -1,0 +1,13 @@
+<div class="short-entries">
+
+{% for e in entries %}
+
+    {% if forloop.counter|divisibleby:2 %}
+        {% include "mini-short-entry.html" %}
+    {%else%}
+        {% include "mini-short-entry-odd.html" %}
+    {%endif%}
+
+{%endfor%}
+
+</div>

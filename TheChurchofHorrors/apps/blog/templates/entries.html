@@ -1,43 +1,23 @@
-
-    {% if show_long %}
-
-        {% for e in entries %}
-            
-            {% if forloop.counter0 < 2 %}
-                {% include "mini-long-entry.html" %}
-            {%else%}
-            
-                {% if forloop.counter0 == 2 %}
-                <div class="short-entries">
-                {% endif %}
-            
-                {% if forloop.counter|divisibleby:2 %}
-                    {% include "mini-short-entry.html" %}
-                {%else%}
-                    {% include "mini-short-entry-odd.html" %}
-                {%endif%}
-                
-                {% if forloop.last %}
-                </div>
-                {% endif %}
-                
-            {%endif%}
-        {%endfor%}
+{% for e in entries %}
     
+    {% if forloop.counter0 < 2 %}
+        {% include "mini-long-entry.html" %}
     {%else%}
-            <div class="short-entries">
     
-            {% for e in entries %}
-            
-                {% if forloop.counter|divisibleby:2 %}
-                    {% include "mini-short-entry.html" %}
-                {%else%}
-                    {% include "mini-short-entry-odd.html" %}
-                {%endif%}
-            
-            {%endfor%}
-            
-            </div>
-            
+        {% if forloop.counter0 == 2 %}
+        <div class="short-entries">
+        {% endif %}
     
+        {% if forloop.counter|divisibleby:2 %}
+            {% include "mini-short-entry.html" %}
+        {%else%}
+            {% include "mini-short-entry-odd.html" %}
+        {%endif%}
+        
+        {% if forloop.last %}
+        </div>
+        {% endif %}
+        
     {%endif%}
+{%endfor%}
+

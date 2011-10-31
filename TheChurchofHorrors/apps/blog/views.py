@@ -19,7 +19,7 @@ def home(request):
     random.shuffle(entries)
 
     return render_to_response("home.html", 
-        dict(right_entries=right_entries, entries=entries,show_long=True,section=None,subsection=None), 
+        dict(right_entries=right_entries, entries=entries,section=None,subsection=None), 
         context_instance=RequestContext(request))
     
 def contact(request):
@@ -68,7 +68,7 @@ def section_subsection(request,section,subsection):
     random.shuffle(entries)
 
     return render_to_response("home.html", 
-        dict(right_entries=right_entries, entries=entries, show_long=False,section=section,subsection=subsection), 
+        dict(right_entries=right_entries, entries=entries,section=section,subsection=subsection), 
         context_instance=RequestContext(request))
     
 def entry(request,section,subsubsection,entry):
@@ -115,8 +115,8 @@ def view_for_subsection(request,subsection):
 
     random.shuffle(entries)
 
-    return render_to_response("home.html", 
-        dict(right_entries=right_entries, entries=entries, show_long=False,subsection=subsection,section=None), 
+    return render_to_response("home-short.html", 
+        dict(right_entries=right_entries, entries=entries,subsection=subsection,section=None), 
         context_instance=RequestContext(request))
 
 def view_for_section(request,section):
@@ -126,8 +126,8 @@ def view_for_section(request,section):
 
     random.shuffle(entries)
 
-    return render_to_response("home.html", 
-        dict(right_entries=right_entries, entries=entries, show_long=False, section = section,subsection=None), 
+    return render_to_response("home-short.html", 
+        dict(right_entries=right_entries, entries=entries, section = section,subsection=None), 
         context_instance=RequestContext(request))
     
     
