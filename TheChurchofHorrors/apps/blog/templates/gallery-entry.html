@@ -1,4 +1,11 @@
-<script type="text/javascript">
+<script type="text/javascript"> 
+{% if request.is_ajax %}
+$(document).ready(function{
+    $("#ajax-wrapper .adjust").scaleImage({parent: "div",center: true,scale:"fill"});
+    $("#ajax-wrapper .adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
+    });
+{%endif%}
+
 function gallery_next() {
     var margin = 730;
     var total = parseInt($('#gallery-entry').attr('total'));
