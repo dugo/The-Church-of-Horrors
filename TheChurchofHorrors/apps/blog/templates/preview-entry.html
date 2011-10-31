@@ -1,6 +1,6 @@
 <div {% if not parity %}style="margin-right:0px;"{%endif%}>
     <div><img src="{{e.get_main_image}}" class="adjust"/></div>
     <div class="title"><a href="{{e.get_absolute_url}}">{{e}}</a></div>
-    <span class="author">{%if e.author.get_full_name%}{{e.author.get_full_name}}{%else%}{{e.author}}{%endif%}</span>
+    <span class="author">{{e.author.get_profile}}</span>
     <span class="date">{{e.created|date}}</span>
 </div>

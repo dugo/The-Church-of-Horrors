@@ -10,6 +10,7 @@ from django.utils.translation import ugettext as _
 
 class UserProfileForm( forms.ModelForm ):
     description = forms.CharField(label=_(u'Descripción'),widget=forms.Textarea(attrs={'class':'counted','maxlength':'160'}),help_text = _(u'¿Cómo te describirías en un sms (160 caracteres)?') )
+    
     class Meta:
         model = models.UserProfile
 
@@ -79,6 +80,8 @@ class UserProfile(CounterAdmin):
         
         form = super(UserProfile, self).get_form(request, obj=None, **kwargs)
         
+        form.base_fields['name'].initial = request.user.get_full_name() if request.user.get_full_name() else unicode(request.user)
+        
         if not request.user.is_superuser:
             #form.base_fields['user'].queryset = form.base_fields['user'].queryset.filter(id=request.user.id)
             self.exclude = ('user',)
@@ -86,6 +89,7 @@ class UserProfile(CounterAdmin):
             form.base_fields['rol'].initial = form.base_fields['rol'].queryset[:1].get()
         else:
             form.base_fields['user'].initial = request.user
+            
         
         return form
 

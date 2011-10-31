@@ -2,11 +2,11 @@
 {% load blog %}
 
 {% block extra_metatags %}
-<meta name="keywords" content="{%if e.author.get_full_name%}{{e.author.get_full_name}}{%else%}{{e.author}}{%endif%},{{e.get_profile.rol}}"/>
+<meta name="keywords" content="{{e.author.get_profile}},{{e.get_profile.rol}}"/>
 <meta name="description" content="{{e.get_profile.description}}" />
 {%endblock%}
 
-{% block title %}The Church of Horrors :: {%if e.author.get_full_name%}{{e.author.get_full_name}}{%else%}{{e.author}}{%endif%}{%endblock%}
+{% block title %}The Church of Horrors :: {{author.get_profile}}{%endblock%}
 
 {% block author %}{% mini_author author %}{% endblock %}
 
