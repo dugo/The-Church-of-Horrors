@@ -534,4 +534,9 @@ a:hover { color:#d10019; }
     height:400px;
 }
 
+#ajax-logo {
+    display:none;
+}
+
+#ajax-wrapper { display:block;float:left;width:100%;height:auto;}
 

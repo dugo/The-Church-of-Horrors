@@ -2,7 +2,9 @@
 {% load url from future %}
 
 
-{#{% if not request.is_ajax %}#}
+{% if request.is_ajax %}
+<img src='{{STATIC_URL}}thechurch/images/logo.png' alt="The Church of Horrors" id="ajax-logo"/>
+{%else%}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -26,9 +28,13 @@
   })();
 
 </script>
+{%endif%}
 
+{% if request.is_ajax %}
 <title>{%block title%}{%endblock%}</title> 
+{%endif%}
 
+{% if not request.is_ajax %}
 <link rel="shortcut icon" href="{{STATIC_URL}}favicon.ico" />
 
 <link rel="stylesheet" href="{{STATIC_URL}}thechurch/css/style.css" type="text/css"/>
@@ -41,13 +47,65 @@
 <script type="text/javascript" >
 $(document).ready(function(){
 
-    $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
-    $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
+    $("#ajax-wrapper .adjust").scaleImage({parent: "div",center: true,scale:"fill"});
+    $("#ajax-wrapper .adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
     
+    // ajaxing!!
+    window.onpopstate = function(event) {  
+        if (!event.state)
+            return;
+        $('#ajax-wrapper').html(event.state);
+        ajax_ready();
+    }
+    
+    $('a[href^="/"]:not(a[href^="/admin"])').click(function(e){ 
+        
+        var url = this.href;
+        
+        e.preventDefault(); 
+        $.ajax({
+            url: url,
+            type:"get",
+            context: $(this),
+            success: function (data) {
+                
+                    $('#ajax-wrapper').html(data);
+                
+                    ajax_ready();        
+                    window.history.pushState(data, $('#ajax-wrapper title').text(), url);
+                },
+            error: function() { window.location = this.href; }
+            });
+        
+        });
     
     
     {% block extra_js_ready %}{%endblock%}
 });
+
+function ajax_ready() {
+$(document).ready(function(){
+    $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
+    $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
+    $('#ajax-wrapper a[href^="/"]:not(a[href^="/admin"])').click(function(e){ 
+        e.preventDefault(); 
+        var url = this.href;
+        $.ajax({
+            url: url,
+            type:"get",
+            context: $(this),
+            success: function (data) {
+                
+                    $('#ajax-wrapper').html(data);
+                
+                    ajax_ready();        
+                    window.history.pushState(data, $('#ajax-wrapper title').text(), url);
+                },
+            error: function() { window.location = this.href; }
+            });
+        });
+    });
+}
 </script>
 
 </head>
@@ -76,18 +134,18 @@ $(document).ready(function(){
                 <input type="text" id="search" placeholder="Buscar..."/>
             </div>
         </div>
-{#{% endif %}#}
+{% endif %}
 
-<div id="content" class="{%block content_class%}{%endblock%}">
-{%block home_gallery%}{%endblock%}
-<hr/>
-{%block breadcrumb%}{%endblock%}
-{%block content%}{%endblock%}
-</div>
+<div id='ajax-wrapper'>
+    <div id="content" class="{%block content_class%}{%endblock%}">
 
-{#{% if not request.is_ajax %}#}
-        <div id="left">
-        
+    {%block home_gallery%}{%endblock%}
+    <hr/>
+    {%block breadcrumb%}{%endblock%}
+    {%block content%}{%endblock%}
+    </div>
+
+    <div id="left">
             {%block author%}<hr/>{%endblock%}
         
             {% if right_entries.0 %}
@@ -104,11 +162,12 @@ $(document).ready(function(){
                         {% endfor %}
                     <hr/>
                 {%endfor%}
-            {%endif%}
-            </div>
+        {%endif%}
         </div>
     </div>
+</div>
 
+{% if not request.is_ajax %}
     <div id="footer">
         <div id="subfooter-1">
             <div id="subfooter-2">
@@ -144,4 +203,4 @@ $(document).ready(function(){
     </div>
 </body>
 </html>
-{#{%endif%}#}
+{%endif%}
