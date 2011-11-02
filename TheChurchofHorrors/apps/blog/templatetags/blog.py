@@ -1,6 +1,9 @@
 from django.template.defaultfilters import stringfilter
 from django import template
 from apps.blog.models import Entry
+import re
+
+htmlchars = re.compile(r'&[&^];')
 
 register = template.Library()
 
@@ -60,6 +63,11 @@ def breadcrumb(path,section=None,subsection=None):
 @stringfilter
 def remove_linebreaks(value):
     return value.replace('\n','').replace('\r','')
+    
+@register.filter
+@stringfilter
+def remove_htmlchars(value):
+    return re.sub(htmlchars,'',value)
 
 @register.filter
 @stringfilter
