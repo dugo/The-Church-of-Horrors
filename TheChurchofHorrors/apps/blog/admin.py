@@ -81,6 +81,15 @@ class Entry(admin.ModelAdmin):
             
         return form
     
+    def has_delete_permission(self, request, obj=None):
+        
+        if obj is None:
+            return True
+        
+        if not request.user.is_superuser and (obj.author_id <> request.user.id or obj.published ):
+            return False
+        
+        return True
     
     def save_model(self, request, obj, form, change):
         
