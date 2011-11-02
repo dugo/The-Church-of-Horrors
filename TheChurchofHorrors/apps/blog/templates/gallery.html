@@ -43,7 +43,7 @@ function gallery_prev() {
             <div class="image">
                 <div class="desc">
                     <a class="title" href="{{e.get_absolute_url}}">{{e}}</a>
-                    <span class="brief">{{e.get_brief}}</span>
+                    <span class="brief|safe">{{e.get_brief}}</span>
                 </div>
                 <a href="{{e.get_absolute_url}}"><img src="{{e.get_main_image}}" alt="{{e.title}}" class="{%if e.get_main_image.adjust%}adjust{%else%}adjust-nofill{%endif%}"/></a>
             </div>
