@@ -22,7 +22,7 @@ class UserProfile(models.Model):
     description = models.CharField(_(u'Descripción'),max_length=160, help_text = _(u'Cómo te describes en 160 caracteres (un sms)'))
     rol = models.ForeignKey(Rol,verbose_name=_(u'Rol'), help_text=_(u'¿Qué papel desempeñas?'),blank=False,null=False)
     avatar = models.ImageField(blank=False,upload_to='avatars/',help_text=_(u'Tu avatar. Será redimensionado y convertido a blanco y negro'))
-    name = models.CharField(_(u'Nombre para mostrar'),max_length=30,unique=True,blank=True,help_text=_(u'El nombre que se mostrará junto a tu avatar'))
+    name = models.CharField(_(u'Nombre para mostrar'),max_length=30,unique=True,null=True,blank=True,help_text=_(u'El nombre que se mostrará junto a tu avatar'))
     #avatar = models.ImageField(blank=False,upload_to='avatars/')
     
     def get_items(self):
