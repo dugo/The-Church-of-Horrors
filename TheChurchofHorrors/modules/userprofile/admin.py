@@ -68,13 +68,10 @@ class UserProfile(CounterAdmin):
     
     def save_model(self, request, obj, form, change):
         
-        if hasattr(obj,'user') and not request.user.is_superuser and request.user.id <> obj.user.id:
-            return
-        
-        if not hasattr(obj,'user') or not request.user.is_superuser:
+        if not request.user.is_superuser:
             obj.user = request.user
                    
-        obj.save()
+        super(UserProfile,self).save_model(request, obj, form, change)
 
     def get_form(self, request, obj=None, **kwargs):
         
