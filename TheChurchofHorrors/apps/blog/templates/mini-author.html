@@ -1,7 +1,14 @@
 <hr/>
 <div class="author"><span>Por:</span>
-    <a href="{{author.get_absolute_url}}"><img src="{{author.get_profile.avatar.url}}" alt='{{author.get_profile}}'/></a>
-    <div class="name"><a href="{{author.get_absolute_url}}">{{author.get_profile}}</a></div>
+    
+    {% if author.get_profile.get_published.count %}
+        <a href="{{author.get_absolute_url}}"><img src="{{author.get_profile.avatar.url}}" alt='{{author.get_profile}}'/></a>
+        <div class="name"><a href="{{author.get_absolute_url}}">{{author.get_profile}}</a></div>
+    {%else%}
+        <img src="{{author.get_profile.avatar.url}}" alt='{{author.get_profile}}'/>
+        <div class="name">{{author.get_profile}}</div>
+    {%endif%}
+    
     <div class="desc">{{author.get_profile.description}}</div>
     <div class="links">
     {%for link in author.get_profile.get_items%}<a href="{{link.url}}" onclick="window.open(this.href);return false;">{{link|lower}}</a>{% if not forloop.last %} / {%endif%}{%endfor%}</div>

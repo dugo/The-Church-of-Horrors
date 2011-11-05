@@ -25,6 +25,9 @@ class UserProfile(models.Model):
     name = models.CharField(_(u'Nombre para mostrar'),max_length=30,unique=True,null=True,blank=True,help_text=_(u'El nombre que se mostrará junto a tu avatar'))
     #avatar = models.ImageField(blank=False,upload_to='avatars/')
     
+    def get_published(self):
+        return self.entries.filter(published=True)
+    
     def get_items(self):
         return self.items.order_by('id')[:]
     
