@@ -26,7 +26,7 @@ class UserProfile(models.Model):
     #avatar = models.ImageField(blank=False,upload_to='avatars/')
     
     def get_published(self):
-        return self.entries.filter(published=True)
+        return self.user.entries.filter(published=True)
     
     def get_items(self):
         return self.items.order_by('id')[:]
