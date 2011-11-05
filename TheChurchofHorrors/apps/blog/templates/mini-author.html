@@ -1,9 +1,8 @@
 <hr/>
 <div class="author"><span>Por:</span>
-    <img src="{{author.get_profile.avatar.url}}" alt='{{author.get_profile}}'/>
-    <div class="name">{{author.get_profile}}</div>
+    <a href="{{author.get_absolute_url}}"><img src="{{author.get_profile.avatar.url}}" alt='{{author.get_profile}}'/></a>
+    <div class="name"><a href="{{author.get_absolute_url}}">{{author.get_profile}}</a></div>
     <div class="desc">{{author.get_profile.description}}</div>
     <div class="links">
-    {% if author.entries.all.count%}<a href="{{author.get_absolute_url}}">publicaciones</a>{%if author.get_profile.get_items%} / {%endif%}{%endif%}
     {%for link in author.get_profile.get_items%}<a href="{{link.url}}" onclick="window.open(this.href);return false;">{{link|lower}}</a>{% if not forloop.last %} / {%endif%}{%endfor%}</div>
 </div>
