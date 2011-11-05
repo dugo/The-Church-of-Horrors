@@ -314,14 +314,14 @@ a:hover { color:#d10019; }
     margin-bottom:10px;
 }
 
-#left div.author .name {
-    display:block !important;
-    color: #808183 !important;
-    font-family:"DINWeb-Medium",Arial  !important;
-    font-size:14px !important;
-    height:auto !important;
-    width:auto !important;
-    margin-bottom:10px !important;
+#left div.author .name,#left div.author .name a {
+    display:block;
+    color: #808183;
+    font-family:"DINWeb-Medium",Arial;
+    font-size:14px;
+    height:auto;
+    width:auto;
+    margin-bottom:10px;
 }
 #left div.author .desc {
     display:inline;
