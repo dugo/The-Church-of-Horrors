@@ -504,6 +504,9 @@ a:hover { color:#d10019; }
     bottom:14px;
     cursor:pointer;
     z-index:999;
+    filter:alpha(opacity=70);
+	opacity:.70;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"; /*--IE 8 Transparency--*/
 }
 
 #gallery-wrapper #prev,#gallery-entry-wrapper #prev {
@@ -516,6 +519,9 @@ a:hover { color:#d10019; }
     cursor:pointer;
     z-index:999;
     display:none;
+    filter:alpha(opacity=70);
+	opacity:.70;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"; /*--IE 8 Transparency--*/
 }
 
 #gallery-entry-wrapper {
