@@ -76,7 +76,8 @@ class Entry(admin.ModelAdmin):
             form.base_fields['author'].initial = request.user
         
         if not request.user.is_superuser:
-            self.exclude = ('author','gallery','published',)
+            self.readonly_fields = ('slug','author',)
+            #self.exclude = ('author','gallery','published',)
             #form.base_fields['author'].queryset = form.base_fields['author'].queryset.filter(id=request.user.id)
             
         return form
