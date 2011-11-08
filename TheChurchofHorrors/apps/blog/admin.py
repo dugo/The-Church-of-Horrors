@@ -94,10 +94,7 @@ class Entry(admin.ModelAdmin):
     
     def save_model(self, request, obj, form, change):
         
-        if hasattr(obj,'author') and not request.user.is_superuser and request.user.id <> obj.author.id:
-            return
-        
-        if not hasattr(obj,'author') or not request.user.is_superuser:
+        if not hasattr(obj,'author') or obj.author is None or not request.user.is_superuser:
             obj.author = request.user
                    
         obj.save()
