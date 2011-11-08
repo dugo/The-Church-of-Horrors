@@ -3,7 +3,7 @@
 
 {% block extra_metatags %}
 <meta name="keywords" content="{{entry.tags.all|join:","}}"/>
-<meta name="description" content="{{entry.get_brief|unescape|remove_linebreaks}}" />
+<meta name="description" content="{{entry.get_brief|remove_linebreaks}}" />
 {%endblock%}
 
 {% block title %}The Church of Horrors :: {{entry}}{%endblock%}
