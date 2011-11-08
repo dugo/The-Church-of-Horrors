@@ -70,14 +70,13 @@ class Entry(admin.ModelAdmin):
     
     def get_form(self, request, obj=None, **kwargs):
         
-        if not request.user.is_superuser:
-            self.readonly_fields = ('slug','author',)
-        
         form = super(Entry, self).get_form(request, obj=None, **kwargs)
         
+        if form.base_fields.has_key('author'):
+            form.base_fields['author'].initial = request.user
         
-        form.base_fields['author'].initial = request.user
-        
+        if not request.user.is_superuser:
+            self.readonly_fields = ('slug','author',)
             #self.exclude = ('author','gallery','published',)
             #form.base_fields['author'].queryset = form.base_fields['author'].queryset.filter(id=request.user.id)
             

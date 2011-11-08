@@ -65,7 +65,7 @@ class Entry(models.Model):
     title = models.CharField(_(u"Título"),max_length=255,blank=False,unique=True)
     content = tinymce_models.HTMLField(_("Contenido"),blank=False,)
     #brief = models.TextField(_("Brief"),blank=False)
-    author = models.ForeignKey(User,verbose_name=_(u"Autor"),related_name="entries",blank=True,null=False)
+    author = models.ForeignKey(User,verbose_name=_(u"Autor"),related_name="entries",blank=True,null=True)
     section = models.ForeignKey(Section,verbose_name=_(u"Sección"))
     subsection = models.ForeignKey(Subsection,verbose_name=_(u"Categoría"))
     created = models.DateTimeField(_(u'Creado'),auto_now_add=True)
