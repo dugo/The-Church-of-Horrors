@@ -254,4 +254,4 @@ ABSOLUTE_URL_OVERRIDES = {
 
 DATETIME_FORMAT = DATE_FORMAT = "d b Y"
 
-DEFAULT_FILE_STORAGE = 'site.storages.ASCIIFileSystemStorage'
+DEFAULT_FILE_STORAGE = 'TheChurchofHorrors.site.storages.ASCIIFileSystemStorage'
