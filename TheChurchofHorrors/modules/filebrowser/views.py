@@ -274,7 +274,7 @@ def _upload_file(request):
     """
     
     from django.core.files.move import file_move_safe
-    from django.utils.encoding import force_unicode
+    import unicodedata
     
     if request.method == 'POST':
         folder = request.POST.get('folder')
@@ -283,7 +283,7 @@ def _upload_file(request):
         abs_path = os.path.join(MEDIA_ROOT, DIRECTORY, folder)
         if request.FILES:
             filedata = request.FILES['Filedata']
-            filedata.name = convert_filename(force_unicode(filedata.name,errors='ignore'))
+            filedata.name = convert_filename(unicodedata.normalize('NFKD', filedata.name).encode('ascii', 'ignore'))
             # PRE UPLOAD SIGNAL
             filebrowser_pre_upload.send(sender=request, path=request.POST.get('folder'), file=filedata)
             # HANDLE UPLOAD
