@@ -254,4 +254,4 @@ ABSOLUTE_URL_OVERRIDES = {
 
 DATETIME_FORMAT = DATE_FORMAT = "d b Y"
 
-DEFAULT_FILE_STORAGE = 'site.storage.ASCIIFileSystemStorage'
+DEFAULT_FILE_STORAGE = 'site.storages.ASCIIFileSystemStorage'
