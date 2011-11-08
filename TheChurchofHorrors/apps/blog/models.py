@@ -150,8 +150,9 @@ class Entry(models.Model):
     
     def get_brief(self):
         import re
+        from templatetags.blog import unescape
         
-        content = re.sub(r'<[^>]+>','',self.content)
+        content = unescape(re.sub(r'<[^>]+>','',self.content))
         
         if len(content) < 300:
             return content
