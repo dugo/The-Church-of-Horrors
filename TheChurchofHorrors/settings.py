@@ -169,6 +169,7 @@ TINYMCE_DEFAULT_CONFIG = {
     "embed_iframe_innerhtml_fallback" : 'This will be placed between the iframe tags',
     "theme_advanced_blockformats":"p",
     "force_br_newlines" : True,
+    "force__newlines" : False,
     "template_templates" : [ { "title" : "Entrevista", "src" : "/static/thechurch/tinymce_templates/entrevista.html" ,  "description" : "Entrevista"  }, { "title" : u"Artículo", "src" : "/static/thechurch/tinymce_templates/critica.html" ,  "description" : u"Artículo"  }, { "title" : u"Crítica de disco", "src" : "/static/thechurch/tinymce_templates/critica-discos.html" ,  "description" : u"Crítica de disco"  }],   
 
 }
