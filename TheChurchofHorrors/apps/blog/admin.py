@@ -9,6 +9,8 @@ from tinymce.widgets import TinyMCE
 from django import forms
 from django.utils.translation import ugettext as _
 from django.conf import settings
+import re
+import os.path
 
 class Section(admin.ModelAdmin):
     model = models.Section
@@ -29,6 +31,12 @@ class ImageGalleryFormset(BaseInlineFormSet):
         for form in self.forms:
             try:
                 if form.cleaned_data and not form.cleaned_data['DELETE']:
+                    relpath = re.sub(r'^%s' % settings.MEDIA_URL, "", form.cleaned_data['file'])
+                    
+                    if not os.path.exists(os.path.join(settings.MEDIA_ROOT,relpath)):
+                        raise forms.ValidationError(_(u"El fichero '%s' no existe" % form.cleaned_data['file']))
+                
+                if form.cleaned_data and not form.cleaned_data['DELETE']:
                     total+=1
                 
                 if form.cleaned_data and not form.cleaned_data['DELETE'] and form.cleaned_data['main']:
@@ -46,7 +54,7 @@ class ImageGalleryFormset(BaseInlineFormSet):
 class ImageGallery(admin.TabularInline):
     model = models.ImageGallery
     can_delete = True
-    extra = 1
+    extra = 5
     
     formset = ImageGalleryFormset
 
@@ -113,13 +121,22 @@ class Entry(CounterAdmin):
         
         if not hasattr(obj,'author') or obj.author is None or not request.user.is_superuser:
             obj.author = request.user
-                   
+        
         obj.save()
     
     def view(self,o):
         return "<a href='%s' onclick='window.open(this.href);return false;'>%s</a>" % (o.get_absolute_url(),_(u'Ver'))
     view.allow_tags = True
     view.short_description = _(u'Ver')
+    
+    """
+    def save_formset(self, request, form, formset, change): 
+        import os.path
+        instances = formset.save(commit=False)
+        for i in instances:
+            if os.path.exists(os.path.join(settings.MEDIA_ROOT, i.file.path)):
+                i.save()
+        #formset.save()"""
     
     def queryset(self, request):
         qs = super(Entry, self).queryset(request)
