@@ -49,16 +49,33 @@ class ImageGallery(admin.TabularInline):
     extra = 1
     
     formset = ImageGalleryFormset
+
+class CounterAdmin(admin.ModelAdmin):
+    counted_fields = ()
     
+    #really for textareas
+    max_lengths = {'abstract': 400,'brief':450}
+    
+    class Media:
+        js = ('%sthechurch/js/jquery-1.6.4.min.js' % settings.STATIC_URL,
+            '%sthechurch/js/jquery.charCount.js' % settings.STATIC_URL,)
+        
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        field = super(CounterAdmin, self).formfield_for_dbfield(db_field, **kwargs)
+        if db_field.name in self.counted_fields:
+            field.widget.attrs['maxlength'] = self.max_lengths[db_field.name]
+            field.widget.attrs['class'] = 'counted ' + field.widget.attrs.get('class','')
+        return field        
 
 class EntryForm(ModelForm):
     
     content = forms.CharField(label=_(u"Contenido"),widget=TinyMCE(attrs={'cols': 120, 'rows': 40},  mce_attrs = { "style_formats" : [ {"title" : _('Cita'), "block" : 'blockquote'} ], "content_css": "%sthechurch/css/editor.css" % settings.STATIC_URL }))
+    brief = forms.CharField(label=_(u'Resumen'),widget=forms.Textarea(attrs={'class':'counted','maxlength':'450'}),help_text = _(u'Un breve resumen representativo de la entrada. Si queda vacío se cogerá el primer párrafo.'),required=False)
     
     class Meta:
         model = models.Entry
 
-class Entry(admin.ModelAdmin):
+class Entry(CounterAdmin):
     model = models.Entry
     form = EntryForm
     
