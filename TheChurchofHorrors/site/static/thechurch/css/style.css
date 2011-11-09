@@ -360,9 +360,10 @@ a:hover { color:#d10019; }
     font-weight:normal;
 }
 
+/*
 .entry {
     text-align:justify;
-}
+}*/
 
 .entry .date {
     font-family:verdana;
