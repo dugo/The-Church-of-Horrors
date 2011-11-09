@@ -476,6 +476,7 @@ a:hover { color:#d10019; }
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)"; /*--IE 8 Transparency--*/
     overflow:hidden;
     text-overflow:ellipsis;
+    cursor:pointer;
 }
 
 #gallery .desc .title {
@@ -485,8 +486,8 @@ a:hover { color:#d10019; }
     font-family:verdana;
     font-size:12px;
     overflow: hidden;
-    white-space:nowrap;
-    text-overflow:ellipsis;  
+    /*white-space:nowrap;*/
+    /*text-overflow:ellipsis;  */
 }
 
 #gallery .desc .brief {
