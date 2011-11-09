@@ -6,14 +6,14 @@ blockquote {
     /*text-align:justify;*/
 }
 
-p {
+* {
     font-family:verdana;
     font-size:10px;
     color: black;
     /*text-align:justify;*/
 }
 
-p strong {
+* strong {
     font-weight:bold;
     /*text-align:justify;*/
 }
