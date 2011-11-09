@@ -46,8 +46,8 @@ function gallery_prev() {
                         <span class="title">{{e}}</span>
                         <span class="brief">{{e.get_brief}}</span>
                     </div>
-                    <img src="{{e.get_main_image}}" title="{{e}}" alt="{{e.title}}" class="{%if e.get_main_image.adjust%}adjust{%else%}adjust-nofill{%endif%}"/>
                 </a>
+                    <img src="{{e.get_main_image}}" title="{{e}}" alt="{{e.title}}" class="{%if e.get_main_image.adjust%}adjust{%else%}adjust-nofill{%endif%}"/>
             </div>
         {%endfor%}
     </div>

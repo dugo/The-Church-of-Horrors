@@ -476,7 +476,6 @@ a:hover { color:#d10019; }
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)"; /*--IE 8 Transparency--*/
     overflow:hidden;
     text-overflow:ellipsis;
-    cursor:pointer;
 }
 
 #gallery .desc .title {
