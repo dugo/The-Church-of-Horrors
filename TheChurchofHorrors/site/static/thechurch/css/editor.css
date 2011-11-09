@@ -15,8 +15,6 @@ blockquote {
 
 * strong {
     font-weight:bold;
-    margin:0;
-    padding:0;
     /*text-align:justify;*/
 }
 
@@ -48,3 +46,8 @@ td {
 
 a:hover { color:#d10019 !important;}
 a {text-decoration:none !important; color:#5889b6 !important;}
+
+p {
+    margin:0;
+    padding:0;
+}
