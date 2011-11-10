@@ -25,7 +25,7 @@ $(document).ready(function(){
 
     if (pages>1) {
         for (var i=0;i<pages;i++) {
-            var css = (!paging)?"class='current'":"";
+            var css = (!i)?"class='current'":"";
             $('#paging').append("<span "+css+" onclick='paging(this,"+(i*wrapper_height)+");'>"+(i+1)+"</span>");
             }
     }
