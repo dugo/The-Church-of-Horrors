@@ -44,7 +44,16 @@
 {% block extra_js %}{%endblock%}
 
 
-{%if not request.is_ajax %}
+
+{%if request.is_ajax %}
+<script type="text/javascript" >
+$(document).ready(function(){
+
+    $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
+    $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
+});
+</script>
+{%else %}
 <script type="text/javascript" >
 $(document).ready(function(){
 
