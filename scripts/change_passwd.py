@@ -39,8 +39,8 @@ for email in sys.argv[1:]:
     u.save()
     
     # render template
-    email = render_to_string('emails/first_email.html', { 'user': u , 'passwd':passwd})
+    content = render_to_string('emails/first_email.html', { 'user': u , 'passwd':passwd})
     
     # write email
-    open(emails[i],"w").write(email)
+    open(email,"w").write(content)
 
