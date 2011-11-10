@@ -28,6 +28,8 @@ sys.path.insert(0,PROJECT_PATH)
 import settings
 setup_environ(settings)
 
+from django.contrib.auth.models import User
+
 from django.template.loader import render_to_string
 
 for email in sys.argv[1:]:
