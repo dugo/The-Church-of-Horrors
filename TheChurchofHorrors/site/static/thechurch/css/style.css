@@ -406,6 +406,7 @@ a:hover { color:#d10019; }
 #paging .current {
     color:#d10019 !important;
     font-weight:bold !important;
+    cursor:default !important;
 }
 
 .entry div.column { padding-right:10px; }

@@ -31,6 +31,10 @@ $(document).ready(function(){
     }
 });
 function paging(link,margin) {
+    
+    if ($(link).hasClass('current'))
+        return;
+    
     $(document).scrollTo("#content",{easing:"swing",duration:"slow"});
     $($(".content-entry .paging-container")[0]).animate({"margin-top":"-"+margin+"px"});
     $('#paging .current').removeClass("current");
