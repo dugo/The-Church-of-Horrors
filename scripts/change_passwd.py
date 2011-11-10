@@ -42,5 +42,5 @@ for email in sys.argv[1:]:
     content = render_to_string('emails/first_email.html', { 'user': u , 'passwd':passwd})
     
     # write email
-    open(email,"w").write(content)
+    open(email,"w").write(content.encode("utf-8"))
 
