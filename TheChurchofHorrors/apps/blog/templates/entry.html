@@ -15,6 +15,7 @@
 {%block content_class%}entry{%endblock%}
 
 {%block extra_js%}
+<script type="text/javascript" src='{{STATIC_URL}}thechurch/js/jquery.scrollTo-min.js'>
 <script type="text/javascript">
 $(document).ready(function(){
     var wrapper_height = $($('.content-entry')[0]).height();
@@ -26,6 +27,9 @@ $(document).ready(function(){
         for (var i=0;i<pages;i++) {
             $('#paging').append("<span onclick='$($(\".content-entry .paging-container\")[0]).animate({\"margin-top\":\"-"+(i*wrapper_height)+"px\"});'>"+(i+1)+"</span>");
             }
+        $('#paging').localScroll({
+           target:'#content'
+        });
     }
 });
 </script>
