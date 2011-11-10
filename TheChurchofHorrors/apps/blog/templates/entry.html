@@ -14,6 +14,7 @@
 
 {%block content_class%}entry{%endblock%}
 
+{%block extra_js%}
 <script type="text/javascript">
 $(document).ready(function(){
     var wrapper_height = $($('.content-entry')[0]).height();
@@ -26,6 +27,7 @@ $(document).ready(function(){
         }
 });
 </script>
+{%endblock%}
 
 {%block content%}
     {%if user.is_superuser or entry.author.id == request.user.id%}<a href="{% url admin:blog_entry_change entry.id %}" onclick="window.open(this.href);return false;" class="edit">Editar</a>{%endif%}
