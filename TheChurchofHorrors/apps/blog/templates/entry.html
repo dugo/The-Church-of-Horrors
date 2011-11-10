@@ -22,9 +22,11 @@ $(document).ready(function(){
 
     var pages = Math.ceil(parseFloat(real_height)/parseFloat(wrapper_height));
 
-    for (var i=0;i<pages;i++) {
-        $('#paging').append("<span onclick='$($(\".content-entry .paging-container\")[0]).animate({\"margin-top\":\"-"+(i*wrapper_height)+"px\"});'>"+(i+1)+"</span>");
-        }
+    if (pages>1) {
+        for (var i=0;i<pages;i++) {
+            $('#paging').append("<span onclick='$($(\".content-entry .paging-container\")[0]).animate({\"margin-top\":\"-"+(i*wrapper_height)+"px\"});'>"+(i+1)+"</span>");
+            }
+    }
 });
 </script>
 {%endblock%}
