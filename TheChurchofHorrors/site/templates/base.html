@@ -43,22 +43,29 @@
 {%endif%}
 {% block extra_js %}{%endblock%}
 
-
-
-{%if request.is_ajax %}
-<script type="text/javascript" >
-$(document).load(function(){
-
-    $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
-    $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
-});
-</script>
-{%else %}
+{% if request.is_ajax %}
 <script type="text/javascript" >
 $(document).ready(function(){
 
+$("img").load(function(){
     $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
     $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
+});
+});
+</script>
+{%else%}
+
+
+<script type="text/javascript" >
+$(document).ready(function(){
+
+$("img").load(function(){
+    $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
+    $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
+});
+
+    /*$(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
+    $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});*/
     
     // ajaxing!!
     window.onpopstate = function(event) {  
