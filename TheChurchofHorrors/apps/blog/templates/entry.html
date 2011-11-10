@@ -25,7 +25,8 @@ $(document).ready(function(){
 
     if (pages>1) {
         for (var i=0;i<pages;i++) {
-            $('#paging').append("<span onclick='paging(this,"+(i*wrapper_height)+");'>"+(i+1)+"</span>");
+            var css = (!paging)?"class='current'":"";
+            $('#paging').append("<span "+css+" onclick='paging(this,"+(i*wrapper_height)+");'>"+(i+1)+"</span>");
             }
     }
 });
@@ -33,7 +34,7 @@ function paging(link,margin) {
     $(document).scrollTo("#content",{easing:"swing",duration:"slow"});
     $($(".content-entry .paging-container")[0]).animate({"margin-top":"-"+margin+"px"});
     $('#paging .current').removeClass("current");
-    $(this).addClass("current");
+    $(link).addClass("current");
 }
 </script>
 {%endblock%}
