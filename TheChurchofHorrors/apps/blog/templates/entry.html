@@ -14,12 +14,24 @@
 
 {%block content_class%}entry{%endblock%}
 
+{% block extra_js_ready %}
+var wrapper_height = $($('.content-entry')[0]).height();
+var real_height = $($('.content-entry .paging-container')[0]).height();
+
+var pages = Math.ceil(parseFloat(real_height)/parseFloat(wrapper_height));
+
+for (var i=0;i<pages;i++) {
+    $('#paging').append("<span onclick='$($(\".content-entry .paging-container\")[0]).animate({\"margin-top\":\"-"+(i*wrapper_height)+"px\"});'>"+(i+1)+"</span>");
+    }
+{%endblock%}
+
 {%block content%}
     {%if user.is_superuser or entry.author.id == request.user.id%}<a href="{% url admin:blog_entry_change entry.id %}" onclick="window.open(this.href);return false;" class="edit">Editar</a>{%endif%}
     <br/>
     <a href="{{e.get_absolute_url}}"><h1>{{entry.title}}</h1></a>
     <span class="date">{{entry.created|date}}</span>
     {% if entry.show_gallery%}{%entry_gallery entry%}{%endif%}
-    <div class="content-entry">{{entry.content|safe}}</div>
+    <div class="content-entry"><div class="paging-container">{{entry.content|safe}}</div></div>
+    <div id="paging"></div>
     <!--<hr/>-->
 {%endblock%}

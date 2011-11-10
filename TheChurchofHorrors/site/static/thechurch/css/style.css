@@ -383,8 +383,26 @@ a:hover { color:#d10019; }
     font-size:10px !important;
     color: black !important;
     margin-top:16px;
+    height:450px;
+    overflow:hidden;
 }
 
+.entry .content-entry .paging-container {
+    height:auto;
+    overflow:hidden;
+}
+
+#paging {
+    float:right;
+    margin-top:20px;
+}
+#paging span {
+    cursor:pointer;
+    color:#5889b6;    
+    font-family:verdana;
+    font-size:10px;
+    margin-left:5px;
+}
 
 .entry div.column { padding-right:10px; }
 
