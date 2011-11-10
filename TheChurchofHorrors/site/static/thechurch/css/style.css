@@ -403,6 +403,9 @@ a:hover { color:#d10019; }
     font-size:10px;
     margin-left:5px;
 }
+#paging .current {
+    color:#d10019 !important;
+}
 
 .entry div.column { padding-right:10px; }
 
