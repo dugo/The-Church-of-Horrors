@@ -388,7 +388,10 @@ a:hover { color:#d10019; }
 }
 
 .entry .content-entry .paging-container {
-    height:auto;
+    width:100%;
+    display:block;
+    float:left;
+    height:100%;
     overflow:hidden;
 }
 
