@@ -15,35 +15,33 @@
 {%block content_class%}entry{%endblock%}
 
 {%block extra_js%}
-<script type="text/javascript" src='{{STATIC_URL}}thechurch/js/jquery.scrollTo-min.js'></script>
+<!--<script type="text/javascript" src='{{STATIC_URL}}thechurch/js/jquery.scrollTo-min.js'></script>-->
 <script type="text/javascript">
 $(document).ready(function(){
     
     var wrapper = $($('.content-entry')[0]);
     var html = wrapper.html();
-    var content = html.split("<span class='pagebreak'></span>");
+    var content = html.split("<span class=\"pagebreak\"></span>");
     
     wrapper.html('');
     for (var p in content) {
-            wrapper.append('<div class="paging-container">'+p+'</div>');
+            wrapper.append('<div class="paging-container">'+content[p]+'</div>');
         }
     
     var width = $(wrapper).width();
     var pages = content.length;
 
-    if (pages>1) {
         for (var i=0;i<pages;i++) {
             var css = (!i)?"class='current'":"";
-            $('#paging').append("<span "+css+" onclick='paging(this,"+(i*wrapper_width)+");'>"+(i+1)+"</span>");
-            }
-    }
+            $('#paging').append("<span "+css+" onclick='paging(this,"+(i*width)+");'>"+(i+1)+"</span>");
+        }
 });
 function paging(link,margin) {
     
     if ($(link).hasClass('current'))
         return;
     
-    $(document).scrollTo("#content",{easing:"swing",duration:"slow"});
+    //$(document).scrollTo("#content",{easing:"swing",duration:"slow"});
     $($(".content-entry .paging-container")[0]).animate({"margin-left":"-"+margin+"px"});
     $('#paging .current').removeClass("current");
     $(link).addClass("current");
