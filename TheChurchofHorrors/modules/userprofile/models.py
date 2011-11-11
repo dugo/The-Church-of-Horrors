@@ -27,7 +27,8 @@ class UserProfile(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return self.user.get_absolute_url()
+        return ('author', (), {
+            'user': unicode(self.user)})
 
     def get_published(self):
         return self.user.entries.filter(published=True)
