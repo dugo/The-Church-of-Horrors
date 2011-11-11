@@ -47,7 +47,7 @@ class UserProfile(CounterAdmin):
     
     model = models.UserProfile
     
-    list_display = ('user','get_avatar',)
+    list_display = ('user','get_avatar','url')
     
     inlines = (UserProfileItem,)
     
@@ -57,6 +57,11 @@ class UserProfile(CounterAdmin):
         return "<img src='%s' height=50 width=auto/>" % unicode(obj.avatar.url)
     get_avatar.allow_tags = True
     get_avatar.short_description = "Avatar"
+    
+    def url(self,obj):
+        return u"<a href='%s' target='_blank'/>Ver</a>" % unicode(obj.user.get_absolute_url())
+    get_avatar.allow_tags = True
+    get_avatar.short_description = _("En el sitio")
 
     def queryset(self, request):
         qs = super(UserProfile, self).queryset(request)
