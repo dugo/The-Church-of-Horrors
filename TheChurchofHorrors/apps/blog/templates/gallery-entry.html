@@ -34,8 +34,10 @@ function gallery_prev() {
 </script>
 
 <div id="gallery-entry-wrapper">
+    {% if images.count > 1 %}
     <div id="next" onclick="gallery_next();"></div>
     <div id="prev" onclick="gallery_prev();"></div>
+    {%endif%}
     <div id="gallery-entry" total="{{images.count}}" current="1">
         {% for i in images %}
             <div class="image">
