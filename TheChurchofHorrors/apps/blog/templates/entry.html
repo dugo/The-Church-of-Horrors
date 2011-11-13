@@ -15,28 +15,34 @@
 {%block content_class%}entry{%endblock%}
 
 {%block extra_js%}
-<script type="text/javascript" src='{{STATIC_URL}}thechurch/js/jquery.scrollTo-min.js'></script>
+<!--<script type="text/javascript" src='{{STATIC_URL}}thechurch/js/jquery.scrollTo-min.js'></script>-->
 <script type="text/javascript">
 $(document).ready(function(){
-    var wrapper_height = $($('.content-entry')[0]).height();
-    var real_height = $($('.content-entry .paging-container')[0]).height();
+    
+    var wrapper = $($('.content-entry')[0]);
+    var html = wrapper.html();
+    var content = html.split("<span class=\"pagebreak\"></span>");
+    
+    wrapper.html('');
+    for (var p in content) {
+            wrapper.append('<div class="paging-container">'+content[p]+'</div>');
+        }
+    
+    var width = $(wrapper).width();
+    var pages = content.length;
 
-    var pages = Math.ceil(parseFloat(real_height)/parseFloat(wrapper_height));
-
-    if (pages>1) {
         for (var i=0;i<pages;i++) {
             var css = (!i)?"class='current'":"";
-            $('#paging').append("<span "+css+" onclick='paging(this,"+(i*wrapper_height)+");'>"+(i+1)+"</span>");
-            }
-    }
+            $('#paging').append("<span "+css+" onclick='paging(this,"+(i*width)+");'>"+(i+1)+"</span>");
+        }
 });
 function paging(link,margin) {
     
     if ($(link).hasClass('current'))
         return;
     
-    $(document).scrollTo("#content",{easing:"swing",duration:"slow"});
-    $($(".content-entry .paging-container")[0]).animate({"margin-top":"-"+margin+"px"});
+    //$(document).scrollTo("#content",{easing:"swing",duration:"slow"});
+    $($(".content-entry .paging-container")[0]).animate({"margin-left":"-"+margin+"px"});
     $('#paging .current').removeClass("current");
     $(link).addClass("current");
 }
@@ -49,7 +55,7 @@ function paging(link,margin) {
     <a href="{{e.get_absolute_url}}"><h1>{{entry.title}}</h1></a>
     <span class="date">{{entry.created|date}}</span>
     {% if entry.show_gallery%}{%entry_gallery entry%}{%endif%}
-    <div class="content-entry"><div class="paging-container">{{entry.content|safe}}</div></div>
+    <div class="content-entry">{{entry.content|safe}}</div>
     <div id="paging"></div>
     <!--<hr/>-->
 {%endblock%}

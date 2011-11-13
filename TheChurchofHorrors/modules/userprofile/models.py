@@ -24,7 +24,12 @@ class UserProfile(models.Model):
     avatar = models.ImageField(blank=False,upload_to='avatars/',help_text=_(u'Tu avatar. Será redimensionado y convertido a blanco y negro'))
     name = models.CharField(_(u'Nombre para mostrar'),max_length=30,unique=True,null=True,blank=True,help_text=_(u'El nombre que se mostrará junto a tu avatar'))
     #avatar = models.ImageField(blank=False,upload_to='avatars/')
-    
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('author', (), {
+            'user': unicode(self.user)})
+
     def get_published(self):
         return self.user.entries.filter(published=True)
     

@@ -48,8 +48,8 @@ class ImageGalleryFormset(BaseInlineFormSet):
         if count <> 1:
             raise forms.ValidationError(_(u"Debes subir al menos una imagen y sólo debe haber una marcada como principal"))
         
-        if self.instance.show_gallery and total <= 1:
-            raise forms.ValidationError(_(u"Para que aparezca la galería debes de subir una imagen o más"))
+        """if self.instance.show_gallery and total <= 1:
+            raise forms.ValidationError(_(u"Para que aparezca la galería debes de subir una imagen o más"))"""
 
 class ImageGallery(admin.TabularInline):
     model = models.ImageGallery

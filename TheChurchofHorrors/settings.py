@@ -159,10 +159,11 @@ TINYMCE_JS_URL = '/static/tiny_mce/tiny_mce_src.js'
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "tiny_mce")
 TINYMCE_DEFAULT_CONFIG = {
     #'plugins': "preview,spellchecker,paste,searchreplace,media,embed",
-    'plugins': "preview,table,spellchecker,paste,searchreplace,media,embed,template",
+    'plugins': "preview,table,spellchecker,paste,searchreplace,media,embed,template,fullscreen,pagebreak",
     'theme': "advanced",
     "theme_advanced_buttons3_add_before" : "tablecontrols,separator",
-    "theme_advanced_buttons3_add" : "separator,preview,emotions,embed,separator,template",
+    "theme_advanced_buttons2_add" : "separator,pagebreak",
+    "theme_advanced_buttons3_add" : "separator,preview,emotions,embed,separator,template,separator,fullscreen",
     "plugin_preview_width" : "500",
     "plugin_preview_height" : "600",
     "extended_valid_elements" : "iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder]",
@@ -172,6 +173,9 @@ TINYMCE_DEFAULT_CONFIG = {
     "force_p_newlines" : False,
     "convert_newlines_to_brs" : False,
     "template_templates" : [ { "title" : "Entrevista", "src" : "/static/thechurch/tinymce_templates/entrevista.html" ,  "description" : "Entrevista"  }, { "title" : u"Artículo", "src" : "/static/thechurch/tinymce_templates/critica.html" ,  "description" : u"Artículo"  }, { "title" : u"Crítica de disco", "src" : "/static/thechurch/tinymce_templates/critica-discos.html" ,  "description" : u"Crítica de disco"  }],   
+    "fullscreen_new_window" : False,
+    "fullscreen_settings" : { "theme_advanced_path_location" : "top" },
+    "pagebreak_separator" : "<span class='pagebreak'></span>"
 
 }
 TINYMCE_SPELLCHECKER = True

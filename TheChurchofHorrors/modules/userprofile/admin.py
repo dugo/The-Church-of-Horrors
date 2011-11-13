@@ -6,6 +6,7 @@ from django.contrib import admin
 from django import forms
 from django.conf import settings
 from django.utils.translation import ugettext as _
+from django.contrib.sites.models import Site
 
 
 class UserProfileForm( forms.ModelForm ):
@@ -47,7 +48,7 @@ class UserProfile(CounterAdmin):
     
     model = models.UserProfile
     
-    list_display = ('user','get_avatar',)
+    list_display = ('user','get_avatar','url')
     
     inlines = (UserProfileItem,)
     
@@ -57,6 +58,11 @@ class UserProfile(CounterAdmin):
         return "<img src='%s' height=50 width=auto/>" % unicode(obj.avatar.url)
     get_avatar.allow_tags = True
     get_avatar.short_description = "Avatar"
+    
+    def url(self,obj):
+        return u"<a href='%s' target='_blank'/>%s%s</a>" % (obj.get_absolute_url(),Site.objects.get_current().domain,obj.get_absolute_url())
+    url.allow_tags = True
+    url.short_description = _("En el sitio")
 
     def queryset(self, request):
         qs = super(UserProfile, self).queryset(request)
