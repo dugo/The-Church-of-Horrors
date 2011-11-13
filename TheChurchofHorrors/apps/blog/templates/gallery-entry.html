@@ -17,6 +17,9 @@ function gallery_next() {
     if (current>=total)
         $('#next').fadeOut('slow');
     
+    if (current==1)
+        $('#prev').fadeOut('slow');
+    
     $('#prev').fadeIn('slow');
 }
 function gallery_prev() {
@@ -51,7 +54,7 @@ function clear_autogallery() {
     }
 }
 
-document.ready(function(){
+$(document).ready(function(){
     AUTOGALLERY = setTimeout("auto_gallery()", 10000);
 });
 </script>
