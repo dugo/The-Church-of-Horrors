@@ -1,21 +1,28 @@
 <script type="text/javascript"> 
 function gallery_next() {
+    
+    clear_autogallery();
+    
     var margin = 730;
     var total = parseInt($('#gallery-entry').attr('total'));
     var current = parseInt($('#gallery-entry').attr('current'));
     
-    if (current<total) {
-            $('#gallery-entry').animate( {"margin-left":(current*margin*-1)+"px"},'slow','swing');
-            current++;
-            $('#gallery-entry').attr('current',current);
-            
-            if (current>=total)
-                $('#next').fadeOut('slow');
-            
-            $('#prev').fadeIn('slow');
-        }
+    if (current>=total)
+        current = 0;
+    
+    $('#gallery-entry').animate( {"margin-left":(current*margin*-1)+"px"},'slow','swing');
+    current++;
+    $('#gallery-entry').attr('current',current);
+    
+    if (current>=total)
+        $('#next').fadeOut('slow');
+    
+    $('#prev').fadeIn('slow');
 }
 function gallery_prev() {
+    
+    clear_autogallery()
+    
     var margin = 730;
     var total = parseInt($('#gallery-entry').attr('total'));
     var current = parseInt($('#gallery-entry').attr('current'));
@@ -31,6 +38,22 @@ function gallery_prev() {
             $('#next').fadeIn('slow');
         }
 }
+function auto_gallery() {
+    delete AUTOGALLERY;
+    gallery_next();
+    AUTOGALLERY = setTimeout("auto_gallery()", 10000);
+}
+function clear_autogallery() {
+    if (typeof AUTOGALLERY != "undefined")
+    {
+        clearTimeout(AUTOGALLERY);
+        delete AUTOGALLERY;
+    }
+}
+
+document.ready(function(){
+    AUTOGALLERY = setTimeout("auto_gallery()", 10000);
+});
 </script>
 
 {% if images.count > 1 %}

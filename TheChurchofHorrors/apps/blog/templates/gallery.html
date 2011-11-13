@@ -1,31 +1,38 @@
 {% if total > 0 %}
 
-<script type="text/javascript">
+<script type="text/javascript"> 
 function gallery_next() {
-    var margin = 730;
-    var total = parseInt($('#gallery').attr('total'));
-    var current = parseInt($('#gallery').attr('current'));
     
-    if (current<total) {
-            $('#gallery').animate( {"margin-left":(current*margin*-1)+"px"},'slow','swing');
-            current++;
-            $('#gallery').attr('current',current);
-            
-            if (current>=total)
-                $('#next').fadeOut('slow');
-            
-            $('#prev').fadeIn('slow');
-        }
+    clear_autogallery();
+    
+    var margin = 730;
+    var total = parseInt($('#gallery-entry').attr('total'));
+    var current = parseInt($('#gallery-entry').attr('current'));
+    
+    if (current>=total)
+        current = 0;
+    
+    $('#gallery-entry').animate( {"margin-left":(current*margin*-1)+"px"},'slow','swing');
+    current++;
+    $('#gallery-entry').attr('current',current);
+    
+    if (current>=total)
+        $('#next').fadeOut('slow');
+    
+    $('#prev').fadeIn('slow');
 }
 function gallery_prev() {
+    
+    clear_autogallery()
+    
     var margin = 730;
-    var total = parseInt($('#gallery').attr('total'));
-    var current = parseInt($('#gallery').attr('current'));
+    var total = parseInt($('#gallery-entry').attr('total'));
+    var current = parseInt($('#gallery-entry').attr('current'));
     
     if (current>1) {
             current--;
-            $('#gallery').animate( {"margin-left":((current-1)*margin*-1)+"px"},'slow','swing');
-            $('#gallery').attr('current',current);
+            $('#gallery-entry').animate( {"margin-left":((current-1)*margin*-1)+"px"},'slow','swing');
+            $('#gallery-entry').attr('current',current);
             
             if (current<=1)
                 $('#prev').fadeOut('slow');
@@ -33,6 +40,22 @@ function gallery_prev() {
             $('#next').fadeIn('slow');
         }
 }
+function auto_gallery() {
+    delete AUTOGALLERY;
+    gallery_next();
+    AUTOGALLERY = setTimeout("auto_gallery()", 10000);
+}
+function clear_autogallery() {
+    if (typeof AUTOGALLERY != "undefined")
+    {
+        clearTimeout(AUTOGALLERY);
+        delete AUTOGALLERY;
+    }
+}
+
+document.ready(function(){
+    AUTOGALLERY = setTimeout("auto_gallery()", 10000);
+});
 </script>
 
 <div id="gallery-wrapper">
