@@ -5,6 +5,9 @@ function gallery_next() {
     
     clear_autogallery();
     
+    if (!window_focus)
+        return;
+    
     var margin = 730;
     var total = parseInt($('#gallery').attr('total'));
     var current = parseInt($('#gallery').attr('current'));
@@ -60,7 +63,12 @@ function clear_autogallery() {
 
 $(document).ready(function(){
     AUTOGALLERY = setTimeout("auto_gallery()", 10000);
+    
 });
+
+window.onblur = function() { window_focus = false; }
+window.onfocus = function() { window_focus = true; }
+window_focus = true;
 </script>
 
 <div id="gallery-wrapper">

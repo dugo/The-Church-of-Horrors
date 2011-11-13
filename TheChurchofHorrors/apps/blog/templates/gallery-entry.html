@@ -3,6 +3,9 @@ function gallery_next() {
     
     clear_autogallery();
     
+    if (!window_focus)
+        return;
+    
     var margin = 730;
     var total = parseInt($('#gallery-entry').attr('total'));
     var current = parseInt($('#gallery-entry').attr('current'));
@@ -59,6 +62,10 @@ function clear_autogallery() {
 $(document).ready(function(){
     AUTOGALLERY = setTimeout("auto_gallery()", 10000);
 });
+
+window.onblur = function() { window_focus = false; }
+window.onfocus = function() { window_focus = true; }
+window_focus = true;
 </script>
 
 {% if images.count > 1 %}

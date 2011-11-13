@@ -28,7 +28,7 @@ $(document).ready(function(){
             wrapper.append('<div class="paging-container">'+content[p]+'</div>');
         }
     
-    var width = $(wrapper).width();
+    var width = 730;
     var pages = content.length;
 
         for (var i=0;i<pages;i++) {
@@ -42,7 +42,7 @@ function paging(link,margin) {
         return;
     
     //$(document).scrollTo("#content",{easing:"swing",duration:"slow"});
-    $($(".content-entry .paging-container")[0]).animate({"margin-left":"-"+margin+"px"},'slow','swing');
+    $($(".content-entry")[0]).animate({"margin-left":"-"+margin+"px"},'slow','swing');
     $('#paging .current').removeClass("current");
     $(link).addClass("current");
 }

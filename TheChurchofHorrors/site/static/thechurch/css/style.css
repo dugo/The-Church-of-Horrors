@@ -439,6 +439,9 @@ a:hover { color:#d10019; }
     width:100%;
     vertical-align: text-top ; 
     height:450px !important;
+    max-height:450px !important;
+    overflow:hidden  !important;
+    display:block;
 }
 .entry td {
     vertical-align: text-top; 
