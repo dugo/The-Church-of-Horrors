@@ -316,6 +316,10 @@ a:hover { color:#d10019; }
     margin-bottom:10px;
 }
 
+#left div.author .name {
+    margin-bottom:10px;
+}
+
 #left div.author .name,#left div.author .name a {
     display:block;
     color: #808183;
@@ -330,14 +334,14 @@ a:hover { color:#d10019; }
     font-family:verdana;
     font-size:10px;
     height:auto;
-    width:50%;
+    width:106px;
     margin:0;
     color:black;
 }
 
 #left div.author .links {
     height:auto;
-    width:100%;
+    width:106px;
     font-family:verdana;
     font-size:10px;
     margin-top:10px;
@@ -347,7 +351,7 @@ a:hover { color:#d10019; }
     display:block;
     width:104px;
     height:auto;
-    margin-left: -10px;
+    /*margin-left: -10px;*/
     float:left;
     margin-right:20px;
     /*margin-bottom:10px;*/
