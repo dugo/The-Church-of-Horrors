@@ -33,11 +33,10 @@ function gallery_prev() {
 }
 </script>
 
+{% if images.count > 1 %}
 <div id="gallery-entry-wrapper">
-    {% if images.count > 1 %}
     <div id="next" onclick="gallery_next();"></div>
     <div id="prev" onclick="gallery_prev();"></div>
-    {%endif%}
     <div id="gallery-entry" total="{{images.count}}" current="1">
         {% for i in images %}
             <div class="image">
@@ -47,3 +46,8 @@ function gallery_prev() {
     </div>
     
 </div>
+{%else%}
+<div style="width:100%;height:auto;">
+    <img src="{{images.1}}" alt="{{images.1}}" class="{%if i.adjust%}adjust{%else%}adjust-nofill{%endif%}"/>
+</div>
+{%endif%}
