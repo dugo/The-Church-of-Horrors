@@ -328,7 +328,7 @@ a:hover { color:#d10019; }
     font-family:"DINWeb-Medium",Arial;
     font-size:14px;
     height:auto;
-    width:auto;
+    width:106px;
     margin-bottom:10px;
 }
 #left div.author .desc {
@@ -343,7 +343,7 @@ a:hover { color:#d10019; }
 
 #left div.author .links {
     height:auto;
-    width:106px;
+    width:100%;
     font-family:verdana;
     font-size:10px;
     margin-top:10px;
