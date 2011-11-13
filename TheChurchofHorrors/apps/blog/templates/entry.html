@@ -42,7 +42,7 @@ function paging(link,margin) {
         return;
     
     //$(document).scrollTo("#content",{easing:"swing",duration:"slow"});
-    $($(".content-entry .paging-container")[0]).animate({"margin-left":"-"+margin+"px"});
+    $($(".content-entry .paging-container")[0]).animate({"margin-left":"-"+margin+"px"},'slow','swing');
     $('#paging .current').removeClass("current");
     $(link).addClass("current");
 }
