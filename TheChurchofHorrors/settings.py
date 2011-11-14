@@ -17,7 +17,7 @@ sys.path.insert(0, APPS_ROOT)
 sys.path.insert(0, MODULES_ROOT)
 
 ADMINS = (
-    (u'Rubén Dugo', 'rdugomartin@gmail.com'),
+    (u'Rubén Dugo', 'raubn.zero@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -149,10 +149,12 @@ FILEBROWSER_EXTENSIONS = {
     'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
 }
 
-"""FILEBROWSER_VERSIONS = {
+FILEBROWSER_VERSIONS = {
   'admin_thumbnail': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'crop'},
-  'bw': {'verbose_name': u'Black&White', 'width': 104, 'height': '', 'opts': ''},
-}"""
+  'mini': {'verbose_name': 'Mini', 'width': 420, 'height': '', 'opts': ''},
+  'preview': {'verbose_name': 'Preview', 'width': 104, 'height': 105, 'opts': 'crop'},
+  'gallery': {'verbose_name': 'Gallery', 'width': 730, 'height': '', 'opts': ''},
+}
 
 TINYMCE_COMPRESSOR = True
 TINYMCE_JS_URL = '/static/tiny_mce/tiny_mce_src.js'

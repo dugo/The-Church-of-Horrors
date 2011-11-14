@@ -1,3 +1,5 @@
+{% load fb_versions %}
+
 <script type="text/javascript"> 
 function gallery_next() {
     
@@ -75,14 +77,15 @@ window_focus = true;
     <div id="gallery-entry" total="{{images.count}}" current="1">
         {% for i in images %}
             <div class="image">
-                <img src="{{i}}" alt="{{i.entry.title}}" class="{%if i.adjust%}adjust{%else%}adjust-nofill{%endif%}"/>
+                <img src="{% version i.file 'gallery' %}" alt="{{i.entry.title}}" class="{%if i.adjust%}adjust{%else%}adjust-nofill{%endif%}"/>
             </div>
         {%endfor%}
     </div>
     
 </div>
 {%else%}
-<div style="width:100%;height:{{images.0.file.height}}px;margin-top:22px;">
-    <img src="{{images.0}}" alt="{{images.0}}" class="{%if i.adjust%}adjust{%else%}adjust-nofill{%endif%}"/>
+{% version_object images.0.file 'gallery' as img %}
+<div style="width:100%;height:400px;margin-top:22px;">
+    <img src="{{img}}" alt="{{images.0.entry.title}}" class="{%if images.0.adjust%}adjust{%else%}adjust-nofill{%endif%}"/>
 </div>
 {%endif%}

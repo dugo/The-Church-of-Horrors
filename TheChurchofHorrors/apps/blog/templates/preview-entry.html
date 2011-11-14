@@ -1,5 +1,7 @@
+{% load fb_versions %}
+
 <div {% if not parity %}style="margin-right:0px;"{%endif%}>
-    <div><a href="{{e.get_absolute_url}}" title="{{e}}"><img src="{{e.get_main_image}}" class="adjust" alt="{{e}}" title="{{e}}"/></a></div>
+    <div><a href="{{e.get_absolute_url}}" title="{{e}}"><img src="{% version e.get_main_image 'preview' %}" alt="{{e}}" title="{{e}}"/></a></div>
     <div class="title"><a href="{{e.get_absolute_url}}" title="{{e}}">{{e}}</a></div>
     <span class="author">{{e.author.get_profile}}</span>
     <span class="date">{{e.created|date}}</span>

@@ -1,3 +1,5 @@
+{% load fb_versions %}
+
 {% if total > 0 %}
 
 <script type="text/javascript"> 
@@ -83,7 +85,7 @@ window_focus = true;
                         <span class="brief">{{e.get_brief}}</span>
                     </div>
                 </a>
-                    <img src="{{e.get_main_image}}" title="{{e}}" alt="{{e.title}}" class="{%if e.get_main_image.adjust%}adjust{%else%}adjust-nofill{%endif%}"/>
+                    <img src="{% version e.get_main_image 'gallery' %}" title="{{e}}" alt="{{e.title}}" class="{%if e.get_main_image.adjust%}adjust{%else%}adjust-nofill{%endif%}"/>
             </div>
         {%endfor%}
     </div>
