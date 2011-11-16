@@ -1,5 +1,6 @@
 {% load fb_versions %}
 
+{% if images.count > 1 %}
 <script type="text/javascript"> 
 function gallery_next() {
     
@@ -70,7 +71,6 @@ window.onfocus = function() { window_focus = true; }
 window_focus = true;
 </script>
 
-{% if images.count > 1 %}
 <div id="gallery-entry-wrapper">
     <div id="next" onclick="gallery_next();"></div>
     <div id="prev" onclick="gallery_prev();"></div>
@@ -85,7 +85,7 @@ window_focus = true;
 </div>
 {%else%}
 {% version_object images.0.file 'gallery' as img %}
-<div style="width:100%;height:400px;margin-top:22px;">
-    <img src="{{img}}" alt="{{images.0.entry.title}}" class="{%if images.0.adjust%}adjust{%else%}adjust-nofill{%endif%}"/>
+<div style="width:100%;height:{%if images.0.adjust%}400{%else%}{{img.height}}{%endif%}px;margin-top:22px;">
+    <img src="{{img}}" alt="{{images.0.entry.title}}" {%if images.0.adjust%}class="adjust"{%endif%}/>
 </div>
 {%endif%}
