@@ -77,7 +77,7 @@ class CounterAdmin(admin.ModelAdmin):
 
 class EntryForm(ModelForm):
     
-    content = forms.CharField(label=_(u"Contenido"),widget=TinyMCE(attrs={'cols': 120, 'rows': 40},  mce_attrs = { "style_formats" : [ {"title" : _('Cita'), "block" : 'blockquote'} ], "content_css": "%sthechurch/css/editor.css" % settings.STATIC_URL }))
+    content = forms.CharField(label=_(u"Contenido"),widget=TinyMCE(attrs={'cols': 120, 'rows': 40}))
     brief = forms.CharField(label=_(u'Resumen'),widget=forms.Textarea(attrs={'class':'counted','maxlength':'450'}),help_text = _(u'Un breve resumen representativo de la entrada. Si queda vacío se cogerá el primer párrafo.'),required=False)
     
     class Meta:

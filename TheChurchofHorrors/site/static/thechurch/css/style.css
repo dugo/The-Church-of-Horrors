@@ -442,11 +442,22 @@ a:hover { color:#d10019; }
     max-height:450px !important;
     overflow:hidden  !important;
     display:block;
+    text-align:center;
 }
 .entry td {
     vertical-align: text-top; 
     padding:0;
-    /*padding-right:30px;*/
+    padding-right:30px;
+    width:50%;
+}
+
+.entry td:nth-child(2n+1) {
+    padding-left: 0 !important;
+    padding-right: 15px !important;
+}
+.entry td:nth-child(2n) {
+    padding-left: 15px !important;
+    padding-right: 0 !important;
 }
 
 #breadcrumb {

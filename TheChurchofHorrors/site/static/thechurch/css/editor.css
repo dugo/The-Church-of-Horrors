@@ -40,7 +40,8 @@ hr {
 td {
     vertical-align: text-top ; 
     padding:0;
-    /*padding-right:30px;*/
+    width:50%;
+    padding-right:30px;
 
 }
 
@@ -59,10 +60,21 @@ table {
     overflow:hidden  !important;
     display:block;
     vertical-align: text-top ; 
+    border-bottom: dashed 1px red;
+    text-align:center;
 }
 
-.pagebreak {
+td:nth-child(2n+1) {
+    padding-left: 0 !important;
+    padding-right: 15px !important;
+}
+td:nth-child(2n) {
+    padding-left: 15px !important;
+    padding-right: 0 !important;
+}
+
+/*.pagebreak {
     display:block;
     width:100%;
     border: dashed 1px red;
-}
+}*/

@@ -20,16 +20,15 @@
 $(document).ready(function(){
     
     var wrapper = $($('.content-entry')[0]);
-    var html = wrapper.html();
-    var content = html.split("<span class=\"pagebreak\"></span>");
+    var content = wrapper.find('table');
     
+    var pages = content.length;
     wrapper.html('');
-    for (var p in content) {
-            wrapper.append('<div class="paging-container">'+content[p]+'</div>');
+    for (var i=0;i<pages;i++) {
+            wrapper.append('<div class="paging-container"><table>'+content[i].innerHTML+'</table></div>');
         }
     
     var width = 730;
-    var pages = content.length;
 
         for (var i=0;i<pages;i++) {
             var css = (!i)?"class='current'":"";

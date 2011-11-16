@@ -161,23 +161,36 @@ TINYMCE_JS_URL = '/static/tiny_mce/tiny_mce_src.js'
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "tiny_mce")
 TINYMCE_DEFAULT_CONFIG = {
     #'plugins': "preview,spellchecker,paste,searchreplace,media,embed",
-    'plugins': "preview,table,spellchecker,paste,searchreplace,media,embed,template,fullscreen,pagebreak",
+    'plugins': "preview,table,spellchecker,paste,searchreplace,media,embed,template,fullscreen",
     'theme': "advanced",
     "theme_advanced_buttons3_add_before" : "tablecontrols,separator",
-    "theme_advanced_buttons2_add" : "separator,pagebreak",
+    "theme_advanced_buttons2_add" : "separator,pastetext,pasteword,copy,paste",
     "theme_advanced_buttons3_add" : "separator,preview,emotions,embed,separator,template,separator,fullscreen",
-    "plugin_preview_width" : "500",
-    "plugin_preview_height" : "600",
+    #"style_formats" : [ {"title" : 'Cita', "block" : 'blockquote'} ], 
+    "style_formats" : [  ], 
+    "paste_text_linebreaktype" : "br",
+    "width" : 730,
+    "theme_advanced_styles": "",
+    "content_css": "%sthechurch/css/editor.css" % STATIC_URL,
+    "plugin_preview_width" : "730",
+    "plugin_preview_height" : "800",
     "extended_valid_elements" : "iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder]",
     "embed_iframe_innerhtml_fallback" : 'This will be placed between the iframe tags',
-    "theme_advanced_blockformats":"p",
+    "theme_advanced_blockformats":"blockquote",
     "force_br_newlines" : True,
     "force_p_newlines" : False,
     "convert_newlines_to_brs" : False,
-    "template_templates" : [ { "title" : "Entrevista", "src" : "/static/thechurch/tinymce_templates/entrevista.html" ,  "description" : "Entrevista"  }, { "title" : u"Artículo", "src" : "/static/thechurch/tinymce_templates/critica.html" ,  "description" : u"Artículo"  }, { "title" : u"Crítica de disco", "src" : "/static/thechurch/tinymce_templates/critica-discos.html" ,  "description" : u"Crítica de disco"  }],   
+    "template_templates" : [ 
+        { "title" : "Entrevista", "src" : "/static/thechurch/tinymce_templates/entrevista.html" ,  "description" : "Entrevista"  }, 
+        { "title" : u"Artículo", "src" : "/static/thechurch/tinymce_templates/articulo.html" ,  "description" : u"Artículo"  }, 
+        { "title" : u"Crítica de disco", "src" : "/static/thechurch/tinymce_templates/critica-discos.html" ,  "description" : u"Crítica de disco"  },
+        { "title" : u"Página", "src" : "/static/thechurch/tinymce_templates/2col.html" ,  "description" : u"Página 2 columnas"  } ,
+        { "title" : u"Página 1+2", "src" : "/static/thechurch/tinymce_templates/12col.html" ,  "description" : u"Página con encabezado y cuerpo"  } ,
+        { "title" : u"Página 2+1", "src" : "/static/thechurch/tinymce_templates/21col.html" ,  "description" : u"Página con cuerpo y pie"  } ,
+        { "title" : u"Página 1+2+1", "src" : "/static/thechurch/tinymce_templates/121col.html" ,  "description" : u"Página con encabezado, cuerpo y pie"  } ],
     "fullscreen_new_window" : False,
     "fullscreen_settings" : { "theme_advanced_path_location" : "top" },
-    "pagebreak_separator" : "<span class='pagebreak'></span>"
+    #"pagebreak_separator" : "<span class='pagebreak'></span>"
 
 }
 TINYMCE_SPELLCHECKER = True

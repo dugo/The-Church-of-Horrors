@@ -59,7 +59,7 @@
 				ed.execCallback('paste_preprocess', pl, o);
                 
                 // Content string containing the HTML from the clipboard
-                o.content = o.content.replace(/<[^>]+>/g, '');
+                //o.content = o.content.replace(/<[^>]+>/g, '');
 			});
 
 			// Register optional postprocess
