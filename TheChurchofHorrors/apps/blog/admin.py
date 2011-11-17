@@ -89,7 +89,7 @@ class Entry(CounterAdmin):
     
     inlines = (ImageGallery,)
     
-    list_display = ('__unicode__','author','published','gallery','view',)
+    list_display = ('__unicode__','author','created','published','gallery','view',)
     
     readonly_fields = ('slug',)
     
