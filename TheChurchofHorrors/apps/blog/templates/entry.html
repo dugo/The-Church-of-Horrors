@@ -21,9 +21,14 @@ $(document).ready(function(){
     
     var wrapper = $($('.content-entry')[0]);
     var content = wrapper.find('table');
+    var html = wrapper.html();
+    wrapper.html('');
+
+    {% if not entry.show_gallery%}
+    wrapper.prev().append('<div style="width:100%;height:auto;margin-top:22px;text-align:center;">'+html.substring(0,html.indexOf('<table'))+"</div>");
+    {%endif%}
     
     var pages = content.length;
-    wrapper.html('');
     for (var i=0;i<pages;i++) {
             wrapper.append('<div class="paging-container"><table>'+content[i].innerHTML+'</table></div>');
         }
