@@ -7,7 +7,7 @@ function gallery_next() {
     
     clear_autogallery();
     
-    if (!window_focus)
+    if (!window_focus || over_gallery)
         return;
     
     var margin = 730;
@@ -66,11 +66,15 @@ function clear_autogallery() {
 $(document).ready(function(){
     AUTOGALLERY = setTimeout("auto_gallery()", 10000);
     
+    $("#gallery-wrapper").mouseover(function() { over_gallery = true; });
+    $("#gallery-wrapper").mouseenter(function() { over_gallery = false; });
+    
 });
 
 window.onblur = function() { window_focus = false; }
-window.onfocus = function() { window_focus = true; }
+window.onfocus = function() { window_focus = true; over_gallery = false; }
 window_focus = true;
+over_gallery = false;
 </script>
 
 <div id="gallery-wrapper">
