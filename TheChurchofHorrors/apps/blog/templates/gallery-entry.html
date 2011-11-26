@@ -86,6 +86,6 @@ window_focus = true;
 {%else%}
 {% version_object images.0.file 'gallery' as img %}
 <div style="width:100%;height:{%if images.0.adjust%}270{%else%}{{img.height}}{%endif%}px;margin-top:22px;">
-    <img src="{{img}}" alt="{{images.0.entry.title}}" {%if images.0.adjust%}class="adjust"{%endif%}/>
+    <img src="{% version images.0.file 'gallery' %}" alt="{{images.0.entry.title}}" {%if images.0.adjust%}class="adjust"{%endif%}/>
 </div>
 {%endif%}
