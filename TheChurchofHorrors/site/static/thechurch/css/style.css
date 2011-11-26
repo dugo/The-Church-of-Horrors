@@ -402,6 +402,28 @@ a:hover { color:#d10019; }
     overflow:hidden;
 }
 
+.staff div {
+    margin:0 0 15px 0;
+
+}
+
+.staff div span {
+    cursor:pointer;
+}
+
+.staff {
+    font-family:verdana !important;
+    font-size:10px !important;
+}
+
+.staff h3 {
+    margin:15px 0 0 0;
+    padding:0;
+
+    color:#d2001b;
+    font-weight:bold;
+}
+
 #paging {
     float:right;
     margin-top:20px;

@@ -1,1 +1,18 @@
 {% extends "base.html" %}
+{% load blog %}
+
+{% block title %}The Church of Horrors :: Staff{%endblock%}
+
+{%block breadcrumb%}{% breadcrumb request.get_full_path %}{%endblock%}
+
+{%block content_class%}staff{%endblock%}
+
+{%block content%}
+<div>
+{% for key,value in staffs.items %}
+<h3>{{key.1}}{{ value.count|pluralize:"es" }}:</h3>
+{% for s in value%}<span onclick="window.location='{{s.get_absolute_url}}';">{{s}}</span> / <a href='mailto:{{s.user.email}}'>{{s.user.email}}</a><br/>{%endfor%}
+{% endfor %}
+</div>
+<hr/>
+{%endblock%}

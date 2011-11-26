@@ -31,10 +31,14 @@ def contact(request):
         context_instance=RequestContext(request))
     
 def staff(request):
+    from userprofile.models import UserProfile,Rol
+    
     right_entries = Entry.get_last_by_section(request.user)
 
+    rols = Rol.get_all().values_list('name',flat=True)
+
     return render_to_response("staff.html", 
-        dict(right_entries=right_entries, section=None,subsection=None), 
+        dict(right_entries=right_entries, section=None,subsection=None,rols=rols,staffs=UserProfile.get_by_rol()), 
         context_instance=RequestContext(request))
     
 def common(request,slug):

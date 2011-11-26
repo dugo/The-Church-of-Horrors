@@ -9,6 +9,10 @@ class Rol(models.Model):
     name = models.CharField(_('Rol'),max_length=100,unique=True,blank=False)
     sort = models.PositiveIntegerField(_('Orden'),help_text=_(u'Orden en el que se mostrará en la página de staffs'),unique=True,blank=False)
     
+    @classmethod
+    def get_all(self):
+        return Rol.objects.all()    
+    
     def __unicode__(self):
         return unicode(self.name)
     
@@ -32,6 +36,17 @@ class UserProfile(models.Model):
 
     def get_published(self):
         return self.user.entries.filter(published=True)
+    
+    @classmethod
+    def get_by_rol(self):
+        rols = Rol.get_all()
+        
+        staff = {}
+        
+        for r in rols:
+            staff[(r.sort,r.name,)] = UserProfile.objects.filter(rol__id=r.id)
+
+        return staff
     
     def get_items(self):
         return self.items.order_by('id')[:]
