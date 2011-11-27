@@ -263,7 +263,9 @@ try:
 except ImportError:
     pass
 
-BLOG_MAX_LAST_ENTRIES = 4
+BLOG_HOME_LAST_ENTRIES = 6
+BLOG_OTHER_LAST_ENTRIES = 8
+BLOG_RIGHT_LAST_ENTRIES = 4
 BLOG_BREADCRUMB_URL_MAPPING = {
     'contact':"Contacto",
     'staff':"Staff",

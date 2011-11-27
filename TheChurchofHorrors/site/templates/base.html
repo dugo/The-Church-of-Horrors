@@ -63,6 +63,9 @@ $(document).ready(function(){
     
     if (typeof window.history.pushState != "undefined") {
         $('a[href^="/"]:not(a[href^="/admin"])').click(function(e){ 
+        
+        if (typeof AUTOGALLERY != "undefined")
+            clearTimeout(AUTOGALLERY);
             
             var url = this.href;
             
@@ -95,6 +98,10 @@ $(document).ready(function(){
 
     $('#ajax-wrapper a[href^="/"]:not(a[href^="/admin"])').click(function(e){ 
         e.preventDefault(); 
+        
+        if (typeof AUTOGALLERY != "undefined")
+            clearTimeout(AUTOGALLERY);
+            
         var url = this.href;
         $.ajax({
             url: url,
@@ -149,6 +156,10 @@ $(document).ready(function(){
         <hr/>
         {%block breadcrumb%}{%endblock%}
         {%block content%}{%endblock%}
+        
+        {%if paginator.hasprev%}<a href='{{request.path}}{{paginator.prev}}' id="prevpage"><< Publicaciones Posteriores</a>{%endif%}
+        {%if paginator.next%}<a href='{{request.path}}{{paginator.next}}' id="nextpage">Publicaciones Anteriores >></a>{%endif%}
+        
     </div> <!-- #content -->
 
     <div id="left">

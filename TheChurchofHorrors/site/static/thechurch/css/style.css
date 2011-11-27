@@ -622,3 +622,13 @@ a:hover { color:#d10019; }
 
 #ajax-wrapper { display:block;float:left;width:100%;height:auto;}
 
+#prevpage,#nextpage {
+    float:left;
+    font-family:verdana,sans-serif;
+    font-size:10px;
+    font-weight:normal;
+    margin-top:14px;
+}
+#nextpage {
+    float:right;
+}

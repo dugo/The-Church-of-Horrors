@@ -112,7 +112,7 @@ class Entry(models.Model):
             return Entry.objects.order_by('-created').filter(published=True)
         
     @classmethod
-    def get_last_by_author(self,author,entry=None,max=settings.BLOG_MAX_LAST_ENTRIES):
+    def get_last_by_author(self,author,entry=None,max=settings.BLOG_OTHER_LAST_ENTRIES):
 
         entries = Entry.objects.filter(published=True,author__id=author.id).order_by('-created')
         
@@ -122,15 +122,11 @@ class Entry(models.Model):
         return entries[:max]
     
     @classmethod    
-    def get_last_by_section(self,user,section=None,max=settings.BLOG_MAX_LAST_ENTRIES):
+    def get_last_by_section(self,section=None,max=settings.BLOG_RIGHT_LAST_ENTRIES):
         
         entries = {}
         
-        # removed!
-        if False and user.is_authenticated():
-            q = models.Q(published=True) | models.Q(author__id=user.id)
-        else:
-            q = models.Q(published=True)
+        q = models.Q(published=True)
         
         for s in Section.objects.all()[:]:
             if not section is None:
