@@ -64,12 +64,13 @@ def section_subsection(request,section,subsection):
     section = get_object_or_404(Section,slug=section)
     subsection = get_object_or_404(Subsection,slug=subsection)
     
-    entries = Entry.get_last(subsection__id=subsection.id,section__id=section.id)[:settings.BLOG_OTHER_LAST_ENTRIES]
+    paginator = Paginator(Entry.get_last(subsection__id=subsection.id,section__id=section.id),settings.BLOG_OTHER_LAST_ENTRIES,request.GET.get("p",1))
+    entries = paginator.current()
     
     right_entries = Entry.get_last_by_section()
 
     return render_to_response("home.html", 
-        dict(right_entries=right_entries, entries=entries,section=section,subsection=subsection), 
+        dict(right_entries=right_entries, entries=entries,paginator=paginator,section=section,subsection=subsection), 
         context_instance=RequestContext(request))
     
 def entry(request,section,subsubsection,entry):
@@ -107,21 +108,24 @@ def view_for_entry(request,entry):
         
 def view_for_subsection(request,subsection):
     
-    entries = Entry.get_last(subsection__id=subsection.id)[:settings.BLOG_MAX_LAST_ENTRIES]
     right_entries = Entry.get_last_by_section()
+    
+    paginator = Paginator(Entry.get_last(subsection__id=subsection.id),settings.BLOG_OTHER_LAST_ENTRIES,request.GET.get("p",1))
+    entries = paginator.current()
 
     return render_to_response("home-short.html", 
-        dict(right_entries=right_entries, entries=entries,subsection=subsection,section=None), 
+        dict(right_entries=right_entries, entries=entries,paginator=paginator,subsection=subsection,section=None), 
         context_instance=RequestContext(request))
 
 def view_for_section(request,section):
+       
+    right_entries = Entry.get_last_by_section(section=section)
     
-    entries = Entry.get_last(section__id=section.id)[:settings.BLOG_MAX_LAST_ENTRIES]
-    
-    right_entries = Entry.get_last_by_section(request.user,section=section)
+    paginator = Paginator(Entry.get_last(section__id=section.id),settings.BLOG_OTHER_LAST_ENTRIES,request.GET.get("p",1))
+    entries = paginator.current()
 
     return render_to_response("home-short.html", 
-        dict(right_entries=right_entries, entries=entries, section = section,subsection=None), 
+        dict(right_entries=right_entries, entries=entries, paginator=paginator,section = section,subsection=None), 
         context_instance=RequestContext(request))
     
     

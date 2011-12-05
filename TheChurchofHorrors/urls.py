@@ -26,3 +26,5 @@ urlpatterns = patterns('',
     
     (r'', include('blog.urls')),
 )
+
+handler500 = 'TheChurchofHorrors.site.views.server_error'
