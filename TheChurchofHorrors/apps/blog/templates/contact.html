@@ -1,1 +1,66 @@
 {% extends "base.html" %}
+{% load blog %}
+
+{% block title %}The Church of Horrors :: Contacto{%endblock%}
+
+{%block breadcrumb%}{% breadcrumb request.get_full_path %}{%endblock%}
+
+{%block content_class%}contact{%endblock%}
+
+{% block extra_js %}
+<script type="text/javascript">
+
+function echeck(email) {
+	var regexp  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	
+	return (regexp.test(email));				
+}
+
+function validate() {
+    
+    $('.error').removeClass('error');
+    
+    var ok = true;
+    
+    if (!echeck($('input[name=email]').val())) {
+        $('input[name=email]').addClass("error");
+        ok=false;
+    }
+
+    if (!$('input[name=name]').val()) {
+        $('input[name=name]').addClass("error");
+        ok=false;
+    }
+    
+    if (!$('textarea').val()) {
+        $('textarea').addClass("error");
+        ok=false;
+    }
+    
+    return ok;
+}
+</script>
+{%endblock%}
+
+{%block content%}
+<div>
+Contactar con <a href='http://thechurchofhorrors.com/'>The Church of Horrors</a> es tan fácil como rellenar este formulario. Si lo prefieres también puedes enviar un email a <a href='mailto:info@thechurchofhorrors.com'>info@thechurchofhorrors.com</a>
+
+<form action="./" method="POST">
+
+<input type="text" name="name" value=""/>Nombre <span>(*)</span>
+<br/>
+<input type="text" name="email" value=""/>Email <span>(*)</span>
+
+<textarea name="message"></textarea>
+
+{%if next%}<input type="hidden" value="{{next}}" name="next"/>{%endif%}
+
+<input type="submit" value="ENVIAR" onclick="return validate();"/>
+{% csrf_token %}
+</form>
+
+</div>
+
+<hr/>
+{%endblock%}

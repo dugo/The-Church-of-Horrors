@@ -62,7 +62,7 @@ $(document).ready(function(){
     }
     
     if (typeof window.history.pushState != "undefined") {
-        $('a[href^="/"]:not(a[href^="/admin"])').click(function(e){ 
+        $('a[href^="/"]:not(a[href^="/admin",a[href^="/contact"])').click(function(e){ 
         
         if (typeof AUTOGALLERY != "undefined")
             clearTimeout(AUTOGALLERY);
@@ -190,7 +190,7 @@ $(document).ready(function(){
         <div id="subfooter-1">
             <div id="subfooter-2">
                 <div class="footer-item footer-item-1">
-                    <h3><a href="{% url 'contact' %}">Contacto</a></h3>
+                    <h3><a href="{% url 'contact' %}?next={{request.path}}">Contacto</a></h3>
                     <h3><a href="{% url 'staff' %}">Staff</a></h3>
                     <!--<h3><a href="#">Información</a></h3>-->
                 </div>

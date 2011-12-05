@@ -271,6 +271,7 @@ BLOG_BREADCRUMB_URL_MAPPING = {
     'staff':"Staff",
     'author':"Autor",
     }
+BLOG_CONTACT_EMAILS = ["rdugomartin@gmail.com"]
 
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: "/!/%s/" % u.username,

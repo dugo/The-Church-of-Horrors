@@ -22,11 +22,31 @@ def home(request):
         context_instance=RequestContext(request))
     
 def contact(request):
-    
+
     right_entries = Entry.get_last_by_section()
+    
+    if request.method == "POST":
+        from forms import ContactForm
+        
+        form = ContactForm(request.POST)
+        
+        if form.is_valid():
+            from django.core.mail import send_mail
+
+            msg = """Nombre: %s
+            Email: %s
+            Mensaje:
+            %s""" % (form.cleaned_data['name'],form.cleaned_data['email'],form.cleaned_data['message'])
+
+            # send email
+            send_mail('[TheChurchofHorrors] Formulario de contacto', msg, 'info@thechurchofhorrors.com', settings.BLOG_CONTACT_EMAILS, fail_silently=True)
+            
+            return render_to_response("contact-sent.html", 
+                dict(right_entries=right_entries, section=None,subsection=None,next = request.POST.get('next') ), 
+                context_instance=RequestContext(request))
 
     return render_to_response("contact.html", 
-        dict(right_entries=right_entries, section=None,subsection=None), 
+        dict(right_entries=right_entries, section=None,subsection=None,next = request.GET.get('next')), 
         context_instance=RequestContext(request))
     
 def staff(request):
