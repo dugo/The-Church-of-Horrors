@@ -33,13 +33,10 @@ def contact(request):
         if form.is_valid():
             from django.core.mail import send_mail
 
-            msg = """Nombre: %s
-            Email: %s
-            Mensaje:
-            %s""" % (form.cleaned_data['name'],form.cleaned_data['email'],form.cleaned_data['message'])
+            msg = """Nombre: %s\nEmail: %s\nMensaje:\n%s""" % (form.cleaned_data['name'],form.cleaned_data['email'],form.cleaned_data['message'])
 
             # send email
-            send_mail('[TheChurchofHorrors] Formulario de contacto', msg, 'info@thechurchofhorrors.com', settings.BLOG_CONTACT_EMAILS, fail_silently=True)
+            send_mail('[TheChurchofHorrors] Formulario de contacto', msg, 'TheChurchofHorrors <info@thechurchofhorrors.com>', settings.BLOG_CONTACT_EMAILS, fail_silently=True)
             
             return render_to_response("contact-sent.html", 
                 dict(right_entries=right_entries, section=None,subsection=None,next = request.POST.get('next') ), 

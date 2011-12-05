@@ -8,14 +8,14 @@
 {%block content_class%}contact{%endblock%}
 
 {% block extra_js_ready %}
-setTimeout(function(){window.history.go(-2);},5000);
+setTimeout(function(){window.location='/';},5000);
 {%endblock%}
 
 {%block content%}
 <div id="waitmask"></div>
 <div>
 Su mensaje ha sido enviado, en breve nos pondremos en contacto con usted.<br/><br/>
-Volviendo a <a href='{{next}}'>donde estaba...</a>
+Volviendo a <a href='/'>HOME</a>
 </div>
 
 <hr/>
