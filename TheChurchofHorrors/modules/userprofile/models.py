@@ -11,7 +11,7 @@ class Rol(models.Model):
     
     @classmethod
     def get_all(self):
-        return Rol.objects.all()    
+        return Rol.objects.all().order_by('sort')
     
     def __unicode__(self):
         return unicode(self.name)
@@ -39,12 +39,16 @@ class UserProfile(models.Model):
     
     @classmethod
     def get_by_rol(self):
+        from django.utils.datastructures import SortedDict
+
         rols = Rol.get_all()
         
-        staff = {}
+        staff = SortedDict()
         
+        i = 0
         for r in rols:
-            staff[(r.sort,r.name,)] = UserProfile.objects.filter(rol__id=r.id)
+            staff.insert(i, r.name, UserProfile.objects.filter(rol__id=r.id))
+            i+=1
 
         return staff
     

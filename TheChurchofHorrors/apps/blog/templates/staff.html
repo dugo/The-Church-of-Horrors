@@ -10,7 +10,7 @@
 {%block content%}
 <div>
 {% for key,value in staffs.items %}
-<h3>{{key.1}}{{ value.count|pluralize:"es" }}:</h3>
+<h3>{{key}}{{ value.count|pluralize:"es" }}:</h3>
 {% for s in value%}<span onclick="window.location='{{s.get_absolute_url}}';">{{s}}</span> / <a href='mailto:{{s.user.email}}'>{{s.user.email}}</a><br/>{%endfor%}
 {% endfor %}
 <br/>
