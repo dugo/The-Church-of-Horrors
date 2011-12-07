@@ -266,6 +266,7 @@ except ImportError:
 BLOG_HOME_LAST_ENTRIES = 6
 BLOG_OTHER_LAST_ENTRIES = 8
 BLOG_RIGHT_LAST_ENTRIES = 4
+BLOG_RSS_LAST_ENTRIES = 10
 BLOG_BREADCRUMB_URL_MAPPING = {
     'contact':"Contacto",
     'staff':"Staff",

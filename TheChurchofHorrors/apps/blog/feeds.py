@@ -9,7 +9,7 @@ class LatestEntriesFeed(Feed):
     description = _("Actualizaciones en thechurchofhorrors.com")
 
     def items(self):
-        return Entry.get_last()[:settings.BLOG_MAX_LAST_ENTRIES]
+        return Entry.get_last()[:settings.BLOG_RSS_LAST_ENTRIES]
 
     def item_title(self, item):
         return item.title
