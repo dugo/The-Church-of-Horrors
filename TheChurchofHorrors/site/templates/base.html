@@ -44,6 +44,7 @@
 {% block extra_js %}{%endblock%}
 
 {% if not request.is_ajax %}
+{%comment%}
 <script type="text/javascript" >
 $(document).ready(function(){
 
@@ -120,6 +121,7 @@ $(document).ready(function(){
     });
 }
 </script>
+{%endcomment%}
 
 </head>
 <body>
