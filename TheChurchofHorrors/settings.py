@@ -163,7 +163,7 @@ TINYMCE_DEFAULT_CONFIG = {
     #'plugins': "preview,spellchecker,paste,searchreplace,media,embed",
     'plugins': "preview,table,spellchecker,paste,searchreplace,media,embed,template,fullscreen",
     'theme': "advanced",
-    "theme_advanced_buttons3_add_before" : "tablecontrols,separator",
+    #"theme_advanced_buttons3_add_before" : "tablecontrols,separator",
     "theme_advanced_buttons2_add" : "separator,pastetext,pasteword,copy,paste",
     "theme_advanced_buttons3_add" : "separator,preview,emotions,embed,separator,template,separator,fullscreen",
     #"style_formats" : [ {"title" : 'Cita', "block" : 'blockquote'} ], 

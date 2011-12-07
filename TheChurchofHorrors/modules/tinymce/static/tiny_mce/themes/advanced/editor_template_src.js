@@ -40,7 +40,7 @@
 			unlink : ['unlink_desc', 'unlink'],
 			image : ['image_desc', 'mceImage'],
 			cleanup : ['cleanup_desc', 'mceCleanup'],
-			help : ['help_desc', 'mceHelp'],
+			//help : ['help_desc', 'mceHelp'],
 			shortcuts : ['shortcuts_desc', 'mceShortcuts'],
 			code : ['code_desc', 'mceCodeEditor'],
 			hr : ['hr_desc', 'InsertHorizontalRule'],
@@ -53,7 +53,7 @@
 			backcolorpicker : ['backcolor_desc', 'mceBackColor'],
 			charmap : ['charmap_desc', 'mceCharMap'],
 			visualaid : ['visualaid_desc', 'mceToggleVisualAid'],
-			anchor : ['anchor_desc', 'mceInsertAnchor'],
+			//anchor : ['anchor_desc', 'mceInsertAnchor'],
 			newdocument : ['newdocument_desc', 'mceNewDocument'],
 			blockquote : ['blockquote_desc', 'mceBlockQuote']
 		},
@@ -74,7 +74,8 @@
 			t.settings = s = extend({
 				theme_advanced_path : true,
 				theme_advanced_toolbar_location : 'bottom',
-				theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect",
+				//theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect",
+				theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect",
 				theme_advanced_buttons2 : "bullist,numlist,|,outdent,indent,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code",
 				theme_advanced_buttons3 : "hr,removeformat,visualaid,|,sub,sup,|,charmap",
 				theme_advanced_blockformats : "p,address,pre,h1,h2,h3,h4,h5,h6",
