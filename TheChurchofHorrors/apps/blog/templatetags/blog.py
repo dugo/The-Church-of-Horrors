@@ -61,7 +61,13 @@ def breadcrumb(path,section=None,subsection=None):
 @stringfilter
 def remove_linebreaks(value):
     return value.replace('\n','').replace('\r','')
-    
+
+@register.filter(name='url_open')
+def url_open(text):
+    return text.replace('<a ', '<a onclick="window.open(this.href);return false;" ')
+url_open.is_safe = True
+
+
 ##
 # Removes HTML or XML character references and entities from a text string.
 #

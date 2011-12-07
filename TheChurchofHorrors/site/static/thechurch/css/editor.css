@@ -45,8 +45,8 @@ td {
 
 }
 
-a:hover { color:#d10019 !important;}
-a {text-decoration:none !important; color:#5889b6 !important;}
+a:hover { color:#d10019 !important;cursor:pointer !important;}
+a {text-decoration:none !important; color:#5889b6 !important;cursor:pointer !important;}
 
 p {
     margin:0;
