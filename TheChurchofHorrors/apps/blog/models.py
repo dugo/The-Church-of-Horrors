@@ -191,9 +191,12 @@ class ImageGallery(models.Model):
     
 
 
+
+# notify to editors signal
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from userprofile.models import UserProfile
+from django.core.mail import send_mail
  
 @receiver(post_save, sender=Entry)
 def notify_editors(sender, instance, created, **kwargs):
