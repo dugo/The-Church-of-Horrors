@@ -202,7 +202,7 @@ from django.core.mail import send_mail
 def notify_editors(sender, instance, created, **kwargs):
     
     if created: 
-        editors = list(UserProfile.get_by_rol(settings.BLOG_EDITOR_ROL_ID).values_list("user__email",flat=True))
+        editors = [str(email) for email in UserProfile.get_by_rol(settings.BLOG_EDITOR_ROL_ID).values_list("user__email",flat=True)]
 
         
         msg = "Se ha creado una nueva entrada.\nPuedes verla en http://thechurchofhorrors.com%s" % instance.get_admin_url()
