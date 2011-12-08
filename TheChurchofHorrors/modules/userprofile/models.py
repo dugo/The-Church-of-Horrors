@@ -38,7 +38,11 @@ class UserProfile(models.Model):
         return self.user.entries.filter(published=True)
     
     @classmethod
-    def get_by_rol(self):
+    def get_by_rol(self,rol_id):
+        return UserProfile.objects.filter(rol__id=rol_id) 
+    
+    @classmethod
+    def group_by_rol(self):
         from django.utils.datastructures import SortedDict
 
         rols = Rol.get_all()

@@ -44,6 +44,14 @@
 {% block extra_js %}{%endblock%}
 
 {% if not request.is_ajax %}
+
+<script type="text/javascript" >
+$(document).ready(function(){
+    $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
+    $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
+});
+</script>
+
 {%comment%}
 <script type="text/javascript" >
 $(document).ready(function(){
@@ -125,10 +133,15 @@ $(document).ready(function(){
 
 </head>
 <body>
+
+    <map name="map-logo">
+        <area shape="poly" coords="25,15,29,22,25,29,21,22" href="/admin/">
+    </map> 
+
     <div id="topbanner"></div>
     <div id="container">
         <div id="header">
-            <img src="{{STATIC_URL}}thechurch/images/logo.png" alt="The Church of Horros logo" onclick="window.location='/';"/>
+            <a href="/" title="thechurchofhorrors.com"><img src="{{STATIC_URL}}thechurch/images/logo.png" alt="The Church of Horros logo" usemap="#map-logo"/></a>
             <div id="banner"></div>
             <div id="sections">
                 <a href='/' class="section">HOME</a>

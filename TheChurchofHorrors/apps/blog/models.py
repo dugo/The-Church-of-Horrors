@@ -8,6 +8,8 @@ from django.template.defaultfilters import slugify
 from django.conf import settings
 from filebrowser.fields import FileBrowseField
 from taggit.managers import TaggableManager
+from django.core.urlresolvers import reverse
+
 
 
 class Section(models.Model):
@@ -98,10 +100,14 @@ class Entry(models.Model):
             'subsection': self.subsection.slug,
             'entry': self.slug})"""
     
+    
     @models.permalink
     def get_absolute_url(self):
         return ('common', (), {
             'slug': self.slug})
+    
+    def get_admin_url(self):
+        return reverse("admin:blog_entry_change", args=[self.id])
     
     @classmethod
     def get_last(self,**kwargs):
@@ -183,6 +189,22 @@ class ImageGallery(models.Model):
         ordering = ('order',)
         unique_together = ('entry','order',)
     
+
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from userprofile.models import UserProfile
+ 
+@receiver(post_save, sender=Entry)
+def notify_editors(sender, instance, created, **kwargs):
     
-    
+    if created: 
+        editors = UserProfile.get_by_rol(settings.BLOG_EDITOR_ROL_ID).values_list("user__email",flat=True)
+        
+        msg = "Se ha creado una nueva entrada.\nPuedes verla en http://thechurchofhorrors.com%s" % instance.get_admin_url()
+
+            # send email
+        send_mail('[TheChurchofHorrors] Nueva entrada', msg, settings.BLOG_DEFAULT_SENDER, editors, fail_silently=False)
+        
+        
     

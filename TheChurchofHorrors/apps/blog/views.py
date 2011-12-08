@@ -36,7 +36,7 @@ def contact(request):
             msg = """Nombre: %s\nEmail: %s\nMensaje:\n%s""" % (form.cleaned_data['name'],form.cleaned_data['email'],form.cleaned_data['message'])
 
             # send email
-            send_mail('[TheChurchofHorrors] Formulario de contacto', msg, 'TheChurchofHorrors <info@thechurchofhorrors.com>', settings.BLOG_CONTACT_EMAILS, fail_silently=True)
+            send_mail('[TheChurchofHorrors] Formulario de contacto', msg, settings.BLOG_DEFAULT_SENDER, settings.BLOG_CONTACT_EMAILS, fail_silently=True)
             
             return render_to_response("contact-sent.html", 
                 dict(right_entries=right_entries, section=None,subsection=None,next = request.POST.get('next') ), 
@@ -54,7 +54,7 @@ def staff(request):
     rols = Rol.get_all().values_list('name',flat=True)
 
     return render_to_response("staff.html", 
-        dict(right_entries=right_entries, section=None,subsection=None,rols=rols,staffs=UserProfile.get_by_rol()), 
+        dict(right_entries=right_entries, section=None,subsection=None,rols=rols,staffs=UserProfile.group_by_rol()), 
         context_instance=RequestContext(request))
     
 def common(request,slug):

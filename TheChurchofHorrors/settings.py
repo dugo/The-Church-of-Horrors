@@ -273,6 +273,8 @@ BLOG_BREADCRUMB_URL_MAPPING = {
     'author':"Autor",
     }
 BLOG_CONTACT_EMAILS = ["rdugomartin@gmail.com"]
+BLOG_EDITOR_ROL_ID = 1
+BLOG_DEFAULT_SENDER = 'TheChurchofHorrors <info@thechurchofhorrors.com>'
 
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: "/!/%s/" % u.username,
