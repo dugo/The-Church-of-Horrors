@@ -502,7 +502,7 @@ a:hover { color:#d10019; }
 }
 
 .entry table {
-    width:100%;
+    width:730px !important;
     vertical-align: text-top ; 
     height:450px !important;
     max-height:450px !important;
