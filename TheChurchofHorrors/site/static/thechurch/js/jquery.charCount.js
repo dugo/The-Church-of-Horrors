@@ -28,13 +28,17 @@
 			counterElement: 'p',
 			cssWarning: 'warning',
 			cssExceeded: 'exceeded',
-			counterText: ''
+			counterText: '',
+			striphtml: false
 		}; 
 			
 		var options = $.extend(defaults, options); 
 		
 		function calculate(obj){
-			var count = $(obj).val().length;
+			
+			var str = (options.striphtml)? $(obj).val().replace(/<[^>]+>/g,''):$(obj).val();
+			
+			var count = str.length;
 			var available = options.allowed - count;
 			if(available <= options.warning && available >= 0){
 				$(obj).next().addClass(options.cssWarning);
@@ -53,7 +57,7 @@
 
 			$(this).after('<'+ options.counterElement +' class="' + options.css + '">'+ options.counterText +'</'+ options.counterElement +'>');
 			calculate(this);
-			$(this).keypress(function(){calculate(this); });
+			$(this).keyup(function(){calculate(this); });
 			$(this).change(function(){calculate(this)});
 		});
 	  
@@ -76,10 +80,12 @@
 
 $(document).ready(function(){
 	$(".counted").each(function(){
-		len = $(this).attr('maxlength');
+		var len = $(this).attr('maxlength');
+		var striphtml = ($(this).attr('striphtml')=="true")?true:false;
 		$(this).charCount({
 			counterText: '',
 			allowed: len,
+			striphtml: striphtml
 		});
 	});
 	//init_counters("input[maxlength]", 80);

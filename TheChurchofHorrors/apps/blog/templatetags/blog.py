@@ -60,7 +60,12 @@ def breadcrumb(path,section=None,subsection=None):
 @register.filter
 @stringfilter
 def remove_linebreaks(value):
-    return value.replace('\n','').replace('\r','')
+    return value.replace('\n',' ').replace('\r','')
+
+@register.filter
+@stringfilter
+def remove_htmltags(value):
+    return unescape(re.sub(r'<[^>]+>','',value))
 
 @register.filter(name='url_open')
 def url_open(text):

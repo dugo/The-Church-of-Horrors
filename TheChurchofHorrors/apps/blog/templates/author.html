@@ -2,8 +2,8 @@
 {% load blog %}
 
 {% block extra_metatags %}
-<meta name="keywords" content="{{e.author.get_profile}},{{e.get_profile.rol}}"/>
-<meta name="description" content="{{e.get_profile.description}}" />
+<meta name="keywords" content="{%if author%}{{author.get_profile}},{{author.get_profile.rol}}{%else%}{{e.author.get_profile}},{{e.get_profile.rol}}{%endif%}"/>
+<meta name="description" content="{%if author%}{{author.get_profile.description|remove_htmltags|remove_linebreaks}}{%else%}{{e.get_profile.description|remove_htmltags|remove_linebreaks}}{%endif%}" />
 {%endblock%}
 
 {% block title %}The Church of Horrors :: {{author.get_profile}}{%endblock%}

@@ -10,7 +10,7 @@ from django.contrib.sites.models import Site
 
 
 class UserProfileForm( forms.ModelForm ):
-    description = forms.CharField(label=_(u'Descripción'),widget=forms.Textarea(attrs={'class':'counted','maxlength':'160'}),help_text = _(u'¿Cómo te describirías en un sms (160 caracteres)?') )
+    description = forms.CharField(label=_(u'Descripción'),widget=forms.Textarea(attrs={'class':'counted','maxlength':'160','striphtml':'true'}),help_text = _(u'¿Cómo te describirías en un sms (160 caracteres)?') )
     
     class Meta:
         model = models.UserProfile
@@ -34,6 +34,7 @@ class CounterAdmin(admin.ModelAdmin):
         field = super(CounterAdmin, self).formfield_for_dbfield(db_field, **kwargs)
         if db_field.name in self.counted_fields:
             field.widget.attrs['maxlength'] = self.max_lengths[db_field.name]
+            field.widget.attrs['striphtml'] = "true"
             field.widget.attrs['class'] = 'counted ' + field.widget.attrs.get('class','')
         return field    
 
