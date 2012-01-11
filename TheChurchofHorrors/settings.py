@@ -177,7 +177,7 @@ TINYMCE_DEFAULT_CONFIG = {
     "plugin_preview_height" : "800",
     "extended_valid_elements" : "iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder]",
     "embed_iframe_innerhtml_fallback" : 'This will be placed between the iframe tags',
-    "theme_advanced_blockformats":"blockquote",
+    "theme_advanced_blockformats":"p,blockquote",
     "force_br_newlines" : True,
     "force_p_newlines" : False,
     "convert_newlines_to_brs" : False,

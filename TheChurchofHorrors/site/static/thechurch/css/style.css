@@ -491,6 +491,12 @@ a:hover { color:#d10019; }
     font-weight:bold;
 }
 
+.entry p {
+    font-family:verdana;
+    font-size:10px;
+    color: black;
+}
+
 .entry .edit {
     font-size:10px;
     float:right;
