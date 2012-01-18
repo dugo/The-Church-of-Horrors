@@ -510,8 +510,8 @@ a:hover { color:#d10019; }
 .entry table {
     width:730px !important;
     vertical-align: text-top ; 
-    height:450px !important;
-    max-height:450px !important;
+    /*height:450px !important;
+    max-height:450px !important;*/
     overflow:hidden  !important;
     display:block;
     text-align:center;

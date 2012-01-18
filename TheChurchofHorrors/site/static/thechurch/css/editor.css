@@ -58,12 +58,12 @@ p {
 
 table {
     width:730px !important;
-    height:450px !important;
-    max-height:450px !important;
+    /*height:450px !important;*/
+    /*max-height:450px !important;*/
     overflow:hidden  !important;
     display:block;
     vertical-align: text-top ; 
-    border-bottom: dashed 1px red;
+    /*border-bottom: dashed 1px red;*/
     text-align:center;
 }
 

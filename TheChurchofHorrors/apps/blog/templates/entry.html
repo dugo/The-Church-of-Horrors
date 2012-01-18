@@ -16,6 +16,7 @@
 
 {%block extra_js%}
 <!--<script type="text/javascript" src='{{STATIC_URL}}thechurch/js/jquery.scrollTo-min.js'></script>-->
+{%comment%}
 <script type="text/javascript">
 $(document).ready(function(){
     
@@ -51,6 +52,7 @@ function paging(link,margin) {
     $(link).addClass("current");
 }
 </script>
+{%endcomment%}
 {%endblock%}
 
 {%block content%}
