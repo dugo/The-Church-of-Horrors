@@ -389,7 +389,7 @@ a:hover { color:#d10019; }
     color: black !important;
     margin-top:16px;
     height:auto;
-    width:10000px;
+    /*width:10000px;*/
     overflow:hidden;
 }
 
