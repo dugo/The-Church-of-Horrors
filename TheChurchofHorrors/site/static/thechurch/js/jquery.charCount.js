@@ -80,7 +80,7 @@
 
 $(document).ready(function(){
 	$(".counted").each(function(){
-		var len = $(this).attr('maxlength');
+		var len = $(this).attr('mymaxlength');
 		var striphtml = ($(this).attr('striphtml')=="true")?true:false;
 		$(this).charCount({
 			counterText: '',

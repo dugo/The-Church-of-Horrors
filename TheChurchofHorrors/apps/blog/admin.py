@@ -71,14 +71,14 @@ class CounterAdmin(admin.ModelAdmin):
     def formfield_for_dbfield(self, db_field, **kwargs):
         field = super(CounterAdmin, self).formfield_for_dbfield(db_field, **kwargs)
         if db_field.name in self.counted_fields:
-            field.widget.attrs['maxlength'] = self.max_lengths[db_field.name]
+            field.widget.attrs['mymaxlength'] = self.max_lengths[db_field.name]
             field.widget.attrs['class'] = 'counted ' + field.widget.attrs.get('class','')
         return field        
 
 class EntryForm(ModelForm):
     
     content = forms.CharField(label=_(u"Contenido"),widget=TinyMCE(attrs={'cols': 120, 'rows': 40}))
-    brief = forms.CharField(label=_(u'Resumen'),widget=forms.Textarea(attrs={'class':'counted','maxlength':'450'}),help_text = _(u'Un breve resumen representativo de la entrada. Si queda vacío se cogerá el primer párrafo.'),required=False)
+    brief = forms.CharField(label=_(u'Resumen'),widget=forms.Textarea(attrs={'class':'counted','mymaxlength':'450'}),help_text = _(u'Un breve resumen representativo de la entrada. Si queda vacío se cogerá el primer párrafo.'),required=False)
     
     class Meta:
         model = models.Entry
