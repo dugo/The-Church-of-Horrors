@@ -109,6 +109,12 @@ class Entry(models.Model):
     def get_admin_url(self):
         return reverse("admin:blog_entry_change", args=[self.id])
     
+    def get_approved_comments(self):
+        return self.comments.filter(approved=True)
+    
+    def get_comments(self):
+        return self.comments.all()
+    
     @classmethod
     def get_last(self,**kwargs):
         
@@ -190,6 +196,18 @@ class ImageGallery(models.Model):
         unique_together = ('entry','order',)
     
 
+class Comment(models.Model):
+    entry = models.ForeignKey(Entry,verbose_name=_(u"Entrada"),related_name="comments",blank=True)
+    author = models.CharField(_(u'Nombre'),max_length=256)
+    email = models.EmailField(_(u'Email'),max_length=256)
+    time = models.DateTimeField(_(u'Enviado'),auto_now_add=False)
+    website = models.URLField(_(u'Web'),blank=True,default="")
+    approved = models.BooleanField(_(u'Aprobado'),blank=True,default=False)
+    content = models.TextField()
+    
+    class Meta:
+        verbose_name = _(u"comentario")
+        ordering = ('time',)
 
 
 # notify to editors signal
@@ -208,5 +226,16 @@ def notify_editors(sender, instance, created, **kwargs):
 
         send_mail('[TheChurchofHorrors] Nueva entrada', msg, settings.BLOG_DEFAULT_SENDER, editors, fail_silently=False)
         
+@receiver(post_save, sender=Comment)
+def notify_newcomment(sender, instance, created, **kwargs):
+    
+    if created: 
+        to = set(UserProfile.get_by_rol(settings.BLOG_EDITOR_ROL_ID).values_list("user__email",flat=True))
+        to.add(instance.entry.author.email)
         
+        msg = "Se ha añadido un nuevo comentario.\nPuedes aprobarlo en http://thechurchofhorrors.com%s#comments-group" % instance.entry.get_admin_url()
+
+        send_mail('[TheChurchofHorrors] Nueva comentario', msg, settings.BLOG_DEFAULT_SENDER, to, fail_silently=False)
+        
+                
     

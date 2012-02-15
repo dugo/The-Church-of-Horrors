@@ -83,11 +83,19 @@ class EntryForm(ModelForm):
     class Meta:
         model = models.Entry
 
+class Comment(admin.TabularInline):
+    model = models.Comment
+    can_delete = True
+    extra = 0
+    readonly_fields = ('author','email','content','time','website')
+    
+        
+
 class Entry(CounterAdmin):
     model = models.Entry
     form = EntryForm
     
-    inlines = (ImageGallery,)
+    inlines = (ImageGallery,Comment)
     
     list_display = ('__unicode__','author','created','published','gallery','view',)
     

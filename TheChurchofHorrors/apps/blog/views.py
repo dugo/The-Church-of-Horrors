@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from django.http import HttpResponse,HttpResponseNotFound
+from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from apps.blog.models import Entry,Section,Subsection
@@ -8,6 +8,8 @@ from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.contrib.auth.models import User
 from paginator.paginator import Paginator
+import datetime
+from forms import CommentForm
 
 def home(request):
     
@@ -118,6 +120,15 @@ def view_for_entry(request,entry):
     
     right_entries = Entry.get_last_by_author(entry.author,entry)
     
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.entry = entry
+            comment.time = datetime.datetime.now()
+            comment.save()
+            
+            return HttpResponseRedirect("%s#comments" % entry.get_absolute_url() )
 
     return render_to_response("entry.html", 
         dict(right_entries=right_entries, entry=entry), 

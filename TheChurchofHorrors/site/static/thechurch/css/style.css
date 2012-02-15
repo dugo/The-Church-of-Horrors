@@ -450,6 +450,7 @@ a:hover { color:#d10019; }
     height:35px;
     width:105px;
     font-size:15px;
+    cursor:pointer;
 }
 
 .contact textarea {
@@ -495,6 +496,9 @@ a:hover { color:#d10019; }
     font-family:verdana;
     font-size:10px;
     color: black;
+    margin:0;
+    padding:0;
+    text-align:left;
 }
 
 .entry .edit {
@@ -689,4 +693,93 @@ a:hover { color:#d10019; }
     height:100%;
     z-index:10;
     cursor:wait;
+}
+
+#share {
+    width:auto;
+    height:auto;
+    display:block;
+    overflow:hidden;
+    float:right;
+    margin:10px 0;
+}
+
+#share div {
+    float:right;
+}
+
+#comments {
+    overflow:hidden;
+    width:610px;
+    margin-top:15px;
+    margin-left:3px;
+    font-family:Verdana;
+    font-size:10px;
+}
+
+#comments .title {
+    background: transparent url('../images/bullet.png') no-repeat left 6px;
+    font-family: "DINWeb-Medium",Arial;
+    font-size: 14px;
+    padding-left: 10px;
+    margin-top: 6px;
+    height: auto;
+    width: auto;
+    color:black;
+}
+
+#comments input[type=text],#comments textarea {
+    background-color:white;
+    border:none;
+    display:inline-block;
+    clear:left;
+    margin-top:7px;
+    border:1px solid white;
+}
+
+#comments input[type=text] {
+    margin-right:23px;
+}
+
+#comments input[type=submit] {
+    background-color:black;
+    color:white;
+    float:right;
+    border:none;
+    height:35px;
+    width:105px;
+    font-size:15px;
+    cursor:pointer;
+}
+
+#comments textarea {
+    width:608px;
+    height:85px;
+    resize:none;
+    margin-bottom:7px;
+}
+
+#comments span {
+    color: #808184;
+}
+
+#comments .error {
+    border:1px solid red !important;
+}
+
+#comments .noapproved {
+    color:red;
+}
+
+#comments .comment {
+    width:100%;
+    margin:10px 0;
+}
+
+#comments .content {
+    padding:10px;
+    display:block;
+    background-color:#fafbfd;
+    margin:5px auto;
+    width:90%;
 }

@@ -15,6 +15,51 @@
 {%block content_class%}entry{%endblock%}
 
 {%block extra_js%}
+<script type="text/javascript">
+
+function isUrl(s) {
+	var regexp = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi;
+	return regexp.test(s);
+}
+
+function echeck(email) {
+	var regexp  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	
+	return (regexp.test(email));				
+}
+
+function validate() {
+    
+    $('.error').removeClass('error');
+    
+    var ok = true;
+    
+    if (!echeck($('input[name=email]').val())) {
+        $('input[name=email]').addClass("error");
+        ok=false;
+    }
+    
+    if ($('input[name=website]').val()) {
+        if (!isUrl($('input[name=website]').val())) {
+            $('input[name=website]').addClass("error");
+            ok=false;
+        }
+    }
+
+    if (!$('input[name=author]').val()) {
+        $('input[name=author]').addClass("error");
+        ok=false;
+    }
+    
+    if (!$('textarea').val()) {
+        $('textarea').addClass("error");
+        ok=false;
+    }
+    
+    return ok;
+}
+</script>
+
 <!--<script type="text/javascript" src='{{STATIC_URL}}thechurch/js/jquery.scrollTo-min.js'></script>-->
 {%comment%}
 <script type="text/javascript">
@@ -63,5 +108,41 @@ function paging(link,margin) {
     {% if entry.show_gallery%}{%entry_gallery entry%}{%endif%}
     <div class="content-entry">{{entry.content|url_open|safe}}</div>
     <div id="paging"></div>
-    <!--<hr/>-->
+    
+    <div id="share">
+        <div>        
+            <iframe src="//www.facebook.com/plugins/like.php?href={{request.build_absolute_uri}}&amp;send=false&amp;layout=button_count&amp;width=130&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:130px; height:21px;" allowTransparency="true"></iframe>
+        </div>
+        <div>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{request.path}}" data-text="{{request.build_absolute_uri}}" data-via="thechurchofhorrors" data-lang="es">Twittear</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+    </div>
+    <hr/>
+    
+    <div id="comments">
+        <span class="title">Comentarios</span>
+        {% for c in entry.get_comments %}
+            {%if c.approved %}
+            <div class="comment">
+                <div class="author"><span>[{{c.time|date:"d b Y H:i"}}]</span> <strong>{{c.author}}</strong> {%if c.website%}&lt;<a href="{{c.website}}" target="_blank">{{c.website}}</a>&gt;{%endif%} escribió:</div>
+                <div class="content">{{c.content}}</div>
+            </div>
+            {%else%}
+            <div class="comment">
+                <div class="author"><span>[{{c.time|date:"d b Y H:i"}}]</span> <strong>{{c.author}}</strong> escribió:</div>
+                <div class="content noapproved">(Contenido pendiente de ser aprobado)</div>
+            </div>
+            {%endif%}
+        {%endfor%}
+        
+        <form action="." method="post">
+            <input name="author" type="text"/>Nombre <span>(*)</span><br/>
+            <input name="email" type="text"/>Email <span>(*) (No será publicado)</span><br/>
+            <input name="website" type="text"/>Website<br/>
+            <textarea name="content"></textarea>
+            {%csrf_token%}
+            <input type="submit" value="PUBLICAR" onclick="return validate();">
+        </form>
+    </div>
 {%endblock%}
