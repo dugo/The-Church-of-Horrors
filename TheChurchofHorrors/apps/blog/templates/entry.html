@@ -4,7 +4,7 @@
 {% block extra_metatags %}
 <meta name="keywords" content="{{entry.tags.all|join:","}}"/>
 <meta name="description" content="{{entry.get_brief|remove_linebreaks}}" />
-<meta property="og:image" content="http://thechurchofhorrors.com{{entry.get_main_image}}" />
+<meta property="og:image" content="{{entry.get_main_image}}" />
 {%endblock%}
 
 {% block title %}The Church of Horrors :: {{entry}}{%endblock%}
