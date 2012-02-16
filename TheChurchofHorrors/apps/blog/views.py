@@ -58,6 +58,14 @@ def staff(request):
     return render_to_response("staff.html", 
         dict(right_entries=right_entries, section=None,subsection=None,rols=rols,staffs=UserProfile.group_by_rol()), 
         context_instance=RequestContext(request))
+
+def info(request):
+    
+    right_entries = Entry.get_last_by_section()
+
+    return render_to_response("info.html", 
+        dict(right_entries=right_entries, section=None,subsection=None,), 
+        context_instance=RequestContext(request))
     
 def common(request,slug):
     
@@ -130,6 +138,9 @@ def view_for_entry(request,entry):
             comment.entry = entry
             comment.time = datetime.datetime.now()
             comment.save()
+            
+            # send notification
+            comment.notify()
             
             #return HttpResponseRedirect("%s#comments" % entry.get_absolute_url() )
         

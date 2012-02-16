@@ -49,6 +49,14 @@
 $(document).ready(function(){
     $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
     $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
+    
+    var footer = 190+30;
+    var header = 152+16;
+    var content = $('#content').height()+17;
+    if ($(window).height()>footer+header+content) {
+            var height = $(window).height()-17-footer-header;
+            $("#content").css("min-height",height+"px").css("height",height+"px");
+    }
 });
 </script>
 
@@ -58,7 +66,6 @@ $(document).ready(function(){
 
     $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
     $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
-
     /*$(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
     $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});*/
     
@@ -207,7 +214,7 @@ $(document).ready(function(){
                 <div class="footer-item footer-item-1">
                     <h3><a href="{% url 'contact' %}?next={{request.path}}">Contacto</a></h3>
                     <h3><a href="{% url 'staff' %}">Staff</a></h3>
-                    <!--<h3><a href="#">Información</a></h3>-->
+                    <h3><a href="{% url 'info' %}">Información</a></h3>
                 </div>
                 <div class="footer-item">
                     <h3>Categorías</h3>

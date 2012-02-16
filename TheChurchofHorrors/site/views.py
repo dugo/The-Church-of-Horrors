@@ -16,3 +16,11 @@ def server_error(request, template_name='500.html'):
         'MEDIA_URL': settings.MEDIA_URL,
         'STATIC_URL': settings.STATIC_URL
     })))
+
+
+def notfound(request, template_name='404.html'):
+    t = loader.get_template(template_name)
+    return http.HttpResponseNotFound(t.render(Context({
+        'MEDIA_URL': settings.MEDIA_URL,
+        'STATIC_URL': settings.STATIC_URL
+    })))

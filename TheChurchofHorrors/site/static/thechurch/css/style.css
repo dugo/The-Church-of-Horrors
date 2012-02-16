@@ -416,6 +416,17 @@ a:hover { color:#d10019; }
     font-size:10px !important;
 }
 
+.error {
+    font-family:verdana;
+    font-size:18px;
+    color:black;
+    font-weight:normal;
+}
+
+.error p {
+    padding:20px;
+}
+
 .staff h3 {
     margin:15px 0 0 0;
     padding:0;

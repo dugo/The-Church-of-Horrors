@@ -24,7 +24,19 @@ urlpatterns = patterns('',
     (r'^admin/filebrowser/', include('filebrowser.urls')),
     url(r'^admin_tools/', include('admin_tools.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    
+)
+
+handler500 = 'TheChurchofHorrors.site.views.server_error'
+handler404 = 'TheChurchofHorrors.site.views.notfound'
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^500/$', handler500),
+        (r'^404/$', handler404),
+    )
+
+urlpatterns += patterns('',
     (r'', include('blog.urls')),
 )
-handler500 = 'TheChurchofHorrors.site.views.server_error'
+
+

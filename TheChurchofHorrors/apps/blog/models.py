@@ -203,6 +203,18 @@ class Comment(models.Model):
     approved = models.BooleanField(_(u'Aprobado'),blank=True,default=True)
     content = models.TextField()
     
+    def notify(self):
+        to = set(UserProfile.get_by_rol(settings.BLOG_EDITOR_ROL_ID).values_list("user__email",flat=True))
+        to.add(instance.entry.author.email)
+        for e in settings.BLOG_CONTACT_EMAILS:
+            to.add(e)
+        
+        
+        msg = "Se ha añadido un nuevo comentario.\nPuedes verlo en http://thechurchofhorrors.com%s#comments" % self.entry.get_absolute_url()
+
+        send_mail('[TheChurchofHorrors] Nueva comentario', msg, settings.BLOG_DEFAULT_SENDER, to, fail_silently=False)
+        
+    
     class Meta:
         verbose_name = _(u"comentario")
         ordering = ('time',)
@@ -223,7 +235,9 @@ def notify_editors(sender, instance, created, **kwargs):
         msg = "Se ha creado una nueva entrada.\nPuedes verla en http://thechurchofhorrors.com%s" % instance.get_admin_url()
 
         send_mail('[TheChurchofHorrors] Nueva entrada', msg, settings.BLOG_DEFAULT_SENDER, editors, fail_silently=False)
-        
+
+
+"""
 @receiver(post_save, sender=Comment)
 def notify_newcomment(sender, instance, created, **kwargs):
     
@@ -236,7 +250,7 @@ def notify_newcomment(sender, instance, created, **kwargs):
         
         msg = "Se ha añadido un nuevo comentario.\nPuedes verlo en http://thechurchofhorrors.com%s#comments" % instance.entry.get_absolute_url()
 
-        send_mail('[TheChurchofHorrors] Nueva comentario', msg, settings.BLOG_DEFAULT_SENDER, to, fail_silently=False)
+        send_mail('[TheChurchofHorrors] Nueva comentario', msg, settings.BLOG_DEFAULT_SENDER, to, fail_silently=False)"""
         
                 
     
