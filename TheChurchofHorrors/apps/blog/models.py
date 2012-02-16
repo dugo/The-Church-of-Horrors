@@ -10,8 +10,6 @@ from filebrowser.fields import FileBrowseField
 from taggit.managers import TaggableManager
 from django.core.urlresolvers import reverse
 
-
-
 class Section(models.Model):
     name = models.CharField(_(u"Nombre"),max_length=255,unique=True,db_index=True,blank=False)
     slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=u"Será generada automaticamente a partir del nombre")
@@ -202,7 +200,7 @@ class Comment(models.Model):
     email = models.EmailField(_(u'Email'),max_length=256)
     time = models.DateTimeField(_(u'Enviado'),auto_now_add=False)
     website = models.URLField(_(u'Web'),blank=True,default="")
-    approved = models.BooleanField(_(u'Aprobado'),blank=True,default=False)
+    approved = models.BooleanField(_(u'Aprobado'),blank=True,default=True)
     content = models.TextField()
     
     class Meta:
@@ -232,8 +230,11 @@ def notify_newcomment(sender, instance, created, **kwargs):
     if created: 
         to = set(UserProfile.get_by_rol(settings.BLOG_EDITOR_ROL_ID).values_list("user__email",flat=True))
         to.add(instance.entry.author.email)
+        for e in settings.BLOG_CONTACT_EMAILS:
+            to.add(e)
         
-        msg = "Se ha añadido un nuevo comentario.\nPuedes aprobarlo en http://thechurchofhorrors.com%s#comments-group" % instance.entry.get_admin_url()
+        
+        msg = "Se ha añadido un nuevo comentario.\nPuedes verlo en http://thechurchofhorrors.com%s#comments" % instance.entry.get_absolute_url()
 
         send_mail('[TheChurchofHorrors] Nueva comentario', msg, settings.BLOG_DEFAULT_SENDER, to, fail_silently=False)
         

@@ -767,7 +767,7 @@ a:hover { color:#d10019; }
     border:1px solid red !important;
 }
 
-#comments .noapproved {
+#comments .noapproved,#comments .errorlist {
     color:red;
 }
 
@@ -782,4 +782,12 @@ a:hover { color:#d10019; }
     background-color:#fafbfd;
     margin:5px auto;
     width:90%;
+}
+
+#comments img {
+    display:block;
+}
+
+#comments label {
+    display:none;
 }

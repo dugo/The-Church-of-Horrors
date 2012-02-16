@@ -9,7 +9,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from paginator.paginator import Paginator
 import datetime
-from forms import CommentForm
+from forms import CommentForm,CaptchaForm
 
 def home(request):
     
@@ -118,20 +118,40 @@ def view_for_entry(request,entry):
     if not request.user.is_superuser and not entry.published and (not request.user.is_authenticated() or entry.author_id <> request.user.id):
         return HttpResponseNotFound()
     
-    right_entries = Entry.get_last_by_author(entry.author,entry)
+    author = website = email = content = ''
     
     if request.method == "POST":
+        
+        captcha = CaptchaForm(request.POST)
         form = CommentForm(request.POST)
-        if form.is_valid():
+        
+        if captcha.is_valid() and form.is_valid():
             comment = form.save(commit=False)
             comment.entry = entry
             comment.time = datetime.datetime.now()
             comment.save()
             
-            return HttpResponseRedirect("%s#comments" % entry.get_absolute_url() )
+            #return HttpResponseRedirect("%s#comments" % entry.get_absolute_url() )
+        
+        else:
+            author = request.POST.get("author","")
+            website = request.POST.get("website","")
+            email = request.POST.get("email","")
+            content = request.POST.get("content","")
+
+    else:
+        captcha = CaptchaForm()
+    
+    right_entries = Entry.get_last_by_author(entry.author,entry)
 
     return render_to_response("entry.html", 
-        dict(right_entries=right_entries, entry=entry), 
+        dict(right_entries=right_entries,
+            entry=entry,
+            author=author,
+            website=website,
+            email=email,
+            content=content,
+            captcha=captcha), 
         context_instance=RequestContext(request))
         
 def view_for_subsection(request,subsection):

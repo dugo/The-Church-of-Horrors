@@ -50,6 +50,11 @@ function validate() {
         $('input[name=author]').addClass("error");
         ok=false;
     }
+
+    if (!$('input[name=captcha_1]').val()) {
+        $('input[name=captcha_1]').addClass("error");
+        ok=false;
+    }
     
     if (!$('textarea').val()) {
         $('textarea').addClass("error");
@@ -136,11 +141,12 @@ function paging(link,margin) {
             {%endif%}
         {%endfor%}
         
-        <form action="." method="post">
-            <input name="author" type="text"/>Nombre <span>(*)</span><br/>
-            <input name="email" type="text"/>Email <span>(*) (No será publicado)</span><br/>
-            <input name="website" type="text"/>Website<br/>
-            <textarea name="content"></textarea>
+        <form action=".#comments" method="post">
+            <input name="author" type="text" value="{{author}}"/>Nombre <span>(*)</span><br/>
+            <input name="email" type="text" value="{{email}}"/>Email <span>(*) (No será publicado)</span><br/>
+            <input name="website" type="text" value="{{website}}"/>Website<br/>
+            <textarea name="content">{{content}}</textarea>
+            {{captcha}}Introduce lo que ves en la imagen <span>(*)</span><br/>
             {%csrf_token%}
             <input type="submit" value="PUBLICAR" onclick="return validate();">
         </form>

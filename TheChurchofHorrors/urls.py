@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     (r'robots\.txt$', 'django.views.generic.simple.redirect_to', {'url': '%srobots.txt' % settings.STATIC_URL}),
     (r'crossdomain\.xml$', 'django.views.generic.simple.redirect_to', {'url': '%scrossdomain.xml' % settings.STATIC_URL}),
     (r'firma\.png$', 'django.views.generic.simple.redirect_to', {'url': '%sfirma.png' % settings.STATIC_URL}),
+    url(r'^captcha/', include('captcha.urls')),
 
     (r'^tinymce/', include('tinymce.urls')),
     (r'^admin/filebrowser/', include('filebrowser.urls')),
@@ -26,5 +27,4 @@ urlpatterns = patterns('',
     
     (r'', include('blog.urls')),
 )
-
 handler500 = 'TheChurchofHorrors.site.views.server_error'
