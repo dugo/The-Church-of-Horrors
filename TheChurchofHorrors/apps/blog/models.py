@@ -205,7 +205,7 @@ class Comment(models.Model):
     
     def notify(self):
         to = set(UserProfile.get_by_rol(settings.BLOG_EDITOR_ROL_ID).values_list("user__email",flat=True))
-        to.add(instance.entry.author.email)
+        to.add(self.entry.author.email)
         for e in settings.BLOG_CONTACT_EMAILS:
             to.add(e)
         
