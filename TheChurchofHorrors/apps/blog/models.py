@@ -213,7 +213,7 @@ class Comment(models.Model):
         msg = "Se ha añadido un nuevo comentario a la entrada '%s'.\n\nPuedes verlo en http://thechurchofhorrors.com%s#comments" % (self.entry,self.entry.get_absolute_url())
 
         for e in to:
-            send_mail('[TheChurchofHorrors] Nueva comentario', msg, settings.BLOG_DEFAULT_SENDER, e, fail_silently=False)
+            send_mail('[TheChurchofHorrors] Nueva comentario', msg, settings.BLOG_DEFAULT_SENDER, [e], fail_silently=False)
         
     
     class Meta:
