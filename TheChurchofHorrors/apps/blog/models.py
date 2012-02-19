@@ -206,11 +206,11 @@ class Comment(models.Model):
     def notify(self):
         to = set(UserProfile.get_by_rol(settings.BLOG_EDITOR_ROL_ID).values_list("user__email",flat=True))
         to.add(self.entry.author.email)
-        for e in settings.BLOG_CONTACT_EMAILS:
-            to.add(e)
+        [ to.add(e[1]) for e in settings.ADMINS ]
+        [ to.add(e) for e in Comment.objects.filter(entry=self.entry).values_list("email",flat=True) ]
         
         
-        msg = "Se ha añadido un nuevo comentario.\nPuedes verlo en http://thechurchofhorrors.com%s#comments" % self.entry.get_absolute_url()
+        msg = "Se ha añadido un nuevo comentario a la entrada '%s'.\n\nPuedes verlo en http://thechurchofhorrors.com%s#comments" % (self.entry,self.entry.get_absolute_url())
 
         send_mail('[TheChurchofHorrors] Nueva comentario', msg, settings.BLOG_DEFAULT_SENDER, to, fail_silently=False)
         
