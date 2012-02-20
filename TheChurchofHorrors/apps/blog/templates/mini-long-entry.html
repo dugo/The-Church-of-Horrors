@@ -8,7 +8,7 @@
     <p>{{e.get_brief}}</p>
     
     <a href="{{e.get_absolute_url}}" class="read">Leer</a>
-    <a href="{{e.get_absolute_url}}#comments" class="comments">{{e.n_comments}} Comentarios</a>
+    <a href="{{e.get_absolute_url}}#comments" class="comments">{{e.n_comments}} Comentario{{e.n_comments|pluralize}}</a>
     </div>
 </div>
 <hr/>
