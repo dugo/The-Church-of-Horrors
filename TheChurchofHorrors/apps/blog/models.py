@@ -112,6 +112,10 @@ class Entry(models.Model):
     
     def get_comments(self):
         return self.comments.all()
+        
+    
+    def n_comments(self):
+        return self.comments.all().count()
     
     @classmethod
     def get_last(self,**kwargs):

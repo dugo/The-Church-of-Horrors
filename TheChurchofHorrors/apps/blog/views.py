@@ -19,7 +19,9 @@ def home(request):
     paginator = Paginator(Entry.get_last(),settings.BLOG_HOME_LAST_ENTRIES,request.GET.get("p",1))
     entries = paginator.current()
     
-    return render_to_response("home.html", 
+    template = "home.html" if paginator.page == 1 else "home-short.html"
+    
+    return render_to_response(template, 
         dict(right_entries=right_entries, entries=entries,paginator=paginator,section=None,subsection=None), 
         context_instance=RequestContext(request))
     

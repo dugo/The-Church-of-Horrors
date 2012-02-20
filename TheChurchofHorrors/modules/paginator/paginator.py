@@ -7,9 +7,9 @@ class Paginator:
         self.page_length = page_length
         try:
             self.page = int(page)
-            if self.page <=0: self.page = 0
+            if self.page <=0: self.page = 1
         except ValueError,TypeError:
-            self.page = 0
+            self.page = 1
     
     def current(self):
         if not self.page:
