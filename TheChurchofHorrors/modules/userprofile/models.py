@@ -24,7 +24,6 @@ class Rol(models.Model):
 class UserProfile(models.Model):
     user = models.ForeignKey(User, verbose_name=_("Usuario"), unique=True,blank=True,null=True)
     description = models.CharField(_(u'Descripción'),max_length=1024, help_text = _(u'Cómo te describes en 160 caracteres (un sms)'))
-    rol = models.ForeignKey(Rol,verbose_name=_(u'Rol'), help_text=_(u'¿Qué papel desempeñas?'),blank=False,null=False)
     avatar = models.ImageField(blank=False,upload_to='avatars/',help_text=_(u'Tu avatar. Será redimensionado y convertido a blanco y negro'))
     name = models.CharField(_(u'Nombre para mostrar'),max_length=30,unique=True,null=True,blank=True,help_text=_(u'El nombre que se mostrará junto a tu avatar'))
     #avatar = models.ImageField(blank=False,upload_to='avatars/')
@@ -51,7 +50,9 @@ class UserProfile(models.Model):
         
         i = 0
         for r in rols:
-            staff.insert(i, r.name, UserProfile.objects.filter(rol__id=r.id))
+            q = UserProfile.objects.filter(id__in=RolItem.objects.filter(rol__id=r.id).values_list("profile",flat=True))
+            if q.count():
+                staff.insert(i, r.name, q )
             i+=1
 
         return staff
@@ -100,6 +101,19 @@ class UserProfile(models.Model):
         ordering = ('user',)
         
 
+class RolItem(models.Model):
+    profile = models.ForeignKey(UserProfile, verbose_name=_("Perfil"),related_name="rols")
+    rol = models.ForeignKey(Rol, verbose_name=_("Rol"),related_name="profiles")
+    
+    
+    def __unicode__(self):
+        return unicode(self.rol)
+        
+    class Meta:
+        verbose_name = _("rol")
+        verbose_name_plural = _("roles")
+        unique_together = ("profile","rol",)
+        
 class UserProfileItem(models.Model):
     profile = models.ForeignKey(UserProfile, verbose_name=_("Perfil"),related_name="items")
     display_name = models.CharField(_(u'Nombre para mostrar'),max_length=20,blank=False)

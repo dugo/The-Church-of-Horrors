@@ -7,6 +7,7 @@ urlpatterns = patterns('blog.views',
 
     url(r'^$', 'home',name='home'),
     url(r'^contact/$', 'contact',name='contact'),
+    #url(r'^search/$', 'search',name='search'),
     url(r'^staff/$', 'staff',name='staff'),
     url(r'^info/$', 'info',name='info'),
     url(r'^!/(?P<user>[\w\._-]+)/$', 'author',name='author'),

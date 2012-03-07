@@ -10,6 +10,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="google-site-verification" content="TpuITMzwLc7W8ha_L8d8p7g7fwjCCfRvbGa81RSGZAk" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21826201-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 {%endif%}
 
 {%block extra_metatags%}
@@ -168,8 +181,10 @@ $(document).ready(function(){
                 {% for s in subsections %}
                 <a href='{{s.get_absolute_url}}'>{{s}}</a>
                 {% endfor %}
-                <button id="search-button"></button>
-                <input type="text" id="search" placeholder="Buscar..."/>
+                <form action="/" method="GET">
+                <input type="submit" id="search-button" value=""/>
+                <input type="text" id="search" name="q" placeholder="Buscar..."/>
+                </form>
             </div>
         </div><!-- #header -->
 {% endif %}
@@ -205,6 +220,8 @@ $(document).ready(function(){
                 <hr/>
             {%endfor%}
         {%endif%}
+        
+        <iframe allowTransparency='true' frameborder='0' scrolling='no' src='http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FThe-Church-of-Horrors%2F104289879612507%3Fref%3Dts&amp%3Bwidth=189&amp%3Bcolorscheme=light&amp%3Bconnections=10&amp%3Bstream=false&amp%3Bheader=false&amp%3Bheight=300' style='border:none; overflow:hidden; width:189px; height:300px;'></iframe>
     </div> <!-- #left -->
     
 </div> <!-- #ajax-wrapper -->

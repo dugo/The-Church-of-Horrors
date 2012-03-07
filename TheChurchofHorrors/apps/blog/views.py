@@ -12,6 +12,10 @@ import datetime
 from forms import CommentForm,CaptchaForm
 
 def home(request):
+
+    if request.method == "GET" and request.GET.get("q"):
+        #return search(request)
+        pass
     
     right_entries = Entry.get_last_by_section()
     
@@ -24,7 +28,21 @@ def home(request):
     return render_to_response(template, 
         dict(right_entries=right_entries, entries=entries,paginator=paginator,section=None,subsection=None), 
         context_instance=RequestContext(request))
+
+def search(request):
+
     
+    q = request.GET.get("q")
+        
+    paginator = Paginator(Entry.search(q),settings.BLOG_OTHER_LAST_ENTRIES,request.GET.get("p",1))
+    entries = paginator.current()
+    
+    right_entries = Entry.get_last_by_section()
+
+    return render_to_response("home-short.html", 
+        dict(right_entries=right_entries, entries=entries,paginator=paginator,section=None,subsection=None), 
+        context_instance=RequestContext(request))
+
 def contact(request):
 
     right_entries = Entry.get_last_by_section()

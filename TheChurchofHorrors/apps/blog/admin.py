@@ -96,6 +96,8 @@ class Entry(CounterAdmin):
     form = EntryForm
     
     inlines = (ImageGallery,Comment)
+
+    search_fields = ('title',)
     
     list_display = ('__unicode__','author','created','published','gallery','view',)
     

@@ -1,3 +1,5 @@
+# coding=utf8
+
 from django.template.defaultfilters import stringfilter
 from django import template
 from apps.blog.models import Entry
@@ -32,7 +34,7 @@ def home_gallery():
     return {'gallery':gallery, "total":total }
 	
 @register.inclusion_tag('breadcrumb.html')
-def breadcrumb(path,section=None,subsection=None):
+def breadcrumb(path,section=None,subsection=None,request=None):
 	
 	urls = []
 	
@@ -52,6 +54,10 @@ def breadcrumb(path,section=None,subsection=None):
 		if mapping.get(token):
 			urls.append( (path, mapping.get(token),) )
 	
+	# for search
+	if not urls and not request is None and request.method == "GET" and request.GET.get("q"):
+		urls.append( (path, u"Resultados de '%s'" % request.GET.get('q'),) )
+		
 	if urls and (not section or not subsection):
 		urls.insert(0, ("/", "HOME") )
 	

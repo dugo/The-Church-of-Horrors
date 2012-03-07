@@ -5,7 +5,7 @@
 
 {% block title %}The Church of Horrors{%if section%} :: {{section}}{%endif%}{%if subsection%} :: {{subsection}}{%endif%}{%endblock%}
 
-{%block breadcrumb%}{% breadcrumb request.get_full_path section subsection %}{%endblock%}
+{%block breadcrumb%}{% breadcrumb request.get_full_path section subsection request %}{%endblock%}
 
 {%block content_class%}home{%endblock%}
 

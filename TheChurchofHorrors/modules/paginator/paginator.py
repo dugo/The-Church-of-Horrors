@@ -18,7 +18,7 @@ class Paginator:
         idx1 = (self.page-1)*self.page_length
         idx2 = self.page*self.page_length
         
-        if not self.query[idx1:idx2].count():
+        if not self._count(self.query[idx1:idx2]):
             return ()
         
         return self.query[idx1:idx2]
@@ -31,7 +31,7 @@ class Paginator:
         idx1 = self.page*self.page_length
         idx2 = (self.page+1)*self.page_length
         
-        if not self.query[idx1:idx2].count():
+        if not self._count(self.query[idx1:idx2]):
             return None
         
         
@@ -44,7 +44,7 @@ class Paginator:
         idx1 = (self.page-2)*self.page_length
         idx2 = (self.page-1)*self.page_length
         
-        if not self.query[idx1:idx2].count():
+        if not self._count(self.query[idx1:idx2]):
             return None
         
         return "?p=%d" % (self.page-1) if (self.page-1) > 1 else ""
@@ -56,5 +56,14 @@ class Paginator:
         idx1 = (self.page-2)*self.page_length
         idx2 = (self.page-1)*self.page_length
         
-        if self.query[idx1:idx2].count():
+        if self._count(self.query[idx1:idx2]):
             return True
+
+    def _count(self,q):
+        
+        try:
+            return q.count()
+        except TypeError:
+            pass
+        
+        return len(q)

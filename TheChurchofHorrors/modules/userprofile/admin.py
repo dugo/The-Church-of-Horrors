@@ -42,6 +42,11 @@ class UserProfileItem(admin.TabularInline):
     model = models.UserProfileItem
     can_delete = True
     extra = 1
+    
+class RolItem(admin.TabularInline):
+    model = models.RolItem
+    can_delete = True
+    extra = 1
 
 class UserProfile(CounterAdmin):
     
@@ -51,7 +56,7 @@ class UserProfile(CounterAdmin):
     
     list_display = ('user','get_avatar','url')
     
-    inlines = (UserProfileItem,)
+    inlines = (UserProfileItem,RolItem)
     
     counted_fields = ('description',)
     
@@ -88,8 +93,8 @@ class UserProfile(CounterAdmin):
             self.exclude = ('user',)
             form = super(UserProfile, self).get_form(request, obj=None, **kwargs)
             #self.exclude = ('user',)
-            form.base_fields['rol'].queryset = form.base_fields['rol'].queryset.filter(name="Redactor")
-            form.base_fields['rol'].initial = form.base_fields['rol'].queryset[:1].get()
+            #form.base_fields['rol'].queryset = form.base_fields['rol'].queryset.filter(name="Redactor")
+            #form.base_fields['rol'].initial = form.base_fields['rol'].queryset[:1].get()
         else:
             
             form = super(UserProfile, self).get_form(request, obj=None, **kwargs)

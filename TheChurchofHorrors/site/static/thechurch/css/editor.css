@@ -6,12 +6,12 @@ blockquote {
     /*text-align:justify;*/
 }
 
-* {
+/** {
     font-family:verdana;
     font-size:10px;
     color: black;
     /*text-align:justify;*/
-}
+/*}*/
 
 * strong {
     font-weight:bold;

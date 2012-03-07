@@ -68,7 +68,7 @@ class Entry(models.Model):
     author = models.ForeignKey(User,verbose_name=_(u"Autor"),related_name="entries",blank=True,null=True)
     section = models.ForeignKey(Section,verbose_name=_(u"Sección"))
     subsection = models.ForeignKey(Subsection,verbose_name=_(u"Categoría"))
-    created = models.DateTimeField(_(u'Creado'),auto_now_add=True)
+    created = models.DateTimeField(_(u'Creado'),help_text=_("La hora no tiene importancia"))
     modified = models.DateTimeField(_(u'Modificado'),auto_now=True)
     published = models.BooleanField(_(u'Publicado'),default=False,blank=False)
     slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=_(u"Será generada automaticamente a partir del título"))
@@ -78,6 +78,10 @@ class Entry(models.Model):
     
     def __unicode__(self):
         return unicode(self.title)
+    
+    @classmethod
+    def search(self,q):
+        return self.objects.raw("SELECT * FROM blog_entry WHERE MATCH (title) AGAINST ('%s');" % q)
     
     @classmethod
     def get_home_gallery(self):

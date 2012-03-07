@@ -52,7 +52,7 @@ hr {
     cursor:pointer;
     }
 #header #subsections a { display:block; background-color:white; color:black; float:left; padding:6px 12px;margin-right:3px;font-family:verdana,sans-serif;font-size:10px; }
-#header #subsections a:hover { background-color:#d10019; }
+#header #subsections a:hover { background-color:#808184; }
 a:hover { color:#d10019; }
 
 #left {
@@ -155,7 +155,7 @@ a:hover { color:#d10019; }
     font-size:10px;
     position:absolute;
     bottom:16px;
-    left:655px;
+    left:650px;
 }
 .home .long-entry p {
     font-family:verdana,sans-serif;
@@ -206,7 +206,7 @@ a:hover { color:#d10019; }
     font-size:10px;
     position:absolute;
     bottom:30px;
-    left:279px;
+    left:274px;
 }
 .home .short-entry hr {
     margin:16px 0;
