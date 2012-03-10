@@ -38,7 +38,7 @@ class UserProfile(models.Model):
     
     @classmethod
     def get_by_rol(self,rol_id):
-        return UserProfile.objects.filter(id__in=RolItem.objects.filter(rol__id=r.id).values_list("profile",flat=True))
+        return UserProfile.objects.filter(id__in=RolItem.objects.filter(rol__id=rol_id).values_list("profile",flat=True))
     
     @classmethod
     def group_by_rol(self):
