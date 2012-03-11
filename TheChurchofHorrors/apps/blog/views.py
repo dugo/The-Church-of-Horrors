@@ -14,8 +14,7 @@ from forms import CommentForm,CaptchaForm
 def home(request):
 
     if request.method == "GET" and request.GET.get("q"):
-        #return search(request)
-        pass
+        return search(request)
     
     right_entries = Entry.get_last_by_section()
     
@@ -30,7 +29,6 @@ def home(request):
         context_instance=RequestContext(request))
 
 def search(request):
-
     
     q = request.GET.get("q")
         
@@ -38,6 +36,8 @@ def search(request):
     entries = paginator.current()
     
     right_entries = Entry.get_last_by_section()
+
+
 
     return render_to_response("home-short.html", 
         dict(right_entries=right_entries, entries=entries,paginator=paginator,section=None,subsection=None), 

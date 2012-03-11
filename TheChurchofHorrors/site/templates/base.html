@@ -93,6 +93,10 @@ $(document).ready(function(){
             $("#content").css("min-height",height+"px").css("height",height+"px");
     }
     
+    window.onblur = function() { window_focus = false; }
+    window.onfocus = function() { window_focus = true; }
+    window_focus = true;
+    
     setTimeout("next_banner()",10000);
 });
 </script>

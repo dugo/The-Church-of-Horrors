@@ -10,6 +10,7 @@ from filebrowser.fields import FileBrowseField
 from taggit.managers import TaggableManager
 from django.core.urlresolvers import reverse
 
+
 class Section(models.Model):
     name = models.CharField(_(u"Nombre"),max_length=255,unique=True,db_index=True,blank=False)
     slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=u"Será generada automaticamente a partir del nombre")
@@ -79,9 +80,25 @@ class Entry(models.Model):
     def __unicode__(self):
         return unicode(self.title)
     
+    """@classmethod
+    def search(self,q):
+        return self.objects.raw("SELECT * FROM blog_entry WHERE MATCH (title) AGAINST ('%s');" % q)"""
+        
     @classmethod
     def search(self,q):
-        return self.objects.raw("SELECT * FROM blog_entry WHERE MATCH (title) AGAINST ('%s');" % q)
+        from whoosh.filedb.filestore import FileStorage
+        from whoosh.qparser import MultifieldParser
+        storage = FileStorage(settings.WHOOSH_INDEX)
+        ix = storage.open_index()
+        q = q.replace('+', ' AND ').replace(' -', ' NOT ')
+        parser = MultifieldParser(["content","title","tags","author"], schema=ix.schema)
+        qry = parser.parse(q)
+        searcher = ix.searcher()
+        hits = searcher.search(qry)
+        
+        
+        
+        return self.objects.filter(id__in=[h.fields()['id'] for h in hits])
     
     @classmethod
     def get_home_gallery(self):
@@ -246,6 +263,45 @@ def notify_editors(sender, instance, created, **kwargs):
 
         send_mail('[TheChurchofHorrors] Nueva entrada', msg, settings.BLOG_DEFAULT_SENDER, editors, fail_silently=False)
 
+
+""" WHOOSH """
+
+from django.db.models import signals
+import os
+from whoosh import fields
+from whoosh.filedb.filestore import FileStorage
+
+WHOOSH_SCHEMA = fields.Schema(title=fields.TEXT(stored=True),
+                              content=fields.TEXT,
+                              tags=fields.TEXT,
+                              author=fields.TEXT,
+                              id=fields.ID(stored=True, unique=True))
+
+def create_index(sender=None, **kwargs):
+    if not os.path.exists(settings.WHOOSH_INDEX):
+        os.mkdir(settings.WHOOSH_INDEX)
+        storage = FileStorage(settings.WHOOSH_INDEX)
+        ix = storage.create_index(schema=WHOOSH_SCHEMA)
+
+signals.post_syncdb.connect(create_index)
+
+
+def update_index(sender, instance, created, **kwargs):
+    storage = FileStorage(settings.WHOOSH_INDEX)
+    ix = storage.open_index()
+    writer = ix.writer()
+    if True:
+        writer.add_document(title=instance.title, content=instance.content,tags=unicode(instance.tags.all()),author=unicode(instance.author.get_profile().name+u"\n"+instance.author.username),
+                                    id=unicode(instance.pk))
+        writer.commit()
+    else:
+        writer.update_document(title=instance.title, content=instance.content,tags=unicode(instance.tags.all()),author=unicode(instance.author.get_profile().name+u"\n"+instance.author.username),
+                                    id=unicode(instance.pk))
+        writer.commit()
+
+signals.post_save.connect(update_index, sender=Entry)
+
+""" END WHOOSH """
 
 """
 @receiver(post_save, sender=Comment)

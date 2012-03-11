@@ -12,6 +12,7 @@ SITE_ROOT           = os.path.join(PROJECT_ROOT, 'site')
 MODULES_ROOT        = os.path.join(PROJECT_ROOT, 'modules')
 APPS_ROOT        = os.path.join(PROJECT_ROOT, 'apps')
 SITEPACKAGES_ROOT   = get_python_lib()
+WHOOSH_INDEX        = os.path.join(SITE_ROOT,"index")
 
 sys.path.insert(0, APPS_ROOT)
 sys.path.insert(0, MODULES_ROOT)
