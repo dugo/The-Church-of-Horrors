@@ -98,7 +98,7 @@ class Entry(models.Model):
         
         
         
-        return self.objects.filter(id__in=[h.fields()['id'] for h in hits])
+        return self.objects.filter(id__in=[h.fields()['id'] for h in hits]).filter(published=True)
     
     @classmethod
     def get_home_gallery(self):
