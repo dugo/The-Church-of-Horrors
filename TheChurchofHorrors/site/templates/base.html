@@ -65,6 +65,22 @@
 {% if not request.is_ajax %}
 
 <script type="text/javascript" >
+function next_banner() {
+    
+    if (window_focus) {
+        var current = parseInt($("#banner").attr("current"));
+        
+        var i = (current>=2)?0:current+1;
+        
+        $($("#banner a img")[current]).fadeOut(2000);
+        $($("#banner a img")[i]).fadeIn(2000);
+        
+        $("#banner").attr("current",i+"")    
+    }
+    
+    setTimeout("next_banner()",10000);
+}
+
 $(document).ready(function(){
     $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
     $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
@@ -76,6 +92,8 @@ $(document).ready(function(){
             var height = $(window).height()-17-footer-header;
             $("#content").css("min-height",height+"px").css("height",height+"px");
     }
+    
+    setTimeout("next_banner()",10000);
 });
 </script>
 
@@ -168,7 +186,11 @@ $(document).ready(function(){
     <div id="container">
         <div id="header">
             <a href="/" title="thechurchofhorrors.com"><img src="{{STATIC_URL}}thechurch/images/logo.png" alt="The Church of Horros logo" usemap="#map-logo"/></a>
-            <div id="banner"></div>
+            <div id="banner" current="0">
+                <a href="http://thebloodydirtysanchez.bandcamp.com/" target="_blank" title="http://thebloodydirtysanchez.bandcamp.com"><img src="{{STATIC_URL}}thechurch/images/bloody.jpg"/></a>
+                <a href="http://famfest.info/" target="_blank" title="http://famfest.info"><img src="{{STATIC_URL}}thechurch/images/familiar.jpg" style="display:none"/></a>
+                <a href="http://www.lowtoy.com/" target="_blank" title="http://www.lowtoy.com"><img src="{{STATIC_URL}}thechurch/images/lowtoy.jpg" style="display:none"/></a>
+            </div>
             <div id="sections">
                 <a href='/' class="section">HOME</a>
                 {% for s in sections %}
