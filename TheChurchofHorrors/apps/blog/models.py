@@ -299,15 +299,19 @@ def update_index(sender, instance, created, **kwargs):
             pass
         
     tags = u','.join(tags)
+
+    try:
     
-    if created:
-        writer.add_document(title=instance.title, content=instance.content,tags=tags,author=instance.author.get_profile().name+u"\n"+instance.author.username,
-                                    id=unicode(instance.pk))
-        writer.commit()
-    else:
-        writer.update_document(title=instance.title, content=instance.content,tags=tags,author=instance.author.get_profile().name+u"\n"+instance.author.username,
-                                    id=unicode(instance.pk))
-        writer.commit()
+        if created:
+            writer.add_document(title=instance.title, content=instance.content,tags=tags,author=instance.author.get_profile().name+u"\n"+instance.author.username,
+                                        id=unicode(instance.pk))
+            writer.commit()
+        else:
+            writer.update_document(title=instance.title, content=instance.content,tags=tags,author=instance.author.get_profile().name+u"\n"+instance.author.username,
+                                        id=unicode(instance.pk))
+            writer.commit()
+    except:
+        pass
 
 signals.post_save.connect(update_index, sender=Entry)
 
