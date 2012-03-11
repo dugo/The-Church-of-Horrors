@@ -291,7 +291,7 @@ def update_index(sender, instance, created, **kwargs):
     ix = storage.open_index()
     writer = ix.writer()
     if True:
-        writer.add_document(title=instance.title, content=instance.content,tags=unicode(instance.tags.all()),author=instance.author.get_profile().name+u"\n"+instance.author.username,
+        writer.add_document(title=instance.title, content=instance.content,tags=str(instance.tags.all()).encode("utf-8",errors='ignore'),author=instance.author.get_profile().name.encode("utf-8",errors='ignore')+u"\n"+instance.author.username.encode("utf-8",errors='ignore'),
                                     id=unicode(instance.pk))
         writer.commit()
     else:
