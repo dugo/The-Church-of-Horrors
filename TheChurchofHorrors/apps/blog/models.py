@@ -290,12 +290,22 @@ def update_index(sender, instance, created, **kwargs):
     storage = FileStorage(settings.WHOOSH_INDEX)
     ix = storage.open_index()
     writer = ix.writer()
+    
+    tags = []
+    for t in instance.tags.all():
+        try:
+            tags.append(unicode(t.name))
+        except:
+            pass
+        
+    tags = u','.join(tags)
+    
     if True:
-        writer.add_document(title=instance.title, content=instance.content,tags=u','.join([t.name.decode('utf-8',"ignore") for t in instance.tags.all()]),author=instance.author.get_profile().name+u"\n"+instance.author.username,
+        writer.add_document(title=instance.title, content=instance.content,tags=tags,author=instance.author.get_profile().name+u"\n"+instance.author.username,
                                     id=unicode(instance.pk))
         writer.commit()
     else:
-        writer.update_document(title=instance.title, content=instance.content,tags=u','.join([t.name.decode('utf-8',"ignore") for t in instance.tags.all()]),author=instance.author.get_profile().name+u"\n"+instance.author.username,
+        writer.update_document(title=instance.title, content=instance.content,tags=tags,author=instance.author.get_profile().name+u"\n"+instance.author.username,
                                     id=unicode(instance.pk))
         writer.commit()
 
