@@ -10,3 +10,4 @@ South==0.7.3
 #django-admin-tools==0.4.0
 #django-filebrowser==3.0
 django-simple-captcha==0.3.0
+Whoosh==2.3.2
