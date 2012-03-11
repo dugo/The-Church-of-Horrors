@@ -300,7 +300,7 @@ def update_index(sender, instance, created, **kwargs):
         
     tags = u','.join(tags)
     
-    if True:
+    if created:
         writer.add_document(title=instance.title, content=instance.content,tags=tags,author=instance.author.get_profile().name+u"\n"+instance.author.username,
                                     id=unicode(instance.pk))
         writer.commit()
