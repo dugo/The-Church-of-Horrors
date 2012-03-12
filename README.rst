@@ -1,7 +1,3 @@
-=====================
-The Church of Horrors
-=====================
-
 What is The Church of Horrors?
 ==============================
 
