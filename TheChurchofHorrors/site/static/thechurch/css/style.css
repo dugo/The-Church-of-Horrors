@@ -66,7 +66,12 @@ a:hover { color:#d10019; }
     z-index:1;
 }
 
-#left div {
+#related {
+    width:100%;
+    padding:0;
+}
+
+#left div, #related div {
     width:104px;
     height:172px;
     display:block;
@@ -76,7 +81,13 @@ a:hover { color:#d10019; }
     overflow:hidden;
 }
 
-#left div.section {
+
+#related div {
+    margin-right:21px;
+}
+
+
+#left div.section,#related div.section {
     background:transparent url('../images/bullet.png') no-repeat left 6px;
     font-family:"DINWeb-Medium",Arial;
     font-size:14px;
@@ -86,7 +97,16 @@ a:hover { color:#d10019; }
     width:auto;
 }
 
-#left div .title {
+#related div.section {
+    margin-top:16px;
+}
+
+#related div.section {
+    display:block;
+    width:100%;
+}
+
+#left div .title, #related div .title {
     font-family:verdana,sans-serif;
     font-size:12px;
     color:#5889b6;
@@ -102,14 +122,14 @@ a:hover { color:#d10019; }
     white-space:nowrap;
     text-overflow:clip;
 }*/
-#left div .author {
+#left div .author, #related div .author {
     font-family:verdana,sans-serif;
     font-size:10px;
     color:#808184;
     font-weight:normal;
     display:block;
 }
-#left div .date {
+#left div .date, #related div .date {
     font-family:verdana,sans-serif;
     font-size:10px;
     color:#808184;
@@ -118,7 +138,7 @@ a:hover { color:#d10019; }
     display:block;
 }
 
-#left div div {
+#left div div, #related div div {
     height:105px;
     width:100%;
     margin:0;

@@ -126,6 +126,14 @@ function paging(link,margin) {
     </div>
     <hr/>
     
+    <div id="related">
+        <div class="section">Relacionado</div>
+        {% for e in entry.get_related %}
+            {% preview_entry e forloop.counter 6%}
+        {% endfor %}
+        <hr/>
+    </div>
+    
     <div id="comments">
         <span class="title">Comentarios</span>
         {% for c in entry.get_comments %}

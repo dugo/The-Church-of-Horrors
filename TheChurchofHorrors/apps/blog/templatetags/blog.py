@@ -8,8 +8,8 @@ import re, htmlentitydefs
 register = template.Library()
 
 @register.inclusion_tag('preview-entry.html')
-def preview_entry(entry, n=0):
-	return {'e':entry,'parity':n%2}
+def preview_entry(entry, n=0,cols=2):
+	return {'e':entry,'parity':n%cols}
 	
 @register.inclusion_tag('mini-author.html')
 def mini_author(author):

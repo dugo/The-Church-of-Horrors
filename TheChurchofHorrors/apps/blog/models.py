@@ -133,7 +133,9 @@ class Entry(models.Model):
     
     def get_comments(self):
         return self.comments.all()
-        
+
+    def get_related(self):
+        return Entry.objects.filter(tags__name__in=self.tags.values_list("name",flat=True).all()[:]).distinct()[:6]
     
     def n_comments(self):
         return self.comments.all().count()
