@@ -1,3 +1,3 @@
 {% if urls %}
-<div id="breadcrumb">Estás en / {%for url in urls%}<a href="{{url.0}}">{{url.1}}</a>{%if not forloop.last%} > {%endif%}{%endfor%}</div>
+<div id="breadcrumb">Estás en / {%for url in urls%}<a href="{{url.0}}">{{url.1|safe}}</a>{%if not forloop.last%} > {%endif%}{%endfor%}</div>
 {%endif%}

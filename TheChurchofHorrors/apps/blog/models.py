@@ -47,15 +47,8 @@ class Subsection(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        
-        if hasattr(self,"section"):
-            return ('section_subsection', (), {
-                'section': self.section.slug,
-                'subsection': self.slug})
-                
-        else:
-            return ('common', (), {
-                'slug': self.slug})
+        return ('common', (), {
+            'slug': self.slug})
     
     def save(self,*args,**kwargs):
         self.slug = slugify(self.name)
@@ -63,7 +56,7 @@ class Subsection(models.Model):
 
 class SubsectionTag(models.Model):
     tag = models.ForeignKey("taggit.tag",verbose_name=_(u"Etiqueta"))
-    subsection = models.ForeignKey(Subsection,verbose_name=_(u"Categoría"))
+    subsection = models.ForeignKey(Subsection,verbose_name=_(u"Categoría"),related_name="tags")
     sort = models.PositiveIntegerField(_(u"Orden"),default=0,blank=False,null=False,help_text=_(u"En el que se mostrará en el menú"))
 
     def __unicode__(self):
@@ -78,9 +71,9 @@ class SubsectionTag(models.Model):
     @models.permalink
     def get_absolute_url(self):
         
-        return ('section_subsection', (), {
-            'section': self.subsection.slug,
-            'subsection': self.tag.name})
+        return ('subsection_tag', (), {
+            'subsection': self.subsection.slug,
+            'tag': self.tag.name})
 
 class Entry(models.Model):
     title = models.CharField(_(u"Título"),max_length=255,blank=False,unique=True)

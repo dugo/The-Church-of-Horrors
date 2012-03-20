@@ -34,7 +34,7 @@ def home_gallery():
     return {'gallery':gallery, "total":total }
 	
 @register.inclusion_tag('breadcrumb.html')
-def breadcrumb(path,section=None,subsection=None,request=None):
+def breadcrumb(path,section=None,subsection=None,request=None,tag=None):
 	
 	urls = []
 	
@@ -60,6 +60,10 @@ def breadcrumb(path,section=None,subsection=None,request=None):
 		
 	if urls and (not section or not subsection):
 		urls.insert(0, ("/", "HOME") )
+		
+	if not tag is None:
+		urls.append( (request.path, "<em>%s</em>" % str(tag),) )
+		
 	
 	return {'urls':urls}
 

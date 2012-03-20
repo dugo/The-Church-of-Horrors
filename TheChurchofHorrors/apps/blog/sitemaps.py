@@ -1,6 +1,7 @@
 from django.contrib.sitemaps import Sitemap
 from django.contrib.auth.models import User
 from apps.blog.models import Entry,Section,Subsection
+from taggit.models import Tag
 from datetime import date
 
 class BlogSitemap(Sitemap):
@@ -39,21 +40,21 @@ class SubsectionSitemap(Sitemap):
         except Entry.DoesNotExist:
             return date.today()
 
-class SectionSubsectionSitemap(Sitemap):
+class SectionTagSitemap(Sitemap):
     changefreq = "always"
     priority = 0.8
 
     def items(self):
         subsections = []
-        for s in Section.objects.all()[:]:
-            for ss in Subsection.objects.all()[:]:
-                ss.section = s
-                subsections.append(ss)
+        for s in Subsection.objects.all()[:]:
+            for t in s.tags.all()[:]:
+                subsections.append(t)
+                
         return subsections
 
     def lastmod(self, obj):
         try:
-            return Entry.objects.filter(subsection__id=obj.id,section=obj.section.id,published=True).order_by("-created")[0:1].get().created
+            return Entry.objects.filter(subsection__id=obj.subsection.id,tags__id__in=[obj.tag.id],published=True).order_by("-created")[0:1].get().created
         except Entry.DoesNotExist:
             return date.today()
             

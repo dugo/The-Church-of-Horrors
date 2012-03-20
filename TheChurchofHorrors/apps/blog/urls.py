@@ -14,7 +14,7 @@ urlpatterns = patterns('blog.views',
     url(r'^archive/(?P<year>\d+)/(?P<month>\d+)/$', 'archive',name='archive'),
     url(r'^feed/$', LatestEntriesFeed(),name='feed'),
     url(r'^(?P<slug>[\w-]+)/$', 'common',name="common"),
-    url(r'^(?P<section>[\w-]+)/(?P<subsection>[\w-]+)/$', 'section_subsection',name="section_subsection"),
+    url(r'^(?P<subsection>[\w-]+)/(?P<tag>[\w-]+)/$', 'subsection_tag',name="subsection_tag"),
     #url(r'(?P<section>[\w-]+)/(?P<subsection>[\w-]+)/(?P<entry>[\w-]+)/', 'entry',name="entry"),
     
     

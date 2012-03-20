@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from paginator.paginator import Paginator
 import datetime
 from forms import CommentForm,CaptchaForm
+from taggit.models import Tag
 
 def home(request):
 
@@ -25,7 +26,7 @@ def home(request):
     template = "home.html" if paginator.page == 1 else "home-short.html"
     
     return render_to_response(template, 
-        dict(right_entries=right_entries, entries=entries,paginator=paginator,section=None,subsection=None), 
+        dict(right_entries=right_entries, entries=entries,paginator=paginator,section=None,subsection=None,tag=None), 
         context_instance=RequestContext(request))
 
 def search(request):
@@ -40,7 +41,7 @@ def search(request):
 
 
     return render_to_response("home-short.html", 
-        dict(right_entries=right_entries, entries=entries,paginator=paginator,section=None,subsection=None), 
+        dict(right_entries=right_entries, entries=entries,paginator=paginator,section=None,subsection=None,tag=None), 
         context_instance=RequestContext(request))
 
 def contact(request):
@@ -105,6 +106,19 @@ def common(request,slug):
         return HttpResponseNotFound()
 
     return HttpResponseNotFound()
+
+def subsection_tag(request,subsection,tag):
+
+    subsection = get_object_or_404(Subsection,slug=subsection)
+    tag = get_object_or_404(Tag,name=tag)
+
+    paginator = Paginator(Entry.get_last(subsection__id=subsection.id,tags__id__in=[tag.id]),settings.BLOG_OTHER_LAST_ENTRIES,request.GET.get("p",1))
+    entries = paginator.current()
+    right_entries = Entry.get_last_by_section()
+
+    return render_to_response("home-short.html", 
+        dict(right_entries=right_entries, entries=entries,paginator=paginator,section=None,subsection=subsection,tag=tag), 
+        context_instance=RequestContext(request))
     
 def section_subsection(request,section,subsection):
     
@@ -193,7 +207,7 @@ def view_for_subsection(request,subsection):
     entries = paginator.current()
 
     return render_to_response("home-short.html", 
-        dict(right_entries=right_entries, entries=entries,paginator=paginator,subsection=subsection,section=None), 
+        dict(right_entries=right_entries, entries=entries,paginator=paginator,subsection=subsection,section=None,tag=None), 
         context_instance=RequestContext(request))
 
 def view_for_section(request,section):
@@ -204,7 +218,7 @@ def view_for_section(request,section):
     entries = paginator.current()
 
     return render_to_response("home-short.html", 
-        dict(right_entries=right_entries, entries=entries, paginator=paginator,section = section,subsection=None), 
+        dict(right_entries=right_entries, entries=entries, paginator=paginator,section = section,subsection=None,tag=None), 
         context_instance=RequestContext(request))
     
     

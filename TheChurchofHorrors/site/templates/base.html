@@ -208,7 +208,14 @@ $(document).ready(function(){
             </div>
             <div id="subsections">
                 {% for s in subsections %}
-                <a href='{{s.get_absolute_url}}'>{{s}}</a>
+                    <div class="subsection">
+                        <a href='{{s.get_absolute_url}}'>{{s}}</a>
+                            <span class="tags">
+                            {% for t in s.tags.all %}
+                            <div><a href='{{t.get_absolute_url}}'>{{t}}</a></div>
+                            {%endfor%}
+                            </span>
+                    </div>
                 {% endfor %}
                 <form action="/" method="GET">
                 <input type="submit" id="search-button" value=""/>

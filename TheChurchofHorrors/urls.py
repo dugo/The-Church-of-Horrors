@@ -8,7 +8,7 @@ from django.conf import settings
 
 from apps.blog.sitemaps import *
 
-sitemaps = {'section':SectionSitemap(),'subsection':SubsectionSitemap(),'sectionsubsection':SectionSubsectionSitemap(),'blog':BlogSitemap(),'author':AuthorSitemap()}
+sitemaps = {'section':SectionSitemap(),'subsection':SubsectionSitemap(),'tags':SectionTagSitemap(),'blog':BlogSitemap(),'author':AuthorSitemap()}
 
 urlpatterns = patterns('',
     

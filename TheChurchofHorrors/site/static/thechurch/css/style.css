@@ -22,7 +22,7 @@ hr {
 
 
 #container { width:980px; margin: 0 auto; height:auto;display:block;overflow:hidden;}
-#header { width: 100%; margin: 16px auto 0 auto; display:block;overflow:hidden;}
+#header { width: 100%; margin: 16px auto 0 auto; display:block;overflow:visible;}
 #header a img { float:left; display:block;margin-top:9px;cursor:pointer;}
 #header #banner { position:relative;margin-left:20px;height:56px;width:720px;/*background-color:#d10018;*/float:left;display:block;}
 #header #banner img {position:absolute;left:0;top:0;}
@@ -34,6 +34,38 @@ hr {
 #twitter {background-position: -90px 0px !important;}
 #vimeo {background-position: -135px 0px !important;}
 #header #subsections { display:block;margin-top:5px;float:left;clear:both;width:100%;}
+
+#header #subsections .subsection {
+    height:auto;
+    display:block;
+    float:left;
+    overflow:visible;
+    position:relative;
+}
+
+#header #subsections .subsection div {
+    float:none;
+    font-style:italic;
+    overflow:visible;
+}
+
+#header #subsections .subsection .tags {
+    position:absolute;
+    top:24px;
+    left:0;
+    display:none;
+    z-index:20;
+}
+
+#header #subsections .subsection .tags a {
+    padding:6px 8px;
+}
+
+#header #subsections .subsection:hover .tags {
+    display:block;
+    overflow:visible;
+}
+
 #search {
     border:0;
     background-color:white;
@@ -52,7 +84,7 @@ hr {
     width:20px;
     cursor:pointer;
     }
-#header #subsections a { display:block; background-color:white; color:black; float:left; padding:6px 12px;margin-right:3px;font-family:verdana,sans-serif;font-size:10px; }
+#header #subsections a { display:block; background-color:white; color:black; padding:6px 12px;margin-right:3px;font-family:verdana,sans-serif;font-size:10px; }
 #header #subsections a:hover { background-color:#808184; }
 a:hover { color:#d10019; }
 
