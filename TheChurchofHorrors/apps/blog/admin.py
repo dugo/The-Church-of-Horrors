@@ -17,11 +17,17 @@ class Section(admin.ModelAdmin):
     
     readonly_fields = ('slug',)
 
+class SubsectionTag(admin.TabularInline):
+    model = models.SubsectionTag
+    can_delete = True
+    extra = 0
+
 class Subsection(admin.ModelAdmin):
     model = models.Subsection
     
     readonly_fields = ('slug',)
     list_display = ('name','sort',)
+    inlines = (SubsectionTag,)
 
 class ImageGalleryFormset(BaseInlineFormSet):
     def clean(self):

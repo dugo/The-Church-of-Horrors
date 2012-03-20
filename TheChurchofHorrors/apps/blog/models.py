@@ -61,6 +61,26 @@ class Subsection(models.Model):
         self.slug = slugify(self.name)
         super(type(self),self).save(*args,**kwargs)
 
+class SubsectionTag(models.Model):
+    tag = models.ForeignKey("taggit.tag",verbose_name=_(u"Etiqueta"))
+    subsection = models.ForeignKey(Subsection,verbose_name=_(u"Categoría"))
+    sort = models.PositiveIntegerField(_(u"Orden"),default=0,blank=False,null=False,help_text=_(u"En el que se mostrará en el menú"))
+
+    def __unicode__(self):
+        return unicode(self.tag)
+
+    class Meta:
+        verbose_name = _(u"etiqueta de categoría")
+        verbose_name_plural = _(u"etiquetas de categoría")
+        ordering = ('sort',)
+        unique_together = ( ('subsection','tag',) ,('sort','subsection',))
+    
+    @models.permalink
+    def get_absolute_url(self):
+        
+        return ('section_subsection', (), {
+            'section': self.subsection.slug,
+            'subsection': self.tag.name})
 
 class Entry(models.Model):
     title = models.CharField(_(u"Título"),max_length=255,blank=False,unique=True)
