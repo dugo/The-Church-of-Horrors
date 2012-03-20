@@ -73,7 +73,7 @@ class SubsectionTag(models.Model):
         
         return ('subsection_tag', (), {
             'subsection': self.subsection.slug,
-            'tag': self.tag.name})
+            'tag': self.tag.slug})
 
 class Entry(models.Model):
     title = models.CharField(_(u"Título"),max_length=255,blank=False,unique=True)

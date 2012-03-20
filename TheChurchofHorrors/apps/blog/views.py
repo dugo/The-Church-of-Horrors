@@ -110,7 +110,7 @@ def common(request,slug):
 def subsection_tag(request,subsection,tag):
 
     subsection = get_object_or_404(Subsection,slug=subsection)
-    tag = get_object_or_404(Tag,name=tag)
+    tag = get_object_or_404(Tag,slug=tag)
 
     paginator = Paginator(Entry.get_last(subsection__id=subsection.id,tags__id__in=[tag.id]),settings.BLOG_OTHER_LAST_ENTRIES,request.GET.get("p",1))
     entries = paginator.current()
