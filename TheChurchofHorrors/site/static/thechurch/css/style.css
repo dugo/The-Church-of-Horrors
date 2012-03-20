@@ -55,6 +55,7 @@ hr {
     left:0;
     display:none;
     z-index:20;
+    white-space:nowrap;
 }
 
 #header #subsections .subsection .tags a {
