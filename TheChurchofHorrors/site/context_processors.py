@@ -12,7 +12,8 @@ def common(request):
     current = datetime.date(first.year,first.month,1)
     archives = []
     while True:
-        archives.append( current )
+        if Entry.get_archive(current.year,current.month).count()>0:
+            archives.append( current )
 
         if current.year == last.year and current.month == last.month:
             break
