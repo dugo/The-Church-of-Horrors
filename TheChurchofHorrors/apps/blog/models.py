@@ -9,7 +9,8 @@ from django.conf import settings
 from filebrowser.fields import FileBrowseField
 from taggit.managers import TaggableManager
 from django.core.urlresolvers import reverse
-
+from dateutil.relativedelta import relativedelta
+import datetime
 
 class Section(models.Model):
     name = models.CharField(_(u"Nombre"),max_length=255,unique=True,db_index=True,blank=False)
@@ -93,6 +94,12 @@ class Entry(models.Model):
     def __unicode__(self):
         return unicode(self.title)
     
+    @classmethod
+    def get_archive(self,year,month):
+        current = datetime.date(int(year),int(month),1)
+        print self.objects.filter(created__gte=current,created__lt=current+relativedelta(months=1)).count()
+        return self.objects.filter(created__gte=current,created__lt=current+relativedelta(months=1))
+
     """@classmethod
     def search(self,q):
         return self.objects.raw("SELECT * FROM blog_entry WHERE MATCH (title) AGAINST ('%s');" % q)"""

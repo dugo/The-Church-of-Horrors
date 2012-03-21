@@ -26,7 +26,7 @@ def home(request):
     template = "home.html" if paginator.page == 1 else "home-short.html"
     
     return render_to_response(template, 
-        dict(right_entries=right_entries, entries=entries,paginator=paginator,section=None,subsection=None,tag=None), 
+        dict(right_entries=right_entries, entries=entries,paginator=paginator,archive=None,section=None,subsection=None,tag=None), 
         context_instance=RequestContext(request))
 
 def search(request):
@@ -41,7 +41,7 @@ def search(request):
 
 
     return render_to_response("home-short.html", 
-        dict(right_entries=right_entries, entries=entries,paginator=paginator,section=None,subsection=None,tag=None), 
+        dict(right_entries=right_entries, entries=entries,paginator=paginator,archive=None,section=None,subsection=None,tag=None), 
         context_instance=RequestContext(request))
 
 def contact(request):
@@ -117,7 +117,7 @@ def subsection_tag(request,subsection,tag):
     right_entries = Entry.get_last_by_section()
 
     return render_to_response("home-short.html", 
-        dict(right_entries=right_entries, entries=entries,paginator=paginator,section=None,subsection=subsection,tag=tag), 
+        dict(right_entries=right_entries, entries=entries,paginator=paginator,archive=None,section=None,subsection=subsection,tag=tag), 
         context_instance=RequestContext(request))
     
 def section_subsection(request,section,subsection):
@@ -140,8 +140,11 @@ def entry(request,section,subsubsection,entry):
 def archive(request,year,month):
     right_entries = Entry.get_last_by_section()
 
-    return render_to_response("archive.html", 
-        dict(right_entries=right_entries, section=None,subsection=None), 
+    paginator = Paginator(Entry.get_archive(year,month),settings.BLOG_OTHER_LAST_ENTRIES,request.GET.get("p",1))
+    entries = paginator.current()
+
+    return render_to_response("home-short.html", 
+        dict(right_entries=right_entries,entries=entries, archive=datetime.date(int(year),int(month),1),section=None,subsection=None,tag=None), 
         context_instance=RequestContext(request))
     
 def author(request,user):
@@ -207,7 +210,7 @@ def view_for_subsection(request,subsection):
     entries = paginator.current()
 
     return render_to_response("home-short.html", 
-        dict(right_entries=right_entries, entries=entries,paginator=paginator,subsection=subsection,section=None,tag=None), 
+        dict(right_entries=right_entries, entries=entries,paginator=paginator,archive=None,subsection=subsection,section=None,tag=None), 
         context_instance=RequestContext(request))
 
 def view_for_section(request,section):
@@ -218,8 +221,6 @@ def view_for_section(request,section):
     entries = paginator.current()
 
     return render_to_response("home-short.html", 
-        dict(right_entries=right_entries, entries=entries, paginator=paginator,section = section,subsection=None,tag=None), 
+        dict(right_entries=right_entries, entries=entries, paginator=paginator,section = section,archive=None,subsection=None,tag=None), 
         context_instance=RequestContext(request))
-    
-    
-    
+

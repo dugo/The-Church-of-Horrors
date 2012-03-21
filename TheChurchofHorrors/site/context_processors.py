@@ -1,10 +1,26 @@
 def common(request):
-    from blog.models import Section,Subsection
+    from blog.models import Section,Subsection,Entry
+    from dateutil.relativedelta import relativedelta
+    import datetime
     
     sections = Section.objects.all().order_by('name')[:]
     subsections = Subsection.objects.all().order_by('sort')[:]
-    
+
+    first = Entry.objects.all().order_by("created")[0].created
+    last = Entry.objects.all().order_by("-created")[0].created
+
+    current = datetime.date(first.year,first.month,1)
+    archives = []
+    while True:
+        archives.append( current )
+
+        if current.year == last.year and current.month == last.month:
+            break
+
+        current += relativedelta(months=1)
+
     return {
         'sections': sections,
-        'subsections': subsections
+        'subsections': subsections,
+        'archives': archives
     }

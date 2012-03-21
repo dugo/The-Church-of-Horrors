@@ -285,13 +285,13 @@ $(document).ready(function(){
                     <a href="{{s.get_absolute_url}}">{{s}}</a>
                     {%endfor%}
                 </div>
-                <!--
+                
                 <div class="footer-item">
                     <h3>Archivo</h3>
-                    <a href="#">Julio 2011</a>
-                    <a href="#">Junio 2011</a>
+		    {% for a in archives %}
+                    <a href="{% url "archive" a.year a.month %}">{{a|date:"F Y"|title}}</a>
+		    {%endfor%}
                 </div>
-                -->
             </div>
             
         </div>
