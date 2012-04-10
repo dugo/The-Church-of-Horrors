@@ -109,6 +109,8 @@ class Entry(CounterAdmin):
     
     readonly_fields = ('slug',)
     
+    date_hierarchy = 'created'
+    
     def get_form(self, request, obj=None, **kwargs):
         
         form = super(Entry, self).get_form(request, obj=None, **kwargs)
