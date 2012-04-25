@@ -293,3 +293,6 @@ DEFAULT_FILE_STORAGE = 'TheChurchofHorrors.site.storages.ASCIIFileSystemStorage'
 
 import locale
 locale.setlocale(locale.LC_ALL, "es_ES.utf8")
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
