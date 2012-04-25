@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+
 # generate a random password
 from random import choice,seed
 import time
