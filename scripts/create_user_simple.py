@@ -53,7 +53,7 @@ u.staff = True
 u.is_superuser = False
 
 # set password
-u.set_passwd(passwd)
+u.set_password(passwd)
 
 u.save()
 
