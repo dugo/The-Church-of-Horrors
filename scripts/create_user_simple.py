@@ -65,9 +65,9 @@ u.save()
 # send email
 
 # render template
-email = render_to_string('emails/first_email.html', { 'user': u , 'passwd':passwd})
+content = render_to_string('emails/first_email.html', { 'user': u , 'passwd':passwd})
 
 # send email
-send_mail('Bienvenido a TheChurchofHorrors', email, u'Rubén Dugo <rdugo@thechurchofhorrors.com>', [email], fail_silently=False)
+send_mail('Bienvenido a TheChurchofHorrors', content, u'Rubén Dugo <rdugo@thechurchofhorrors.com>', [email], fail_silently=False)
 
 
