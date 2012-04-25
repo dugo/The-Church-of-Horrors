@@ -49,7 +49,7 @@ group = Group.objects.get(name="Redactor")
 u = User(username=username,email=email,first_name=name)
 
 # set staff
-u.staff = True
+u.is_staff = True
 u.is_superuser = False
 
 # set password
