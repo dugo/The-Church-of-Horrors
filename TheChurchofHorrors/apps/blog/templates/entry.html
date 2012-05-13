@@ -5,6 +5,8 @@
 <meta name="keywords" content="{{entry.tags.all|join:","}}"/>
 <meta name="description" content="{{entry.get_brief|remove_linebreaks}}" />
 <meta property="og:image" content="{{entry.get_main_image}}" />
+<meta itemprop="name" content="{{entry.title}}">
+<meta itemprop="description" content="{{entry.get_brief|remove_linebreaks}}">
 {%endblock%}
 
 {% block title %}The Church of Horrors :: {{entry}}{%endblock%}
@@ -122,6 +124,19 @@ function paging(link,margin) {
         <div>
             <a href="https://twitter.com/share" class="twitter-share-button" data-via="ChurchOfHorrors" data-lang="es">Twittear</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+        <div>
+            <g:plusone size="medium"></g:plusone>
+                        
+            <script type="text/javascript">
+              window.___gcfg = {lang: 'es'};
+
+              (function() {
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+              })();
+            </script>
         </div>
     </div>
     <hr/>
