@@ -261,7 +261,7 @@ class Comment(models.Model):
 
         for e in to:
             if e:
-                send_mail('[TheChurchofHorrors] Nueva comentario', msg, settings.BLOG_DEFAULT_SENDER, [e], fail_silently=False)
+                send_mail('[TheChurchofHorrors] Nuevo comentario', msg, settings.BLOG_DEFAULT_SENDER, [e], fail_silently=False)
         
     
     class Meta:
