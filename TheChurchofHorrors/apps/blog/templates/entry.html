@@ -159,7 +159,7 @@ function paging(link,margin) {
             {%if c.approved %}
             <div class="comment">
                 <div class="author"><span>[{{c.time|date:"d b Y H:i"}}]</span> <strong>{{c.author}}</strong> {%if c.website%}&lt;<a href="{{c.website}}" target="_blank">{{c.website}}</a>&gt;{%endif%} escribió:</div>
-                <div class="content">{{c.content}}</div>
+                <div class="content">{{c.content|linebreaksbr}}</div>
             </div>
             {%else%}
             <div class="comment">
@@ -173,7 +173,7 @@ function paging(link,margin) {
             <input name="author" type="text" value="{{author}}"/>Nombre <span>(*)</span><br/>
             <input name="email" type="text" value="{{email}}"/>Email <span>(*) (No será publicado)</span><br/>
             <input name="website" type="text" value="{{website}}"/>Website<br/>
-            <textarea name="content">{{content|linebreaksbr}}</textarea>
+            <textarea name="content">{{content}}</textarea>
             {{captcha}}Introduce lo que ves en la imagen <span>(*)</span><br/>
             {%csrf_token%}
             <input type="submit" value="PUBLICAR" onclick="return validate();">
