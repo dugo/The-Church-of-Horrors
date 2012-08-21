@@ -54,8 +54,8 @@ def noise_arcs(draw,image):
     color = {}
     for j in range(0,2):
         for i in range(0,3):
-        aux[i] = hex(random.randrange(0,255)).replace("0x","").upper()
-        if len(aux[i])<2: aux[i]= "0" + aux[i]
+            aux[i] = hex(random.randrange(0,255)).replace("0x","").upper()
+            if len(aux[i])<2: aux[i]= "0" + aux[i]
         color[j] = "#" + str(aux[0]) + str(aux[1]) + str(aux[2])
     size = image.size
     pos = int(random.randrange(-20,-5))
