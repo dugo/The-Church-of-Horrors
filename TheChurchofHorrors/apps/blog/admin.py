@@ -96,7 +96,7 @@ class CommentInline(admin.TabularInline):
     readonly_fields = ('author','email','content','time','website')
 
 
-class Comment(admin.TabularInline):
+class Comment(admin.ModelAdmin):
 
     list_display = ('author','content','email','website','time',)
         
