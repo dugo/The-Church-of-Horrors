@@ -98,7 +98,7 @@ class CommentInline(admin.TabularInline):
 
 class Comment(admin.TabularInline):
 
-    list_display = ('author','email','website','time',)
+    list_display = ('author','content','email','website','time',)
         
 
 class Entry(CounterAdmin):
