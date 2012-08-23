@@ -97,7 +97,6 @@ class Entry(models.Model):
     @classmethod
     def get_archive(self,year,month):
         current = datetime.date(int(year),int(month),1)
-        print self.objects.filter(created__gte=current,created__lt=current+relativedelta(months=1)).count()
         return self.objects.filter(created__gte=current,created__lt=current+relativedelta(months=1))
 
     """@classmethod

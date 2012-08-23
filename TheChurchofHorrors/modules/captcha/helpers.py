@@ -13,7 +13,7 @@ def math_challenge():
     
 def random_char_challenge():
     chars,ret = u'abcdefghijklmnopqrstuvwxyz1234567890', u''
-    settings.CAPTCHA_LENGTH = random.randint(7,12) 
+    settings.CAPTCHA_LENGTH = random.randint(5,8) 
     for i in range(settings.CAPTCHA_LENGTH):
         ret += chars[random.randint(0,len(chars)-1)]
     return ret.upper(),ret

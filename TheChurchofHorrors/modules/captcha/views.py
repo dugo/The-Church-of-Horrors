@@ -13,6 +13,13 @@ except ImportError:
 
 NON_DIGITS_RX = re.compile('[^\d]')
 
+def dec2hex(n):
+    """return the hexadecimal string representation of integer n"""
+    return "%02X" % n
+def hex2dec(s):
+    """return the integer value of a hexadecimal string s"""
+    return int(s, 16)
+
 def captcha_image(request,key):
     store = get_object_or_404(CaptchaStore,hashkey=key)
     text=store.challenge
@@ -29,9 +36,8 @@ def captcha_image(request,key):
     color = ''
     for j in range(0,2):
         for i in range(0,3):
-            aux[i] = hex(random.randrange(0,255)).replace("0x","").upper()
-        if len(aux[i])<2: aux[i]= "0" + aux[i]
-        color = "#" + str(aux[0]) + str(aux[1]) + str(aux[2])
+            aux[i] = dec2hex(random.randrange(0,255))
+        color = "#" + aux[0] + aux[1] + aux[2]
 
     settings.CAPTCHA_BACKGROUND_COLOR = color
 
@@ -41,8 +47,12 @@ def captcha_image(request,key):
         PIL_VERSION = int(NON_DIGITS_RX.sub('',Image.VERSION))
     except:
         PIL_VERSION = 116
+
+    for i in range(0,3):
+        aux[i] = dec2hex((hex2dec(aux[i])+ random.randint(32,64) )%256)
+    color = "#" + aux[0] + aux[1] + aux[2]
     
-    
+    settings.CAPTCHA_FOREGROUND_COLOR = color
     
     xpos = 2
 
@@ -53,7 +63,7 @@ def captcha_image(request,key):
         else:
             charlist.append(char)
     for char in charlist:
-        fgimage = Image.new('RGB', size, settings.CAPTCHA_FOREGROUND_COLOR)
+        fgimage = Image.new('RGB', size, color)
         charimage = Image.new('L', font.getsize(' %s '%char), '#000000')
         chardraw = ImageDraw.Draw(charimage)
         chardraw.text((0,0), ' %s '%char, font=font, fill='#ffffff')
