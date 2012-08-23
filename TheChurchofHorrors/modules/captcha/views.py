@@ -21,9 +21,20 @@ def captcha_image(request,key):
         font = ImageFont.truetype(settings.CAPTCHA_FONT_PATH,settings.CAPTCHA_FONT_SIZE)
     else:
         font = ImageFont.load(settings.CAPTCHA_FONT_PATH)
-    
+
     size = font.getsize(text)
     size = (size[0]*2, int(size[1] * 1.2))
+
+    aux = {}
+    color = ''
+    for j in range(0,2):
+        for i in range(0,3):
+            aux[i] = hex(random.randrange(0,255)).replace("0x","").upper()
+        if len(aux[i])<2: aux[i]= "0" + aux[i]
+        color = "#" + str(aux[0]) + str(aux[1]) + str(aux[2])
+
+    settings.CAPTCHA_BACKGROUND_COLOR = color
+
     image = Image.new('RGB', size , settings.CAPTCHA_BACKGROUND_COLOR)
     
     try:
