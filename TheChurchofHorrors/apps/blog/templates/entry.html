@@ -54,10 +54,6 @@ function validate() {
         ok=false;
     }
 
-    if (!$('input[name=captcha_1]').val()) {
-        $('input[name=captcha_1]').addClass("error");
-        ok=false;
-    }
     
     if (!$('textarea').val()) {
         $('textarea').addClass("error");
@@ -174,7 +170,7 @@ function paging(link,margin) {
             <input name="email" type="text" value="{{email}}"/>Email <span>(*) (No será publicado)</span><br/>
             <input name="website" type="text" value="{{website}}"/>Website<br/>
             <textarea name="content">{{content}}</textarea>
-            {{captcha}}Introduce lo que ves en la imagen <span>(*)</span><br/>
+            {{form.recaptcha}}{{form.recaptcha.errors}}{#Introduce lo que ves en la imagen <span>(*)</span><br/>#}
             {%csrf_token%}
             <input type="submit" value="PUBLICAR" onclick="return validate();">
         </form>

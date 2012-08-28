@@ -9,7 +9,8 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from paginator.paginator import Paginator
 import datetime
-from forms import CommentForm,CaptchaForm
+from recaptcha_works.decorators import fix_recaptcha_remote_ip
+from forms import CommentForm
 from taggit.models import Tag
 
 def home(request):
@@ -157,7 +158,7 @@ def author(request,user):
         dict(right_entries=[], entries=entries, author=author,section=None,subsection=None), 
         context_instance=RequestContext(request))
 
-
+@fix_recaptcha_remote_ip
 def view_for_entry(request,entry):
     
     if not request.user.is_superuser and not entry.published and (not request.user.is_authenticated() or entry.author_id <> request.user.id):
@@ -167,10 +168,9 @@ def view_for_entry(request,entry):
     
     if request.method == "POST":
         
-        captcha = CaptchaForm(request.POST)
         form = CommentForm(request.POST)
         
-        if captcha.is_valid() and form.is_valid():
+        if form.is_valid():
             comment = form.save(commit=False)
             comment.entry = entry
             comment.time = datetime.datetime.now()
@@ -186,9 +186,8 @@ def view_for_entry(request,entry):
             website = request.POST.get("website","")
             email = request.POST.get("email","")
             content = request.POST.get("content","")
-
     else:
-        captcha = CaptchaForm()
+        form = CommentForm()
     
     right_entries = Entry.get_last_by_author(entry.author,entry)
 
@@ -199,7 +198,7 @@ def view_for_entry(request,entry):
             website=website,
             email=email,
             content=content,
-            captcha=captcha), 
+            form=form), 
         context_instance=RequestContext(request))
         
 def view_for_subsection(request,subsection):

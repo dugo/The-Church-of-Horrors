@@ -221,7 +221,7 @@ INSTALLED_APPS = (
     'tinymce',
     'south',
     'taggit',
-    'captcha',
+    'recaptcha_works',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS =(

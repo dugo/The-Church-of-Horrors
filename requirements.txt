@@ -11,4 +11,4 @@ South==0.7.3
 #django-filebrowser==3.0
 Whoosh==2.3.2
 python-dateutil==2.0
-
+django-recaptcha-works==0.3.4

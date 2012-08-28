@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from models import Comment
-from captcha.fields import CaptchaField
+from recaptcha_works.fields import RecaptchaField
 
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100)
@@ -9,9 +9,10 @@ class ContactForm(forms.Form):
     email = forms.EmailField()
 
 class CommentForm(ModelForm):
+    
+    recaptcha = RecaptchaField(label='Human test', required=True)
+    
     class Meta:
         model = Comment
         fields = ( 'content', 'email', 'website', 'author')
 
-class CaptchaForm(forms.Form):
-    captcha = CaptchaField()
