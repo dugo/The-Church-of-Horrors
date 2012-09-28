@@ -44,16 +44,17 @@ class ImageGalleryFormset(BaseInlineFormSet):
                         raise forms.ValidationError(_(u"El fichero '%s' no existe" % form.cleaned_data['file']))
                 
                 if form.cleaned_data and not form.cleaned_data['DELETE']:
+                    
+                    if form.cleaned_data['order'] in orders:
+                        raise forms.ValidationError(_(u"Aseguresé de que los órdenes de las imágenes no se repiten"))
+                    
+                    orders.append( form.cleaned_data['order'] )
+                    
                     total+=1
                 
                 if form.cleaned_data and not form.cleaned_data['DELETE'] and form.cleaned_data['main']:
                     count += 1
                 
-                if forms.cleaned_data['order'] in orders:
-                    raise forms.ValidationError(_(u"Aseguresé de que los órdenes de las imágenes no se repiten"))
-                
-                orders.append( forms.cleaned_data['order'] )
-                    
                 
             except AttributeError:
                 # annoyingly, if a subform is invalid Django explicity raises
