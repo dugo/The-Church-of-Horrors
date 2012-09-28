@@ -69,7 +69,7 @@ class ImageGalleryFormset(BaseInlineFormSet):
 class ImageGallery(admin.TabularInline):
     model = models.ImageGallery
     can_delete = True
-    extra = 5
+    extra = 1
     
     formset = ImageGalleryFormset
 

@@ -170,7 +170,10 @@ function paging(link,margin) {
             <input name="email" type="text" value="{{email}}"/>Email <span>(*) (No será publicado)</span><br/>
             <input name="website" type="text" value="{{website}}"/>Website<br/>
             <textarea name="content">{{content}}</textarea>
-            {{form.recaptcha}}{{form.recaptcha.errors}}{#Introduce lo que ves en la imagen <span>(*)</span><br/>#}
+            {{form.recaptcha}}
+            {% if not form.non_field_errors%}{{form.recaptcha.errors}}{%endif%}
+            {#Introduce lo que ves en la imagen <span>(*)</span><br/>#}
+            <big>{{ form.non_field_errors}}</big>
             {%csrf_token%}
             <input type="submit" value="PUBLICAR" onclick="return validate();">
         </form>

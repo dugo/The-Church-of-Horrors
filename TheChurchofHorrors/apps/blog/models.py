@@ -266,7 +266,7 @@ class Comment(models.Model):
                 send_mail('[TheChurchofHorrors] Nuevo comentario', msg, settings.BLOG_DEFAULT_SENDER, [e], fail_silently=False)
     
     def __unicode__(self):
-        return self.comment
+        return self.content
     
     class Meta:
         verbose_name = _(u"comentario")

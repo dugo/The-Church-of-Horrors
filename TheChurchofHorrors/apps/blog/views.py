@@ -168,7 +168,7 @@ def view_for_entry(request,entry):
     
     if request.method == "POST":
         
-        form = CommentForm(request.POST)
+        form = CommentForm(request,request.POST)
         
         if form.is_valid():
             comment = form.save(commit=False)
@@ -186,6 +186,7 @@ def view_for_entry(request,entry):
             website = request.POST.get("website","")
             email = request.POST.get("email","")
             content = request.POST.get("content","")
+
     else:
         form = CommentForm()
     
