@@ -36,4 +36,10 @@ class CommentForm(ModelForm):
     class Meta:
         model = Comment
         fields = ( 'content', 'email', 'website', 'author')
+        
+class CommentFormAuthenticated(ModelForm):
+    
+    class Meta:
+        model = Comment
+        fields = ( 'content', 'email', 'website', 'author')
 

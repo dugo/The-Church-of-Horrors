@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from paginator.paginator import Paginator
 import datetime
 from recaptcha_works.decorators import fix_recaptcha_remote_ip
-from forms import CommentForm
+from forms import CommentForm,CommentFormAuthenticated
 from taggit.models import Tag
 
 def home(request):
@@ -168,7 +168,7 @@ def view_for_entry(request,entry):
     
     if request.method == "POST":
         
-        form = CommentForm(request,request.POST)
+        form = CommentFormAuthenticated(request.POST) if request.user.is_authenticated() else CommentForm(request,request.POST)
         
         if form.is_valid():
             comment = form.save(commit=False)
@@ -188,7 +188,7 @@ def view_for_entry(request,entry):
             content = request.POST.get("content","")
 
     else:
-        form = CommentForm()
+        form = Form()
     
     right_entries = Entry.get_last_by_author(entry.author,entry)
 
