@@ -188,7 +188,7 @@ def view_for_entry(request,entry):
             content = request.POST.get("content","")
 
     else:
-        form = Form()
+        form = CommentFormAuthenticated() if request.user.is_authenticated() else CommentForm()
     
     right_entries = Entry.get_last_by_author(entry.author,entry)
 
