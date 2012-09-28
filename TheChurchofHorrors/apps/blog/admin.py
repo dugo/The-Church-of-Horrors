@@ -34,6 +34,7 @@ class ImageGalleryFormset(BaseInlineFormSet):
         # get forms that actually have valid data
         count = 0
         total = 0
+        orders = []
         for form in self.forms:
             try:
                 if form.cleaned_data and not form.cleaned_data['DELETE']:
@@ -47,6 +48,13 @@ class ImageGalleryFormset(BaseInlineFormSet):
                 
                 if form.cleaned_data and not form.cleaned_data['DELETE'] and form.cleaned_data['main']:
                     count += 1
+                
+                if forms.cleaned_data['order'] in orders:
+                    raise forms.ValidationError(_(u"Aseguresé de que los órdenes de las imágenes no se repiten"))
+                
+                orders.append( forms.cleaned_data['order'] )
+                    
+                
             except AttributeError:
                 # annoyingly, if a subform is invalid Django explicity raises
                 # an AttributeError for cleaned_data
@@ -99,6 +107,8 @@ class CommentInline(admin.TabularInline):
 class Comment(admin.ModelAdmin):
 
     list_display = ('author','content','email','website','time',)
+    
+    ordering = ('-time',)
         
 
 class Entry(CounterAdmin):

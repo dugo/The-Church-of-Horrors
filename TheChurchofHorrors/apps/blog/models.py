@@ -12,6 +12,9 @@ from django.core.urlresolvers import reverse
 from dateutil.relativedelta import relativedelta
 import datetime
 
+from south.modelsinspector import add_introspection_rules
+add_introspection_rules([], ["^tinymce\.models\.HTMLField"])
+
 class Section(models.Model):
     name = models.CharField(_(u"Nombre"),max_length=255,unique=True,db_index=True,blank=False)
     slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=u"Será generada automaticamente a partir del nombre")
@@ -237,7 +240,7 @@ class ImageGallery(models.Model):
         verbose_name = _(u"Imagen de galería")
         verbose_name_plural = _(u"Imagenes de galería")
         ordering = ('order',)
-        unique_together = ('entry','order',)
+        #unique_together = ('entry','order',)
     
 
 class Comment(models.Model):
@@ -261,7 +264,9 @@ class Comment(models.Model):
         for e in to:
             if e:
                 send_mail('[TheChurchofHorrors] Nuevo comentario', msg, settings.BLOG_DEFAULT_SENDER, [e], fail_silently=False)
-        
+    
+    def __unicode__(self):
+        return self.comment
     
     class Meta:
         verbose_name = _(u"comentario")
