@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect,HttpResponseForbidden
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from apps.blog.models import Entry,Section,Subsection
@@ -167,6 +167,10 @@ def view_for_entry(request,entry):
     author = website = email = content = ''
     
     if request.method == "POST":
+        
+        if not request.user.is_authenticated():
+            return HttpResponseForbidden()
+            
         
         form = CommentFormAuthenticated(request.POST) if request.user.is_authenticated() else CommentForm(request,request.POST)
         
