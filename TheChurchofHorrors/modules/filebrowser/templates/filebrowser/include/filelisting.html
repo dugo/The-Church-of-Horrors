@@ -82,9 +82,9 @@
         <td>{{ file.datetime|date:"N j, Y" }}</td>
 
         <!-- RENAME -->
-        {%if user.is_superuser%}<td class="fb_icon"><a href="{% url fb_rename %}{% query_string %}&amp;filename={{ file.filename }}" class="fb_renamelink" title="{% trans 'Rename' %}"><img src="{{ settings_var.URL_FILEBROWSER_MEDIA }}img/filebrowser_icon_rename.gif" /></a></td>{%endif %}
+        {%if user.is_superuser or user.get_profile.is_editor%}<td class="fb_icon"><a href="{% url fb_rename %}{% query_string %}&amp;filename={{ file.filename }}" class="fb_renamelink" title="{% trans 'Rename' %}"><img src="{{ settings_var.URL_FILEBROWSER_MEDIA }}img/filebrowser_icon_rename.gif" /></a></td>{%endif %}
 
-        {%if user.is_superuser%}
+        {%if user.is_superuser or user.get_profile.is_editor%}
         <!-- DELETE -->
         {% if results_var.delete_total %}
         <td class="fb_icon">

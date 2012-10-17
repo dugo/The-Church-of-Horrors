@@ -105,7 +105,7 @@ function paging(link,margin) {
 {%endblock%}
 
 {%block content%}
-    {%if user.is_superuser or entry.author.id == request.user.id%}<a href="{{entry.get_admin_url}}" onclick="window.open(this.href);return false;" class="edit">Editar</a>{%endif%}
+    {%if user.is_superuser or user.get_profile.is_editor or entry.author.id == request.user.id %}<a href="{{entry.get_admin_url}}" onclick="window.open(this.href);return false;" class="edit">Editar</a>{%endif%}
     <br/>
     <a href="{{e.get_absolute_url}}"><h1>{{entry.title}}</h1></a>
     <span class="date">{{entry.created|date}}</span>

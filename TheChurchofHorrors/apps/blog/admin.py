@@ -133,7 +133,7 @@ class Entry(CounterAdmin):
         if form.base_fields.has_key('author'):
             form.base_fields['author'].initial = request.user
         
-        if not request.user.is_superuser:
+        if not request.user.is_superuser and not request.user.get_profile().is_editor:
             self.readonly_fields = ('slug',)
             self.exclude = ('author','gallery','published',)
             #form.base_fields['author'].queryset = form.base_fields['author'].queryset.filter(id=request.user.id)
@@ -145,14 +145,14 @@ class Entry(CounterAdmin):
         if obj is None:
             return True
         
-        if not request.user.is_superuser and (obj.author_id <> request.user.id or obj.published ):
+        if not request.user.is_superuser and not request.user.get_profile().is_editor and (obj.author_id <> request.user.id or obj.published ):
             return False
         
         return True
     
     def save_model(self, request, obj, form, change):
         
-        if not hasattr(obj,'author') or obj.author is None or not request.user.is_superuser:
+        if not hasattr(obj,'author') or obj.author is None or (not request.user.is_superuser and not request.user.get_profile().is_editor):
             obj.author = request.user
         
         obj.save()
@@ -174,7 +174,7 @@ class Entry(CounterAdmin):
     def queryset(self, request):
         qs = super(Entry, self).queryset(request)
 
-        if not request.user.is_superuser:
+        if not request.user.is_superuser and not request.user.get_profile().is_editor:
             return qs.filter(author__id=request.user.id)
         
         return qs

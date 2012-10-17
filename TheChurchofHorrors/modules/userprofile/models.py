@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from filebrowser.fields import FileBrowseField
 from django.utils.translation import ugettext as _
+from django.conf import settings
 
 class Rol(models.Model):
     name = models.CharField(_('Rol'),max_length=100,unique=True,blank=False)
@@ -35,6 +36,10 @@ class UserProfile(models.Model):
 
     def get_published(self):
         return self.user.entries.filter(published=True)
+    
+    @property
+    def is_editor(self):
+        return self.user.groups.filter(id=settings.BLOG_EDITOR_GROUP_ID).count()
     
     @classmethod
     def get_by_rol(self,rol_id):
