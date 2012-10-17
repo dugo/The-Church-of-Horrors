@@ -161,7 +161,7 @@ def author(request,user):
 @fix_recaptcha_remote_ip
 def view_for_entry(request,entry):
     
-    if not request.user.is_superuser and (not request.user.is_authenticated() and not request.user.get_profile().is_editor) and not entry.published and (not request.user.is_authenticated() or entry.author_id <> request.user.id):
+    if not request.user.is_superuser and (request.user.is_authenticated() and not request.user.get_profile().is_editor) and not entry.published and (not request.user.is_authenticated() or entry.author_id <> request.user.id):
         return HttpResponseNotFound()
     
     author = website = email = content = ''
