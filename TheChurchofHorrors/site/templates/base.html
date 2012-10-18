@@ -190,11 +190,13 @@ $(document).ready(function(){
     <div id="container">
         <div id="header">
             <a href="/" title="thechurchofhorrors.com"><img src="{{STATIC_URL}}thechurch/images/logo.png" alt="The Church of Horros logo" usemap="#map-logo"/></a>
+            {%comment%}
             <div id="banner" current="0">
                 <a href="http://thebloodydirtysanchez.bandcamp.com/" target="_blank" title="http://thebloodydirtysanchez.bandcamp.com"><img src="{{STATIC_URL}}thechurch/images/bloody.jpg"/></a>
                 <!--<a href="http://famfest.info/" target="_blank" title="http://famfest.info"><img src="{{STATIC_URL}}thechurch/images/familiar.jpg" style="display:none"/></a>
                 <a href="http://www.lowtoy.com/" target="_blank" title="http://www.lowtoy.com"><img src="{{STATIC_URL}}thechurch/images/lowtoy.jpg" style="display:none"/></a>-->
             </div>
+            {%endcomment%}
             <div id="sections">
                 <a href='/' class="section">HOME</a>
                 {% for s in sections %}
@@ -288,9 +290,17 @@ $(document).ready(function(){
                 
                 <div class="footer-item">
                     <h3>Archivo</h3>
-		    {% for a in archives %}
-                    <a href="{% url "archive" a.year a.month %}">{{a|date:"F Y"|title}}</a>
-		    {%endfor%}
+                    <table>
+                        <tbody>
+                        {% for a in archives %}
+                            {% if forloop.counter0|divisibleby:"2" %}<tr>{%endif%}
+                            <td><a href="{% url "archive" a.year a.month %}">{{a|date:"F Y"|title}}</a></td>
+                            {% if not forloop.counter0|divisibleby:"2" %}</tr>{%endif%}
+                        {%endfor%}
+                             
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             

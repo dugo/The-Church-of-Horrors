@@ -311,6 +311,17 @@ a:hover { color:#d10019; }
     font-size:10px;
     font-family:verdana;
 }
+#footer .footer-item table {
+    border-collapse:collapse;
+}
+#footer .footer-item td {
+    padding-right:10px;
+    white-space:nowrap;
+    font-size:10px;
+    font-family:verdana;
+    
+}
+
 #footer .footer-item h3 {
     margin-bottom:3px;
 }

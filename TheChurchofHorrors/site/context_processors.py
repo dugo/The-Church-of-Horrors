@@ -20,6 +20,8 @@ def common(request):
 
         current += relativedelta(months=1)
 
+    archives.reverse()
+
     return {
         'sections': sections,
         'subsections': subsections,
