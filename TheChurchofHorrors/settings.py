@@ -222,6 +222,7 @@ INSTALLED_APPS = (
     'south',
     'taggit',
     'recaptcha_works',
+    'cachebuster',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS =(
@@ -304,3 +305,7 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
+
+
+from django.template.loader import add_to_builtins
+add_to_builtins('cachebuster.templatetags.cachebuster')

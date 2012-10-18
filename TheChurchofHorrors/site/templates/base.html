@@ -54,7 +54,7 @@
 {% if not request.is_ajax %}
 <link rel="shortcut icon" href="{{STATIC_URL}}favicon.ico" />
 
-<link rel="stylesheet" href="{{STATIC_URL}}thechurch/css/style.css" type="text/css"/>
+<link rel="stylesheet" href="{% static thechurch/css/style.css %}" type="text/css"/>
 {% block extra_css %}{%endblock%}
 <script type="text/javascript" src="{{STATIC_URL}}thechurch/js/jquery-1.6.2.min.js"></script>
 <script type="text/javascript" src="{{STATIC_URL}}thechurch/js/jquery.myimgscale-0.2.min.js"></script>

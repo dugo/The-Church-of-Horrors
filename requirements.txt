@@ -12,3 +12,4 @@ South==0.7.3
 Whoosh==2.3.2
 python-dateutil==2.0
 django-recaptcha-works==0.3.4
+django-cachebuster==0.2.1
