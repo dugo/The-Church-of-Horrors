@@ -3,7 +3,7 @@
 from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect,HttpResponseForbidden
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from apps.blog.models import Entry,Section,Subsection
+from apps.blog.models import Entry,Subsection,Number
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -11,23 +11,21 @@ from paginator.paginator import Paginator
 import datetime
 from recaptcha_works.decorators import fix_recaptcha_remote_ip
 from forms import CommentForm,CommentFormAuthenticated
+from userprofile.models import UserProfile,Rol
 from taggit.models import Tag
 
-def home(request):
+def number(request,number=None,month=None,year=None):
 
     if request.method == "GET" and request.GET.get("q"):
         return search(request)
     
-    right_entries = Entry.get_last_by_section()
-    
-    
-    paginator = Paginator(Entry.get_last(),settings.BLOG_HOME_LAST_ENTRIES,request.GET.get("p",1))
-    entries = paginator.current()
-    
-    template = "home.html" if paginator.page == 1 else "home-short.html"
-    
-    return render_to_response(template, 
-        dict(right_entries=right_entries, entries=entries,paginator=paginator,archive=None,section=None,subsection=None,tag=None), 
+    if number:
+        number = get_object_or_404(Number,number=number,year=year,month=month)
+    else:
+        number = Number.get_current()
+
+    return render_to_response("home.html", 
+        dict(number=number), 
         context_instance=RequestContext(request))
 
 def search(request):
@@ -36,19 +34,14 @@ def search(request):
         
     paginator = Paginator(Entry.search(q),settings.BLOG_OTHER_LAST_ENTRIES,request.GET.get("p",1))
     entries = paginator.current()
-    
-    right_entries = Entry.get_last_by_section()
-
 
 
     return render_to_response("home-short.html", 
-        dict(right_entries=right_entries, entries=entries,paginator=paginator,archive=None,section=None,subsection=None,tag=None), 
+        dict(entries=entries,paginator=paginator,archive=None,section=None,subsection=None,tag=None), 
         context_instance=RequestContext(request))
 
 def contact(request):
-
-    right_entries = Entry.get_last_by_section()
-    
+   
     if request.method == "POST":
         from forms import ContactForm
         
@@ -63,48 +56,34 @@ def contact(request):
             send_mail('[TheChurchofHorrors] Formulario de contacto', msg, settings.BLOG_DEFAULT_SENDER, settings.BLOG_CONTACT_EMAILS, fail_silently=True)
             
             return render_to_response("contact-sent.html", 
-                dict(right_entries=right_entries, section=None,subsection=None,next = request.POST.get('next') ), 
+                dict(section=None,subsection=None,next = request.POST.get('next') ), 
                 context_instance=RequestContext(request))
 
     return render_to_response("contact.html", 
-        dict(right_entries=right_entries, section=None,subsection=None,next = request.GET.get('next')), 
+        dict(section=None,subsection=None,next = request.GET.get('next')), 
         context_instance=RequestContext(request))
     
 def staff(request):
-    from userprofile.models import UserProfile,Rol
-    
-    right_entries = Entry.get_last_by_section()
-
     rols = Rol.get_all().values_list('name',flat=True)
 
     return render_to_response("staff.html", 
-        dict(right_entries=right_entries, section=None,subsection=None,rols=rols,staffs=UserProfile.group_by_rol()), 
+        dict(rols=rols,staffs=UserProfile.group_by_rol()), 
         context_instance=RequestContext(request))
 
 def info(request):
     
-    right_entries = Entry.get_last_by_section()
 
     return render_to_response("info.html", 
-        dict(right_entries=right_entries, section=None,subsection=None,), 
         context_instance=RequestContext(request))
     
 def common(request,slug):
     
-    try:
-        return view_for_entry( request, Entry.objects.get(slug=slug) )
-    except Entry.DoesNotExist:
-        pass
 
     try:
         return view_for_subsection( request, subsection = Subsection.objects.get(slug=slug) )
     except Subsection.DoesNotExist:
         pass
 
-    try:
-        return view_for_section( request, section = Section.objects.get(slug=slug) )
-    except Section.DoesNotExist:
-        return HttpResponseNotFound()
 
     return HttpResponseNotFound()
 
@@ -159,7 +138,10 @@ def author(request,user):
         context_instance=RequestContext(request))
 
 @fix_recaptcha_remote_ip
-def view_for_entry(request,entry):
+def entry(request,number,month,year,subsection,slug):
+    
+    number = get_object_or_404(Number,number=number,year=year,month=month)
+    entry = get_object_or_404(Entry,number__id=number.id,slug=slug,subsection__slug=subsection)
     
     if not request.user.is_superuser and (request.user.is_authenticated() and not request.user.get_profile().is_editor) and not entry.published and (not request.user.is_authenticated() or entry.author_id <> request.user.id):
         return HttpResponseNotFound()
@@ -203,6 +185,7 @@ def view_for_entry(request,entry):
             website=website,
             email=email,
             content=content,
+            number=number,
             form=form), 
         context_instance=RequestContext(request))
         

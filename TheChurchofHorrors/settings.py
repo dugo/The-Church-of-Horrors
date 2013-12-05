@@ -153,10 +153,11 @@ FILEBROWSER_EXTENSIONS = {
 FILEBROWSER_VERSIONS = {
   'fb_thumb': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'crop'},
   'mini': {'verbose_name': 'Mini', 'width': 420, 'height': '', 'opts': ''},
+  'micro': {'verbose_name': 'Micro', 'width': 62, 'height': 77, 'opts': 'crop'},
   'preview': {'verbose_name': 'Preview', 'width': 104, 'height': 105, 'opts': 'crop'},
   'gallery': {'verbose_name': 'Gallery', 'width': 730, 'height': '', 'opts': ''},
 }
-FILEBROWSER_ADMIN_VERSIONS = ['mini','preview','gallery']
+FILEBROWSER_ADMIN_VERSIONS = ['mini','preview','gallery',]
 
 TINYMCE_COMPRESSOR = True
 TINYMCE_JS_URL = '/static/tiny_mce/tiny_mce_src.js'

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load blog %}
+{% load blog fb_versions %}
 
 {% block extra_metatags %}
 <meta name="keywords" content="{{entry.tags.all|join:","}}"/>
@@ -13,7 +13,7 @@
 
 {% block author %}{% mini_author entry.author %}{% endblock %}
 
-{%block breadcrumb%}{% breadcrumb request.get_full_path entry.section entry.subsection %}{%endblock%}
+{%block breadcrumb%}{% breadcrumb request.get_full_path number entry.subsection %}{%endblock%}
 
 {%block content_class%}entry{%endblock%}
 
@@ -106,11 +106,16 @@ function paging(link,margin) {
 
 {%block content%}
     {%if user.is_superuser or user.get_profile.is_editor or entry.author.id == request.user.id %}<a href="{{entry.get_admin_url}}" onclick="window.open(this.href);return false;" class="edit">Editar</a>{%endif%}
-    <br/>
-    <a href="{{e.get_absolute_url}}"><h1>{{entry.title}}</h1></a>
-    <span class="date">{{entry.created|date}}</span>
-    {% if entry.show_gallery%}{%entry_gallery entry%}{%endif%}
-    <div class="content-entry">{{entry.content|url_open|safe}}</div>
+
+    <img src="{% version entry.get_main_image 'gallery' %}" title="{{entry}}" alt="{{entry.title}}" class="image-entry"/>
+
+    <div class="content-entry">
+
+        <a href="{{e.get_absolute_url}}"><h1>{{entry.title}}</h1></a>
+
+        {{entry.content|url_open|safe}}
+    </div>
+
     <div id="paging"></div>
     
     <div id="share">

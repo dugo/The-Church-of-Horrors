@@ -10,12 +10,16 @@ from filebrowser.fields import FileBrowseField
 from taggit.managers import TaggableManager
 from django.core.urlresolvers import reverse
 from dateutil.relativedelta import relativedelta
-import datetime
+import datetime,sys
 
 from south.modelsinspector import add_introspection_rules
 add_introspection_rules([], ["^tinymce\.models\.HTMLField"])
 
-class Section(models.Model):
+def in_sync():
+    return False
+    return "syncdb" in sys.argv or "migrate" in sys.argv
+
+"""class Section(models.Model):
     name = models.CharField(_(u"Nombre"),max_length=255,unique=True,db_index=True,blank=False)
     slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=u"Será generada automaticamente a partir del nombre")
     
@@ -34,7 +38,56 @@ class Section(models.Model):
 
     def save(self,*args,**kwargs):
         self.slug = slugify(self.name)
-        super(type(self),self).save(*args,**kwargs)
+        super(type(self),self).save(*args,**kwargs)"""
+
+MONTH_CHOICES = ( (1,'Enero',),
+                (2,'Febrero'),
+                (3,'Marzo'),
+                (4,'Abril'),
+                (5,'Mayo'),
+                (6,'Junio'),
+                (7,'Julio'),
+                (8,'Agosto'),
+                (9,'Septiembre'),
+                (10,'Octubre'),
+                (11,'Noviembre'),
+                (12,'Diciembre'),
+    )
+
+class Number(models.Model):
+    number = models.PositiveIntegerField(u"Número",unique=True,db_index=True)
+    month = models.PositiveIntegerField(u"Mes",choices=MONTH_CHOICES)
+    year = models.PositiveIntegerField(u"Año")
+    imagen = FileBrowseField(blank=False,format='image',extensions=[".jpg",".png",".jpeg",".gif"],default='')
+    published = models.BooleanField("Publicado",default=False,)
+
+    @property
+    def editorial(self):
+        try:
+            return self.entries.get(is_editorial=True)
+        except Entry.DoesNotExist:
+            return None
+
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('number', (), {'number': self.number,'month':self.month,'year':self.year})
+
+    @property
+    def other_entries(self):
+        return self.entries.filter(is_editorial=False)
+
+    @classmethod
+    def get_current(cls):
+        return cls.objects.filter(published=True).order_by("-number")[0]
+
+    def __unicode__(self):
+        return u"Número %d"%self.number
+
+    class Meta:
+        ordering = ("-number",)
+        verbose_name = "Número"
+
 
 class Subsection(models.Model):
     name = models.CharField(_(u"Nombre"),max_length=255,unique=True,db_index=True,blank=False)
@@ -84,15 +137,19 @@ class Entry(models.Model):
     content = tinymce_models.HTMLField(_("Contenido"),blank=False,)
     brief =  models.CharField(_(u'Resumen'),max_length=450, help_text = _(u'Un breve resumen representativo de la entrada. Si queda vacío se cogerá el primer párrafo.'),blank=True)
     author = models.ForeignKey(User,verbose_name=_(u"Autor"),related_name="entries",blank=True,null=True)
-    section = models.ForeignKey(Section,verbose_name=_(u"Sección"))
+    number = models.ForeignKey(Number,verbose_name=_(u"Número"),null=True,default=None,blank=True,related_name='entries')
+    #section = models.ForeignKey(Section,verbose_name=_(u"Sección"))
     subsection = models.ForeignKey(Subsection,verbose_name=_(u"Categoría"))
     created = models.DateTimeField(_(u'Creado'),help_text=_("La hora no tiene importancia"))
     modified = models.DateTimeField(_(u'Modificado'),auto_now=True)
     published = models.BooleanField(_(u'Publicado'),default=False,blank=False)
     slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=_(u"Será generada automaticamente a partir del título"))
-    gallery = models.BooleanField(_(u'Mostrar en galería de HOME'),help_text=_(u'Se mostrará sólo la imagen marcada cómo principal'),default=False,blank=True)
-    show_gallery = models.BooleanField(_(u'Mostrar galería en entrada'),help_text=_(u'Se mostrará en la propia entrada una galería con las imágenes en el orden establecido. Si hay sólo una imagen se mostrará la imagen estática'),default=False,blank=True)
+    #gallery = models.BooleanField(_(u'Mostrar en galería de HOME'),help_text=_(u'Se mostrará sólo la imagen marcada cómo principal'),default=False,blank=True)
+    #show_gallery = models.BooleanField(_(u'Mostrar galería en entrada'),help_text=_(u'Se mostrará en la propia entrada una galería con las imágenes en el orden establecido. Si hay sólo una imagen se mostrará la imagen estática'),default=False,blank=True)
     tags = TaggableManager()
+    imagen = FileBrowseField(blank=False,format='image',extensions=[".jpg",".png",".jpeg",".gif"],default='')
+    imagen = models.FileField(upload_to='./')
+    is_editorial = models.BooleanField(_(u'Es editorial'),default=False,blank=True)
     
     def __unicode__(self):
         return unicode(self.title)
@@ -134,18 +191,20 @@ class Entry(models.Model):
         verbose_name = _(u"entrada")
         ordering = ('-created',)
 
-    """@models.permalink
-    def get_absolute_url(self):
-        return ('entry', (), {
-            'section': self.section.slug,
-            'subsection': self.subsection.slug,
-            'entry': self.slug})"""
-    
-    
     @models.permalink
     def get_absolute_url(self):
-        return ('common', (), {
+        return ('entry', (), {
+            'number':self.number_id,
+            'month':self.number.month,
+            'year':self.number.year,
+            'subsection': self.subsection.slug,
             'slug': self.slug})
+    
+    
+    """@models.permalink
+    def get_absolute_url(self):
+        return ('common', (), {
+            'slug': self.slug})"""
     
     def get_admin_url(self):
         return reverse("admin:blog_entry_change", args=[self.id])
@@ -201,6 +260,8 @@ class Entry(models.Model):
         return entries
         
     def get_main_image(self):
+        if self.imagen:
+            return self.imagen
         return self.images.get(main=True)
     
     def get_brief(self):

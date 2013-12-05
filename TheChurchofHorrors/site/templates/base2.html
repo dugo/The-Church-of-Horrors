@@ -1,4 +1,4 @@
-{% load blog fb_versions%}
+{% load blog %}
 {% load url from future %}
 
 <meta name="google-site-verification" content="TpuITMzwLc7W8ha_L8d8p7g7fwjCCfRvbGa81RSGZAk" />
@@ -190,32 +190,6 @@ $(document).ready(function(){
     <div id="container">
         <div id="header">
             <a href="/" title="thechurchofhorrors.com"><img src="{{STATIC_URL}}thechurch/images/logo.png" alt="The Church of Horros logo" usemap="#map-logo"/></a>
-
-
-            <div id="subsections">
-                {% for s in subsections %}
-                    <a href='#' title="{{s}}">{{s}}</a>
-                {% endfor %}
-            </div>
-
-            <div id="top-left">
-                <form action="/" method="GET">
-                <input type="submit" id="search-button" value=""/>
-                <input type="text" id="search" name="q" placeholder="Buscar..."/>
-                </form>
-                <div>
-                    <span class="actual">ACTUAL</span>
-                    <img src="{% version current_number.imagen 'micro' %}" alt="ACTUAL"/>
-                    <a class="title" href="{{current_number.get_absolute_url}}" title="{{current_number}}">{{current_number|upper}}</a><br/>
-                    <span class="subtitle">{{current_number.get_month_display}} {{current_number.year}}</span>
-
-                    {%with current_number.editorial as e%}
-                    <a class="entry" title="{{e}}" href="{{e.get_absolute_url}}">{{e}}</a>
-                    {%endwith%}
-
-                </div>
-            </div>
-
             {%comment%}
             <div id="banner" current="0">
                 <a href="http://thebloodydirtysanchez.bandcamp.com/" target="_blank" title="http://thebloodydirtysanchez.bandcamp.com"><img src="{{STATIC_URL}}thechurch/images/bloody.jpg"/></a>
@@ -226,24 +200,39 @@ $(document).ready(function(){
             <div id="sections">
                 <a href='/' class="section">HOME</a>
 
-                {#<a href='{{s.get_absolute_url}}' class="section">ANTERIORES</a>#}
+                <a href='{{s.get_absolute_url}}' class="section">ANTERIORES</a>
                 <a href='{{s.get_absolute_url}}' class="section">SITIOS</a>
                 
-                <a href='http://vimeo.com/thechurchofhorrors' class="social vimeo" target="_blank"></a>
-                <a href='https://twitter.com/#!/churchofhorrors' class="social twitter" target="_blank"></a>
-                <a href='http://www.facebook.com/TheChurchofHorrors' class="social facebook" target="_blank"></a>
-                <a href='{%url 'feed' %}' class="social rss" target="_blank"></a>
+                <a href='http://vimeo.com/thechurchofhorrors' id="vimeo" class="social" target="_blank"></a>
+                <a href='https://twitter.com/#!/churchofhorrors' id="twitter" class="social" target="_blank"></a>
+                <a href='http://www.facebook.com/TheChurchofHorrors' id="facebook" class="social" target="_blank"></a>
+                <a href='{%url 'feed' %}' id="rss" class="social" target="_blank"></a>
+            </div>
+            <div id="subsections">
+                {% for s in subsections %}
+                    <div class="subsection">
+                        <a href='{{s.get_absolute_url}}'>{{s}}</a>
+                            <span class="tags">
+                            {% for t in s.tags.all %}
+                            <div><a href='{{t.get_absolute_url}}'>{{t}}</a></div>
+                            {%endfor%}
+                            </span>
+                    </div>
+                {% endfor %}
+                <form action="/" method="GET">
+                <input type="submit" id="search-button" value=""/>
+                <input type="text" id="search" name="q" placeholder="Buscar..."/>
+                </form>
             </div>
         </div><!-- #header -->
 {% endif %}
 
-<div id='ajax-wrapper' class="{%block content_class%}{%endblock%}">
+<div id='ajax-wrapper'>
 
-    <div id="content">
-        {%block breadcrumb%}{%endblock%}
-
+    <div id="content" class="{%block content_class%}{%endblock%}">
         {%block home_gallery%}{%endblock%}
-
+        <hr/>
+        {%block breadcrumb%}{%endblock%}
         {%block content%}{%endblock%}
         
         {%if paginator.hasprev%}<a href='{{request.path}}{{paginator.prev}}' id="prevpage"><< Publicaciones Posteriores</a>{%endif%}
@@ -251,11 +240,28 @@ $(document).ready(function(){
         
     </div> <!-- #content -->
 
-
     <div id="left">
-        {%block author%}{%endblock%}        
-    </div> <!-- #left -->
+        {%block author%}<hr/>{%endblock%}
 
+        {% if right_entries.0 %}
+                <div class="section">Últimas Publicaciones</div>
+                    {% for e in right_entries %}
+                        {% preview_entry e forloop.counter%}
+                    {% endfor %}
+                <hr/>
+        {%else%}
+            {% for s,items in right_entries.items %}
+                <div class="section">Últim{{s|sexualize}}s {{s|upper}}</div>
+                    {% for e in items %}
+                        {% preview_entry e forloop.counter%}
+                    {% endfor %}
+                <hr/>
+            {%endfor%}
+        {%endif%}
+        
+        <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FTheChurchofHorrors&amp;width=230&amp;height=145&amp;connections=0&amp;colorscheme=dark&amp;header=false&amp;show_faces=true&amp;border_color&amp;stream=false&amp;header=false&amp;appId=232493216832744" scrolling="no" frameborder="0" style="border:none; margin-top:10px;overflow:hidden; width:230px; height:290px;" allowTransparency="true"></iframe>
+        
+    </div> <!-- #left -->
     
 </div> <!-- #ajax-wrapper -->
 
@@ -265,64 +271,42 @@ $(document).ready(function(){
         <div id="subfooter-1">
             <div id="subfooter-2">
                 <div class="footer-item footer-item-1">
-                        
-                        <a href="http://thechurchofhorrors.com" class="social logo-social"></a>
-                        <a href="/feed/" class="social rss" target="_blank"></a>
-                        <a href="http://www.facebook.com/TheChurchofHorrors" class="social facebook" target="_blank"></a>
-                        <a href="https://twitter.com/#!/churchofhorrors" class="social twitter" target="_blank"></a>
-                        <a href="http://vimeo.com/thechurchofhorrors" class="social vimeo" target="_blank"></a>
-
-                        <div  class="search-form">
-                            <form action="/" method="GET">
-                            <input type="submit" class="search-button" value=""/>
-                            <input type="text" class="search" name="q" placeholder="Buscar..."/>
-                            </form>
-                        </div>
+                    <h3><a href="{% url 'contact' %}?next={{request.path}}">Contacto</a></h3>
+                    <h3><a href="{% url 'staff' %}">Staff</a></h3>
+                    <h3><a href="{% url 'info' %}">Información</a></h3>
                 </div>
-                <div class="footer-item footer-item-2">
-                
-                    <div class="subitem">    
-                        <h3><a href="#">Sitios</a></h3>
-                        <hr/>
-                        <h3><a href="{% url 'contact' %}?next={{request.path}}">Contacto</a></h3>
-                        <h3><a href="{% url 'staff' %}">Staff</a></h3>
-                        <h3><a href="{% url 'info' %}">Información</a></h3>
-                    </div>
-
-                    <div class="subitem">    
-                        <h3>CATEGORÍAS</h3>
-
-                        {% for s in subsections %}
-                            <a href='#' title="{{s}}">{{s}}</a>
-                        {% endfor %}
-                    </div>
-
+                <div class="footer-item">
+                    <h3>Categorías</h3>
+                    {% for s in subsections %}
+                    <a href="{{s.get_absolute_url}}">{{s}}</a>
+                    {%endfor%}
                 </div>
-                <div class="footer-item footer-item-3">
+                <div class="footer-item">
+                    <h3>Secciones</h3>
+                    {% for s in sections %}
+                    <a href="{{s.get_absolute_url}}">{{s}}</a>
+                    {%endfor%}
+                </div>
                 
-                    <div class="subitem">    
-                        <h3>ACTUAL</h3>
-
-                        <a class="title" href="{{current_number.get_absolute_url}}" title="{{current_number}}">{{current_number|upper}}</a>
-                        <span class="subtitle">{{current_number.get_month_display}} {{current_number.year}}</span>
-
-                        <img src="{% version current_number.imagen 'micro' %}" alt="ACTUAL"/>
-
-                        {%with current_number.editorial as e%}
-                        <a class="entry" title="{{e}}" href="{{e.get_absolute_url}}">{{e}}</a>
-                        {%endwith%}
-                        
-                    </div>
-
-                    <div class="subitem">    
-                    </div>
-
+                <div class="footer-item">
+                    <h3>Archivo</h3>
+                    <table>
+                        <tbody>
+                        {% for a in archives %}
+                            {% if forloop.counter0|divisibleby:"2" %}<tr>{%endif%}
+                            <td><a href="{% url "archive" a.year a.month %}">{{a|date:"F Y"|title}}</a></td>
+                            {% if not forloop.counter0|divisibleby:"2" %}</tr>{%endif%}
+                        {%endfor%}
+                             
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             
         </div>
         
-        <div id="copyright">&copy; 2013 <a href="/">thechurchofhorrors.com</a></div>
+        <div id="copyright"><hr/>Copyright 2011 <a href="/">thechurchofhorrors.com</a>. Todos los derechos reservados.</div>
     </div>
 </body>
 

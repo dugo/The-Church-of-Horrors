@@ -1,9 +1,9 @@
 def common(request):
-    from blog.models import Section,Subsection,Entry
+    from blog.models import Subsection,Entry,Number
     from dateutil.relativedelta import relativedelta
     import datetime
     
-    sections = Section.objects.all().order_by('name')[:]
+    #sections = Section.objects.all().order_by('name')[:]
     subsections = Subsection.objects.all().order_by('sort')[:]
 
     first = Entry.objects.all().order_by("created")[0].created
@@ -23,7 +23,8 @@ def common(request):
     archives.reverse()
 
     return {
-        'sections': sections,
+        #'sections': sections,
         'subsections': subsections,
-        'archives': archives
+        'archives': archives,
+        'current_number':Number.get_current(),
     }

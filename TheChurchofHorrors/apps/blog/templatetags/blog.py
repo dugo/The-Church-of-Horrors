@@ -3,6 +3,7 @@
 from django.template.defaultfilters import stringfilter
 from django import template
 from apps.blog.models import Entry
+from django.conf import settings
 import re, htmlentitydefs
 
 register = template.Library()
@@ -34,18 +35,14 @@ def home_gallery():
     return {'gallery':gallery, "total":total }
 	
 @register.inclusion_tag('breadcrumb.html')
-def breadcrumb(path,section=None,subsection=None,request=None,tag=None,archive=None):
+def breadcrumb(path,number=None,subsection=None,request=None,tag=None,archive=None):
 	
 	urls = []
-	
-	if section:
-		urls.append( (section.get_absolute_url(),unicode(section),) )
-	
+
 	if subsection:
 		urls.append( (subsection.get_absolute_url(),unicode(subsection),) )
 
-	if not section and not subsection:
-		from django.conf import settings
+	if not subsection:
 
 		mapping = settings.BLOG_BREADCRUMB_URL_MAPPING
 
@@ -64,10 +61,10 @@ def breadcrumb(path,section=None,subsection=None,request=None,tag=None,archive=N
 	if not archive is None:
 		urls.append( (request.path, "%s" % archive.strftime("%B %Y").title() ,) )
 
-	if urls and (not section or not subsection):
+	if urls and (not subsection):
 		urls.insert(0, ("/", "HOME") )
 	
-	return {'urls':urls}
+	return {'urls':urls,'number':number}
 
 @register.filter
 @stringfilter

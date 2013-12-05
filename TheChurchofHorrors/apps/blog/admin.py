@@ -12,10 +12,34 @@ from django.conf import settings
 import re
 import os.path
 
-class Section(admin.ModelAdmin):
-    model = models.Section
+class NumberForm(ModelForm):
+
+    def clean_published(self):
+        if self.cleaned_data.get("published"):
+            if not self.instance.pk:
+                return False
+
+            if not self.instance.entries.filter(is_editorial=True).count():
+                raise forms.ValidationError(u"Imposible publicar. Debe marcar una entrada cómo Editorial")
+
+        return self.cleaned_data.get("published")
+
     
-    readonly_fields = ('slug',)
+    """def clean(self):
+        if self.cleaned_data.get("published") and self.instance:
+            raise forms.ValidationError(u"Antes de publicar debe añadir)
+
+
+        return self.cleaned_data"""
+    
+    class Meta:
+        model = models.Number
+
+class Number(admin.ModelAdmin):
+    list_display = ("__unicode__","month","year","published")
+    model = models.Number
+    form = NumberForm
+    
 
 class SubsectionTag(admin.TabularInline):
     model = models.SubsectionTag
@@ -95,6 +119,13 @@ class EntryForm(ModelForm):
     content = forms.CharField(label=_(u"Contenido"),widget=TinyMCE(attrs={'cols': 120, 'rows': 40}))
     brief = forms.CharField(label=_(u'Resumen'),widget=forms.Textarea(attrs={'class':'counted','mymaxlength':'450'}),help_text = _(u'Un breve resumen representativo de la entrada. Si queda vacío se cogerá el primer párrafo.'),required=False)
     
+    def clean_is_editorial(self):
+        if self.cleaned_data.get("is_editorial") and self.cleaned_data.get("number"):
+            if not self.cleaned_data.get("number").editorial is None:
+                raise forms.ValidationError(u'Este Número ya tiene un artículo marcado cómo editorial, desmárquelo para continuar.')
+
+        return self.cleaned_data.get("is_editorial")
+
     class Meta:
         model = models.Entry
 
@@ -110,17 +141,21 @@ class Comment(admin.ModelAdmin):
     list_display = ('author','content','email','website','time',)
     
     ordering = ('-time',)
-        
+
+
+
 
 class Entry(CounterAdmin):
     model = models.Entry
     form = EntryForm
     
-    inlines = (ImageGallery,CommentInline)
+    inlines = (CommentInline,)
 
     search_fields = ('title',)
     
-    list_display = ('__unicode__','author','created','published','gallery','view',)
+    list_display = ('__unicode__','author','created','published','view',)
+
+    list_filter = ('number',)
     
     readonly_fields = ('slug',)
     
@@ -135,7 +170,7 @@ class Entry(CounterAdmin):
         
         if not request.user.is_superuser and not request.user.get_profile().is_editor:
             self.readonly_fields = ('slug',)
-            self.exclude = ('author','gallery','published',)
+            self.exclude = ('author','published','is_editorial','number',)
             #form.base_fields['author'].queryset = form.base_fields['author'].queryset.filter(id=request.user.id)
             
         return form
@@ -179,10 +214,7 @@ class Entry(CounterAdmin):
         
         return qs
 
-
-
-
-admin.site.register(models.Section,Section)
+admin.site.register(models.Number,Number)
 admin.site.register(models.Subsection,Subsection)
 admin.site.register(models.Entry,Entry)
 admin.site.register(models.Comment,Comment)
