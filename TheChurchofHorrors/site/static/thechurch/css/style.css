@@ -728,6 +728,10 @@ a:hover { color:#d10019; }
 
 .entry div.column { padding-right:10px; }
 
+.entry img  {
+    max-width: 620px;
+}
+
 .entry p strong {
     font-weight:bold;
 }
