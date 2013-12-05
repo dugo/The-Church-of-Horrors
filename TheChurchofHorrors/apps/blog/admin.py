@@ -121,7 +121,8 @@ class EntryForm(ModelForm):
     
     def clean_is_editorial(self):
         if self.cleaned_data.get("is_editorial") and self.cleaned_data.get("number"):
-            if not self.cleaned_data.get("number").editorial is None:
+            editorial = self.cleaned_data.get("number").editorial
+            if not editorial is None and editorial.id <> self.instance.id :
                 raise forms.ValidationError(u'Este Número ya tiene un artículo marcado cómo editorial, desmárquelo para continuar.')
 
         return self.cleaned_data.get("is_editorial")
