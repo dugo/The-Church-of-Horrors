@@ -85,6 +85,8 @@ hr {
     position:absolute;
     bottom:0;
     left:0;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 #header #top-left div img {
@@ -472,6 +474,7 @@ a:hover { color:#d10019; }
     font-family: verdana;
     font-size: 10px;
     color: #d20c24;
+    display:block;
 }
 
 
@@ -560,6 +563,7 @@ a:hover { color:#d10019; }
     font-size:10px;
     margin:0;
     padding-top: 16px;
+    text-align: right;
 }
 
 #left div.author img {

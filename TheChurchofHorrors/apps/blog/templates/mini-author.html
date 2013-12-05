@@ -10,5 +10,7 @@
     
     <div class="desc">{{author.get_profile.description|safe}}</div>
     <div class="links">
+    <a href="#" title="Ir a Sitios" style="float:left">Ir a Sitios</a>
+
     {%for link in author.get_profile.get_items%}<a href="{{link.url}}" onclick="window.open(this.href);return false;">{{link|lower}}</a>{% if not forloop.last %} / {%endif%}{%endfor%}</div>
 </div>
