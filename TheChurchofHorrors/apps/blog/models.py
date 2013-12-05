@@ -148,7 +148,6 @@ class Entry(models.Model):
     #show_gallery = models.BooleanField(_(u'Mostrar galería en entrada'),help_text=_(u'Se mostrará en la propia entrada una galería con las imágenes en el orden establecido. Si hay sólo una imagen se mostrará la imagen estática'),default=False,blank=True)
     tags = TaggableManager()
     imagen = FileBrowseField(blank=False,format='image',extensions=[".jpg",".png",".jpeg",".gif"],default='')
-    imagen = models.FileField(upload_to='./')
     is_editorial = models.BooleanField(_(u'Es editorial'),default=False,blank=True)
     
     def __unicode__(self):
