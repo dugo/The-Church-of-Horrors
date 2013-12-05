@@ -747,6 +747,7 @@ a:hover { color:#d10019; }
     top: 0;
     right: 0;
     padding: 4px;
+    position: absolute;
 }
 
 .entry .content-entry hr {
