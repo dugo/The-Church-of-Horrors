@@ -615,6 +615,7 @@ a:hover { color:#d10019; }
     overflow:hidden;
     background-color: white;
     padding:20px 15px;
+    position: relative;
 }
 
 .entry .image-entry {
@@ -742,8 +743,10 @@ a:hover { color:#d10019; }
 
 .entry .edit {
     font-size:10px;
-    float:right;
     font-family:verdana;
+    top: 0;
+    right: 0;
+    padding: 4px;
 }
 
 .entry .content-entry hr {
