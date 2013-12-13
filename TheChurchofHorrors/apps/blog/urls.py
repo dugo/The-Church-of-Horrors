@@ -5,7 +5,7 @@ from feeds import LatestEntriesFeed
 
 urlpatterns = patterns('blog.views',
 
-    url(r'^$', 'number',name='number'),
+    url(r'^$', 'home',name='home'),
     url(r'^numero-(?P<number>\d+)/(?P<year>\d+)/(?P<month>\d+)/$', 'number',name='number'),
     url(r'^contact/$', 'contact',name='contact'),
     #url(r'^search/$', 'search',name='search'),

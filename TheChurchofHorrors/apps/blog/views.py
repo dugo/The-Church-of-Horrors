@@ -14,15 +14,18 @@ from forms import CommentForm,CommentFormAuthenticated
 from userprofile.models import UserProfile,Rol
 from taggit.models import Tag
 
-def number(request,number=None,month=None,year=None):
+def home(request):
 
     if request.method == "GET" and request.GET.get("q"):
         return search(request)
+
+    number = Number.get_current()
+
+    return HttpResponseRedirect(number.get_absolute_url())
+
+def number(request,number=None,month=None,year=None):
     
-    if number:
-        number = get_object_or_404(Number,number=number,year=year,month=month)
-    else:
-        number = Number.get_current()
+    number = get_object_or_404(Number,number=number,year=year,month=month)
 
     return render_to_response("home.html", 
         dict(number=number), 
