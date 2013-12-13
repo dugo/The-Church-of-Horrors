@@ -13,7 +13,7 @@
 
 {% block author %}{% mini_author entry.author %}{% endblock %}
 
-{%block breadcrumb%}{% breadcrumb request.get_full_path number entry.subsection %}{%endblock%}
+{%block breadcrumb%}{% breadcrumb request.get_full_path number subsection entry %}{%endblock%}
 
 {%block content_class%}entry{%endblock%}
 
@@ -140,7 +140,6 @@ function paging(link,margin) {
             </script>
         </div>
     </div>
-    <hr/>
     
     {% with entry.get_related as related %}
         {% if related %}
@@ -149,7 +148,6 @@ function paging(link,margin) {
                 {% for e in related %}
                     {% preview_entry e forloop.counter 6%}
                 {% endfor %}
-                <hr/>
             </div>
         {%endif%}
     {%endwith%}

@@ -60,7 +60,7 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.join(OLD_SITE_ROOT,"media")
+MEDIA_ROOT = os.path.join(SITE_ROOT,"media")
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -72,7 +72,7 @@ MEDIA_URL = 'http://media.thechurchofhorrors.com/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.join(OLD_SITE_ROOT,"static")
+STATIC_ROOT = os.path.join(SITE_ROOT,"static")
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -155,7 +155,7 @@ FILEBROWSER_VERSIONS = {
   'fb_thumb': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'crop'},
   'mini': {'verbose_name': 'Mini', 'width': 420, 'height': '', 'opts': ''},
   'micro': {'verbose_name': 'Micro', 'width': 62, 'height': 77, 'opts': 'crop'},
-  'preview': {'verbose_name': 'Preview', 'width': 104, 'height': 105, 'opts': 'crop'},
+  'preview': {'verbose_name': 'Preview', 'width': 146, 'height': 146, 'opts': 'crop'},
   'gallery': {'verbose_name': 'Gallery', 'width': 730, 'height': '', 'opts': ''},
 }
 FILEBROWSER_ADMIN_VERSIONS = ['mini','preview','gallery',]
@@ -165,12 +165,13 @@ TINYMCE_JS_URL = '/static/tiny_mce/tiny_mce_src.js'
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "tiny_mce")
 TINYMCE_DEFAULT_CONFIG = {
     #'plugins': "preview,spellchecker,paste,searchreplace,media,embed",
-    'plugins': "preview,table,spellchecker,paste,searchreplace,media,embed,template,fullscreen",
+    'plugins': "preview,spellchecker,paste,searchreplace,media,embed,template,fullscreen",
     'theme': "advanced",
-    "theme_advanced_buttons3_add_before" : "tablecontrols,separator",
+    #"theme_advanced_buttons3_add_before" : "tablecontrols,separator",
     "theme_advanced_buttons2_add" : "separator,pastetext,pasteword,copy,paste",
     "theme_advanced_buttons1_add" : "separator,forecolor,fontsizeselect",
-    "theme_advanced_buttons3_add" : "separator,preview,emotions,embed,separator,template,separator,fullscreen",
+    #"theme_advanced_buttons3_add" : "separator,preview,emotions,embed,separator,template,separator,fullscreen",
+    "theme_advanced_buttons3_add" : "separator,preview,emotions,embed,separator",
     #"style_formats" : [ {"title" : 'Cita', "block" : 'blockquote'} ], 
     "style_formats" : [  ], 
     "paste_text_linebreaktype" : "p",

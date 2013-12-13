@@ -194,7 +194,7 @@ $(document).ready(function(){
 
             <div id="subsections">
                 {% for s in subsections %}
-                    <a href='#' title="{{s}}">{{s}}</a>
+                    <a href='{% if number%}{% url "subsection" number.number number.year number.month s.slug%}{%else%}{% url "subsection" current_number.number current_number.year current_number.month s.slug%}{%endif%}' title="{{s}}">{{s}}</a>
                 {% endfor %}
             </div>
 
@@ -293,7 +293,7 @@ $(document).ready(function(){
                         <h3>CATEGORÍAS</h3>
 
                         {% for s in subsections %}
-                            <a href='#' title="{{s}}">{{s}}</a>
+                            <a href='{% if number%}{% url "subsection" number.number number.year number.month s.slug%}{%else%}{% url "subsection" current_number.number current_number.year current_number.month s.slug%}{%endif%}' title="{{s}}">{{s}}</a>
                         {% endfor %}
                     </div>
 

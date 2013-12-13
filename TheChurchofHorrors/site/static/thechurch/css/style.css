@@ -1,5 +1,5 @@
 * {margin:0;padding:0;}
-body { background-color: #f2f3f5; }
+body { background-color: #808184; padding-top:200px;}
 a {text-decoration:none; color:#5889b6;}
 img { border:0; }
 hr {
@@ -21,7 +21,7 @@ hr {
 @font-face{font-family:DINWeb-Black;src:url("fonts/DINWeb-Black.woff") format("woff");}
 
 
-#container { width:1030px; margin: 0 auto; height:auto;display:block;overflow:hidden;}
+#container { width:1030px; margin: 0 auto; height:auto;display:block;overflow:hidden;background-color: #f2f3f5;}
 #header { width: 100%; margin: 16px auto 0 auto; display:block;overflow:visible;}
 #header a img { float:left; display:block;margin-top:30px;cursor:pointer;margin-left: 20px}
 #header #banner { position:relative;margin-left:20px;height:56px;width:720px;/*background-color:#d10018;*/float:left;display:block;}
@@ -36,7 +36,7 @@ hr {
 .logo-social {background-position: -180px 0px !important;width: 55px!important;}
 #header #subsections {
     width:145px;
-    border-top:2px solid black;
+    border-top:3px solid black;
     float:right;
     margin-right:20px;
     padding-top:5px;
@@ -53,7 +53,7 @@ hr {
 }
 
 #header #top-left div {
-    border-top:2px solid black;
+    border-top:3px solid black;
     margin-top:8px;
     padding:8px 0 0 0;
     position:relative;
@@ -144,7 +144,7 @@ hr {
     width:20px;
     cursor:pointer;
     }
-#header #subsections a { color:black;float:right;clear:both;text-align:right;display:block;width:100%;text-transform:uppercase;font-family:verdana,sans-serif;font-size:10px; line-height:13px;}
+#header #subsections a { color:black;float:right;clear:both;text-align:right;display:block;width:100%;text-transform:uppercase;font-family:"DINWeb-Medium",Arial;font-size:11px; line-height:13px;}
 #header #subsections a:hover { text-decoration: underline; }
 a:hover { color:#d10019; }
 
@@ -161,30 +161,39 @@ a:hover { color:#d10019; }
 #related {
     width:100%;
     padding:0;
+    text-transform: uppercase;
 }
 
 #left div, #related div {
     height:172px;
     display:block;
     float:left;
-    margin-bottom:16px;
+    /*margin-bottom:16px;*/
     overflow:hidden;
 }
+
+#related div {width: 146px}
 
 
 #related div {
     margin-right:21px;
 }
 
+#related img {
+    width:146px;
+    height:146px;
+}
+
 
 #left div.section,#related div.section {
-    background:transparent url('../images/bullet.png') no-repeat left 6px;
+    /*background:transparent url('../images/bullet.png') no-repeat left 6px;*/
     font-family:"DINWeb-Medium",Arial;
-    font-size:14px;
-    padding-left: 10px;
+    font-size:16px;
+    /*padding-left: 10px;*/
     margin-top:6px;
     height:auto;
     width:auto;
+    color:#5889b6;
 }
 
 #related div.section {
@@ -215,7 +224,7 @@ a:hover { color:#d10019; }
 #left div .author, #related div .author {
     font-family:verdana,sans-serif;
     font-size:10px;
-    color:#808184;
+    color:#d10019;
     font-weight:normal;
     display:block;
 }
@@ -226,6 +235,7 @@ a:hover { color:#d10019; }
     font-weight:normal;
     font-style:italic;
     display:block;
+    text-transform: none;
 }
 
 #left div div, #related div div {
@@ -330,16 +340,20 @@ a:hover { color:#d10019; }
     margin:16px 0;
 }
 
+.subsection .short-entry {margin-top:0;}
+
+.subsection .short-entries {padding-top:0;}
+
 #footer {
     position:relative;
-    margin-top:30px;
-    margin:30px auto 0 auto;
+    margin:0 auto;
     /*bottom:0px;*/
     height:190px;
     width:100%;
     /*width:980px;*/
     background-color:#404042;
     text-align:center;
+    width: 1030px;
 }
 
 #footer .search {
@@ -427,6 +441,7 @@ a:hover { color:#d10019; }
     margin-bottom:3px;
     color:white;
     font-family:"DINWeb-Medium",Arial;
+    font-weight: normal;
 }
 #footer .footer-item a {
     display:block;
@@ -802,6 +817,7 @@ a:hover { color:#d10019; }
     overflow: hidden;
     height:12px;
     padding-right:18px;
+    width: auto!important;
 }
 
 #breadcrumb .item a {
@@ -810,6 +826,15 @@ a:hover { color:#d10019; }
 
 #breadcrumb .item a:hover {
     color:white;
+}
+
+#breadcrumb .prearrow {
+    width: 0px;
+    height: 0px;
+    border-top: 9px solid #404041;
+    border-bottom: 9px solid #404041;
+    border-left: 9px solid transparent;
+    float:left;
 }
 
 #breadcrumb .arrow {
@@ -1006,26 +1031,29 @@ a:hover { color:#d10019; }
 
 #comments {
     overflow:hidden;
-    width:610px;
+    width:630px;
     margin-top:15px;
-    margin-left:3px;
+    padding:10px;
+    background-color:white;
     font-family:Verdana;
     font-size:10px;
 }
 
 #comments .title {
-    background: transparent url('../images/bullet.png') no-repeat left 6px;
     font-family: "DINWeb-Medium",Arial;
-    font-size: 14px;
-    padding-left: 10px;
     margin-top: 6px;
     height: auto;
     width: auto;
     color:black;
+    font-size:16px;
+    height:auto;
+    width:auto;
+    color:#5889b6;
+    text-transform: uppercase;
 }
 
 #comments input[type=text],#comments textarea {
-    background-color:white;
+    background-color:#f1f4f4;
     border:none;
     display:inline-block;
     clear:left;
@@ -1049,10 +1077,10 @@ a:hover { color:#d10019; }
 }
 
 #comments textarea {
-    width:608px;
+    width:100%;
     height:85px;
     resize:none;
-    margin-bottom:7px;
+    margin-bottom:14px;
 }
 
 #comments span {
@@ -1075,7 +1103,7 @@ a:hover { color:#d10019; }
 #comments .content {
     padding:10px;
     display:block;
-    background-color:#fafbfd;
+    background-color:#f1f4f4;
     margin:5px auto;
     width:90%;
 }

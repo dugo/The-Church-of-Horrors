@@ -10,11 +10,11 @@ register = template.Library()
 
 @register.inclusion_tag('preview-entry.html')
 def preview_entry(entry, n=0,cols=2):
-	return {'e':entry,'parity':n%cols}
-	
+    return {'e':entry,'parity':n%cols}
+    
 @register.inclusion_tag('mini-author.html')
 def mini_author(author):
-	return {'author':author}
+    return {'author':author}
     
 @register.inclusion_tag('gallery-entry.html')
 def entry_gallery(entry):
@@ -33,38 +33,35 @@ def home_gallery():
     total = len(gallery)
     
     return {'gallery':gallery, "total":total }
-	
+    
 @register.inclusion_tag('breadcrumb.html')
-def breadcrumb(path,number=None,subsection=None,request=None,tag=None,archive=None):
-	
-	urls = []
+def breadcrumb(path,number=None,subsection=None,entry=None,request=None,tag=None,archive=None):
+    
+    urls = []
 
-	if subsection:
-		urls.append( (subsection.get_absolute_url(),unicode(subsection),) )
+    if not number:
 
-	if not subsection:
+        mapping = settings.BLOG_BREADCRUMB_URL_MAPPING
 
-		mapping = settings.BLOG_BREADCRUMB_URL_MAPPING
+        token = path.split('/')[1]
+        
+        if mapping.get(token):
+            urls.append( (path, mapping.get(token),) )
+    
+    # for search
+    if not urls and not request is None and request.method == "GET" and request.GET.get("q"):
+        urls.append( (path, u"Resultados de '%s'" % request.GET.get('q'),) )
 
-		token = path.split('/')[1]
-		
-		if mapping.get(token):
-			urls.append( (path, mapping.get(token),) )
-	
-	# for search
-	if not urls and not request is None and request.method == "GET" and request.GET.get("q"):
-		urls.append( (path, u"Resultados de '%s'" % request.GET.get('q'),) )
+    if not tag is None:
+        urls.append( (request.path, "<em>%s</em>" % str(tag),) )
+    
+    if not archive is None:
+        urls.append( (request.path, "%s" % archive.strftime("%B %Y").title() ,) )
 
-	if not tag is None:
-		urls.append( (request.path, "<em>%s</em>" % str(tag),) )
-	
-	if not archive is None:
-		urls.append( (request.path, "%s" % archive.strftime("%B %Y").title() ,) )
+    if urls and (not subsection):
+        urls.insert(0, ("/", "HOME") )
 
-	if urls and (not subsection):
-		urls.insert(0, ("/", "HOME") )
-	
-	return {'urls':urls,'number':number}
+    return {'urls':urls,'number':number,'subsection':subsection,'entry':entry}
 
 @register.filter
 @stringfilter

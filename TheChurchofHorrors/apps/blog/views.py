@@ -28,6 +28,16 @@ def number(request,number=None,month=None,year=None):
         dict(number=number), 
         context_instance=RequestContext(request))
 
+def subsection(request,number,month,year,subsection):
+
+    number = get_object_or_404(Number,number=number,year=year,month=month)
+    subsection = get_object_or_404(Subsection,slug=subsection)
+    entries=number.other_entries.filter(subsection__id=subsection.id)
+
+    return render_to_response("subsection.html", 
+        dict(number=number,subsection=subsection,entries=entries,),
+        context_instance=RequestContext(request))
+
 def search(request):
     
     q = request.GET.get("q")
@@ -186,6 +196,7 @@ def entry(request,number,month,year,subsection,slug):
             email=email,
             content=content,
             number=number,
+            subsection=entry.subsection,
             form=form), 
         context_instance=RequestContext(request))
         
