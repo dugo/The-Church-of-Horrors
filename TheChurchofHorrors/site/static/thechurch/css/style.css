@@ -340,7 +340,7 @@ a:hover { color:#d10019; }
     margin:16px 0;
 }
 
-.subsection .short-entry {margin-top:0;}
+.subsection .short-entry {margin-top:0;margin-bottom: 32px;}
 
 .subsection .short-entries {padding-top:0;}
 
