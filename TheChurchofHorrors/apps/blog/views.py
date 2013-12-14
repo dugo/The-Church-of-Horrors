@@ -153,10 +153,10 @@ def authors(request):
 
       return out
     
-    qs = UserProfile.get_authors()
+    qs = list(set(UserProfile.get_authors()))
     
-
-    authors = chunkIt(random.shuffle(list(set(qs))),3)
+    random.shuffle(qs)
+    authors = chunkIt(qs,3)
     authors.reverse()
     
     return render_to_response("authors.html", 
