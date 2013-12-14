@@ -167,7 +167,7 @@ function paging(link,margin) {
             </div>
             {%endif%}
         {%endfor%}
-        {% if user.is_authenticated%}
+
         <form action=".#comments" method="post">
             <input name="author" type="text" value="{{author}}"/>Nombre <span>(*)</span><br/>
             <input name="email" type="text" value="{{email}}"/>Email <span>(*) (No será publicado)</span><br/>
@@ -180,6 +180,6 @@ function paging(link,margin) {
             {%csrf_token%}
             <input type="submit" value="PUBLICAR" onclick="return validate();">
         </form>
-        {%endif%}
+
     </div>
 {%endblock%}

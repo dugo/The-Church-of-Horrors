@@ -139,7 +139,22 @@ def archive(request,year,month):
     return render_to_response("home-short.html", 
         dict(right_entries=right_entries,entries=entries, archive=datetime.date(int(year),int(month),1),section=None,subsection=None,tag=None), 
         context_instance=RequestContext(request))
+
+def authors(request):
     
+    qs = UserProfile.get_authors().order_by("?")
+    
+    n = qs.count()/3
+
+    authors = []
+    authors.append( qs[n*2:] )
+    authors.append( qs[:n] )
+    authors.append( qs[n:n*2] )
+    
+    return render_to_response("authors.html", 
+        dict(authors=authors,), 
+        context_instance=RequestContext(request))
+
 def author(request,user):
     
     author = get_object_or_404(User,username=user)
@@ -147,7 +162,7 @@ def author(request,user):
     entries = Entry.get_last_by_author(author)
 
     return render_to_response("author.html", 
-        dict(right_entries=[], entries=entries, author=author,section=None,subsection=None), 
+        dict(entries=entries, author=author,), 
         context_instance=RequestContext(request))
 
 @fix_recaptcha_remote_ip

@@ -150,7 +150,7 @@ a:hover { color:#d10019; }
 
 #left {
     width:313px;
-    display:block;
+    display:none;
     float:right;
     /*border:1px solid green;*/
     margin-top:48px;
@@ -342,9 +342,9 @@ a:hover { color:#d10019; }
     margin:16px 0;
 }
 
-.subsection .short-entry {margin-top:0;margin-bottom: 32px;}
+.subsection .short-entry,.author .short-entry {margin-top:0;margin-bottom: 32px;}
 
-.subsection .short-entries {padding-top:0;}
+.subsection .short-entries,.author .short-entries {padding-top:0;}
 
 #footer {
     position:relative;
@@ -595,6 +595,10 @@ a:hover { color:#d10019; }
 
 .entry #content {
     width:650px;
+}
+
+.entry #left {
+    display:block;
 }
 
 .entry h1 {
@@ -1116,4 +1120,101 @@ a:hover { color:#d10019; }
 
 #comments label {
     display:none;
+}
+
+.authors .col {
+    width: 314px;
+    height:auto;
+    float:left;
+    overflow: hidden;
+}
+
+
+.authors .col {
+    margin-right: 24px;
+}
+
+.authors .col:last-child {
+    margin-right: 0;
+}
+
+.authors .author {
+    /*margin-top:6px;*/
+    height:auto;
+    margin-bottom: 30px;
+    padding:16px 12px 16px 12px;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.authors .author span {
+    display:block;
+    background:transparent url('../images/bullet.png') no-repeat left 6px;
+    font-family:"DINWeb-Medium",Arial;
+    font-size:14px;
+    padding-left: 10px;
+    margin-top:6px;
+    height:auto;
+    width:100%;
+    margin-bottom:10px;
+}
+
+.authors .author .name {
+    margin-bottom:10px;
+    float:left;
+}
+
+.authors .author .name,.authors .author .name a {
+    display:block;
+    color: #d10019;
+    font-family:"DINWeb-Medium",Arial;
+    font-size:18px;
+    height:auto;
+    width:138px;
+}
+.authors .author .desc {
+    display:inline;
+    font-family:verdana;
+    font-size:10px;
+    height:auto;
+    width:106px;
+    margin:0;
+    color:black;
+    float:left;
+}
+
+.authors .author .links.sitios a  {
+    width:130px;
+    text-align: center;
+    text-transform: uppercase;
+    color:white;
+    background: black;
+    font-family:"DINWeb-Medium",Arial;
+    font-size:14px;
+    font-weight: bold;
+    padding:2px 0;
+}
+
+.authors .author .links {
+    height:auto;
+    width:100%;
+    font-family:verdana;
+    font-size:10px;
+    margin:0;
+    padding-top: 16px;
+    text-align: right;
+    display: block;
+    float: none;
+    clear: both;
+}
+
+.authors .author img {
+    display:block;
+    width:130px;
+    height:auto;
+    /*margin-left: -10px;*/
+    float:left;
+    margin-right:20px;
+    /*margin-bottom:10px;*/
 }

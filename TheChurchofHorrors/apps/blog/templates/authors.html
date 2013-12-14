@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load blog %}
+
+{% block extra_metatags %}
+<meta name="keywords" content="{{authors|join:","}}"/>
+<meta name="description" content="Sitios" />
+{%endblock%}
+
+{% block title %}The Church of Horrors :: Sitios{%endblock%}
+
+{%block breadcrumb%}{% breadcrumb request.get_full_path %}{%endblock%}
+
+{%block content_class%}home authors{%endblock%}
+
+{%block content%}
+
+	{% for subauthors in authors%}
+		<div class="col">
+		{% for author in subauthors%}
+	    	<div class="author">
+	    
+			    {% if author.get_published.count %}
+			        <a href="{{author.get_absolute_url}}"><img src="{{author.avatar.url}}" alt='{{author}}'/></a>
+			        <div class="name"><a href="{{author.get_absolute_url}}">{{author}}</a></div>
+			    {%else%}
+			        <img src="{{author.avatar.url}}" alt='{{author}}'/>
+			        <div class="name">{{author}}</div>
+			    {%endif%}
+			    
+			    <div class="desc">{{author.description|safe}}</div>
+			    <div class="links sitios">
+			        <a href="{{author.get_absolute_url}}" title="Ir a Sitio" style="float:left">Ir a Sitio</a>
+			    </div>
+
+			    {%if author.get_items%}
+				    <div class="links">
+				    {%for link in author.get_items%}<a href="{{link.url}}" onclick="window.open(this.href);return false;">{{link|lower}}</a>{% if not forloop.last %} / {%endif%}{%endfor%}</div>
+			    {%endif%}
+			</div>
+
+	    {%endfor%}
+		</div>
+	{%endfor%}
+{%endblock%}

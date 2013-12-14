@@ -42,6 +42,10 @@ class UserProfile(models.Model):
         return self.user.groups.filter(id=settings.BLOG_EDITOR_GROUP_ID).count()
     
     @classmethod
+    def get_authors(cls):
+        return cls.objects.filter(user__entries__published=True)
+
+    @classmethod
     def get_by_rol(self,rol_id):
         return UserProfile.objects.filter(id__in=RolItem.objects.filter(rol__id=rol_id).values_list("profile",flat=True))
     

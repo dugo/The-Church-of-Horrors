@@ -19,7 +19,9 @@
 
 	{% for u in urls%}
 		{%if not forloop.first%}<div class="prearrow"></div>{%endif%}
-	<div class="item"><a href="{{u.0}}" title="Ir a {{u.1}}">{{u.1}}</a></div>
+	<div class="item"><a href="{{u.0}}" title="Ir a {{u.1}}">
+		{%if forloop.first%}<strong>{{u.1}}</strong>{%else%}{{u.1}}{%endif%}
+	</a></div>
 	<div class="arrow"></div>
 	{%endfor%}
 

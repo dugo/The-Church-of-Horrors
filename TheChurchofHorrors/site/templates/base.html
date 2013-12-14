@@ -227,7 +227,7 @@ $(document).ready(function(){
                 <a href='/' class="section">HOME</a>
 
                 {#<a href='{{s.get_absolute_url}}' class="section">ANTERIORES</a>#}
-                <a href='{{s.get_absolute_url}}' class="section">SITIOS</a>
+                <a href='{% url 'authors' %}' class="section">SITIOS</a>
                 
                 <a href='http://vimeo.com/thechurchofhorrors' class="social vimeo" target="_blank"></a>
                 <a href='https://twitter.com/#!/churchofhorrors' class="social twitter" target="_blank"></a>
@@ -282,7 +282,7 @@ $(document).ready(function(){
                 <div class="footer-item footer-item-2">
                 
                     <div class="subitem">    
-                        <h3><a href="#">Sitios</a></h3>
+                        <h3><a href="{%url 'authors'%}">Sitios</a></h3>
                         <hr/>
                         <h3><a href="{% url 'contact' %}?next={{request.path}}">Contacto</a></h3>
                         <h3><a href="{% url 'staff' %}">Staff</a></h3>

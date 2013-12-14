@@ -81,17 +81,6 @@ STATIC_URL = 'http://static.thechurchofhorrors.com/'
 
 ADMIN_MEDIA_PREFIX = STATIC_URL+'admin/'
 
-# Additional locations of static files
-STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    ("admin_tools", os.path.join(MODULES_ROOT,"admin_tools","media","admin_tools")),
-    ("tiny_mce", os.path.join(MODULES_ROOT,"tinymce","static","tiny_mce")),
-    ("filebrowser", os.path.join(MODULES_ROOT,"filebrowser","media","filebrowser")),
-    ("thechurch", os.path.join(STATIC_ROOT,"thechurch",)),
-)
-
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
@@ -282,6 +271,7 @@ BLOG_BREADCRUMB_URL_MAPPING = {
     'staff':"Staff",
     'author':"Autor",
     'info':"Información",
+    'sitios':"Sitios",
     }
 BLOG_CONTACT_EMAILS = ["rdugomartin@gmail.com"]
 BLOG_EDITOR_ROL_ID = 1
@@ -289,7 +279,7 @@ BLOG_EDITOR_GROUP_ID = 3
 BLOG_DEFAULT_SENDER = 'TheChurchofHorrors <info@thechurchofhorrors.com>'
 
 ABSOLUTE_URL_OVERRIDES = {
-    'auth.user': lambda u: "/!/%s/" % u.username,
+    'auth.user': lambda u: "/sitios/%s/" % u.username,
 }
 
 DATETIME_FORMAT = DATE_FORMAT = "d b Y"
@@ -303,6 +293,18 @@ if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     MEDIA_ROOT = os.path.join(SITE_ROOT,"media")
     STATIC_ROOT = os.path.join(SITE_ROOT,"static")
+
+# Additional locations of static files
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    ("admin_tools", os.path.join(MODULES_ROOT,"admin_tools","media","admin_tools")),
+    ("tiny_mce", os.path.join(MODULES_ROOT,"tinymce","static","tiny_mce")),
+    ("filebrowser", os.path.join(MODULES_ROOT,"filebrowser","media","filebrowser")),
+    ("thechurch", os.path.join(STATIC_ROOT,"thechurch",)),
+)
+
 
 CACHES = {
     'default': {
