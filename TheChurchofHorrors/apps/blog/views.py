@@ -142,13 +142,22 @@ def archive(request,year,month):
 
 def authors(request):
 
-    def chunks(l, n):
-        for i in xrange(0, len(l), n):
-            yield l[i:i+n]
+    def chunkIt(seq, num):
+      avg = len(seq) / float(num)
+      out = []
+      last = 0.0
+
+      while last < len(seq):
+        out.append(seq[int(last):int(last + avg)])
+        last += avg
+
+      return out
     
     qs = UserProfile.get_authors().order_by("?")
     
-    authors = chunks(list(qs),3)
+
+    authors = chunkIt(list(qs),3)
+    authors.reverse()
     
     return render_to_response("authors.html", 
         dict(authors=authors,), 
