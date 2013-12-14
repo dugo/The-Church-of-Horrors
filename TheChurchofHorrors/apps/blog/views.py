@@ -156,7 +156,7 @@ def authors(request):
     qs = UserProfile.get_authors().order_by("?")
     
 
-    authors = chunkIt(list(qs),3)
+    authors = chunkIt(list(set(qs)),3)
     authors.reverse()
     
     return render_to_response("authors.html", 
