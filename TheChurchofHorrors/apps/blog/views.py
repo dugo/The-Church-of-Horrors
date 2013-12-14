@@ -149,9 +149,9 @@ def authors(request):
     qs = list(qs)
 
     authors = []
-    authors.append( qs[n*2:] )
+    authors.append( qs[n*2+1:] )
     authors.append( qs[:n] )
-    authors.append( qs[n:n*2] )
+    authors.append( qs[n+1:n*2] )
     
     return render_to_response("authors.html", 
         dict(authors=authors,), 
