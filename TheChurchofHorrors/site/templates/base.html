@@ -31,6 +31,7 @@
 {%block extra_metatags%}
 <meta name="keywords" content="the church of horrors,thechurchofhorrors.com,magazine,cultural,magazine cultural,{{sections|join:','}},{{subsections|join:','}}"/>
 <meta name="description" content="The Church of Horrors intenta crear un espacio donde convivan diferentes propuestas y estilos artísticos, fomentando a su vez el conocimiento de obras y artistas; cuyo mejor medio de difusión se encuentra en la misma red." />
+<meta property="og:image" content="{{STATIC_URL}}fblogo.png" />
 {%endblock%}
 
 {% if request.is_ajax %}
@@ -65,22 +66,6 @@
 {% if not request.is_ajax %}
 
 <script type="text/javascript" >
-function next_banner() {
-    
-    if (window_focus) {
-        var current = parseInt($("#banner").attr("current"));
-        
-        var i = (current>=2)?0:current+1;
-        
-        $($("#banner a img")[current]).fadeOut(2000);
-        $($("#banner a img")[i]).fadeIn(2000);
-        
-        $("#banner").attr("current",i+"")    
-    }
-    
-    setTimeout("next_banner()",10000);
-}
-
 $(document).ready(function(){
     $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
     $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
@@ -360,7 +345,7 @@ $(document).ready(function(){
                             {% endfor %}
                         {%endwith%}
                         {%endif%}
-                        
+
                     </div>
 
                 </div>
