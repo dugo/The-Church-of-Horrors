@@ -26,9 +26,10 @@ def home(request):
 def number(request,number=None,month=None,year=None):
     
     number = get_object_or_404(Number,number=number,year=year,month=month)
+    sitios = number.get_sitios()
 
     return render_to_response("home.html", 
-        dict(number=number), 
+        dict(number=number,sitios=sitios), 
         context_instance=RequestContext(request))
 
 def subsection(request,number,month,year,subsection):
@@ -211,11 +212,11 @@ def entry(request,number,month,year,subsection,slug):
 
     else:
         form = CommentFormAuthenticated() if request.user.is_authenticated() else CommentForm(request)
+        entry.add_view_mark(request.META.get("REMOTE_ADDR"),request.user)
     
-    right_entries = Entry.get_last_by_author(entry.author,entry)
 
     return render_to_response("entry.html", 
-        dict(right_entries=right_entries,
+        dict(
             entry=entry,
             author=author,
             website=website,

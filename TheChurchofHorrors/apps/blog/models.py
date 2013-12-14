@@ -9,8 +9,9 @@ from django.conf import settings
 from filebrowser.fields import FileBrowseField
 from taggit.managers import TaggableManager
 from django.core.urlresolvers import reverse
+from django.core.cache import cache
 from dateutil.relativedelta import relativedelta
-import datetime,sys
+import datetime,sys,random
 
 from south.modelsinspector import add_introspection_rules
 add_introspection_rules([], ["^tinymce\.models\.HTMLField"])
@@ -62,12 +63,22 @@ class Number(models.Model):
     published = models.BooleanField("Publicado",default=False,)
 
     @property
+    def modified(self):
+        return self.entries.all().order_by("-modified").values('modified')[0]['modified']
+
+    @property
     def editorial(self):
         try:
             return self.entries.get(is_editorial=True)
         except Entry.DoesNotExist:
             return None
 
+    @property
+    def cartoon(self):
+        try:
+            return self.entries.get(is_cartoon=True)
+        except Entry.DoesNotExist:
+            return None
 
     @models.permalink
     def get_absolute_url(self):
@@ -75,14 +86,31 @@ class Number(models.Model):
 
     @property
     def other_entries(self):
-        return self.entries.filter(is_editorial=False)
+        return self.entries.filter(is_editorial=False,is_cartoon=False)
 
     @classmethod
     def get_current(cls):
         return cls.objects.filter(published=True).order_by("-number")[0]
 
+    def get_more_comment(self):
+        return self.other_entries.order_by("-ncomments")
+
+    def get_more_view(self):
+        return self.other_entries.order_by("-views")
+
     def __unicode__(self):
         return u"Número %d"%self.number
+
+    def get_sitios(self):
+        qs = UserProfile.objects.filter(user__entries__id__in=self.entries.filter(published=True).values_list("id",flat=True))
+        qs = list(set(qs))
+        random.shuffle(qs)
+
+        return qs
+
+    def get_subsections(self):
+
+        return Subsection.objects.filter(id__in=self.other_entries.values_list("subsection",flat=True))
 
     class Meta:
         ordering = ("-number",)
@@ -144,15 +172,27 @@ class Entry(models.Model):
     modified = models.DateTimeField(_(u'Modificado'),auto_now=True)
     published = models.BooleanField(_(u'Publicado'),default=False,blank=False)
     slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=_(u"Será generada automaticamente a partir del título"))
+    views = models.PositiveIntegerField("Visto",db_index=True,default=0,blank=True)
+    ncomments = models.PositiveIntegerField("Comentado",db_index=True,default=0,blank=True)
     #gallery = models.BooleanField(_(u'Mostrar en galería de HOME'),help_text=_(u'Se mostrará sólo la imagen marcada cómo principal'),default=False,blank=True)
     #show_gallery = models.BooleanField(_(u'Mostrar galería en entrada'),help_text=_(u'Se mostrará en la propia entrada una galería con las imágenes en el orden establecido. Si hay sólo una imagen se mostrará la imagen estática'),default=False,blank=True)
     tags = TaggableManager()
     imagen = FileBrowseField(blank=False,format='image',extensions=[".jpg",".png",".jpeg",".gif"],default='')
     is_editorial = models.BooleanField(_(u'Es editorial'),default=False,blank=True)
+    is_cartoon = models.BooleanField(_(u'Es viñeta'),default=False,blank=True)
     
     def __unicode__(self):
         return unicode(self.title)
     
+    def add_view_mark(self,ip,user):
+        key = "thechurch-view-%s-%s"%(ip,user.id,)
+        if not cache.get(key) and not self.author==user:
+            self.views+=1
+            self.save()
+
+        cache.set(key,"ok",3600)
+
+
     @classmethod
     def get_archive(self,year,month):
         current = datetime.date(int(year),int(month),1)
@@ -311,6 +351,16 @@ class Comment(models.Model):
     website = models.URLField(_(u'Web'),blank=True,default="")
     approved = models.BooleanField(_(u'Aprobado'),blank=True,default=True)
     content = models.TextField()
+
+    def save(self,*args,**kwargs):
+
+        if not getattr(self,"pk",None):
+            e = self.entry
+            e.ncomments+=1
+            e.save()
+
+        super(Comment,self).save(self,*args,**kwargs)
+
     
     def notify(self):
         to = set(UserProfile.get_by_rol(settings.BLOG_EDITOR_ROL_ID).values_list("user__email",flat=True))

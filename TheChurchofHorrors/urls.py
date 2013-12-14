@@ -7,8 +7,9 @@ admin.autodiscover()
 from django.conf import settings
 
 from apps.blog.sitemaps import *
+from django.contrib.sitemaps import FlatPageSitemap 
 
-sitemaps = {'subsection':SubsectionSitemap(),'tags':SectionTagSitemap(),'blog':BlogSitemap(),'author':AuthorSitemap()}
+sitemaps = {'pages':FlatPageSitemap(),'number':NumberSitemap(),'blog':BlogSitemap(),'author':AuthorSitemap()}
 
 urlpatterns = patterns('',
     

@@ -99,6 +99,13 @@ $(document).ready(function(){
     
     //setTimeout("next_banner()",10000);
 });
+
+function changetab(self,id) {
+    $("#bottom .tabs .content").hide();
+    $("#bottom .tabs .current").removeClass("current");
+    $(self).addClass("current");
+    $("#"+id).fadeIn()
+}
 </script>
 
 {%comment%}
@@ -193,9 +200,17 @@ $(document).ready(function(){
 
 
             <div id="subsections">
-                {% for s in subsections %}
-                    <a href='{% if number%}{% url "subsection" number.number number.year number.month s.slug%}{%else%}{% url "subsection" current_number.number current_number.year current_number.month s.slug%}{%endif%}' title="{{s}}">{{s}}</a>
+                {% if number%}
+                {% for s in number.get_subsections %}
+                    <a href='{% url "subsection" number.number number.year number.month s.slug%}' title="{{s}}">{{s}}</a>
                 {% endfor %}
+                {%else%}
+                {% with current_number as number%}
+                    {% for s in number.get_subsections %}
+                        <a href='{% url "subsection" number.number number.year number.month s.slug%}' title="{{s}}">{{s}}</a>
+                    {% endfor %}
+                {%endwith%}
+                {%endif%}
             </div>
 
             <div id="top-left">
@@ -251,6 +266,47 @@ $(document).ready(function(){
         
     </div> <!-- #content -->
 
+    {%block prebottom%}
+    {%endblock prebottom%}    
+
+    {%block bottom%}
+    {% if number and not entry%}
+    <div id="bottom">
+
+        <div class="col tabs">
+            <div class="tab current" onclick="changetab(this,'more-view')">+ Leídos</div>
+            <div class="tab" onclick="changetab(this,'more-comment')">+ Comentados</div>
+            <div class="tab">&nbsp;</div>
+
+            <div class="content" id="more-view">
+                {%for entry in number.get_more_view|slice:":5"%}
+                    {%include "micro-entry.html" %}
+                {%endfor%}
+            </div>
+
+            <div class="content" id="more-comment">
+                {%for entry in number.get_more_comment|slice:":5"%}
+                    {%include "micro-entry.html" %}
+                {%endfor%}
+            </div>
+        </div>
+
+        <div class="col cartoon">
+            {%with number.cartoon as cartoon%}
+            <a href="{{cartoon.get_absolute_url}}" title="{{cartoon}}">
+                <img src="{{ cartoon.get_main_image }}" alt="{{cartoon.title}}"/>
+            </a>
+            {%endwith%}
+        </div>
+
+        <div class="col">
+            &nbsp;
+        </div>
+
+    </div>
+    {%endif%}
+    {%endblock bottom%}
+
 
     <div id="left">
         {%block author%}{%endblock%}        
@@ -258,6 +314,7 @@ $(document).ready(function(){
 
     
 </div> <!-- #ajax-wrapper -->
+
 
 {% if not request.is_ajax %}
     </div> <!-- #container -->
@@ -292,9 +349,18 @@ $(document).ready(function(){
                     <div class="subitem">    
                         <h3>CATEGORÍAS</h3>
 
-                        {% for s in subsections %}
-                            <a href='{% if number%}{% url "subsection" number.number number.year number.month s.slug%}{%else%}{% url "subsection" current_number.number current_number.year current_number.month s.slug%}{%endif%}' title="{{s}}">{{s}}</a>
+                        {% if number%}
+                        {% for s in number.get_subsections %}
+                            <a href='{% url "subsection" number.number number.year number.month s.slug%}' title="{{s}}">{{s}}</a>
                         {% endfor %}
+                        {%else%}
+                        {% with current_number as number%}
+                            {% for s in number.get_subsections %}
+                                <a href='{% url "subsection" number.number number.year number.month s.slug%}' title="{{s}}">{{s}}</a>
+                            {% endfor %}
+                        {%endwith%}
+                        {%endif%}
+                        
                     </div>
 
                 </div>

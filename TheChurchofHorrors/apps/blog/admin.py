@@ -22,8 +22,11 @@ class NumberForm(ModelForm):
             if not self.instance.entries.filter(is_editorial=True).count():
                 raise forms.ValidationError(u"Imposible publicar. Debe marcar una entrada cómo Editorial")
 
-        return self.cleaned_data.get("published")
+            if not self.instance.entries.filter(is_cartoon=True).count():
+                raise forms.ValidationError(u"Imposible publicar. Debe marcar una entrada cómo Viñeta")
 
+
+        return self.cleaned_data.get("published")
     
     """def clean(self):
         if self.cleaned_data.get("published") and self.instance:
@@ -127,6 +130,14 @@ class EntryForm(ModelForm):
 
         return self.cleaned_data.get("is_editorial")
 
+    def clean_is_cartoon(self):
+        if self.cleaned_data.get("is_cartoon") and self.cleaned_data.get("number"):
+            cartoon = self.cleaned_data.get("number").cartoon
+            if not cartoon is None and cartoon.id <> self.instance.id :
+                raise forms.ValidationError(u'Este Número ya tiene un artículo marcado cómo viñeta, desmárquelo para continuar.')
+
+        return self.cleaned_data.get("is_cartoon")
+
     class Meta:
         model = models.Entry
 
@@ -154,13 +165,15 @@ class Entry(CounterAdmin):
 
     search_fields = ('title',)
     
-    list_display = ('__unicode__','author','created','published','view',)
+    list_display = ('__unicode__','author','created','published','views','view',)
 
     list_filter = ('number',)
     
     readonly_fields = ('slug',)
     
     date_hierarchy = 'created'
+
+    exclude = ('views','ncomments')
     
     def get_form(self, request, obj=None, **kwargs):
         
@@ -171,7 +184,7 @@ class Entry(CounterAdmin):
         
         if not request.user.is_superuser and not request.user.get_profile().is_editor:
             self.readonly_fields = ('slug',)
-            self.exclude = ('author','published','is_editorial','number',)
+            self.exclude = ('author','published','is_editorial','is_cartoon','number','views','ncomments')
             #form.base_fields['author'].queryset = form.base_fields['author'].queryset.filter(id=request.user.id)
             
         return form

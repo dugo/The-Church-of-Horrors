@@ -38,3 +38,15 @@
     {%endwith%}
 {%endblock%}
 
+{%block prebottom%}
+    <div class="clr"></div>
+    <div id="sitios">
+    <a href="{%url authors%}" class="title" title="Ir a SITIOS">SITIOS</a>
+    {% for s in sitios|slice:":6"%}
+        <div class="item">
+            <div class="img "><a href="{{s.get_absolute_url}}"><img class="adjust-nofill" src="{{s.avatar.url}}" alt='{{author}}'/></a></div>
+            <div class="name"><a href="{{s.get_absolute_url}}">{{s}}</a></div>
+        </div>
+    {%endfor%}
+    </div>
+{%endblock%}

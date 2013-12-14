@@ -1,0 +1,8 @@
+<div class="item">
+    <a title="{{entry}}" href="{{entry.get_absolute_url}}">{{entry}}</a><br/>
+    {%with entry.author.get_profile as author%}
+    {%with entry.number as number%}
+    Por <a href="{{author.get_absolute_url}}" title="{{author}}">{{author}}</a>, {{entry.created|date:"d b Y"}}, en <a title="{{e.subsection}}" href="{% url subsection number.number number.year number.month entry.subsection.slug%}">{{entry.subsection}}</a>.
+    {%endwith%}
+    {%endwith%}
+</div>

@@ -1122,7 +1122,7 @@ a:hover { color:#d10019; }
     display:none;
 }
 
-.authors .col {
+.col {
     width: 314px;
     height:auto;
     float:left;
@@ -1130,11 +1130,11 @@ a:hover { color:#d10019; }
 }
 
 
-.authors .col {
+.col {
     margin-right: 24px;
 }
 
-.authors .col:last-child {
+.col:last-child {
     margin-right: 0;
 }
 
@@ -1217,4 +1217,133 @@ a:hover { color:#d10019; }
     float:left;
     margin-right:20px;
     /*margin-bottom:10px;*/
+}
+
+#bottom {
+    display:block;
+    overflow: hidden;
+    clear:both;
+    height: 250px;
+    padding-top:30px;
+}
+
+#bottom .tabs {
+    background-color: white;
+    height:100%;
+}
+
+#bottom .tabs .tab {
+    padding:5px 0;
+    font-family:"DINWeb-Medium",Arial;
+    color:#5889b6;
+    font-size:14px;
+    float:left;
+    overflow: hidden;
+    cursor: pointer;
+    width:104px;
+    text-align: center;
+    border-bottom:1px solid #f1f4f4;
+    height:20px;
+}
+
+#bottom .tabs .tab.current {
+    border-bottom:1px solid white;
+    border-right:1px solid #f1f4f4;
+    border-left:1px solid #f1f4f4;
+}
+
+#bottom .tabs .tab:first-child {
+    border-left:0;
+}
+
+#bottom .tabs .content {
+    font-family: Verdana,sans-serif;
+    font-size:12px;
+    display:block;
+    height:auto;
+    overflow: hidden;
+    clear:both;
+    padding:0 10px;
+    padding-bottom:10px
+}
+
+#bottom .tabs .content .item {
+    padding-top:10px;
+    display:block;   
+    color:#808184;
+}
+
+
+#bottom .tabs .tab:hover {
+    text-decoration: underline;
+}
+
+#bottom .cartoon {
+    text-align: center;
+}
+
+#bottom .cartoon img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#sitios {
+    background-color:#e2e2e2;
+    padding:10px 23px;
+    display:block;
+    overflow: hidden;
+    width:100%;
+    margin-left:-23px;
+    clear:both;
+}
+
+div.clr {
+    height:30px;
+    display: block;
+    clear:both;
+}
+
+#sitios .title {
+    font-family:"DINWeb-Medium",Arial;   
+    font-size:16px;
+    color:#5889b6;
+    clear:both;
+    display:block;
+    margin-bottom: 10px;
+}
+
+#sitios .name a {
+    font-family: "DINWeb-Medium",Arial;
+    font-size: 12px;
+    color: #d30b23;
+    font-weight: normal;
+    display: block;
+    margin-top:10px;
+    text-transform: uppercase;
+}
+
+#sitios .name a:hover {
+    text-decoration: underline;
+}
+
+#sitios .item {
+    float:left;
+    text-align:center;
+    overflow: hidden;
+    width:146px;
+    height:180px;
+    margin-right: 20px;
+}
+
+#sitios .item:last-child {
+    margin-right: 0;
+}
+
+#sitios .item .img {
+    width:146px;
+    height:146px;
+}
+
+#more-comment {
+    display: none;
 }

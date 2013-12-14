@@ -207,6 +207,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.sitemaps',
+    'django.contrib.flatpages',
     
     'blog',
     'userprofile',

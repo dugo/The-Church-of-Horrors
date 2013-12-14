@@ -1,18 +1,28 @@
 from django.contrib.sitemaps import Sitemap
 from django.contrib.auth.models import User
-from apps.blog.models import Entry,Subsection
+from apps.blog.models import Entry,Subsection,Number
 from taggit.models import Tag
 from datetime import date
 
+class NumberSitemap(Sitemap):
+    changefreq = "always"
+    priority = 1.0
+
+    def items(self):
+        return Number.objects.filter(published=True)
+
+    def lastmod(self, obj):
+        return obj.modified
+
 class BlogSitemap(Sitemap):
     changefreq = "never"
-    priority = 0.5
+    priority = 0.9
 
     def items(self):
         return Entry.objects.filter(published=True)
 
     def lastmod(self, obj):
-        return obj.created
+        return obj.modified
         
 
 class SubsectionSitemap(Sitemap):
@@ -48,7 +58,7 @@ class SectionTagSitemap(Sitemap):
             
 class AuthorSitemap(Sitemap):
     changefreq = "always"
-    priority = 0.5
+    priority = 0.8
 
     def items(self):
         return User.objects.all()

@@ -11,11 +11,6 @@
 	<div class="arrow"></div>
 	{%endif%}
 
-	{% if entry%}
-	<div class="prearrow"></div>
-	<div class="item"><a href="{{entry.get_absolute_url}}" title="Ir a {{entry}}">{{entry}}</a></div>
-	<div class="arrow"></div>
-	{%endif%}
 
 	{% for u in urls%}
 		{%if not forloop.first%}<div class="prearrow"></div>{%endif%}
