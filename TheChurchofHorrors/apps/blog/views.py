@@ -146,6 +146,8 @@ def authors(request):
     
     n = qs.count()/3
 
+    qs = list(qs)
+
     authors = []
     authors.append( qs[n*2:] )
     authors.append( qs[:n] )

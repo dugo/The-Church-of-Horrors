@@ -19,13 +19,8 @@
 		{% for author in subauthors%}
 	    	<div class="author">
 	    
-			    {% if author.get_published.count %}
-			        <a href="{{author.get_absolute_url}}"><img src="{{author.avatar.url}}" alt='{{author}}'/></a>
-			        <div class="name"><a href="{{author.get_absolute_url}}">{{author}}</a></div>
-			    {%else%}
-			        <img src="{{author.avatar.url}}" alt='{{author}}'/>
-			        <div class="name">{{author}}</div>
-			    {%endif%}
+		        <a href="{{author.get_absolute_url}}"><img src="{{author.avatar.url}}" alt='{{author}}'/></a>
+		        <div class="name"><a href="{{author.get_absolute_url}}">{{author}}</a></div>
 			    
 			    <div class="desc">{{author.description|safe}}</div>
 			    <div class="links sitios">
