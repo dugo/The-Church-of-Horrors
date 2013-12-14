@@ -141,17 +141,14 @@ def archive(request,year,month):
         context_instance=RequestContext(request))
 
 def authors(request):
+
+    def chunks(l, n):
+        for i in xrange(0, len(l), n):
+            yield l[i:i+n]
     
     qs = UserProfile.get_authors().order_by("?")
     
-    n = qs.count()/3
-
-    qs = list(qs)
-
-    authors = []
-    authors.append( qs[n*2+1:] )
-    authors.append( qs[:n] )
-    authors.append( qs[n+1:n*2] )
+    authors = chunks(list(qs),3)
     
     return render_to_response("authors.html", 
         dict(authors=authors,), 
