@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.contrib.auth.models import User
 from paginator.paginator import Paginator
-import datetime
+import datetime,random
 from recaptcha_works.decorators import fix_recaptcha_remote_ip
 from forms import CommentForm,CommentFormAuthenticated
 from userprofile.models import UserProfile,Rol
@@ -153,10 +153,10 @@ def authors(request):
 
       return out
     
-    qs = UserProfile.get_authors().order_by("?")
+    qs = UserProfile.get_authors()
     
 
-    authors = chunkIt(list(set(qs)),3)
+    authors = chunkIt(random.shuffle(list(set(qs))),3)
     authors.reverse()
     
     return render_to_response("authors.html", 
