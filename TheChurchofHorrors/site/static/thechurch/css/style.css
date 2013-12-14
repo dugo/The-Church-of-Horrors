@@ -597,7 +597,7 @@ a:hover { color:#d10019; }
     width:650px;
 }
 
-.entry #left {
+.entry #left,.author #left {
     display:block;
 }
 
