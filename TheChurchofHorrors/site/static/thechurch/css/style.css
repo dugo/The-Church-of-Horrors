@@ -1320,6 +1320,10 @@ div.clr {
     display: block;
     margin-top:10px;
     text-transform: uppercase;
+    height: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 #sitios .name a:hover {
