@@ -895,7 +895,7 @@ a:hover { color:#d10019; }
 #gallery .image,#gallery-entry .image {
     display:block;
     position:relative;
-    width:100%;
+    width:652px;
     height:100%;
     float:left;
     text-align:left !important;
