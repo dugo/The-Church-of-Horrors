@@ -86,17 +86,17 @@ class Number(models.Model):
 
     @property
     def other_entries(self):
-        return self.entries.filter(is_editorial=False,is_cartoon=False)
+        return self.entries.filter(is_editorial=False,is_cartoon=False,published=True)
 
     @classmethod
     def get_current(cls):
         return cls.objects.filter(published=True).order_by("-number")[0]
 
     def get_more_comment(self):
-        return self.other_entries.order_by("-ncomments")
+        return self.other_entries.filter(published=True).order_by("-ncomments")
 
     def get_more_view(self):
-        return self.other_entries.order_by("-views")
+        return self.other_entries.filter(published=True).order_by("-views")
 
     def __unicode__(self):
         return u"Número %d"%self.number
