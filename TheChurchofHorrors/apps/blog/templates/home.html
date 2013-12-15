@@ -44,17 +44,17 @@ function prev(){
 {%if e%}
 <div id="gallery-wrapper">
     <div id="gallery">
-        <div class="image">
-            <a href="{{e.get_absolute_url}}" title="Ir a Editorial">
+        <a href="{{e.get_absolute_url}}" title="Ir a Editorial">
                 <div class="desc">
-                	<div>
-                		<span class="overtitle">EDITORIAL</span>
-	                    <span class="title">{{e}}</span>
-	                    <span class="brief">{{e.get_brief}}</span>
-	                </div>
+                    <div>
+                        <span class="overtitle">EDITORIAL</span>
+                        <span class="title">{{e}}</span>
+                        <span class="brief">{{e.get_brief}}</span>
+                    </div>
                 </div>
             </a>
-                <img src="{% version e.get_main_image 'gallery' %}" title="{{e}}" alt="{{e.title}}" class="adjust"/>
+        <div class="image">
+            <img src="{% version e.get_main_image 'gallery' %}" title="{{e}}" alt="{{e.title}}" class="adjust"/>
         </div>
     </div>
 </div>
