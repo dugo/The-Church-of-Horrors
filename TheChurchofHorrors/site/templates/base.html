@@ -67,8 +67,8 @@ $(document).ready(function(){
 });
 
 function changetab(self,id) {
-    $("#bottom .tabs .content").hide();
-    $("#bottom .tabs .current").removeClass("current");
+    $(".tabs .content").hide();
+    $(".tabs .current").removeClass("current");
     $(self).addClass("current");
     $("#"+id).fadeIn()
 }
@@ -158,7 +158,7 @@ function changetab(self,id) {
     </div> <!-- #content -->
 
     <div id="left">
-        {%block author%}{%endblock%}        
+        {%block sidebar%}{%endblock%}
     </div> <!-- #left -->
 
 
@@ -166,7 +166,7 @@ function changetab(self,id) {
     {%endblock prebottom%}    
 
     {%block bottom%}
-    {% if number %}
+    {% if number and not entry%}
     <div id="bottom">
 
         <div class="col tabs">
