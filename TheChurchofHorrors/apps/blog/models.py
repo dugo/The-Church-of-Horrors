@@ -88,6 +88,10 @@ class Number(models.Model):
     def other_entries(self):
         return self.entries.filter(is_editorial=False,is_cartoon=False,published=True)
 
+    @property
+    def all_entries(self):
+        return self.entries.filter(published=True)
+
     @classmethod
     def get_current(cls):
         return cls.objects.filter(published=True).order_by("-number")[0]
