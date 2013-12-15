@@ -87,8 +87,8 @@ class UserProfile(models.Model):
             im = Image.open(self.avatar.path)
             
             # resize process
-            if im.size[0] <> 130:
-                im = im.resize((130,int((float(im.size[1])/float(im.size[0]))*130.0),),Image.ANTIALIAS)
+            if im.size[0] <> 200:
+                im = im.resize((200,int((float(im.size[1])/float(im.size[0]))*200.0),),Image.ANTIALIAS)
             
             # bw    
             im = im.convert('L')

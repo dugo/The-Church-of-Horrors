@@ -301,7 +301,7 @@ class Entry(models.Model):
     def get_main_image(self):
         if self.imagen:
             return self.imagen
-        return self.images.get(main=True)
+        return self.images.get(main=True).file
     
     def get_brief(self):
         import re

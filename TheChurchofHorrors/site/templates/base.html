@@ -34,7 +34,6 @@
 <meta property="og:image" content="http://thechurchofhorrors.com{{STATIC_URL}}fblogo.png" />
 {%endblock%}
 
-{% if request.is_ajax %}
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -48,41 +47,23 @@
   })();
 
 </script>
-{%endif%}
 
 <title>{%block title%}{%endblock%}</title> 
 
-{% if not request.is_ajax %}
+
 <link rel="shortcut icon" href="{{STATIC_URL}}favicon.ico" />
 
 <link rel="stylesheet" href="{% static thechurch/css/style.css %}" type="text/css"/>
 {% block extra_css %}{%endblock%}
 <script type="text/javascript" src="{{STATIC_URL}}thechurch/js/jquery-1.6.2.min.js"></script>
 <script type="text/javascript" src="{{STATIC_URL}}thechurch/js/jquery.myimgscale-0.2.min.js"></script>
-<!--<script type="text/javascript" src="http://sdscdn.userreport.com/popup.min.js"></script><script type="text/javascript">try { _bvt.initSite('92fda707-73d0-4682-bcae-7cf34820106e'); } catch(err) {}</script>-->
-{%endif%}
-{% block extra_js %}{%endblock%}
 
-{% if not request.is_ajax %}
+{% block extra_js %}{%endblock%}
 
 <script type="text/javascript" >
 $(document).ready(function(){
     $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
     $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
-    
-    var footer = 190+30;
-    var header = 152+16;
-    var content = $('#content').height()+17;
-    if ($(window).height()>footer+header+content) {
-            var height = $(window).height()-17-footer-header;
-            $("#content").css("min-height",height+"px").css("height",height+"px");
-    }
-    
-    window.onblur = function() { window_focus = false; }
-    window.onfocus = function() { window_focus = true; }
-    window_focus = true;
-    
-    //setTimeout("next_banner()",10000);
 });
 
 function changetab(self,id) {
@@ -91,85 +72,10 @@ function changetab(self,id) {
     $(self).addClass("current");
     $("#"+id).fadeIn()
 }
+
+{% block extra_js_ready %}{%endblock%}
 </script>
 
-{%comment%}
-<script type="text/javascript" >
-$(document).ready(function(){
-
-    $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
-    $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
-    /*$(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
-    $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});*/
-    
-    // ajaxing!!
-    window.onpopstate = function(event) {  
-        if (!event.state)
-            return;
-        $('#ajax-wrapper').html(event.state);
-        ajax_ready();
-    }
-    
-    if (typeof window.history.pushState != "undefined") {
-        $('a[href^="/"]:not(a[href^="/admin",a[href^="/contact"])').click(function(e){ 
-        
-        if (typeof AUTOGALLERY != "undefined")
-            clearTimeout(AUTOGALLERY);
-            
-            var url = this.href;
-            
-            e.preventDefault(); 
-            $.ajax({
-                url: url,
-                type:"get",
-                context: $(this),
-                success: function (data) {
-                    
-                        $('#ajax-wrapper').html(data);
-                    
-                        ajax_ready();        
-                        window.history.pushState(data, $('#ajax-wrapper title').text(), url);
-                    },
-                error: function() { window.location = this.href; }
-                });
-            
-            });
-     }
-    
-    {% block extra_js_ready %}{%endblock%}
-});
-
-function ajax_ready() {
-$(document).ready(function(){
-    
-    $("#ajax-wrapper .adjust").scaleImage({parent: "div",center: true,scale:"fill"});
-    $("#ajax-wrapper .adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
-
-    $('#ajax-wrapper a[href^="/"]:not(a[href^="/admin"])').click(function(e){ 
-        e.preventDefault(); 
-        
-        if (typeof AUTOGALLERY != "undefined")
-            clearTimeout(AUTOGALLERY);
-            
-        var url = this.href;
-        $.ajax({
-            url: url,
-            type:"get",
-            context: $(this),
-            success: function (data) {
-                
-                    $('#ajax-wrapper').html(data);
-                
-                    ajax_ready();        
-                    window.history.pushState(data, $('#ajax-wrapper title').text(), url);
-                },
-            error: function() { window.location = this.href; }
-            });
-        });
-    });
-}
-</script>
-{%endcomment%}
 
 </head>
 <body>
@@ -235,7 +141,7 @@ $(document).ready(function(){
                 <a href='{%url 'feed' %}' class="social rss" target="_blank"></a>
             </div>
         </div><!-- #header -->
-{% endif %}
+
 
 <div id='ajax-wrapper' class="{%block content_class%}{%endblock%}">
 
@@ -251,11 +157,16 @@ $(document).ready(function(){
         
     </div> <!-- #content -->
 
+    <div id="left">
+        {%block author%}{%endblock%}        
+    </div> <!-- #left -->
+
+
     {%block prebottom%}
     {%endblock prebottom%}    
 
     {%block bottom%}
-    {% if number and not entry%}
+    {% if number %}
     <div id="bottom">
 
         <div class="col tabs">
@@ -291,17 +202,11 @@ $(document).ready(function(){
     </div>
     {%endif%}
     {%endblock bottom%}
-
-
-    <div id="left">
-        {%block author%}{%endblock%}        
-    </div> <!-- #left -->
-
     
 </div> <!-- #ajax-wrapper -->
 
 
-{% if not request.is_ajax %}
+
     </div> <!-- #container -->
     <div id="footer">
         <div id="subfooter-1">
@@ -378,4 +283,3 @@ $(document).ready(function(){
 </body>
 
 </html>
-{%endif%}

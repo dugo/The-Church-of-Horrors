@@ -1,5 +1,5 @@
 * {margin:0;padding:0;}
-body { background-color: #808184; padding-top:200px;}
+body { background-color: #808184; padding-top:20px;}
 a {text-decoration:none; color:#5889b6;}
 img { border:0; }
 hr {
@@ -304,6 +304,16 @@ a:hover { color:#d10019; }
     font-family: verdana;
     font-size: 18px;
     overflow: hidden;
+    height:22px;
+    display: block;
+}
+.home .short-entry .title a {
+    display:block;
+    height:100%;
+    width:100%;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
 .home .short-entry .info {
     font-family:"DINWeb-Medium",Arial;
@@ -1190,9 +1200,8 @@ a:hover { color:#d10019; }
     text-transform: uppercase;
     color:white;
     background: black;
-    font-family:"DINWeb-Medium",Arial;
+    font-family:"DINWeb-Black",Arial;
     font-size:14px;
-    font-weight: bold;
     padding:2px 0;
 }
 
@@ -1295,6 +1304,12 @@ a:hover { color:#d10019; }
     width:100%;
     margin-left:-23px;
     clear:both;
+    position: relative;
+    height:215px;
+}
+
+#sitios-slide {
+    width:10000px;
 }
 
 div.clr {
@@ -1326,7 +1341,7 @@ div.clr {
     white-space: nowrap;
 }
 
-#sitios .name a:hover {
+#sitios .item:hover .name a {
     text-decoration: underline;
 }
 
@@ -1336,11 +1351,12 @@ div.clr {
     overflow: hidden;
     width:146px;
     height:180px;
-    margin-right: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
-#sitios .item:last-child {
-    margin-right: 0;
+#sitios .item:first-child {
+    margin-left: 0;
 }
 
 #sitios .item .img {
@@ -1350,4 +1366,49 @@ div.clr {
 
 #more-comment {
     display: none;
+}
+
+#sitios:hover .next,#sitios:hover .prev {
+    filter:alpha(opacity=70);
+    opacity:.70;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"; /*--IE 8 Transparency--*/
+}
+
+#sitios .next {
+    width:23px;
+    height:23px;
+    background:url('../images/gallery-sprites.png') 0 0 no-repeat;
+    position:absolute;
+    right:14px;
+    top:117px;
+    cursor:pointer;
+    z-index:999;
+    filter:alpha(opacity=0);
+    opacity:0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; /*--IE 8 Transparency--*/
+    -webkit-transition: opacity 0.1s ease-in;
+    -moz-transition: opacity 0.1s ease-in;
+    -o-transition: opacity 0.1s ease-in;
+    -ms-transition: opacity 0.1s ease-in;
+    transition: opacity 0.1s ease-in;
+}
+
+#sitios .prev {
+    width:23px;
+    height:23px;
+    background:url('../images/gallery-sprites.png') -23px 0 no-repeat;
+    position:absolute;
+    left:14px;
+    top:117px;
+    cursor:pointer;
+    z-index:999;
+    display:none;
+    filter:alpha(opacity=0);
+    opacity:0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; /*--IE 8 Transparency--*/
+    -webkit-transition: opacity 0.1s ease-in;
+    -moz-transition: opacity 0.1s ease-in;
+    -o-transition: opacity 0.1s ease-in;
+    -ms-transition: opacity 0.1s ease-in;
+    transition: opacity 0.1s ease-in;
 }

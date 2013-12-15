@@ -144,7 +144,7 @@ FILEBROWSER_VERSIONS = {
   'fb_thumb': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'crop'},
   'mini': {'verbose_name': 'Mini', 'width': 420, 'height': '', 'opts': ''},
   'micro': {'verbose_name': 'Micro', 'width': 62, 'height': 77, 'opts': 'crop'},
-  'preview': {'verbose_name': 'Preview', 'width': 146, 'height': 146, 'opts': 'crop'},
+  'preview': {'verbose_name': 'Preview', 'width': 314, 'height': 209, 'opts': 'crop'},
   'gallery': {'verbose_name': 'Gallery', 'width': 730, 'height': '', 'opts': ''},
 }
 FILEBROWSER_ADMIN_VERSIONS = ['mini','preview','gallery',]

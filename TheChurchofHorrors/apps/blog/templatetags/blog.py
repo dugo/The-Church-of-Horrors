@@ -58,8 +58,8 @@ def breadcrumb(path,number=None,subsection=None,entry=None,request=None,tag=None
     if not archive is None:
         urls.append( (request.path, "%s" % archive.strftime("%B %Y").title() ,) )
 
-    if urls and (not subsection):
-        urls.insert(0, ("/", "HOME") )
+    """if urls and (not subsection):
+        urls.insert(0, ("/", "HOME") )"""
 
     return {'urls':urls,'number':number,'subsection':subsection,'entry':entry}
 

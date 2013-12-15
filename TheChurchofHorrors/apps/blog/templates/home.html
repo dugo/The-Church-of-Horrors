@@ -1,11 +1,40 @@
 {% extends "base.html" %}
 {% load blog fb_versions %}
 
-{#{%blog extra_js_ready%}setTimeout(function(){$('#topbanner').hide('slow');},5000);{%endblock%}#}
-
 {% block title %}The Church of Horrors{%if section%} :: {{section}}{%endif%}{%if subsection%} :: {{subsection}}{%endif%}{%endblock%}
 
 {%block breadcrumb%}{% breadcrumb request.get_full_path number %}{%endblock%}
+
+{% block extra_js_ready %}
+function next(){
+    var total = parseInt($("#sitios").attr("total"));
+    var idx = parseInt($("#sitios").attr("idx"))+1;
+    var w = (!idx)?156:166;
+
+    $("#sitios-slide").animate({"margin-left":(w*idx*-1)+"px"});
+
+    $("#sitios").attr("idx",idx);
+    
+    if (idx+6>=total)    
+        $("#sitios .next").fadeOut();
+
+    $("#sitios .prev").fadeIn()
+}
+function prev(){
+    var total = parseInt($("#sitios").attr("total"));
+    var idx = parseInt($("#sitios").attr("idx"))-1;
+    var w = (!idx)?156:166;
+
+    $("#sitios-slide").animate({"margin-left":(w*idx*-1)+"px"});
+
+    $("#sitios").attr("idx",idx);
+    
+    if (idx<=0)    
+        $("#sitios .prev").fadeOut();
+
+    $("#sitios .next").fadeIn()
+}
+{%endblock%}
 
 {%block content_class%}home{%endblock%}
 
@@ -40,13 +69,20 @@
 
 {%block prebottom%}
     <div class="clr"></div>
-    <div id="sitios">
+    <div id="sitios" total="{{sitios|length}}" idx="0">
+    
+    <div class="prev" onclick="prev()"></div>
+    <div class="next" onclick="next()"></div>
+
     <a href="{%url authors%}" class="title" title="Ir a SITIOS">SITIOS</a>
-    {% for s in sitios|slice:":6"%}
+
+    <div id="sitios-slide">
+    {% for s in sitios%}
         <div class="item">
             <div class="img "><a href="{{s.get_absolute_url}}"><img class="adjust-nofill" src="{{s.avatar.url}}" alt='{{author}}'/></a></div>
             <div class="name"><a href="{{s.get_absolute_url}}">{{s}}</a></div>
         </div>
     {%endfor%}
+    </div>
     </div>
 {%endblock%}
