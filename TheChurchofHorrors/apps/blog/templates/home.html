@@ -41,6 +41,7 @@ function prev(){
 {%block home_gallery%}
 
 {%with number.editorial as e%}
+{%if e%}
 <div id="gallery-wrapper">
     <div id="gallery">
         <div class="image">
@@ -53,10 +54,11 @@ function prev(){
 	                </div>
                 </div>
             </a>
-                <img src="{% version e.get_main_image 'gallery' %}" title="{{e}}" alt="{{e.title}}" class="{%if e.get_main_image.adjust%}adjust{%else%}adjust-nofill{%endif%}"/>
+                <img src="{% version e.get_main_image 'gallery' %}" title="{{e}}" alt="{{e.title}}" class="adjust"/>
         </div>
     </div>
 </div>
+{%endif%}
 {%endwith%}
 
 {%endblock%}
