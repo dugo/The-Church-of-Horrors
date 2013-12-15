@@ -9,7 +9,7 @@ class LatestEntriesFeed(Feed):
     description = _("Actualizaciones en thechurchofhorrors.com")
 
     def items(self):
-        return Number.get_current().other_entries()
+        return Number.get_current().other_entries
 
     def item_title(self, item):
         return item.title
