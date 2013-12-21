@@ -189,6 +189,9 @@ class Entry(models.Model):
         return unicode(self.title)
     
     def add_view_mark(self,ip,user):
+		if not self.published:
+			return 
+		
         key = "thechurch-view-%s-%s"%(ip,user.id,)
         if not cache.get(key) and not self.author==user:
             self.views+=1
