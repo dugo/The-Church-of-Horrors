@@ -40,12 +40,10 @@ org_email = []
 
 i=0
 for l in open(sys.argv[1]).readlines():
-    if i%3==0:
+    if i%2==0:
         nombres.append(l.strip(" \n").lower())
-    elif i%3==1:
-        emails.append(l.strip(" \n").lower())
     else:
-        org_email.append(l.strip(" \n").lower())
+        emails.append(l.strip(" \n").lower())
     
     i+=1
 
