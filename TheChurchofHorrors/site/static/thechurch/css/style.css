@@ -293,10 +293,10 @@ a:hover { color:#d10019; }
     /*text-align:justify;*/
 }
 .home .short-entries { padding-top:16px; display:block;float:left;}
-.home .short-entry { float:left;width:314px;height:262px; position:relative;border-bottom:3px solid #d10019;margin-top:32px;}
+.home .short-entry { float:left;width:314px;height:262px; position:relative;border-bottom:3px solid #d10019;margin-top:32px;overflow: hidden;background-color: white;}
 .home .short-entry.odd { margin-right:24px;}
 .home .short-entry .img { float:left;width:314px;height:128px; }
-.home .short-entry .desc { float:right;height:177px;overflow:hidden; padding:10px;background:white;overflow: hidden;
+.home .short-entry .desc { float:right;height:auto;overflow:hidden; padding:10px;background:white;overflow: hidden;
     text-overflow:ellipsis;display:block;width:294px;}
 .home .short-entry .title {
     height: auto;
@@ -769,11 +769,23 @@ a:hover { color:#d10019; }
 
 .entry p {
     font-family:verdana;
-    font-size:10px;
-    color: black;
+    font-size:12px;
+    color: #808183;
     margin:0;
     padding:0;
     text-align:left;
+}
+
+.entry .go-number {
+    display: block;
+    text-align: right;
+    margin:16px 0 0 0;
+    font-size:12px;
+}
+
+.entry img.main {
+    width:100%;
+    max-width: 100%;
 }
 
 .entry .edit {
@@ -1280,6 +1292,9 @@ a:hover { color:#d10019; }
     padding-top:10px;
     display:block;   
     color:#808184;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 

@@ -1,7 +1,7 @@
 {% load fb_versions %}
 
 <div class="short-entry odd {{e.subsection.slug}}">
-    <div class="img"><a href="{{e.get_absolute_url}}" title="{{e.title}}"><img src="{% version e.get_main_image 'preview' %}" title="{{e.title}}" alt="{{e.title}}"/></a></div>
+    <div class="img"><a href="{{e.get_absolute_url}}" title="{{e.title}}"><img src="{% version e.get_main_image 'preview' %}" title="{{e.title}}" alt="{{e.title}}" class="adjust"/></a></div>
     <div class="desc">
 
 
@@ -12,5 +12,5 @@
     <p>{{e.get_brief}}</p>
     
     </div>
-    <hr/>
+
 </div>

@@ -136,13 +136,17 @@ function paging(link,margin) {
 {%block content%}
     {#<img src="{% version entry.get_main_image 'gallery' %}" title="{{entry}}" alt="{{entry.title}}" class="image-entry"/>#}
 
+    <img src="{% version entry.get_main_image 'gallery' %}" alt="{{entry}}" class="main"/>
+
     <div class="content-entry">
 
         {%if user.is_superuser or user.get_profile.is_editor or entry.author.id == request.user.id %}<a href="{{entry.get_admin_url}}" onclick="window.open(this.href);return false;" class="edit">Editar</a>{%endif%}
 
-        <a href="{{e.get_absolute_url}}"><h1>{{entry.title}}</h1></a>
+        <a href="{{entry.get_absolute_url}}"><h1>{{entry.title}}</h1></a>
 
         {{entry.content|url_open|safe}}
+
+        <a href="{{current_number.get_absolute_url}}" class="go-number" title="Volver al número actual">Volver al número actual</a>
     </div>
 
     <div id="paging"></div>
