@@ -27,13 +27,13 @@ function prev(){
     var idx = parseInt($("#sitios").attr("idx"))-1;
     var w = (!idx)?156:166;
 
-    if (idx<=0) return;
+    if (idx<0) return;
 
     $("#sitios-slide").animate({"margin-left":(w*idx*-1)+"px"});
 
     $("#sitios").attr("idx",idx);
     
-    if (idx<0)    
+    if (idx<=0)    
         $("#sitios .prev").fadeOut();
 
     $("#sitios .next").fadeIn()
