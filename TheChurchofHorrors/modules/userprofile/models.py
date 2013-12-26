@@ -27,6 +27,7 @@ class UserProfile(models.Model):
     description = models.CharField(_(u'Descripción'),max_length=1024, help_text = _(u'Cómo te describes en 160 caracteres (un sms)'))
     avatar = models.ImageField(blank=False,upload_to='avatars/',help_text=_(u'Tu avatar. Será redimensionado y convertido a blanco y negro'))
     name = models.CharField(_(u'Nombre para mostrar'),max_length=30,unique=True,null=True,blank=True,help_text=_(u'El nombre que se mostrará junto a tu avatar'))
+    title = models.CharField(_(u'Título'),max_length=100,blank=False,default="",help_text=_(u'El título de su sitio'))
     #avatar = models.ImageField(blank=False,upload_to='avatars/')
 
     @models.permalink

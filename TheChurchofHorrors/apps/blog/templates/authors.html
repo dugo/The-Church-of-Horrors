@@ -20,6 +20,7 @@
 	    	<div class="author">
 	    
 		        <a href="{{author.get_absolute_url}}"><img src="{{author.avatar.url}}" alt='{{author}}'/></a>
+		        <div class="title">{%if author.title%}<a href="{{author.get_absolute_url}}">{{author.title|upper}}</a>{%endif%}</div>
 		        <div class="name"><a href="{{author.get_absolute_url}}">{{author}}</a></div>
 			    
 			    <div class="desc">{{author.description|safe}}</div>

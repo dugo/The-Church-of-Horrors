@@ -5,10 +5,6 @@
 <meta name="msvalidate.01" content="A98E9B38B9C1DE9BA4D87BBED4F18D0D" />
 
 
-{% if request.is_ajax %}
-<img src='{{STATIC_URL}}thechurch/images/logo.png' alt="The Church of Horrors" id="ajax-logo"/>
-
-{%else%}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" itemscope itemtype="http://schema.org/Blog">
 <head>
@@ -26,7 +22,7 @@
   })();
 
 </script>
-{%endif%}
+
 
 {%block extra_metatags%}
 <meta name="keywords" content="the church of horrors,thechurchofhorrors.com,magazine,cultural,magazine cultural,{{sections|join:','}},{{subsections|join:','}}"/>
@@ -54,6 +50,9 @@
 <link rel="shortcut icon" href="{{STATIC_URL}}favicon.ico" />
 
 <link rel="stylesheet" href="{% static thechurch/css/style.css %}" type="text/css"/>
+<style type="text/css">
+{{css}}
+</style>
 {% block extra_css %}{%endblock%}
 <script type="text/javascript" src="{{STATIC_URL}}thechurch/js/jquery-1.6.2.min.js"></script>
 <script type="text/javascript" src="{{STATIC_URL}}thechurch/js/jquery.myimgscale-0.2.min.js"></script>
@@ -64,6 +63,15 @@
 $(document).ready(function(){
     $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
     $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
+
+    $("#header #subsections a")
+        .hover(function(){ 
+            var cls = $(this).attr("class");
+            $("#header #subsections").addClass(cls);
+        },function(){ 
+            var cls = $(this).attr("class");
+            $("#header #subsections").removeClass(cls);
+        });
 });
 
 function changetab(self,id) {
@@ -72,7 +80,6 @@ function changetab(self,id) {
     $(self).addClass("current");
     $("#"+id).fadeIn()
 }
-
 {% block extra_js_ready %}{%endblock%}
 </script>
 
@@ -93,12 +100,12 @@ function changetab(self,id) {
             <div id="subsections">
                 {% if number%}
                 {% for s in number.get_subsections %}
-                    <a href='{% url "subsection" number.number number.year number.month s.slug%}' title="{{s}}">{{s}}</a>
+                    <a href='{% url "subsection" number.number number.year number.month s.slug%}' title="{{s}}" class="{{s.slug}}">{{s}}</a>
                 {% endfor %}
                 {%else%}
                 {% with current_number as number%}
                     {% for s in number.get_subsections %}
-                        <a href='{% url "subsection" number.number number.year number.month s.slug%}' title="{{s}}">{{s}}</a>
+                        <a href='{% url "subsection" number.number number.year number.month s.slug%}' title="{{s}}" class="{{s.slug}}">{{s}}</a>
                     {% endfor %}
                 {%endwith%}
                 {%endif%}

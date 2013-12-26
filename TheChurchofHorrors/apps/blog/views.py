@@ -36,7 +36,7 @@ def subsection(request,number,month,year,subsection):
 
     number = get_object_or_404(Number,number=number,year=year,month=month)
     subsection = get_object_or_404(Subsection,slug=subsection)
-    entries=number.other_entries.filter(subsection__id=subsection.id)
+    entries=number.other_entries_random.filter(subsection__id=subsection.id)
 
     return render_to_response("subsection.html", 
         dict(number=number,subsection=subsection,entries=entries,),

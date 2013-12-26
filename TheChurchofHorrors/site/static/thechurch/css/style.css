@@ -360,7 +360,7 @@ a:hover { color:#d10019; }
     position:relative;
     margin:0 auto;
     /*bottom:0px;*/
-    height:190px;
+    height:200px;
     width:100%;
     /*width:980px;*/
     background-color:#404042;
@@ -537,7 +537,7 @@ a:hover { color:#d10019; }
     position:absolute;
     bottom:0px;
     text-align:center;
-    padding-bottom:10px;
+    padding-bottom:20px;
 }
 
 #left div.author {
@@ -569,10 +569,23 @@ a:hover { color:#d10019; }
     display:block;
     color: #d10019;
     font-family:"DINWeb-Medium",Arial;
-    font-size:18px;
+    font-size:14px;
     height:auto;
     width:138px;
 }
+
+#left div.author .title,#left div.author .title a {
+    display:block;
+    font-family:"DINWeb-Medium",Arial;
+    font-size:16px;
+    height:auto;
+    width:138px;
+    float:left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+
 #left div.author .desc {
     display:inline;
     font-family:verdana;
@@ -651,6 +664,12 @@ a:hover { color:#d10019; }
 
 .entry .image-entry {
     width:100%;
+}
+
+.entry .content-entry .link {
+    font-family: "DINWeb-Medium",Arial;
+    font-size:12px;
+    color:#808184;
 }
 
 .entry .content-entry .paging-container {
@@ -1187,11 +1206,23 @@ a:hover { color:#d10019; }
     float:left;
 }
 
+.authors .author .title,.authors .author .title a {
+    display:block;
+    font-family:"DINWeb-Medium",Arial;
+    font-size:16px;
+    height:auto;
+    width:138px;
+    float:left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+
 .authors .author .name,.authors .author .name a {
     display:block;
     color: #d10019;
     font-family:"DINWeb-Medium",Arial;
-    font-size:18px;
+    font-size:14px;
     height:auto;
     width:138px;
 }
@@ -1212,7 +1243,7 @@ a:hover { color:#d10019; }
     text-transform: uppercase;
     color:white;
     background: black;
-    font-family:"DINWeb-Black",Arial;
+    font-family:"DINWeb-Medium",Arial;
     font-size:14px;
     padding:2px 0;
 }
@@ -1320,7 +1351,7 @@ a:hover { color:#d10019; }
     margin-left:-23px;
     clear:both;
     position: relative;
-    height:215px;
+    height:225px;
 }
 
 #sitios-slide {
@@ -1348,12 +1379,22 @@ div.clr {
     color: #d30b23;
     font-weight: normal;
     display: block;
-    margin-top:10px;
     text-transform: uppercase;
     height: 18px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+#sitios .item .title {
+    font-size:14px;
+    height: 18px;
+    margin-top:10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom:0;
+    display:block;
 }
 
 #sitios .item:hover .name a {
@@ -1365,7 +1406,7 @@ div.clr {
     text-align:center;
     overflow: hidden;
     width:146px;
-    height:180px;
+    height:190px;
     margin-right: 10px;
     margin-left: 10px;
 }

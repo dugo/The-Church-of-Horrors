@@ -138,9 +138,15 @@ function paging(link,margin) {
 
     <img src="{% version entry.get_main_image 'gallery' %}" alt="{{entry}}" class="main"/>
 
-    <div class="content-entry">
+    <div class="content-entry {{entry.subsection.slug}}">
 
         {%if user.is_superuser or user.get_profile.is_editor or entry.author.id == request.user.id %}<a href="{{entry.get_admin_url}}" onclick="window.open(this.href);return false;" class="edit">Editar</a>{%endif%}
+
+        {% if entry.is_editorial%}
+        <div class="link">EDITORIAL</div>
+        {%else%}
+        <a class="link" href="{% url subsection entry.number.number entry.number.year entry.number.month entry.subsection.slug%}">{{entry.subsection|upper}}</a>
+        {%endif%}
 
         <a href="{{entry.get_absolute_url}}"><h1>{{entry.title}}</h1></a>
 

@@ -89,6 +89,10 @@ class Number(models.Model):
         return self.entries.filter(is_editorial=False,is_cartoon=False,published=True)
 
     @property
+    def other_entries_random(self):
+        return self.other_entries.order_by("?")
+
+    @property
     def all_entries(self):
         return self.entries.filter(published=True)
 
@@ -125,6 +129,7 @@ class Subsection(models.Model):
     name = models.CharField(_(u"Nombre"),max_length=255,unique=True,db_index=True,blank=False)
     slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=u"Será generada automaticamente a partir del nombre")
     sort = models.PositiveIntegerField(_(u"Orden"),default=0,blank=False,null=False,help_text=_(u"En el que se mostrará en el menú"))
+    color = models.CharField("Color Css",max_length="7",help_text="#3f3f3f",default="")
     
     def __unicode__(self):
         return unicode(self.name)
@@ -139,6 +144,21 @@ class Subsection(models.Model):
         return ('common', (), {
             'slug': self.slug})
     
+    @classmethod
+    def get_css_colors(cls):
+        css = """
+        .home .short-entry.%(slug)s { border-bottom: 3px solid %(color)s }
+        .entry .content-entry.%(slug)s .link { color: %(color)s }
+        #header #subsections.%(slug)s {border-top:3px solid %(color)s}
+        """
+        ret = ""
+
+        for ss in cls.objects.exclude(color=""):
+            ret+=css%dict(color=ss.color,slug=ss.slug)
+
+        return ret
+
+
     def save(self,*args,**kwargs):
         self.slug = slugify(self.name)
         super(type(self),self).save(*args,**kwargs)
