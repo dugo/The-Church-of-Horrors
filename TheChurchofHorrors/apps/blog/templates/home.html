@@ -85,7 +85,7 @@ function prev(){
     <div id="sitios-slide">
     {% for s in sitios%}
         <div class="item">
-            <div class="img "><a href="{{s.get_absolute_url}}"><img class="adjust-nofill" src="{{s.avatar.url}}" alt='{{author}}'/></a></div>
+            <div class="img "><a href="{{s.get_absolute_url}}"><img class="adjust" src="{{s.avatar.url}}" alt='{{author}}'/></a></div>
             <div class="title">{%if s.title%}<a href="{{s.get_absolute_url}}">{{s.title|upper}}</a>{%endif%}</div>
             <div class="name"><a href="{{s.get_absolute_url}}">{{s}}</a></div>
         </div>
