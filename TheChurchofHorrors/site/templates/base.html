@@ -88,12 +88,12 @@ $(document).ready(function(){
             textHeight = ourText.height();
             textWidth = ourText.width();
             fontSize = fontSize - 1;
-        } while ((textHeight > maxHeight || textWidth > maxWidth) && fontSize > 3);
+        } while (textWidth > maxWidth && fontSize > 3);
         return this;
     }
 })(jQuery);
 
-$.each( $("#sitios .title"), function(idx,ui){ $(ui).textfill({ maxFontPixels: 36 }) } );
+$.each( $("#sitios .title"), function(idx,ui){ $(ui).textfill({ maxFontPixels: 14 }) } );
 
 });
 
