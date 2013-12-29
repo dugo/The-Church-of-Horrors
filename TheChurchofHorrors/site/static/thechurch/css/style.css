@@ -67,6 +67,7 @@ hr {
     float:left;
     width: 145px;
     display:block;
+    position: relative;
 }
 
 #header #top-left div .actual {

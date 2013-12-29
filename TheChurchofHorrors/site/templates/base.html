@@ -197,7 +197,9 @@ function number_prev() {
                         <span class="subtitle">{{n.get_month_display}} {{n.year}}</span>
 
                         {%with n.editorial as e%}
+                        {%if e%}
                         <a class="entry" title="{{e}}" href="{{e.get_absolute_url}}">{{e}}</a>
+                        {%endif%}
                         {%endwith%}
                     </div>
                     {%endfor%}
