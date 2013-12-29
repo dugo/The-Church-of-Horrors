@@ -1395,6 +1395,8 @@ div.clr {
     white-space: nowrap;
     margin-bottom:0;
     display:block;
+    width: 166px;
+    margin-left: -10px;
 }
 
 #sitios .item:hover .name a {
@@ -1407,8 +1409,8 @@ div.clr {
     overflow: hidden;
     width:146px;
     height:190px;
-    margin-right: 10px;
-    margin-left: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 #sitios .item:first-child {
