@@ -46,18 +46,27 @@ hr {
     width:145px;
     float:right;
     margin-right:24px;
+    overflow: hidden;
+    position: relative;
 }
 
 #header #top-left form {
     overflow: hidden;
 }
 
-#header #top-left div {
+#header #top-left .top-left-wrapper {
     border-top:3px solid black;
     margin-top:8px;
     padding:8px 0 0 0;
     position:relative;
     overflow: hidden;
+    width:2000px;
+}
+
+#header #top-left .top-left-wrapper .item {
+    float:left;
+    width: 145px;
+    display:block;
 }
 
 #header #top-left div .actual {
@@ -91,6 +100,29 @@ hr {
 
 #header #top-left div img {
     float:right;
+}
+
+#top-left .prev {
+    width:12px;
+    height:12px;
+    background:url('../images/mini-arrows.png') 0 0 no-repeat;
+    position:absolute;
+    right: 15px;
+    top: 40px;
+    cursor:pointer;
+    z-index:999;
+    display:none;
+}
+
+#top-left .next {
+    width:12px;
+    height:12px;
+    background:url('../images/mini-arrows.png') -12px 0 no-repeat;
+    position:absolute;
+    right: 0;
+    top: 40px;
+    cursor:pointer;
+    z-index:999;
 }
 
 #header #subsections .subsection {

@@ -103,6 +103,42 @@ function changetab(self,id) {
     $(self).addClass("current");
     $("#"+id).fadeIn()
 }
+function number_next() {
+    var total = parseInt($(".top-left-wrapper").attr("total"));
+    var current = parseInt($(".top-left-wrapper").attr("current"));
+
+    if (current>=total)
+        return;
+
+    $("#top-left .prev").fadeIn();
+
+    current++;
+
+    $(".top-left-wrapper").animate({"margin-left":current*-1*145+"px"});
+
+    $(".top-left-wrapper").attr("current",current);
+
+    if (current>=total)
+        $("#top-left .next").fadeOut();
+}
+function number_prev() {
+    var total = parseInt($(".top-left-wrapper").attr("total"));
+    var current = parseInt($(".top-left-wrapper").attr("current"));
+
+    if (current<=0)
+        return;
+
+    $("#top-left .next").fadeIn();
+
+    current--;
+
+    $(".top-left-wrapper").animate({"margin-left":current*-1*145+"px"});
+
+    $(".top-left-wrapper").attr("current",current);
+
+    if (current<=0)
+        $("#top-left .prev").fadeOut();
+}
 {% block extra_js_ready %}{%endblock%}
 </script>
 
@@ -139,17 +175,37 @@ function changetab(self,id) {
                 <input type="submit" id="search-button" value=""/>
                 <input type="text" id="search" name="q" placeholder="Buscar..."/>
                 </form>
-                <div>
-                    <span class="actual">ACTUAL</span>
-                    <img src="{% version current_number.imagen 'micro' %}" alt="ACTUAL"/>
-                    <a class="title" href="{{current_number.get_absolute_url}}" title="{{current_number}}">{{current_number|upper}}</a><br/>
-                    <span class="subtitle">{{current_number.get_month_display}} {{current_number.year}}</span>
 
-                    {%with current_number.editorial as e%}
-                    <a class="entry" title="{{e}}" href="{{e.get_absolute_url}}">{{e}}</a>
-                    {%endwith%}
 
+                <div class="top-left-wrapper" total="{{anteriores|length}}" current="0">
+                    <div class="item">
+                        <span class="actual">ACTUAL</span>
+                        <img src="{% version current_number.imagen 'micro' %}" alt="ACTUAL"/>
+                        <a class="title" href="{{current_number.get_absolute_url}}" title="{{current_number}}">{{current_number|upper}}</a><br/>
+                        <span class="subtitle">{{current_number.get_month_display}} {{current_number.year}}</span>
+
+                        {%with current_number.editorial as e%}
+                        <a class="entry" title="{{e}}" href="{{e.get_absolute_url}}">{{e}}</a>
+                        {%endwith%}
+                    </div>
+
+                    {% for n in anteriores%}
+                    <div class="item">
+                        <span class="actual">ANTERIOR</span>
+                        <img src="{% version n.imagen 'micro' %}" alt="ACTUAL"/>
+                        <a class="title" href="{{n.get_absolute_url}}" title="{{n}}">{{n|upper}}</a><br/>
+                        <span class="subtitle">{{n.get_month_display}} {{n.year}}</span>
+
+                        {%with n.editorial as e%}
+                        <a class="entry" title="{{e}}" href="{{e.get_absolute_url}}">{{e}}</a>
+                        {%endwith%}
+                    </div>
+                    {%endfor%}
                 </div>
+
+
+                <div class="prev" title="Pasar a un número posterior" onclick="number_prev()"></div>
+                <div class="next" title="Pasar a un número anterior" onclick="number_next()"></div>
             </div>
 
             {%comment%}
