@@ -1187,6 +1187,7 @@ a:hover { color:#d10019; }
     background-color: white;
     position: relative;
     overflow: hidden;
+    height: 200px;
 }
 
 .authors .author span {
@@ -1235,18 +1236,9 @@ a:hover { color:#d10019; }
     margin:0;
     color:black;
     float:left;
+    height:130px;
 }
 
-.authors .author .links.sitios a  {
-    width:130px;
-    text-align: center;
-    text-transform: uppercase;
-    color:white;
-    background: black;
-    font-family:"DINWeb-Medium",Arial;
-    font-size:14px;
-    padding:2px 0;
-}
 
 .authors .author .links {
     height:auto;
@@ -1259,6 +1251,26 @@ a:hover { color:#d10019; }
     display: block;
     float: none;
     clear: both;
+    position: absolute;
+    bottom:12px;
+    right:12px;
+}
+
+.authors .author .links.sitios {
+    position:absolute;
+    top:140px;
+    left:12px;
+}
+
+.authors .author .links.sitios a  {
+    width:130px;
+    text-align: center;
+    text-transform: uppercase;
+    color:white;
+    background: black;
+    font-family:"DINWeb-Medium",Arial;
+    font-size:14px;
+    padding:2px 0;
 }
 
 .authors .author .img {
