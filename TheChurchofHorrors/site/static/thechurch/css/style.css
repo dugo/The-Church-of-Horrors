@@ -1261,14 +1261,18 @@ a:hover { color:#d10019; }
     clear: both;
 }
 
-.authors .author img {
-    display:block;
+.authors .author .img {
     width:130px;
     height:130px;
+    margin-right:20px;
+    float:left;
+}
+
+.authors .author img {
+    display:block;
     height:auto;
     /*margin-left: -10px;*/
-    float:left;
-    margin-right:20px;
+    
     /*margin-bottom:10px;*/
 }
 
