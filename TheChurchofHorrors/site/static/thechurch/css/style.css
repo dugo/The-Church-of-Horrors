@@ -621,15 +621,19 @@ a:hover { color:#d10019; }
     font-family:"DINWeb-Medium",Arial;
     font-size:16px;
     height:auto;
-    width:138px;
+    width:100%;
     float:left;
     white-space: nowrap;
     overflow: hidden;
     text-overflow:ellipsis;
+    text-align: center;
 }
 
 #left div.author .title a {
     width:auto;
+    margin:0 auto;
+    margin-bottom:5px;
+    float:none;
 }
 
 #left div.author .desc {
