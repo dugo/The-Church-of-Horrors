@@ -474,6 +474,15 @@ a:hover { color:#d10019; }
     position: relative;
 }
 
+#footer .footer-item .subitem.anteriores {
+   width:26%;
+   margin-right: 3%;
+}
+
+#footer .footer-item .subitem.anteriores:last-child {
+    margin-right: 0;
+}
+
 #footer .footer-item-3 img {
     float:left;
 }

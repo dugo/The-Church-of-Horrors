@@ -7,5 +7,6 @@ def common(request):
     return {
         'subsections': subsections,
         'current_number':Number.get_current(),
+        'anteriores':Number.get_anteriores(),
         'css':Subsection.get_css_colors(),
     }

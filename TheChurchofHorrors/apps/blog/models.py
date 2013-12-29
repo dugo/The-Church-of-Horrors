@@ -100,6 +100,13 @@ class Number(models.Model):
     def get_current(cls):
         return cls.objects.filter(published=True).order_by("-number")[0]
 
+    @classmethod
+    def get_anteriores(cls):
+        if settings.DEBUG:
+            return [cls.get_current(),cls.get_current(),cls.get_current(),cls.get_current(),cls.get_current()]
+        else:
+            return cls.objects.filter(published=True).order_by("-number")[1:]
+
     def get_more_comment(self):
         return self.other_entries.filter(published=True).order_by("-ncomments")
 

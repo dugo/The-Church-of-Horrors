@@ -286,7 +286,7 @@ function changetab(self,id) {
                 </div>
                 <div class="footer-item footer-item-3">
                 
-                    <div class="subitem">    
+                    <div class="subitem" style="margin-right: 5%;">    
                         <h3>ACTUAL</h3>
 
                         <a class="title" href="{{current_number.get_absolute_url}}" title="{{current_number}}">{{current_number|upper}}</a>
@@ -300,8 +300,30 @@ function changetab(self,id) {
                         
                     </div>
 
-                    <div class="subitem">    
+                    {% for n in anteriores|slice:":1" %}
+                    <div class="subitem anteriores">    
+                        <h3>ANTERIORES</h3>
+
+                        <a class="title" href="{{n.get_absolute_url}}" title="{{current_number}}">{{n|upper}}</a>
+                        <span class="subtitle">{{n.get_month_display}} {{n.year}}</span>
+
+                        <img src="{% version n.imagen 'micro' %}" alt="Número {{n.number}}"/>
+                        
                     </div>
+                    {%endfor%}
+
+
+                    {% for n in anteriores|slice:"1:2" %}
+                    <div class="subitem anteriores">    
+                        <h3>&nbsp;</h3>
+
+                        <a class="title" href="{{n.get_absolute_url}}" title="{{current_number}}">{{n|upper}}</a>
+                        <span class="subtitle">{{n.get_month_display}} {{n.year}}</span>
+
+                        <img src="{% version n.imagen 'micro' %}" alt="Número {{n.number}}"/>
+                        
+                    </div>
+                    {%endfor%}
 
                 </div>
             </div>
