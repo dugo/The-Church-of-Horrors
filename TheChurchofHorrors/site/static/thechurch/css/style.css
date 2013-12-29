@@ -1187,7 +1187,7 @@ a:hover { color:#d10019; }
     background-color: white;
     position: relative;
     overflow: hidden;
-    height: 200px;
+    height: 210px;
 }
 
 .authors .author span {
@@ -1242,7 +1242,6 @@ a:hover { color:#d10019; }
 
 .authors .author .links {
     height:auto;
-    width:100%;
     font-family:verdana;
     font-size:10px;
     margin:0;
