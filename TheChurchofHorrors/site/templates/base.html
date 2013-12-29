@@ -268,7 +268,7 @@ function number_prev() {
                 {%endfor%}
             </div>
 
-            <div class="content" id="more-comment">
+            <div class="content" id="more-comment" style="display:none">
                 {%for entry in number.get_more_comment|slice:":5"%}
                     {%include "micro-entry.html" %}
                 {%endfor%}
