@@ -1264,6 +1264,7 @@ a:hover { color:#d10019; }
 .authors .author img {
     display:block;
     width:130px;
+    height:130px;
     height:auto;
     /*margin-left: -10px;*/
     float:left;
