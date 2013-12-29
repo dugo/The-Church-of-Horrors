@@ -1219,6 +1219,10 @@ a:hover { color:#d10019; }
     text-overflow:ellipsis;
 }
 
+.authors .author .title a {
+    width: auto;
+}
+
 .authors .author .name,.authors .author .name a {
     display:block;
     color: #d10019;
