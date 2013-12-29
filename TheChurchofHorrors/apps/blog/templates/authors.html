@@ -19,7 +19,12 @@
 		{% for author in subauthors%}
 	    	<div class="author">
 	    
-		        <a href="{{author.get_absolute_url}}"><img src="{{author.avatar.url}}" alt='{{author}}' class="adjust"/></a>
+		        <a href="{{author.get_absolute_url}}">
+		        	<div class="img">
+		        		<img src="{{author.avatar.url}}" alt='{{author}}' class="adjust"/>
+		        	</div>
+		        </a>
+
 		        <div class="title">{%if author.title%}<a href="{{author.get_absolute_url}}">{{author.title|upper}}</a>{%endif%}</div>
 		        <div class="name"><a href="{{author.get_absolute_url}}">{{author}}</a></div>
 			    
