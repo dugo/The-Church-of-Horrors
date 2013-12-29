@@ -2,7 +2,7 @@
     
     {% if author.get_profile.get_published.count %}
 
-        {%if author.title%}
+        {%if author.get_profile.title%}
         <div class="title"><a href="{{author.get_absolute_url}}">{{author.get_profile.title|upper}}</a></div>
         {%endif%}
 
