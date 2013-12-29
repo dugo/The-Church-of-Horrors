@@ -18,6 +18,8 @@
 		<div class="col">
 		{% for author in subauthors%}
 	    	<div class="author">
+
+	    		<div class="title">{%if author.title%}<a href="{{author.get_absolute_url}}">{{author.title|upper}}</a>{%endif%}</div>
 	    
 		        <a href="{{author.get_absolute_url}}">
 		        	<div class="img">
@@ -25,7 +27,6 @@
 		        	</div>
 		        </a>
 
-		        <div class="title">{%if author.title%}<a href="{{author.get_absolute_url}}">{{author.title|upper}}</a>{%endif%}</div>
 		        <div class="name"><a href="{{author.get_absolute_url}}">{{author}}</a></div>
 			    
 			    <div class="desc">{{author.description|safe}}</div>

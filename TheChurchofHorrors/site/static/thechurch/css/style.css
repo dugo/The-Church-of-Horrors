@@ -326,7 +326,7 @@ a:hover { color:#d10019; }
     /*text-align:justify;*/
 }
 .home .short-entries { padding-top:16px; display:block;float:left;}
-.home .short-entry { float:left;width:314px;height:262px; position:relative;border-bottom:3px solid #d10019;margin-top:32px;overflow: hidden;background-color: white;}
+.home .short-entry { float:left;width:314px;height:284px; position:relative;border-bottom:3px solid #d10019;margin-top:32px;overflow: hidden;background-color: white;}
 .home .short-entry.odd { margin-right:24px;}
 .home .short-entry .img { float:left;width:314px;height:128px; }
 .home .short-entry .desc { float:right;height:auto;overflow:hidden; padding:10px;background:white;overflow: hidden;
@@ -337,7 +337,7 @@ a:hover { color:#d10019; }
     font-family: verdana;
     font-size: 18px;
     overflow: hidden;
-    height:22px;
+    height:44px;
     display: block;
 }
 .home .short-entry .title a {
@@ -346,7 +346,6 @@ a:hover { color:#d10019; }
     width:100%;
     overflow: hidden;
     text-overflow:ellipsis;
-    white-space: nowrap;
 }
 .home .short-entry .info {
     font-family:"DINWeb-Medium",Arial;
@@ -1262,15 +1261,20 @@ a:hover { color:#d10019; }
     font-family:"DINWeb-Medium",Arial;
     font-size:16px;
     height:auto;
-    width:138px;
+    width:100%;
     float:left;
     white-space: nowrap;
     overflow: hidden;
     text-overflow:ellipsis;
+    text-align: center;
+    height:27px;
 }
 
 .authors .author .title a {
     width: auto;
+    margin:0 auto;
+    margin-bottom: 5px;
+    float:none;
 }
 
 .authors .author .name,.authors .author .name a {
@@ -1311,7 +1315,7 @@ a:hover { color:#d10019; }
 
 .authors .author .links.sitios {
     position:absolute;
-    top:140px;
+    top:167px;
     left:12px;
 }
 
