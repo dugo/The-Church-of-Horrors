@@ -628,6 +628,10 @@ a:hover { color:#d10019; }
     text-overflow:ellipsis;
 }
 
+#left div.author .title a {
+    width:auto;
+}
+
 #left div.author .desc {
     display:inline;
     font-family:verdana;
