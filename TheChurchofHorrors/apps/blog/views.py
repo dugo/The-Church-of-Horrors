@@ -42,6 +42,15 @@ def subsection(request,number,month,year,subsection):
         dict(number=number,subsection=subsection,entries=entries,),
         context_instance=RequestContext(request))
 
+def subsection(request,slug):
+
+    subsection = get_object_or_404(Subsection,slug=slug)
+    entries=subsection.other_entries_random.filter(subsection__id=subsection.id)
+
+    return render_to_response("subsection.html", 
+        dict(subsection=subsection,entries=entries,),
+        context_instance=RequestContext(request))
+
 def search(request):
     
     q = request.GET.get("q")

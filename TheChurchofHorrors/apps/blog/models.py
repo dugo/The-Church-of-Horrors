@@ -141,6 +141,14 @@ class Subsection(models.Model):
     def __unicode__(self):
         return unicode(self.name)
 
+    @property
+    def other_entries(self):
+        return self.entries.filter(is_editorial=False,is_cartoon=False,published=True,number__published=True)
+
+    @property
+    def other_entries_random(self):
+        return self.other_entries.order_by("?")
+
     class Meta:
         verbose_name = _(u"categoría")
         verbose_name_plural = _(u"categorías")
@@ -148,7 +156,7 @@ class Subsection(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('common', (), {
+        return ('subsection', (), {
             'slug': self.slug})
     
     @classmethod
@@ -198,7 +206,7 @@ class Entry(models.Model):
     author = models.ForeignKey(User,verbose_name=_(u"Autor"),related_name="entries",blank=True,null=True)
     number = models.ForeignKey(Number,verbose_name=_(u"Número"),null=True,default=None,blank=True,related_name='entries')
     #section = models.ForeignKey(Section,verbose_name=_(u"Sección"))
-    subsection = models.ForeignKey(Subsection,verbose_name=_(u"Categoría"))
+    subsection = models.ForeignKey(Subsection,verbose_name=_(u"Categoría"),related_name="entries")
     created = models.DateTimeField(_(u'Creado'),help_text=_("La hora no tiene importancia"))
     modified = models.DateTimeField(_(u'Modificado'),auto_now=True)
     published = models.BooleanField(_(u'Publicado'),default=False,blank=False)

@@ -157,17 +157,9 @@ function number_prev() {
 
 
             <div id="subsections">
-                {% if number%}
-                {% for s in number.get_subsections %}
-                    <a href='{% url "subsection" number.number number.year number.month s.slug%}' title="{{s}}" class="{{s.slug}}">{{s}}</a>
+                {% for s in subsections %}
+                    <a href='{{s.get_absolute_url}}' title="{{s}}" class="{{s.slug}}">{{s}}</a>
                 {% endfor %}
-                {%else%}
-                {% with current_number as number%}
-                    {% for s in number.get_subsections %}
-                        <a href='{% url "subsection" number.number number.year number.month s.slug%}' title="{{s}}" class="{{s.slug}}">{{s}}</a>
-                    {% endfor %}
-                {%endwith%}
-                {%endif%}
             </div>
 
             <div id="top-left">
@@ -326,19 +318,9 @@ function number_prev() {
 
                     <div class="subitem">    
                         <h3>CATEGORÍAS</h3>
-
-                        {% if number%}
-                        {% for s in number.get_subsections %}
-                            <a href='{% url "subsection" number.number number.year number.month s.slug%}' title="{{s}}">{{s}}</a>
+                        {% for s in subsections %}
+                            <a href='{{s.get_absolute_url}}' title="{{s}}">{{s}}</a>
                         {% endfor %}
-                        {%else%}
-                        {% with current_number as number%}
-                            {% for s in number.get_subsections %}
-                                <a href='{% url "subsection" number.number number.year number.month s.slug%}' title="{{s}}">{{s}}</a>
-                            {% endfor %}
-                        {%endwith%}
-                        {%endif%}
-
                     </div>
 
                 </div>
