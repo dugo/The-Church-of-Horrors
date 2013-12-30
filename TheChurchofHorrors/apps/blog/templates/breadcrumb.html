@@ -1,17 +1,32 @@
 <div id="breadcrumb">
 
 	{% if number %}
-		{% if not subsection or entry %}
 		<div class="item"><a href="{{number.get_absolute_url}}" title="Ir a NÚMERO {{number.number}} {{number.get_month_display}} {{number.year}}"><strong>NÚMERO {{number.number}}</strong> {{number.get_month_display}} {{number.year}}</a></div>
 		<div class="arrow"></div>
-		{%endif%}
 	{%endif%}
 
 	{% if subsection%}
-	{% if entry%}<div class="prearrow"></div>{%endif%}
-	<div class="item"><a href="{% url subsection number.number number.year number.month  subsection.slug %}" title="Ir a {{subsection}}">{{subsection}}</a></div>
+	{% if entry or number%}<div class="prearrow"></div>{%endif%}
+	<div class="item">
+		{% if number%}
+		<a href="{% url subsection number.number number.year number.month  subsection.slug %}" title="Ir a {{subsection}}">{{subsection}}</a>
+		{%else%}
+		<a href="{{subsection.get_absolute_url}}" title="Ir a {{subsection}}">{{subsection}}</a>
+		{%endif%}
+	</div>
 	<div class="arrow"></div>
 	{%endif%}
+
+	{% if author%}
+	
+	<div class="item"><strong><a href="{% url authors %}" title="Ir a Sitios">Sitios</a></strong></div>
+	<div class="arrow"></div>
+
+	<div class="prearrow"></div>
+	<div class="item"><a href="{{author.get_absolute_url}}" title="Ir a {{author.get_profile}}">{{author.get_profile}}</a></div>
+	<div class="arrow"></div>
+	{%endif%}
+
 
 
 	{% for u in urls%}
@@ -21,5 +36,6 @@
 	</a></div>
 	<div class="arrow"></div>
 	{%endfor%}
+
 
 </div>

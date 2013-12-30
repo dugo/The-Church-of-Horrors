@@ -42,7 +42,7 @@ def subsection(request,number,month,year,subsection):
         dict(number=number,subsection=subsection,entries=entries,),
         context_instance=RequestContext(request))
 
-def subsection(request,slug):
+def subsection_global(request,slug):
 
     subsection = get_object_or_404(Subsection,slug=slug)
     entries=subsection.other_entries_random.filter(subsection__id=subsection.id)

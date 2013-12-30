@@ -35,11 +35,11 @@ def home_gallery():
     return {'gallery':gallery, "total":total }
     
 @register.inclusion_tag('breadcrumb.html')
-def breadcrumb(path,number=None,subsection=None,entry=None,request=None,tag=None,archive=None):
+def breadcrumb(path,number=None,subsection=None,entry=None,request=None,author=None,tag=None,archive=None):
     
     urls = []
 
-    if not number:
+    if not number and not author and not subsection:
 
         mapping = settings.BLOG_BREADCRUMB_URL_MAPPING
 
@@ -49,7 +49,7 @@ def breadcrumb(path,number=None,subsection=None,entry=None,request=None,tag=None
             urls.append( (path, mapping.get(token),) )
     
     # for search
-    if not urls and not request is None and request.method == "GET" and request.GET.get("q"):
+    if not urls and request and request.method == "GET" and request.GET.get("q"):
         urls.append( (path, u"Resultados de '%s'" % request.GET.get('q'),) )
 
     if not tag is None:
@@ -61,7 +61,7 @@ def breadcrumb(path,number=None,subsection=None,entry=None,request=None,tag=None
     """if urls and (not subsection):
         urls.insert(0, ("/", "HOME") )"""
 
-    return {'urls':urls,'number':number,'subsection':subsection,'entry':entry}
+    return {'urls':urls,'number':number,'subsection':subsection,'entry':entry,'author':author}
 
 @register.filter
 @stringfilter

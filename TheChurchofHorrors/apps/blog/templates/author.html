@@ -10,7 +10,7 @@
 
 {% block sidebar %}{% mini_author author %}{% endblock %}
 
-{%block breadcrumb%}{% breadcrumb request.get_full_path %}{%endblock%}
+{%block breadcrumb%}{% breadcrumb request.get_full_path "" "" "" "" author %}{%endblock%}
 
 {%block content_class%}home author{%endblock%}
 
