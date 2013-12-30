@@ -267,7 +267,7 @@ class Entry(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('entry', (), {
-            'number':self.number_id,
+            'number':self.number.number,
             'month':self.number.month,
             'year':self.number.year,
             'subsection': self.subsection.slug,
