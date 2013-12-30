@@ -32,13 +32,17 @@
         </div>
     </div>
 
+    {%with number.cartoon as cartoon%}
+    {%if cartoon%}
     <div class="cartoon">
-        {%with number.cartoon as cartoon%}
+        
         <a href="{{cartoon.get_absolute_url}}" title="{{cartoon}}">
             <img src="{{ cartoon.get_main_image }}" alt="{{cartoon.title}}"/>
         </a>
-        {%endwith%}
+        
     </div>
+    {%endif%}
+    {%endwith%}
 
 {% endblock %}
 
