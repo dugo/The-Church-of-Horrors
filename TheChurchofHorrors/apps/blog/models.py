@@ -143,7 +143,7 @@ class Subsection(models.Model):
 
     @property
     def other_entries(self):
-        return self.entries.filter(is_editorial=False,is_cartoon=False,published=True,number__published=True)
+        return self.entries.filter(published=True,number__published=True)
 
     @property
     def other_entries_random(self):
