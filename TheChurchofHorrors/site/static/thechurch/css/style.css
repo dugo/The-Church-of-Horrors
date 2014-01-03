@@ -1091,7 +1091,7 @@ a:hover { color:#d10019; }
     display:none;
 }
 
-#ajax-wrapper { display:block;float:left;width:990px;height:auto;padding:23px;padding-top: 0}
+#ajax-wrapper { display:block;float:left;width:990px;height:auto;padding:20px;padding-top: 0}
 
 #prevpage,#nextpage {
     float:left;
@@ -1618,3 +1618,52 @@ div.clr {
     max-width: 100%;
     margin:0 auto;
 }
+
+.anteriores #content .anterior {
+    width:290px;
+    height:153px;
+    display: block;
+    background-color: white;
+    padding:16px 12px;
+    float:left;
+    margin-right: 24px;
+    margin-bottom: 32px;
+}
+
+.anteriores #content .anterior.odd {
+    margin-right: 0;
+}
+
+.anteriores #content .anterior .desc,.anteriores #content .anterior .subtitle,.anteriores #content .anterior .title {
+    float:left;
+    width:150px;
+    clear: none;
+    vertical-align: top;
+}
+
+.anteriores #content .anterior .subtitle {
+    font-size: 14px;
+    color: #d20c24;
+    font-family: Verdana;
+}
+
+.anteriores #content .anterior .title {
+    color: #5889b6;
+    font-size: 20px;
+    font-family: Verdana;
+    text-transform: uppercase;
+}
+
+.anteriores #content .anterior .desc {
+    color: black;
+    margin-top:10px;
+    font-family: Verdana;
+    font-size: 12px;
+}
+
+.anteriores #content .anterior .img {
+    width:133px;
+    height:153px;
+    float:right;
+}
+

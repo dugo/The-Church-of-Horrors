@@ -210,7 +210,7 @@ function number_prev() {
             <div id="sections">
                 <a href='/' class="section">ACTUAL</a>
 
-                {#<a href='{{s.get_absolute_url}}' class="section">ANTERIORES</a>#}
+                <a href='{%url 'anteriores' %}' class="section">ANTERIORES</a>
                 <a href='{% url 'authors' %}' class="section">SITIOS</a>
                 
                 <a href='http://vimeo.com/thechurchofhorrors' class="social vimeo" target="_blank"></a>

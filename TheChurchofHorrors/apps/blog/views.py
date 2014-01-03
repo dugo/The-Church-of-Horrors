@@ -51,6 +51,10 @@ def subsection_global(request,slug):
         dict(subsection=subsection,entries=entries,),
         context_instance=RequestContext(request))
 
+def anteriores(request):
+
+    return render_to_response("anteriores.html", context_instance=RequestContext(request))
+
 def search(request):
     
     q = request.GET.get("q")

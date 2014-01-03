@@ -273,6 +273,7 @@ BLOG_BREADCRUMB_URL_MAPPING = {
     'author':"Autor",
     'info':"Información",
     'sitios':"Sitios",
+    'anteriores':"Anteriores",
     }
 BLOG_CONTACT_EMAILS = ["rdugomartin@gmail.com"]
 BLOG_EDITOR_ROL_ID = 1
