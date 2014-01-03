@@ -655,6 +655,18 @@ a:hover { color:#d10019; }
     text-align: right;
 }
 
+#left div.author .links.sitios a {
+    width: 130px;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    background: black;
+    font-family: "DINWeb-Medium",Arial;
+    font-size: 14px;
+    padding: 2px 0;
+    float:left;
+}
+
 #left div.author img {
     display:block;
     width:130px;
