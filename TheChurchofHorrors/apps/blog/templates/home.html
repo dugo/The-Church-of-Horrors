@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load blog fb_versions %}
 
-{% block title %}The Church of Horrors{%if section%} :: {{section}}{%endif%}{%if subsection%} :: {{subsection}}{%endif%}{%endblock%}
+{% block title %}The Church of Horrors :: {{number}} :: {{number.get_month_display}} {{number.year}}{%endblock%}
 
 {%block breadcrumb%}{% breadcrumb request.get_full_path number %}{%endblock%}
 
