@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load blog fb_versions %}
+
+{% block extra_metatags %}
+<meta name="keywords" content="{{authors|join:","}}"/>
+<meta name="description" content="Sitios" />
+{%endblock%}
+
+{% block title %}The Church of Horrors :: Anteriores{%endblock%}
+
+{%block breadcrumb%}{% breadcrumb request.get_full_path %}{%endblock%}
+
+{%block content_class%}home anteriores{%endblock%}
+
+{%block content%}
+	{% for number in anteriores%}
+    	<div class="anterior {% if forloop.counter|divisibleby:3 %}odd{%endif%}">
+
+        	<div class="img">
+        		<img src="{% version number.imagen 'preview' %}" alt='{{number}}' class="adjust"/>
+        	</div>
+
+    		<div class="title"><a href="{{number.get_absolute_url}}" title="Ir a {{number}}">{{number}}</a></div>
+
+    		<div class="subtitle">{{number.get_month_display}} {{number.year}}</a></div>
+
+    		{% if number.editorial%}
+    		<div class="desc">{{number.editorial}}</div>
+    		{%endif%}
+    
+
+		</div>
+    {%endfor%}
+{%endblock%}
