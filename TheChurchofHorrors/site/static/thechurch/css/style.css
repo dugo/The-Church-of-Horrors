@@ -166,7 +166,7 @@ hr {
     color:gray;
     font-family:verdana,sans-serif;
     font-size:10px;
-    width: 120px;
+    width: 110px;
     padding: 0 5px;
     }
 #search-button {
@@ -408,7 +408,7 @@ a:hover { color:#d10019; }
     color:gray;
     font-family:verdana,sans-serif;
     font-size:10px;
-    width: 142px;
+    width: 132px;
     padding: 0 5px;
     }
 #footer .search-form {
