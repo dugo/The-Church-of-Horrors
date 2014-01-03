@@ -325,7 +325,7 @@ a:hover { color:#d10019; }
     letter-spacing:0.05em;
     /*text-align:justify;*/
 }
-.home .short-entries { padding-top:16px; display:block;float:left;}
+.home .short-entries { padding-top:0; display:block;float:left;}
 .home .short-entry { float:left;width:314px;height:284px; position:relative;border-bottom:3px solid #d10019;margin-top:32px;overflow: hidden;background-color: white;}
 .home .short-entry.odd { margin-right:24px;}
 .home .short-entry .img { float:left;width:314px;height:128px; }

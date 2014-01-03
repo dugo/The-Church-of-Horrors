@@ -2,7 +2,7 @@ from blog.models import Number,Subsection
 
 def common(request):
     
-    subsections = Subsection.objects.all().order_by('sort')[:]
+    subsections = Subsection.objects.filter(hidden=False).order_by('sort')[:]
 
     return {
         'subsections': subsections,

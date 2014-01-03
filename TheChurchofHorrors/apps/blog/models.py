@@ -137,6 +137,7 @@ class Subsection(models.Model):
     slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=u"Será generada automaticamente a partir del nombre")
     sort = models.PositiveIntegerField(_(u"Orden"),default=0,blank=False,null=False,help_text=_(u"En el que se mostrará en el menú"))
     color = models.CharField("Color Css",max_length="7",help_text="#3f3f3f",default="")
+    hidden = models.BooleanField("Oculta",default=False)
     
     def __unicode__(self):
         return unicode(self.name)
@@ -297,7 +298,7 @@ class Entry(models.Model):
         return self.comments.all()
 
     def get_related(self):
-        return Entry.objects.filter(number__published=True,tags__name__in=self.tags.values_list("name",flat=True).all()[:]).exclude(id=self.id).exclude(published=False).distinct()[:4]
+        return Entry.objects.filter(subsection__hidden=False,number__published=True,tags__name__in=self.tags.values_list("name",flat=True).all()[:]).exclude(id=self.id).exclude(published=False).distinct()[:4]
     
     def n_comments(self):
         return self.comments.all().count()
