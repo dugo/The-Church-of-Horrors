@@ -987,7 +987,7 @@ a:hover { color:#d10019; }
 #gallery .image,#gallery-entry .image {
     display:block;
     position:relative;
-    width:652px;
+    width:650px;
     height:100%;
     float:left;
     text-align:left !important;
@@ -999,7 +999,7 @@ a:hover { color:#d10019; }
 #gallery .desc {
     display:block;
     position:absolute;
-    width:338px;
+    width:340px;
     height:100%;
     right:0;
     z-index:10;
