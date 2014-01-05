@@ -627,7 +627,7 @@ a:hover { color:#d10019; }
     white-space: nowrap;
     overflow: hidden;
     text-overflow:ellipsis;
-    text-align: center;
+    text-align: left;
 }
 
 #left div.author .title a {
@@ -1280,7 +1280,7 @@ a:hover { color:#d10019; }
     white-space: nowrap;
     overflow: hidden;
     text-overflow:ellipsis;
-    text-align: center;
+    text-align: left;
     height:27px;
 }
 
