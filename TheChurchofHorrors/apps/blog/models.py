@@ -117,7 +117,7 @@ class Number(models.Model):
         return u"Número %d"%self.number
 
     def get_sitios(self):
-        qs = UserProfile.objects.filter(rols__rol__id=2,user__entries__id__in=self.entries.filter(published=True,is_cartoon=False,is_editorial=False).values_list("id",flat=True))
+        qs = UserProfile.objects.filter(rols__rol__id=2,user__entries__id__in=self.entries.filter(published=True,is_cartoon=False,).values_list("id",flat=True))
         qs = list(set(qs))
         random.shuffle(qs)
 
@@ -315,7 +315,7 @@ class Entry(models.Model):
     @classmethod
     def get_last_by_author(self,author,entry=None,max=settings.BLOG_OTHER_LAST_ENTRIES):
 
-        entries = Entry.objects.filter(published=True,author__id=author.id,is_cartoon=False,is_editorial=False).order_by('-created')
+        entries = Entry.objects.filter(published=True,author__id=author.id,is_cartoon=False,).order_by('-created')
         
         if entry:
             return entries.exclude(id=entry.id)

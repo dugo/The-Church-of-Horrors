@@ -36,7 +36,7 @@ class UserProfile(models.Model):
             'user': unicode(self.user)})
 
     def get_published(self):
-        return self.user.entries.filter(published=True,number__published=True,is_cartoon=False,is_editorial=False)
+        return self.user.entries.filter(published=True,number__published=True,is_cartoon=False,)
     
     @property
     def is_editor(self):
