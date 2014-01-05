@@ -6,11 +6,11 @@ sys.stdout = sys.stderr
 activate = "/var/virtualenvs/thechurch/bin/activate_this.py"
 execfile(activate, dict(__file__=activate))
 
-path = '/var/webapps/The-Church-of-Horrors-beta'
+path = '/var/webapps/The-Church-of-Horrors'
 if path not in sys.path:
     sys.path.insert(0,path)
 
-path = '/var/webapps/The-Church-of-Horrors-beta/TheChurchofHorrors'
+path = '/var/webapps/The-Church-of-Horrors/TheChurchofHorrors'
 if path not in sys.path:
     sys.path.insert(0,path)
 
