@@ -268,7 +268,8 @@ function number_prev() {
         {%with number.cartoon as cartoon%}
         {%if cartoon%}
         <div class="col cartoon">
-                        <a href="{{cartoon.get_absolute_url}}" title="{{cartoon}}">
+            <div class="cartoon-title {{cartoon.subsection.slug}}">{{cartoon.author.get_profile}}</div>
+            <a href="{{cartoon.get_absolute_url}}" title="{{cartoon}}">
                 <img src="{{ cartoon.get_main_image }}" alt="{{cartoon.title}}"/>
             </a>
         </div>
@@ -370,7 +371,7 @@ function number_prev() {
             
         </div>
         
-        <div id="copyright">&copy; 2013 <a href="/">thechurchofhorrors.com</a></div>
+        <div id="copyright">&copy; 2014 <a href="/">thechurchofhorrors.com</a></div>
     </div>
 </body>
 

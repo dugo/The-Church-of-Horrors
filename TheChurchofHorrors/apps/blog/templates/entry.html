@@ -38,7 +38,7 @@
     {%with number.cartoon as cartoon%}
     {%if cartoon%}
     <div class="cartoon">
-        
+        <div class="cartoon-title {{cartoon.subsection.slug}}">{{cartoon.author.get_profile}}</div>
         <a href="{{cartoon.get_absolute_url}}" title="{{cartoon}}">
             <img src="{{ cartoon.get_main_image }}" alt="{{cartoon.title}}"/>
         </a>

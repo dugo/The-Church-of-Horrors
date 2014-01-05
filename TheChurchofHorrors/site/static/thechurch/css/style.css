@@ -364,6 +364,7 @@ a:hover { color:#d10019; }
     height: 60px;
     overflow:hidden;
     text-overflow:ellipsis;
+    line-height: 12px;
     /*text-align:justify;*/
 }
 .home .short-entry .read {
@@ -541,7 +542,7 @@ a:hover { color:#d10019; }
 #footer .footer-item-3 .subtitle {
     font-family: verdana;
     font-size: 10px;
-    color: #d20c24;
+    color: #808183;
     display:block;
 }
 
@@ -588,6 +589,7 @@ a:hover { color:#d10019; }
     padding:16px 12px 16px 12px;
     background-color: white;
     position: relative;
+    margin-bottom: 20px;
 }
 
 #left div.author span {
@@ -1419,12 +1421,23 @@ a:hover { color:#d10019; }
     text-decoration: underline;
 }
 
+#bottom .cartoon .cartoon-title {
+    height:20px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 3px solid black;
+    text-transform: uppercase;
+    font-family:"DINWeb-Medium",Arial;
+    color:#5889b6;
+    font-size: 16px;
+}
+
 #bottom .cartoon {
     text-align: center;
 }
 
 #bottom .cartoon img {
-    max-height: 100%;
+    max-height: 215px;
     max-width: 100%;
 }
 
@@ -1561,7 +1574,6 @@ div.clr {
 #left div.tabs {
     background-color: white;
     height:100%;
-    margin-top:20px;
     height:250px;
 }
 
@@ -1626,9 +1638,20 @@ div.clr {
 }
 
 #left div.cartoon img,#left div.cartoon a {
-    max-height: 100%;
     max-width: 100%;
+    max-height: 215px;
     margin:0 auto;
+}
+
+#left div.cartoon .cartoon-title {
+    height:20px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 3px solid black;
+    text-transform: uppercase;
+    font-family:"DINWeb-Medium",Arial;
+    color:#5889b6;
+    font-size: 16px;
 }
 
 .anteriores #content .anterior {
