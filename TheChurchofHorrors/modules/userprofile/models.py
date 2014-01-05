@@ -36,7 +36,7 @@ class UserProfile(models.Model):
             'user': unicode(self.user)})
 
     def get_published(self):
-        return self.user.entries.filter(published=True)
+        return self.user.entries.filter(published=True,number__published=True,is_cartoon=False,is_editorial=False)
     
     @property
     def is_editor(self):
@@ -44,7 +44,7 @@ class UserProfile(models.Model):
     
     @classmethod
     def get_authors(cls):
-        return cls.objects.filter(user__entries__published=True)
+        return cls.objects.filter(user__entries__published=True,user__groups__id=1)
 
     @classmethod
     def get_by_rol(self,rol_id):
