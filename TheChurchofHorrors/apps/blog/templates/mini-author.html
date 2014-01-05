@@ -1,26 +1,32 @@
 <div class="author">
     
-    {% if author.get_profile.get_published.count %}
+    {% with author.get_profile as profile %}
+    {% if profile.get_published.count %}
 
-        {%if author.get_profile.title%}
-        <div class="title"><a href="{{author.get_absolute_url}}">{{author.get_profile.title|upper}}</a></div>
+        {%if profile.title%}
+        <div class="title"><a href="{{author.get_absolute_url}}">{{profile.title|upper}}</a></div>
         {%endif%}
 
-        <a href="{{author.get_absolute_url}}"><img src="{{author.get_profile.avatar.url}}" alt='{{author.get_profile}}'/></a>
+        <a href="{{author.get_absolute_url}}"><img src="{{profile.avatar.url}}" alt='{{profile}}'/></a>
 
-        <div class="name"><a href="{{author.get_absolute_url}}">{{author.get_profile}}</a></div>
+        <div class="name"><a href="{{author.get_absolute_url}}">{{profile}}</a></div>
     {%else%}
-        <img src="{{author.get_profile.avatar.url}}" alt='{{author.get_profile}}'/>
-        <div class="name">{{author.get_profile}}</div>
+        {%if profile.title%}
+        <div class="title">{{profile.title|upper}}</div>
+        {%endif%}
+        <img src="{{profile.avatar.url}}" alt='{{profile}}'/>
+        <div class="name">{{profile}}</div>
     {%endif%}
     
-    <div class="desc">{{author.get_profile.description|safe}}</div>
+    <div class="desc">{{profile.description|safe}}</div>
     <div class="links sitios">
         <a href="{%url authors%}" title="Ir a Sitios">Ir a Sitios</a>
     </div>
 
-    {%if author.get_profile.get_items%}
+    {%if profile.get_items%}
         <div class="links">
-        {%for link in author.get_profile.get_items%}<a href="{{link.url}}" onclick="window.open(this.href);return false;">{{link|lower}}</a>{% if not forloop.last %} / {%endif%}{%endfor%}</div>
+        {%for link in profile.get_items%}<a href="{{link.url}}" onclick="window.open(this.href);return false;">{{link|lower}}</a>{% if not forloop.last %} / {%endif%}{%endfor%}</div>
     {%endif%}
+
+    {%endwith%}
 </div>
