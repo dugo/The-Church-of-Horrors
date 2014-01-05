@@ -117,7 +117,7 @@ class Number(models.Model):
         return u"Número %d"%self.number
 
     def get_sitios(self):
-        qs = UserProfile.objects.filter(rols__id__in=(2,),user__entries__id__in=self.entries.filter(published=True,is_cartoon=False,is_editorial=False).values_list("id",flat=True))
+        qs = UserProfile.objects.filter(rols__rol__id=2,user__entries__id__in=self.entries.filter(published=True,is_cartoon=False,is_editorial=False).values_list("id",flat=True))
         qs = list(set(qs))
         random.shuffle(qs)
 

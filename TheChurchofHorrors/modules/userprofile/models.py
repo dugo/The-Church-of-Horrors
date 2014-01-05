@@ -44,7 +44,7 @@ class UserProfile(models.Model):
     
     @classmethod
     def get_authors(cls):
-        return cls.objects.filter(user__entries__published=True,rols__id=2)
+        return cls.objects.filter(user__entries__published=True,rols__rol__id=2)
 
     @classmethod
     def get_by_rol(self,rol_id):
