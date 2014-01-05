@@ -315,12 +315,12 @@ class Entry(models.Model):
     @classmethod
     def get_last_by_author(self,author,entry=None,max=settings.BLOG_OTHER_LAST_ENTRIES):
 
-        entries = Entry.objects.filter(published=True,author__id=author.id).order_by('-created')
+        entries = Entry.objects.filter(published=True,author__id=author.id,is_cartoon=False,is_editorial=False).order_by('-created')
         
         if entry:
             return entries.exclude(id=entry.id)
         
-        return entries[:max]
+        return entries
     
     @classmethod    
     def get_last_by_section(self,section=None,max=settings.BLOG_RIGHT_LAST_ENTRIES):
