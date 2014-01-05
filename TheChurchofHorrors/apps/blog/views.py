@@ -13,6 +13,7 @@ from recaptcha_works.decorators import fix_recaptcha_remote_ip
 from forms import CommentForm,CommentFormAuthenticated
 from userprofile.models import UserProfile,Rol
 from taggit.models import Tag
+from django.views.decorators.csrf import csrf_exempt
 
 def home(request):
 
@@ -262,3 +263,13 @@ def view_for_section(request,section):
         dict(right_entries=right_entries, entries=entries, paginator=paginator,section = section,archive=None,subsection=None,tag=None), 
         context_instance=RequestContext(request))
 
+
+@csrf_exempt
+def cookies(request):
+
+    if request.method <> "POST":
+        return HttpResponseForbidden()
+
+    request.session['cookiesok'] = True
+
+    return HttpResponse("ok")

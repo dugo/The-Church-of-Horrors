@@ -1700,3 +1700,41 @@ div.clr {
     float:right;
 }
 
+#cookies {
+    background-color: #444444;
+    overflow: hidden;
+    display: block;
+    position: fixed;
+    bottom:0;
+    left:0;
+    height:auto;
+    width:80%;
+    padding:10px 10%;
+    text-align: left;
+    text-rendering: optimizeLegibility;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+#cookies button {
+    float:right;
+    padding:5px 10px;
+    color:white;
+    text-rendering: optimizeLegibility;
+    font-family: Helvetica, Arial, sans-serif;
+    border:0;
+    background-color: black;
+    cursor:pointer;
+    font-family: "DINWeb-Medium",Arial;
+    font-size: 15px;
+}
+
+#cookies p {
+    color:#bbbbbb;
+    font-size:12px;
+    margin-top: 5px;
+}
+
+#cookies .title {
+    color: #ffffff;
+    font-size:15px;
+}

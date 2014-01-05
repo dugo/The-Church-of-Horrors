@@ -62,6 +62,11 @@ $(document).ready(function(){
     $(".adjust").scaleImage({parent: "div",center: true,scale:"fill"});
     $(".adjust-nofill").scaleImage({parent: "div",center: true,scale:"fit"});
 
+    $("#cookies button").click(function(){
+        $.post("{%url 'cookies'%}");
+        $("#cookies").fadeOut();
+    });
+
     $("#header #subsections a")
         .hover(function(){ 
             var cls = $(this).attr("class");
@@ -372,6 +377,19 @@ function number_prev() {
         </div>
         
         <div id="copyright">&copy; 2014 <a href="/">thechurchofhorrors.com</a></div>
+
+        {% if not request.session.cookiesok%}
+        <div id="cookies">
+            <div class="title">Uso de cookies</div>
+
+
+            <button>CERRAR</button>
+
+            <p>Este sitio web utiliza cookies propias y de terceros para que usted tenga una mejor experiencia de usuario. Si continúa navegando está dando su consentimiento para la aceptación de las mencionadas cookies.</p>
+        </div>
+        {%endif%}
+
+    </div>
     </div>
 </body>
 
