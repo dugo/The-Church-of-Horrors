@@ -469,7 +469,11 @@ signals.post_syncdb.connect(create_index)
 def update_index(sender, instance, created, **kwargs):
     storage = FileStorage(settings.WHOOSH_INDEX)
     ix = storage.open_index()
-    writer = ix.writer()
+
+    try:
+        writer = ix.writer()
+    except:
+        return
     
     tags = []
     for t in instance.tags.all():
