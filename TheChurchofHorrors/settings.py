@@ -187,8 +187,8 @@ TINYMCE_DEFAULT_CONFIG = {
         { "title" : u"Página 1+2+1", "src" : "/static/thechurch/tinymce_templates/121col.html" ,  "description" : u"Página con encabezado, cuerpo y pie"  } ],
     "fullscreen_new_window" : False,
     "fullscreen_settings" : { "theme_advanced_path_location" : "top" },
-    "relative_urls": True,
-    "convert_urls": False,
+    "relative_urls": False,
+    "convert_urls": True,
     #"pagebreak_separator" : "<span class='pagebreak'></span>"
 
 }
