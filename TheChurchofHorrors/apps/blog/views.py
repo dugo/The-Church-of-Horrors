@@ -200,10 +200,7 @@ def entry(request,number,month,year,subsection,slug):
     author = website = email = content = ''
     
     if request.method == "POST":
-        
-        if not request.user.is_authenticated():
-            return HttpResponseForbidden()
-            
+
         
         form = CommentFormAuthenticated(request.POST) if request.user.is_authenticated() else CommentForm(request,request.POST)
         
