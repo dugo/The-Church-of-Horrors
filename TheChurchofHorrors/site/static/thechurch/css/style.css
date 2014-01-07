@@ -667,6 +667,7 @@ a:hover { color:#d10019; }
     font-size: 14px;
     padding: 2px 0;
     float:left;
+    line-height: 24px
 }
 
 #left div.author img {
@@ -1342,6 +1343,7 @@ a:hover { color:#d10019; }
     font-family:"DINWeb-Medium",Arial;
     font-size:14px;
     padding:2px 0;
+    line-height: 24px;
 }
 
 .authors .author .img {
