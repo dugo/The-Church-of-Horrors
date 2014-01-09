@@ -1740,3 +1740,17 @@ div.clr {
     color: #ffffff;
     font-size:15px;
 }
+
+.links .twitter { background-position: 0 0;}
+.links .facebook { background-position: -28px 0;}
+.links .vimeo { background-position: -56px 0;}
+.links .bandcamp { background-position: -84px 0;}
+.links .soundcloud { background-position: -112px 0;}
+.links .cargocollective { background-position: -140px 0;}
+.links .flickr { background-position: -168px 0;}
+.links .blogger { background-position: -196px 0;}
+.links .lastfm { background-position: -224px 0;}
+.links .pinterest { background-position: -252px 0;}
+.links .doc { background-position: -280px 0;}
+.links .tumblr { background-position: -308px 0;}
+.links .wordpress { background-position: -336px 0;}

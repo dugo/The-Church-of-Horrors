@@ -6,6 +6,21 @@ from filebrowser.fields import FileBrowseField
 from django.utils.translation import ugettext as _
 from django.conf import settings
 
+USERPROFILE_ITEM_CHOICES = (('twitter', 'Twitter'),
+('facebook', 'Facebook'),
+('vimeo', 'Vimeo'),
+('bandcamp', 'Bandcamp'),
+('soundcloud', 'Soundcloud'),
+('cargocollective', 'CargoCollective'),
+('flickr', 'Flickr'),
+('blogger', 'Blogger'),
+('lastfm', 'Lastfm'),
+('pinterest', 'Pinterest'),
+('doc', 'Documento pdf de descarga'),
+('tumblr', 'Tumblr'),
+('wordpress', 'Wordpress'))
+
+
 class Rol(models.Model):
     name = models.CharField(_('Rol'),max_length=100,unique=True,blank=False)
     sort = models.PositiveIntegerField(_('Orden'),help_text=_(u'Orden en el que se mostrará en la página de staffs'),unique=True,blank=False)
@@ -127,6 +142,7 @@ class RolItem(models.Model):
 class UserProfileItem(models.Model):
     profile = models.ForeignKey(UserProfile, verbose_name=_("Perfil"),related_name="items")
     display_name = models.CharField(_(u'Nombre para mostrar'),max_length=20,blank=False)
+    icon = models.CharField(max_length=30,default="",choices=USERPROFILE_ITEM_CHOICES)
     url = models.URLField(blank=False)
     
     def __unicode__(self):
