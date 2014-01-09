@@ -655,6 +655,22 @@ a:hover { color:#d10019; }
     margin:0;
     padding-top: 16px;
     text-align: right;
+    float:right;
+    width:140px;
+}
+
+#left div.author .links a {
+    display:inline-block;
+    width:28px;
+    height:28px;
+    background-image:url('../images/icons.png');
+    margin-left: 4px;
+}
+
+#left div.author .links.sitios {
+    float:left;
+    clear:left;
+    width: 140px;
 }
 
 #left div.author .links.sitios a {
@@ -667,7 +683,8 @@ a:hover { color:#d10019; }
     font-size: 14px;
     padding: 2px 0;
     float:left;
-    line-height: 24px
+    line-height: 24px;
+    margin-left:0;
 }
 
 #left div.author img {
@@ -1328,9 +1345,17 @@ a:hover { color:#d10019; }
     right:12px;
 }
 
+.authors .author .links a {
+    display:inline-block;
+    width:28px;
+    height:28px;
+    background-image:url('../images/icons.png');
+    margin-left: 4px;
+}
+
 .authors .author .links.sitios {
     position:absolute;
-    top:167px;
+    bottom:12px;
     left:12px;
 }
 
@@ -1344,6 +1369,7 @@ a:hover { color:#d10019; }
     font-size:14px;
     padding:2px 0;
     line-height: 24px;
+    margin-left: 0;
 }
 
 .authors .author .img {
@@ -1741,9 +1767,9 @@ div.clr {
     font-size:15px;
 }
 
-.links .twitter { background-position: 0 0;}
-.links .facebook { background-position: -28px 0;}
-.links .vimeo { background-position: -56px 0;}
+.links .twitter { background-position: 0 0!important;}
+.links .facebook { background-position: -28px 0!important;}
+.links .vimeo { background-position: -56px 0!important;}
 .links .bandcamp { background-position: -84px 0;}
 .links .soundcloud { background-position: -112px 0;}
 .links .cargocollective { background-position: -140px 0;}
