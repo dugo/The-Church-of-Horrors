@@ -20,7 +20,9 @@ USERPROFILE_ITEM_CHOICES = (
 ('pinterest', 'Pinterest'),
 ('doc', 'Documento pdf de descarga'),
 ('tumblr', 'Tumblr'),
-('wordpress', 'Wordpress'))
+('wordpress', 'Wordpress'),
+('web', 'Web generica'),
+('otro', 'Otro tipo de enlace'))
 
 
 class Rol(models.Model):
