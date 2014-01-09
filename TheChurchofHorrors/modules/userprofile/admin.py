@@ -7,6 +7,7 @@ from django import forms
 from django.conf import settings
 from django.utils.translation import ugettext as _
 from django.contrib.sites.models import Site
+from django.forms.models import BaseInlineFormSet
 
 
 class UserProfileForm( forms.ModelForm ):
@@ -38,10 +39,31 @@ class CounterAdmin(admin.ModelAdmin):
             field.widget.attrs['class'] = 'counted ' + field.widget.attrs.get('class','')
         return field    
 
+class UserProfileItemFormset(BaseInlineFormSet):
+    def clean(self):
+        total = 1 if self.data.get("attach") else 0
+        if not total:
+            if self.instance and self.instance.attach:
+                total=1
+        for form in self.forms:
+            try:
+                if form.cleaned_data and not form.cleaned_data['DELETE']:
+                    total+=1
+                
+            except AttributeError:
+                # annoyingly, if a subform is invalid Django explicity raises
+                # an AttributeError for cleaned_data
+                pass
+        
+        if total>4:
+            raise forms.ValidationError(u"El total de los enlaces (incluyendo el fichero adjunto) no debe superar 4")
+
 class UserProfileItem(admin.TabularInline):
     model = models.UserProfileItem
     can_delete = True
     extra = 0
+    max_num = 4
+    formset = UserProfileItemFormset
     
 class RolItem(admin.TabularInline):
     model = models.RolItem
