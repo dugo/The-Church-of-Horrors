@@ -41,12 +41,12 @@ class CounterAdmin(admin.ModelAdmin):
 class UserProfileItem(admin.TabularInline):
     model = models.UserProfileItem
     can_delete = True
-    extra = 1
+    extra = 0
     
 class RolItem(admin.TabularInline):
     model = models.RolItem
     can_delete = True
-    extra = 1
+    extra = 0
 
 class UserProfile(CounterAdmin):
     

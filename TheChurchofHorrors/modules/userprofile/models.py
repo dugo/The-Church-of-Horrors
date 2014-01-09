@@ -6,7 +6,9 @@ from filebrowser.fields import FileBrowseField
 from django.utils.translation import ugettext as _
 from django.conf import settings
 
-USERPROFILE_ITEM_CHOICES = (('twitter', 'Twitter'),
+USERPROFILE_ITEM_CHOICES = (
+('','-'),
+('twitter', 'Twitter'),
 ('facebook', 'Facebook'),
 ('vimeo', 'Vimeo'),
 ('bandcamp', 'Bandcamp'),
@@ -43,6 +45,7 @@ class UserProfile(models.Model):
     avatar = models.ImageField(blank=False,upload_to='avatars/',help_text=_(u'Tu avatar. Será redimensionado y convertido a blanco y negro. Súbelo cuadrado sino será recortado.'))
     name = models.CharField(_(u'Nombre para mostrar'),max_length=30,unique=True,null=True,blank=True,help_text=_(u'El nombre que se mostrará junto a tu avatar'))
     title = models.CharField(_(u'Título'),max_length=100,blank=False,default="",help_text=_(u'El título de su sitio'))
+    attach = models.FileField("Fichero adjunto",blank=True,default="",upload_to="users/",help_text=u"Fichero opcional al cual se enlazará en tu perfil. Puedes subir tu portafolio, curriculum o cualquier información de interés sobre tí.")
     #avatar = models.ImageField(blank=False,upload_to='avatars/')
 
     @models.permalink
@@ -142,7 +145,7 @@ class RolItem(models.Model):
 class UserProfileItem(models.Model):
     profile = models.ForeignKey(UserProfile, verbose_name=_("Perfil"),related_name="items")
     display_name = models.CharField(_(u'Nombre para mostrar'),max_length=20,blank=False)
-    icon = models.CharField(max_length=30,default="",choices=USERPROFILE_ITEM_CHOICES)
+    icon = models.CharField('Icono',max_length=30,default="",choices=USERPROFILE_ITEM_CHOICES)
     url = models.URLField(blank=False)
     
     def __unicode__(self):
