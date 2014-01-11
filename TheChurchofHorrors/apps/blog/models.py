@@ -101,7 +101,7 @@ class Number(models.Model):
         return cls.objects.filter(published=True).order_by("-number")[0]
 
     def is_current(cls):
-        return cls.objects.filter(published=True).values("id").order_by("-number")[0]['id'] == self.id
+        return Number.objects.filter(published=True).values("id").order_by("-number")[0]['id'] == self.id
 
     @classmethod
     def get_anteriores(cls):
