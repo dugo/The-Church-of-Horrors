@@ -116,6 +116,9 @@ class Number(models.Model):
     def get_more_view(self):
         return self.other_entries.filter(published=True).order_by("-views")
 
+    def get_more_shared(self):
+        return self.other_entries.filter(published=True).order_by("-shared")
+
     def __unicode__(self):
         return u"Número %d"%self.number
 
@@ -125,6 +128,10 @@ class Number(models.Model):
         random.shuffle(qs)
 
         return qs
+
+    @classmethod
+    def get_published(cls):
+        return cls.objects.filter(published=True)
 
     def get_subsections(self):
 
@@ -218,6 +225,7 @@ class Entry(models.Model):
     slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=_(u"Será generada automaticamente a partir del título"))
     views = models.PositiveIntegerField("V",db_index=True,default=0,blank=True)
     ncomments = models.PositiveIntegerField("C",db_index=True,default=0,blank=True)
+    shared = models.PositiveIntegerField("S",db_index=True,default=0,blank=True)
     #gallery = models.BooleanField(_(u'Mostrar en galería de HOME'),help_text=_(u'Se mostrará sólo la imagen marcada cómo principal'),default=False,blank=True)
     #show_gallery = models.BooleanField(_(u'Mostrar galería en entrada'),help_text=_(u'Se mostrará en la propia entrada una galería con las imágenes en el orden establecido. Si hay sólo una imagen se mostrará la imagen estática'),default=False,blank=True)
     tags = TaggableManager()
