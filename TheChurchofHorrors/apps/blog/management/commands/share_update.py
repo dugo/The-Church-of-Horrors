@@ -35,7 +35,7 @@ class Command(BaseCommand):
                     data = simplejson.loads(data)
                     print data
                     for d in data:
-                        total+= int(d['share_count'])
+                        total+= int(d['share_count']) + int(d['like_count'])
 
                     print "FB SHARE",entry,total
                 except:
