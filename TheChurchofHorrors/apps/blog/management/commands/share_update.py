@@ -2,7 +2,6 @@
 
 from django.core.management.base import BaseCommand
 import urllib,urllib2,simplejson,re,datetime
-from django.db.models import Sum
 import sys,traceback
 from django.conf import settings
 from blog.models import *

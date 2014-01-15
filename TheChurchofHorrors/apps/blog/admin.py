@@ -165,7 +165,7 @@ class Entry(CounterAdmin):
 
     search_fields = ('title',)
     
-    list_display = ('__unicode__','author','created','published','views','ncomments','view','shared')
+    list_display = ('__unicode__','author','created','published','views','ncomments','shared','view',)
 
     list_filter = ('number',)
     
