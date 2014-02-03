@@ -129,6 +129,13 @@ class Number(models.Model):
 
         return qs
 
+    def get_sitios(self):
+        qs = UserProfile.objects.filter(rols__rol__id=2,user__entries__id__in=Entry.objects.filter(published=True,number__published=True,is_cartoon=False,).values_list("id",flat=True))
+        qs = list(set(qs))
+        random.shuffle(qs)
+
+        return qs
+
     @classmethod
     def get_published(cls):
         return cls.objects.filter(published=True)
