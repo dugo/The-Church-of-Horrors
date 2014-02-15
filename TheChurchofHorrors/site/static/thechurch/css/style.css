@@ -33,6 +33,7 @@ hr {
 .facebook {background-position: -45px 0px !important;}
 .twitter {background-position: -90px 0px !important;}
 .vimeo {background-position: -135px 0px !important;}
+.tumblr {background-position: -260px 0px !important;}
 .logo-social {background-position: -180px 0px !important;width: 55px!important;}
 #header #subsections {
     width:145px;
@@ -409,7 +410,7 @@ a:hover { color:#d10019; }
     color:gray;
     font-family:verdana,sans-serif;
     font-size:10px;
-    width: 132px;
+    width: 179px;
     padding: 0 5px;
     }
 #footer .search-form {
@@ -418,7 +419,7 @@ a:hover { color:#d10019; }
     overflow: hidden;
     clear:both;
     margin-left: 67px;
-    width:167px;
+    width:212px;
     padding-top: 10px;
 }
 #footer .search-button {
@@ -641,7 +642,7 @@ a:hover { color:#d10019; }
     display:inline;
     font-family:verdana;
     font-size:10px;
-    height:auto;
+    height:97px;
     width:106px;
     margin:0;
     color:black;

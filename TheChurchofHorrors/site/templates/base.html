@@ -94,6 +94,8 @@ $(document).ready(function(){
         } while (textWidth > maxWidth && fontSize > 3);
         return this;
     }
+
+    {% block extra_js_ready %}{%endblock%}
 })(jQuery);
 
 $.each( $("#sitios .title,#left div.author .title,.authors .author .title"), function(idx,ui){ $(ui).textfill({ maxFontPixels: 14 }) } );
@@ -142,7 +144,6 @@ function number_prev() {
     if (current<=0)
         $("#top-left .prev").fadeOut();
 }
-{% block extra_js_ready %}{%endblock%}
 </script>
 
 
@@ -218,6 +219,7 @@ function number_prev() {
                 <a href='{%url 'anteriores' %}' class="section">ANTERIORES</a>
                 <a href='{% url 'authors' %}' class="section">SITIOS</a>
                 
+                <a href='http://vimeo.com/thechurchofhorrors' class="social tumblr" target="_blank"></a>
                 <a href='http://vimeo.com/thechurchofhorrors' class="social vimeo" target="_blank"></a>
                 <a href='https://twitter.com/#!/churchofhorrors' class="social twitter" target="_blank"></a>
                 <a href='http://www.facebook.com/TheChurchofHorrors' class="social facebook" target="_blank"></a>
@@ -310,6 +312,7 @@ function number_prev() {
                         <a href="http://www.facebook.com/TheChurchofHorrors" class="social facebook" target="_blank"></a>
                         <a href="https://twitter.com/#!/churchofhorrors" class="social twitter" target="_blank"></a>
                         <a href="http://vimeo.com/thechurchofhorrors" class="social vimeo" target="_blank"></a>
+                        <a href="http://vimeo.com/thechurchofhorrors" class="social tumblr" target="_blank"></a>
 
                         <div  class="search-form">
                             <form action="/" method="get">
@@ -338,7 +341,6 @@ function number_prev() {
                 </div>
                 <div class="footer-item footer-item-3" style="margin-right:0">
                 
-                    {% if number.is_current%}
                     <div class="subitem" style="margin-right: 5%;">    
                         <h3>ACTUAL</h3>
 
@@ -377,7 +379,6 @@ function number_prev() {
                         
                     </div>
                     {%endfor%}
-                    {%endif%}
 
                 </div>
             </div>
