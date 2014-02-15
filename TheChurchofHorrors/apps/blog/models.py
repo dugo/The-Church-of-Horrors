@@ -334,8 +334,11 @@ class Entry(models.Model):
     @classmethod
     def get_last_by_author(self,author,entry=None,max=settings.BLOG_OTHER_LAST_ENTRIES):
 
-        entries = Entry.objects.filter(published=True,author__id=author.id,is_cartoon=False,).order_by('-created')
-        
+        if author.get_profile().is_ilustrator:
+            entries = Entry.objects.filter(published=True,author__id=author.id,is_cartoon=False,number__published=True).order_by('-created')
+        else:
+            entries = Entry.objects.filter(published=True,ilustrator__id=author.id,number__published=True).order_by('-created')
+            
         if entry:
             return entries.exclude(id=entry.id)
         

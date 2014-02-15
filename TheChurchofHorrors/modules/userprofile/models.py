@@ -60,7 +60,11 @@ class UserProfile(models.Model):
     
     @property
     def is_editor(self):
-        return self.user.groups.filter(id=settings.BLOG_EDITOR_GROUP_ID).count()
+        return not not self.user.groups.filter(id=settings.BLOG_EDITOR_GROUP_ID).count()
+
+    @property
+    def is_ilustrator(self):
+        return not not self.rols.filter(id=settings.BLOG_ILUSTRATOR_ROL_ID).count()
     
     @classmethod
     def get_authors(cls):

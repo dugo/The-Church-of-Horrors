@@ -20,7 +20,7 @@ $(".left .author .desc").dotdotdot();
 
 {%block breadcrumb%}{% breadcrumb request.get_full_path "" "" "" "" author %}{%endblock%}
 
-{%block content_class%}home author{%endblock%}
+{%block content_class%}home author {%if author.is_ilustrator%}ilustrator{%endif%}{%endblock%}
 
 {%block content%}
     {% include "short-entries.html" %}
