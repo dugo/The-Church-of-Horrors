@@ -1783,3 +1783,6 @@ div.clr {
 .links .doc { background-position: -280px 0!important;}
 .links .tumblr { background-position: -308px 0!important;}
 .links .wordpress { background-position: -336px 0!important;}
+
+.home.ilustrator .short-entry {height:184px;}
+.home.ilustrator .short-entry .desc p {display: none}
