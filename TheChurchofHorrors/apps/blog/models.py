@@ -223,7 +223,7 @@ class Entry(models.Model):
     content = tinymce_models.HTMLField(_("Contenido"),blank=False,)
     brief =  models.CharField(_(u'Resumen'),max_length=450, help_text = _(u'Un breve resumen representativo de la entrada. Si queda vacío se cogerá el primer párrafo.'),blank=True)
     author = models.ForeignKey(User,verbose_name=_(u"Autor"),related_name="entries",blank=True,null=True)
-    ilustrator = models.ForeignKey(User,verbose_name=_(u"Ilustrador"),related_name="ilustrations",blank=False,null=True)
+    ilustrator = models.ForeignKey(User,verbose_name=_(u"Ilustrador"),related_name="ilustrations",blank=True,null=True)
     number = models.ForeignKey(Number,verbose_name=_(u"Número"),null=True,default=None,blank=True,related_name='entries')
     #section = models.ForeignKey(Section,verbose_name=_(u"Sección"))
     subsection = models.ForeignKey(Subsection,verbose_name=_(u"Categoría"),related_name="entries")
