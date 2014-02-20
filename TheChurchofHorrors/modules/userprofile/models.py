@@ -22,7 +22,7 @@ USERPROFILE_ITEM_CHOICES = (
 ('tumblr', 'Tumblr'),
 ('wordpress', 'Wordpress'),
 ('web', 'Web generica'),
-('otro', 'Otro tipo de enlace'))
+('otro', 'Mundozero'))
 
 
 class Rol(models.Model):
@@ -64,7 +64,7 @@ class UserProfile(models.Model):
 
     @property
     def is_ilustrator(self):
-        return not not self.rols.filter(rol__id__in=settings.BLOG_ILUSTRATOR_ROL_IDS).count()
+        return not not self.rols.filter(rol__id__in=settings.BLOG_ILUSTRATOR_ROL_IDS    ).count()
     
     @classmethod
     def get_authors(cls):
