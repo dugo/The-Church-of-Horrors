@@ -5,7 +5,7 @@
 
 {%block breadcrumb%}{% breadcrumb request.get_full_path number %}{%endblock%}
 
-{% block extra_js_ready %}
+{% block extra_js %}
 function next(){
     var total = parseInt($("#sitios").attr("total"));
     var idx = parseInt($("#sitios").attr("idx"))+1;
