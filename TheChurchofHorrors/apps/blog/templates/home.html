@@ -6,6 +6,7 @@
 {%block breadcrumb%}{% breadcrumb request.get_full_path number %}{%endblock%}
 
 {% block extra_js %}
+<script type="text/javascript">
 function next(){
     var total = parseInt($("#sitios").attr("total"));
     var idx = parseInt($("#sitios").attr("idx"))+1;
@@ -38,6 +39,7 @@ function prev(){
 
     $("#sitios .next").fadeIn()
 }
+</script>
 {%endblock%}
 
 {%block content_class%}home{%endblock%}
