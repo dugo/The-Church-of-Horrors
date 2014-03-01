@@ -14,7 +14,7 @@ def preview_entry(entry, n=0,cols=2):
     
 @register.inclusion_tag('mini-author.html')
 def mini_author(author):
-    return {'author':author}
+    return {'author':author,'MEDIA_URL':settings.MEDIA_URL}
     
 @register.inclusion_tag('gallery-entry.html')
 def entry_gallery(entry):

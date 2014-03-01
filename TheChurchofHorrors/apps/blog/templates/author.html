@@ -6,13 +6,21 @@
 <meta name="description" content="{%if author%}{{author.get_profile.description|remove_htmltags|remove_linebreaks}}{%else%}{{e.get_profile.description|remove_htmltags|remove_linebreaks}}{%endif%}" />
 {%endblock%}
 
+{%block extra_js%}
+<script type="text/javascript" src="{{STATIC_URL}}thechurch/js/jquery.dotdotdot.min.js"></script>
+{%endblock%}
+
+{%block extra_js_ready%}
+$(".left .author .desc").dotdotdot();
+{%endblock%}
+
 {% block title %}The Church of Horrors :: {{author.get_profile}}{%endblock%}
 
 {% block sidebar %}{% mini_author author %}{% endblock %}
 
 {%block breadcrumb%}{% breadcrumb request.get_full_path "" "" "" "" author %}{%endblock%}
 
-{%block content_class%}home author{%endblock%}
+{%block content_class%}home author {%if author.get_profile.is_ilustrator%}ilustrator{%endif%}{%endblock%}
 
 {%block content%}
     {% include "short-entries.html" %}

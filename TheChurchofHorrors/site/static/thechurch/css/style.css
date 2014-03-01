@@ -33,6 +33,7 @@ hr {
 .facebook {background-position: -45px 0px !important;}
 .twitter {background-position: -90px 0px !important;}
 .vimeo {background-position: -135px 0px !important;}
+.tumblr {background-position: -260px 0px !important;}
 .logo-social {background-position: -180px 0px !important;width: 55px!important;}
 #header #subsections {
     width:145px;
@@ -409,7 +410,7 @@ a:hover { color:#d10019; }
     color:gray;
     font-family:verdana,sans-serif;
     font-size:10px;
-    width: 132px;
+    width: 179px;
     padding: 0 5px;
     }
 #footer .search-form {
@@ -418,7 +419,7 @@ a:hover { color:#d10019; }
     overflow: hidden;
     clear:both;
     margin-left: 67px;
-    width:167px;
+    width:212px;
     padding-top: 10px;
 }
 #footer .search-button {
@@ -614,7 +615,7 @@ a:hover { color:#d10019; }
     font-family:"DINWeb-Medium",Arial;
     font-size:14px;
     height:auto;
-    width:138px;
+    width:134px;
 }
 
 #left div.author .title,#left div.author .title a {
@@ -641,7 +642,7 @@ a:hover { color:#d10019; }
     display:inline;
     font-family:verdana;
     font-size:10px;
-    height:auto;
+    height:97px;
     width:106px;
     margin:0;
     color:black;
@@ -655,6 +656,22 @@ a:hover { color:#d10019; }
     margin:0;
     padding-top: 16px;
     text-align: right;
+    float:right;
+    width:140px;
+}
+
+#left div.author .links a {
+    display:inline-block;
+    width:28px;
+    height:28px;
+    background-image:url('../images/icons.png');
+    margin-left: 4px;
+}
+
+#left div.author .links.sitios {
+    float:left;
+    clear:left;
+    width: 140px;
 }
 
 #left div.author .links.sitios a {
@@ -667,7 +684,8 @@ a:hover { color:#d10019; }
     font-size: 14px;
     padding: 2px 0;
     float:left;
-    line-height: 24px
+    line-height: 24px;
+    margin-left:0;
 }
 
 #left div.author img {
@@ -676,7 +694,7 @@ a:hover { color:#d10019; }
     height:auto;
     /*margin-left: -10px;*/
     float:left;
-    margin-right:20px;
+    margin-right:22px;
     /*margin-bottom:10px;*/
 }
 
@@ -1251,7 +1269,7 @@ a:hover { color:#d10019; }
     background-color: white;
     position: relative;
     overflow: hidden;
-    height: 232px;
+    height: 200px;
 }
 
 .authors .author span {
@@ -1298,7 +1316,7 @@ a:hover { color:#d10019; }
     font-family:"DINWeb-Medium",Arial;
     font-size:14px;
     height:auto;
-    width:138px;
+    width:135px;
 }
 .authors .author .desc {
     display:inline;
@@ -1309,7 +1327,9 @@ a:hover { color:#d10019; }
     margin:0;
     color:black;
     float:left;
-    height:130px;
+    height:97px;
+    overflow: hidden;
+    text-overflow:ellipsis;
 }
 
 
@@ -1328,9 +1348,17 @@ a:hover { color:#d10019; }
     right:12px;
 }
 
+.authors .author .links a {
+    display:inline-block;
+    width:28px;
+    height:28px;
+    background-image:url('../images/icons.png');
+    margin-left: 4px;
+}
+
 .authors .author .links.sitios {
     position:absolute;
-    top:167px;
+    bottom:12px;
     left:12px;
 }
 
@@ -1344,12 +1372,13 @@ a:hover { color:#d10019; }
     font-size:14px;
     padding:2px 0;
     line-height: 24px;
+    margin-left: 0;
 }
 
 .authors .author .img {
     width:130px;
     height:130px;
-    margin-right:20px;
+    margin-right:23px;
     float:left;
 }
 
@@ -1741,16 +1770,21 @@ div.clr {
     font-size:15px;
 }
 
-.links .twitter { background-position: 0 0;}
-.links .facebook { background-position: -28px 0;}
-.links .vimeo { background-position: -56px 0;}
-.links .bandcamp { background-position: -84px 0;}
-.links .soundcloud { background-position: -112px 0;}
-.links .cargocollective { background-position: -140px 0;}
-.links .flickr { background-position: -168px 0;}
-.links .blogger { background-position: -196px 0;}
-.links .lastfm { background-position: -224px 0;}
-.links .pinterest { background-position: -252px 0;}
-.links .doc { background-position: -280px 0;}
-.links .tumblr { background-position: -308px 0;}
-.links .wordpress { background-position: -336px 0;}
+.links .twitter { background-position: 0 0!important;}
+.links .facebook { background-position: -28px 0!important;}
+.links .vimeo { background-position: -56px 0!important;}
+.links .bandcamp { background-position: -84px 0!important;}
+.links .soundcloud { background-position: -112px 0!important;}
+.links .cargocollective { background-position: -140px 0!important;}
+.links .flickr { background-position: -168px 0!important;}
+.links .blogger { background-position: -196px 0!important;}
+.links .lastfm { background-position: -224px 0!important;}
+.links .pinterest { background-position: -252px 0!important;}
+.links .doc { background-position: -280px 0!important;}
+.links .tumblr { background-position: -308px 0!important;}
+.links .wordpress { background-position: -336px 0!important;}
+.links .web { background-position: -364px 0!important;}
+.links .otro { background-position: -392px 0!important;}
+
+.home.ilustrator .short-entry {height:184px;}
+.home.ilustrator .short-entry .desc p {display: none}

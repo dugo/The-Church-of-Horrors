@@ -7,6 +7,7 @@ from django import forms
 from django.conf import settings
 from django.utils.translation import ugettext as _
 from django.contrib.sites.models import Site
+from django.forms.models import BaseInlineFormSet
 
 
 class UserProfileForm( forms.ModelForm ):
@@ -38,15 +39,36 @@ class CounterAdmin(admin.ModelAdmin):
             field.widget.attrs['class'] = 'counted ' + field.widget.attrs.get('class','')
         return field    
 
+class UserProfileItemFormset(BaseInlineFormSet):
+    def clean(self):
+        total = 1 if self.data.get("attach") else 0
+        if not total:
+            if self.instance and self.instance.attach:
+                total=1
+        for form in self.forms:
+            try:
+                if form.cleaned_data and not form.cleaned_data['DELETE']:
+                    total+=1
+                
+            except AttributeError:
+                # annoyingly, if a subform is invalid Django explicity raises
+                # an AttributeError for cleaned_data
+                pass
+        
+        if total>4:
+            raise forms.ValidationError(u"El total de los enlaces (incluyendo el fichero adjunto) no debe superar 4")
+
 class UserProfileItem(admin.TabularInline):
     model = models.UserProfileItem
     can_delete = True
-    extra = 1
+    extra = 0
+    max_num = 4
+    formset = UserProfileItemFormset
     
 class RolItem(admin.TabularInline):
     model = models.RolItem
     can_delete = True
-    extra = 1
+    extra = 0
 
 class UserProfile(CounterAdmin):
     
@@ -87,22 +109,10 @@ class UserProfile(CounterAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         
-        
-        
         if not request.user.is_superuser:
             self.exclude = ('user',)
-            form = super(UserProfile, self).get_form(request, obj=None, **kwargs)
-            #self.exclude = ('user',)
-            #form.base_fields['rol'].queryset = form.base_fields['rol'].queryset.filter(name="Redactor")
-            #form.base_fields['rol'].initial = form.base_fields['rol'].queryset[:1].get()
-        else:
             
-            form = super(UserProfile, self).get_form(request, obj=None, **kwargs)
-            form.base_fields['user'].initial = request.user
-        
-        form.base_fields['name'].initial = request.user.get_full_name() if request.user.get_full_name() else unicode(request.user)    
-        
-        return form
+        return super(UserProfile, self).get_form(request, obj=None, **kwargs)
 
 
 

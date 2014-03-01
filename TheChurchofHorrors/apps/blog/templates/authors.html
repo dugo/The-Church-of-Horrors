@@ -6,6 +6,14 @@
 <meta name="description" content="Sitios" />
 {%endblock%}
 
+{%block extra_js%}
+<script type="text/javascript" src="{{STATIC_URL}}thechurch/js/jquery.dotdotdot.min.js"></script>
+{%endblock%}
+
+{%block extra_js_ready%}
+$(".author .desc").dotdotdot();
+{%endblock%}
+
 {% block title %}The Church of Horrors :: Sitios{%endblock%}
 
 {%block breadcrumb%}{% breadcrumb request.get_full_path %}{%endblock%}
@@ -34,9 +42,15 @@
 			        <a href="{{author.get_absolute_url}}" title="Ir a Sitio" style="float:left">Ir a Sitio</a>
 			    </div>
 
-			    {%if author.get_items%}
-				    <div class="links">
-				    {%for link in author.get_items%}<a href="{{link.url}}" onclick="window.open(this.href);return false;">{{link|lower}}</a>{% if not forloop.last %} / {%endif%}{%endfor%}</div>
+			    {%if author.get_items or author.attach%}
+			    <div class="links">
+				    {%for link in author.get_items%}
+		            <a href="{{link.url}}" class="{{link.icon}}" target="_blank" title="{{link|lower}}"></a>
+			        {%endfor%}
+			        {%if author.attach%}
+			        <a href="{{MEDIA_URL}}{{author.attach}}" class="doc" target="_blank" title="ver/descargar documento adjunto"></a>
+			        {%endif%}
+			    </div>
 			    {%endif%}
 			</div>
 

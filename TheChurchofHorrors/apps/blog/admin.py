@@ -165,7 +165,7 @@ class Entry(CounterAdmin):
 
     search_fields = ('title',)
     
-    list_display = ('__unicode__','author','created','published','views','ncomments','view',)
+    list_display = ('__unicode__','author','created','published','views','ncomments','shared','view',)
 
     list_filter = ('number',)
     
@@ -173,7 +173,7 @@ class Entry(CounterAdmin):
     
     date_hierarchy = 'created'
 
-    exclude = ('views','ncomments')
+    exclude = ('views','ncomments','shared')
     
     def get_form(self, request, obj=None, **kwargs):
         
@@ -184,7 +184,7 @@ class Entry(CounterAdmin):
         
         if not request.user.is_superuser and not request.user.get_profile().is_editor:
             self.readonly_fields = ('slug',)
-            self.exclude = ('author','published','is_editorial','is_cartoon','number','views','ncomments')
+            self.exclude = ('author','published','is_editorial','is_cartoon','number','views','ncomments','shared')
             #form.base_fields['author'].queryset = form.base_fields['author'].queryset.filter(id=request.user.id)
             
         return form

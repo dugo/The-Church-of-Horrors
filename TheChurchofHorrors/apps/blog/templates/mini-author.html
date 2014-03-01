@@ -23,9 +23,15 @@
         <a href="{%url authors%}" title="Ir a Sitios">Ir a Sitios</a>
     </div>
 
-    {%if profile.get_items%}
+    {%if profile.get_items or profile.attach%}
         <div class="links">
-        {%for link in profile.get_items%}<a href="{{link.url}}" onclick="window.open(this.href);return false;">{{link|lower}}</a>{% if not forloop.last %} / {%endif%}{%endfor%}</div>
+        {%for link in profile.get_items%}
+            <a href="{{link.url}}" class="{{link.icon}}" target="_blank" title="{{link|lower}}"></a>
+        {%endfor%}
+        {%if profile.attach%}
+        <a href="{{MEDIA_URL}}{{profile.attach}}" class="doc" target="_blank" title="ver/descargar documento adjunto"></a>
+        {%endif%}
+        </div>
     {%endif%}
 
     {%endwith%}

@@ -100,6 +100,9 @@ class Number(models.Model):
     def get_current(cls):
         return cls.objects.filter(published=True).order_by("-number")[0]
 
+    def is_current(self):
+        return Number.objects.filter(published=True).values("id").order_by("-number")[0]['id'] == self.id
+
     @classmethod
     def get_anteriores(cls):
         if settings.DEBUG:
@@ -113,6 +116,9 @@ class Number(models.Model):
     def get_more_view(self):
         return self.other_entries.filter(published=True).order_by("-views")
 
+    def get_more_shared(self):
+        return self.other_entries.filter(published=True).order_by("-shared")
+
     def __unicode__(self):
         return u"Número %d"%self.number
 
@@ -122,6 +128,17 @@ class Number(models.Model):
         random.shuffle(qs)
 
         return qs
+
+    def get_sitios(self):
+        qs = UserProfile.objects.filter(rols__rol__id=2,user__entries__id__in=Entry.objects.filter(published=True,number__published=True,is_cartoon=False,).values_list("id",flat=True))
+        qs = list(set(qs))
+        random.shuffle(qs)
+
+        return qs
+
+    @classmethod
+    def get_published(cls):
+        return cls.objects.filter(published=True)
 
     def get_subsections(self):
 
@@ -205,7 +222,8 @@ class Entry(models.Model):
     title = models.CharField(_(u"Título"),max_length=255,blank=False,unique=True)
     content = tinymce_models.HTMLField(_("Contenido"),blank=False,)
     brief =  models.CharField(_(u'Resumen'),max_length=450, help_text = _(u'Un breve resumen representativo de la entrada. Si queda vacío se cogerá el primer párrafo.'),blank=True)
-    author = models.ForeignKey(User,verbose_name=_(u"Autor"),related_name="entries",blank=True,null=True)
+    author = models.ForeignKey(User,verbose_name=_(u"Autor"),related_name="entries",blank=False,null=True)
+    ilustrator = models.ForeignKey(User,verbose_name=_(u"Ilustrador"),related_name="ilustrations",blank=True,null=True,default=None)
     number = models.ForeignKey(Number,verbose_name=_(u"Número"),null=True,default=None,blank=True,related_name='entries')
     #section = models.ForeignKey(Section,verbose_name=_(u"Sección"))
     subsection = models.ForeignKey(Subsection,verbose_name=_(u"Categoría"),related_name="entries")
@@ -215,6 +233,7 @@ class Entry(models.Model):
     slug = models.SlugField(max_length=255,unique=True,blank=True,help_text=_(u"Será generada automaticamente a partir del título"))
     views = models.PositiveIntegerField("V",db_index=True,default=0,blank=True)
     ncomments = models.PositiveIntegerField("C",db_index=True,default=0,blank=True)
+    shared = models.PositiveIntegerField("S",db_index=True,default=0,blank=True)
     #gallery = models.BooleanField(_(u'Mostrar en galería de HOME'),help_text=_(u'Se mostrará sólo la imagen marcada cómo principal'),default=False,blank=True)
     #show_gallery = models.BooleanField(_(u'Mostrar galería en entrada'),help_text=_(u'Se mostrará en la propia entrada una galería con las imágenes en el orden establecido. Si hay sólo una imagen se mostrará la imagen estática'),default=False,blank=True)
     tags = TaggableManager()
@@ -315,8 +334,12 @@ class Entry(models.Model):
     @classmethod
     def get_last_by_author(self,author,entry=None,max=settings.BLOG_OTHER_LAST_ENTRIES):
 
-        entries = Entry.objects.filter(published=True,author__id=author.id,is_cartoon=False,).order_by('-created')
-        
+        if author.get_profile().is_ilustrator:
+            entries = Entry.objects.filter(published=True,ilustrator__id=author.id,number__published=True).order_by('-created')
+        else:
+            entries = Entry.objects.filter(published=True,author__id=author.id,is_cartoon=False,number__published=True).order_by('-created')
+            
+            
         if entry:
             return entries.exclude(id=entry.id)
         
