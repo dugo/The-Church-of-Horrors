@@ -183,7 +183,7 @@ class Subsection(models.Model):
         .home .short-entry.%(slug)s { border-bottom: 3px solid %(color)s }
         .entry .content-entry.%(slug)s .link { color: %(color)s }
         #header #subsections.%(slug)s {border-top:3px solid %(color)s}
-        .cartoon .cartoon-title.%(slug)s {border-bottom:3px solid %(color)s}
+        .cartoon.%(slug)s {border-bottom:3px solid %(color)s}
         """
         ret = ""
 

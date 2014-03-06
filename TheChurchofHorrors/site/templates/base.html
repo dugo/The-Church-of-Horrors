@@ -53,7 +53,7 @@
 </style>
 {% block extra_css %}{%endblock%}
 <script type="text/javascript" src="{{STATIC_URL}}thechurch/js/jquery-1.6.2.min.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}thechurch/js/jquery.myimgscale-0.2.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}thechurch/js/jquery.myimgscale-0.2.min.js?0"></script>
 
 {% block extra_js %}{%endblock%}
 
@@ -280,11 +280,12 @@ function number_prev() {
 
         {%with number.cartoon as cartoon%}
         {%if cartoon%}
-        <div class="col cartoon">
-            <div class="cartoon-title {{cartoon.subsection.slug}}">{{cartoon.author.get_profile}}</div>
+        <div class="col cartoon {{cartoon.subsection.slug}}">
             <a href="{{cartoon.get_absolute_url}}" title="{{cartoon}}">
-                <img src="{{ cartoon.get_main_image }}" alt="{{cartoon.title}}"/>
+                <img src="{% version cartoon.get_main_image 'preview' %}" alt="{{cartoon.title}}"/>
             </a>
+
+            <div class="cartoon-title">{{cartoon.author.get_profile}}<span>Viñeta mensual</span></div>
         </div>
         {%endif%}
         {%endwith%}

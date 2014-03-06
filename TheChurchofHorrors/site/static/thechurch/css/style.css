@@ -1453,17 +1453,36 @@ a:hover { color:#d10019; }
 }
 
 #bottom .cartoon .cartoon-title {
-    height:20px;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
+    text-indent: 10px;
+    padding:10px 0;
     text-transform: uppercase;
     font-family:"DINWeb-Medium",Arial;
-    color:#5889b6;
+    color:#d20c24;
     font-size: 16px;
+    text-align: left;
+    position: absolute;
+    bottom: 0;
+    left:0;
+    height: auto;
+    margin:0;
+    width:100%;
+    line-height: 16px;
+}
+
+#bottom .cartoon .cartoon-title span {
+    font-weight: normal;
+    float:right;
+    color:#5889b6;
+    text-transform: none;
+    font-family:"DINWeb-Light",Arial;
+    padding-right: 10px;
 }
 
 #bottom .cartoon {
     text-align: center;
+    position: relative;
+    height:100%;
+    background-color: white;
 }
 
 #bottom .cartoon img {
@@ -1665,6 +1684,8 @@ div.clr {
     width:100%;
     height:250px;
     margin-top:20px;
+    background-color: white;
+    position: relative;
 }
 
 #left div.cartoon img,#left div.cartoon a {
@@ -1674,13 +1695,29 @@ div.clr {
 }
 
 #left div.cartoon .cartoon-title {
-    height:20px;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
+    text-indent: 10px;
+    padding:10px 0;
     text-transform: uppercase;
     font-family:"DINWeb-Medium",Arial;
-    color:#5889b6;
+    color:#d20c24;
     font-size: 16px;
+    text-align: left;
+    position: absolute;
+    bottom: 0;
+    left:0;
+    height: auto;
+    margin:0;
+    width:100%;
+    line-height: 16px;
+}
+
+#left div.cartoon .cartoon-title span {
+    font-weight: normal;
+    float:right;
+    color:#5889b6;
+    text-transform: none;
+    font-family:"DINWeb-Light",Arial;
+    padding-right: 10px;
 }
 
 .anteriores #content .anterior {
