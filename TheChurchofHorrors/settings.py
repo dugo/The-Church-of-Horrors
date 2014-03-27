@@ -189,6 +189,7 @@ TINYMCE_DEFAULT_CONFIG = {
     "fullscreen_settings" : { "theme_advanced_path_location" : "top" },
     "relative_urls": False,
     "convert_urls": True,
+    'entity_encoding': 'numeric'
     #"pagebreak_separator" : "<span class='pagebreak'></span>"
 
 }
