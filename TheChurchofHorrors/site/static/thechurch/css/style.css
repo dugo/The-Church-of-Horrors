@@ -1781,6 +1781,7 @@ div.clr {
     text-align: left;
     text-rendering: optimizeLegibility;
     font-family: Helvetica, Arial, sans-serif;
+    z-index: 9999;
 }
 
 #cookies button {
@@ -1825,3 +1826,4 @@ div.clr {
 
 .home.ilustrator .short-entry {height:184px;}
 .home.ilustrator .short-entry .desc p {display: none}
+
