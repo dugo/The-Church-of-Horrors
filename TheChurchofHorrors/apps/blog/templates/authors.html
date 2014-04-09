@@ -1,5 +1,7 @@
 {% extends "base.html" %}
-{% load blog %}
+{% load blog cache %}
+
+{% cache 24*60*60 %}
 
 {% block extra_metatags %}
 <meta name="keywords" content="{{authors|join:","}}"/>
@@ -58,3 +60,5 @@ $(".author .desc").dotdotdot();
 		</div>
 	{%endfor%}
 {%endblock%}
+
+{%endcache%}

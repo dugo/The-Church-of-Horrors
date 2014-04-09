@@ -1,5 +1,7 @@
 {% extends "base.html" %}
-{% load blog %}
+{% load blog cache %}
+
+{% cache 24*60*60 author.id%}
 
 {% block extra_metatags %}
 <meta name="keywords" content="{%if author%}{{author.get_profile}},{{author.get_profile.rol}}{%else%}{{e.author.get_profile}},{{e.get_profile.rol}}{%endif%}"/>
@@ -25,3 +27,5 @@ $(".left .author .desc").dotdotdot();
 {%block content%}
     {% include "short-entries.html" %}
 {%endblock%}
+
+{%endcache%}

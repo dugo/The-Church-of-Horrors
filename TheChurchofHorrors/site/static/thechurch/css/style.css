@@ -23,7 +23,7 @@ hr {
 
 #container { width:1030px; margin: 0 auto; height:auto;display:block;overflow:hidden;background-color: #f2f3f5;}
 #header { width: 100%; margin: 16px auto 0 auto; display:block;overflow:visible;}
-#header a img { float:left; display:block;margin-top:30px;cursor:pointer;margin-left: 20px}
+#header a img { float:left; display:block;margin-top:30px;cursor:pointer;margin-left: 20px;width:300px;height:auto;}
 #header #banner { position:relative;margin-left:20px;height:56px;width:720px;/*background-color:#d10018;*/float:left;display:block;}
 #header #banner img {position:absolute;left:0;top:0;}
 #header #sections { display:block;margin-top:16px;float:left;width:990px;background-color:#e2e2e2;padding: 8px 20px;}

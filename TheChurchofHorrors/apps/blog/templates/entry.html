@@ -1,5 +1,7 @@
 {% extends "base.html" %}
-{% load blog fb_versions %}
+{% load blog fb_versions cache%}
+
+{%cache 6*60*60 entry.id%}
 
 {% block extra_metatags %}
 <meta name="keywords" content="{{entry.tags.all|join:","}}"/>
@@ -234,3 +236,5 @@ function paging(link,margin) {
 
     </div>
 {%endblock%}
+
+{%endcache%}
