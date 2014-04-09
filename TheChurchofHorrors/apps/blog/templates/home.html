@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load blog fb_versions cache %}
 
-{% cache 24*60*60 number.number%}
+{% cache 24*60*60 "number" number.number%}
 
 {% block title %}The Church of Horrors :: {{number}} :: {{number.get_month_display}} {{number.year}}{%endblock%}
 

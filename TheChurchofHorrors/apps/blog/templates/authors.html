@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load blog cache %}
 
-{% cache 24*60*60 %}
+{% cache 24*60*60 "authors" %}
 
 {% block extra_metatags %}
 <meta name="keywords" content="{{authors|join:","}}"/>
