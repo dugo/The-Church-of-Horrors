@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from paginator.paginator import Paginator
 import datetime,random
 from recaptcha_works.decorators import fix_recaptcha_remote_ip
-from forms import CommentForm,CommentFormAuthenticated
+from forms import CommentForm,CommentFormAuthenticated,ContactForm
 from userprofile.models import UserProfile,Rol
 from taggit.models import Tag
 from django.views.decorators.csrf import csrf_exempt
@@ -71,10 +71,9 @@ def search(request):
 def contact(request):
    
     if request.method == "POST":
-        from forms import ContactForm
         
-        form = ContactForm(request.POST)
-        
+        form = ContactForm(request,request.POST)
+
         if form.is_valid():
             from django.core.mail import send_mail
 
@@ -88,7 +87,7 @@ def contact(request):
                 context_instance=RequestContext(request))
 
     return render_to_response("contact.html", 
-        dict(section=None,subsection=None,next = request.GET.get('next')), 
+        dict(section=None,subsection=None,form=ContactForm(request),next = request.GET.get('next')), 
         context_instance=RequestContext(request))
     
 def staff(request):

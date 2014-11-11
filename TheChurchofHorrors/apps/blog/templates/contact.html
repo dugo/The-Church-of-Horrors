@@ -56,6 +56,9 @@ Contactar con <a href='http://thechurchofhorrors.com/'>The Church of Horrors</a>
 
 {%if next%}<input type="hidden" value="{{next}}" name="next"/>{%endif%}
 
+{{form.recaptcha}}
+<big>{{ form.non_field_errors}}</big>
+
 <input type="submit" value="ENVIAR" onclick="return validate();"/>
 {% csrf_token %}
 </form>
